@@ -23,19 +23,31 @@
 
 "use strict";
 
+const fs = require("fs");
 const path = require("path");
+const dotenv = require("dotenv");
 
 const { AngularWebpackPlugin } = require("@ngtools/webpack");
 const { DefinePlugin } = require("webpack");
 
 const { commonResolveConfig, postCssConfig } = require("./webpack-common.config.js");
-const webpackUtils = require("../../_moonsphere-base/webpack/webpack-utils.js");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const envLocalPath = path.resolve(__dirname, "..", ".env.local");
+if (fs.existsSync(envLocalPath)) {
+    dotenv.config({ path: envLocalPath });
+}
+const envPath = path.join(process.env.MOONSPHERE_BASE_PATH, ".env");
+if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+}
 
 const landingPageBaseUrl = `http://localhost:${process.env.ENV_MSPH_LANDING_PAGE_DEV_PORT}`;
 const clientBaseUrl = `http://localhost:${process.env.ENV_MSPH_WEB_CLIENT_DEV_PORT}`;
 const cdnBaseUrl = `http://localhost:${process.env.ENV_MSPH_CONTENT_DISTRIBUTOR_PORT}`;
+
+const webpackUtils = require(path.join(process.env.MOONSPHERE_BASE_PATH, "webpack", "webpack-utils.js"));
 
 module.exports = {
     mode: "development",
