@@ -1,0 +1,65 @@
+<!--
+  ~ Copyright (c) 2023 by MILOSZ GILGA <http://miloszgilga.pl>
+  ~ Silesian University of Technology
+  ~
+  ~    File name: birth-date-select-spinner.component.html
+  ~    Last modified: 7/12/23, 6:34 PM
+  ~    Project name: moonsphere
+  ~    Module name: moonsphere-web-client
+  ~
+  ~ This project is a part of "MoonSphere" instant messenger system. This is a project completing a
+  ~ engineers degree in computer science at Silesian University of Technology.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+  ~ file except in compliance with the License. You may obtain a copy of the License at
+  ~
+  ~     <http://www.apache.org/license/LICENSE-2.0>
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software distributed under
+  ~ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~ OF ANY KIND, either express or implied. See the License for the specific language
+  ~ governing permissions and limitations under the license.
+  -->
+
+<div
+    [formGroup]="formGroup"
+    class="flex flex-col"
+>
+    <div class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
+        {{ "msph.webClient.registerPage.formFields.birthDate.value" | translate }}
+        <span class="ms-0.5 text-msph-primary-tint">*</span>
+    </div>
+    <div class="flex gap-3">
+        <msph-auth-single-select-spinner
+            [formGroup]="formGroup"
+            [listElements]="formMonths"
+            [initIdValue]="getFormControlValue('month')"
+            (persistElement)="patchValue($event,'month')"
+            i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.month"
+            formControlIdentifier="birthDate"
+            class="flex-none w-[170px]"
+        />
+        <msph-auth-single-select-spinner
+            [formGroup]="formGroup"
+            [listElements]="formDays"
+            [initIdValue]="getFormControlValue('day')"
+            (persistElement)="patchValue($event,'day')"
+            formControlIdentifier="birthDate"
+            i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.day"
+        />
+        <msph-auth-single-select-spinner
+            [formGroup]="formGroup"
+            [listElements]="formYears"
+            [initIdValue]="getFormControlValue('year')"
+            (persistElement)="patchValue($event,'year')"
+            formControlIdentifier="birthDate"
+            i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.year"
+        />
+    </div>
+    <div class="text-sm mt-1 mx-2 msph_auth-invalid-text">
+        <msph-field-validator [formGroup]="formGroup" formControlIdentifier="birthDate" i18nPrefix="webClient.register"/>
+        <msph-field-validator [formGroup]="formGroup" formControlIdentifier="birthDate" i18nPrefix="webClient.register" type="notAll"/>
+        <msph-field-validator [formGroup]="formGroup" formControlIdentifier="birthDate" i18nPrefix="webClient.register" type="invalid"/>
+        <msph-field-validator [formGroup]="formGroup" formControlIdentifier="birthDate" i18nPrefix="webClient.register" type="inappropriateAge"/>
+    </div>
+</div>

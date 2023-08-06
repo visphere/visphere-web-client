@@ -1,0 +1,97 @@
+<!--
+  ~ Copyright (c) 2023 by MILOSZ GILGA <http://miloszgilga.pl>
+  ~ Silesian University of Technology
+  ~
+  ~    File name: login-form.component.html
+  ~    Last modified: 7/6/23, 11:50 PM
+  ~    Project name: moonsphere
+  ~    Module name: moonsphere-web-client
+  ~
+  ~ This project is a part of "MoonSphere" instant messenger system. This is a project completing a
+  ~ engineers degree in computer science at Silesian University of Technology.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+  ~ file except in compliance with the License. You may obtain a copy of the License at
+  ~
+  ~     <http://www.apache.org/license/LICENSE-2.0>
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software distributed under
+  ~ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~ OF ANY KIND, either express or implied. See the License for the specific language
+  ~ governing permissions and limitations under the license.
+  -->
+
+<form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmitLoginForm()"
+    class="grid gap-3"
+>
+    <ng-template *ngIf="loginOrEmailProvided; then passwordFormContent; else loginFormContent"/>
+    <ng-template #loginFormContent>
+        <div class="grid gap-3">
+            <msph-auth-common-form-input
+                [maxLength]="100"
+                [formGroup]="loginForm"
+                (input)="changeNextButtonState()"
+                formControlIdentifier="usernameOrEmailAddress"
+                i18nLabel="msph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value"
+            >
+                <msph-field-validator
+                    [formGroup]="loginForm"
+                    formControlIdentifier="usernameOrEmailAddress" i18nPrefix="clientCommon.login"
+                />
+            </msph-auth-common-form-input>
+            <button
+                type="button"
+                class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full"
+                [disabled]="!nextButtonEnabled"
+                (click)="moveForward()"
+            >
+                {{ "msph.common.utils.continue" | translate }}
+                <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #passwordFormContent>
+        <div class="grid gap-3">
+            <div class="flex flex-col">
+                <p class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
+                    {{ "msph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value" | translate }}
+                </p>
+                <div class="relative w-full">
+                    <input
+                        [value]="loginForm.get('usernameOrEmailAddress')?.value"
+                        disabled
+                        type="text"
+                        class="msph_auth-input w-full"
+                    />
+                    <button
+                        type="button"
+                        class="absolute right-2.5 top-1/2 -translate-y-1/2 msph_login-form-edit-button"
+                        (click)="moveBackward()"
+                    >
+                        {{ "msph.common.utils.edit" | translate }}
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <msph-password-input-toggler
+                    [formGroup]="loginForm"
+                    formControlIdentifier="password"
+                    i18nLabel="msph.clientCommon.loginPage.formFields.password.value"
+                >
+                    <msph-field-validator
+                        [formGroup]="loginForm"
+                        formControlIdentifier="password" i18nPrefix="clientCommon.login"
+                    />
+                </msph-password-input-toggler>
+            </div>
+            <button
+                [disabled]="loginForm.invalid"
+                class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full"
+            >
+                {{ "msph.clientCommon.loginPage.sendLoginForm" | translate }}
+            </button>
+        </div>
+    </ng-template>
+</form>
