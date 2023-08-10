@@ -36,7 +36,7 @@ const {
 } = require('./webpack-common.config.cjs');
 const webpackUtils = require('../../moonsphere-base/webpack/webpack-utils.cjs');
 
-const envPath = path.join('..', '..', 'moonsphere-base', '.env');
+const envPath = path.resolve(__dirname, '..', '..', 'moonsphere-base', '.env');
 if (fs.existsSync(envPath)) {
   dotenv.config({ path: envPath });
 }

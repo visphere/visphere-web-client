@@ -6,8 +6,8 @@
     "docker:dev": "npx webpack --progress --config _webpack/webpack-docker-dev.config.cjs",
     "docker:prod": "npx webpack --progress --config _webpack/webpack-docker-prod.config.cjs",
     "lint": "npx eslint src/**/*.{ts,html}",
-    "test:single": "cross-env ENV_KARMA_TYPE='single' npx karma start",
-    "test:watch": "cross-env ENV_KARMA_TYPE='watch' npx karma start"
+    "test:single": "cross-env ENV_KARMA_TYPE='single' npx karma start karma.conf.cjs",
+    "test:watch": "cross-env ENV_KARMA_TYPE='watch' npx karma start karma.conf.cjs"
   },
   "private": true,
   "author": {
