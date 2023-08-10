@@ -7,13 +7,26 @@
     "docker:prod": "npx webpack --progress --config _webpack/webpack-docker-prod.config.cjs",
     "lint": "npx eslint src/**/*.{ts,html}",
     "test:single": "cross-env ENV_KARMA_TYPE='single' npx karma start karma.conf.cjs",
-    "test:watch": "cross-env ENV_KARMA_TYPE='watch' npx karma start karma.conf.cjs"
+    "test:watch": "cross-env ENV_KARMA_TYPE='watch' npx karma start karma.conf.cjs",
+    "configure:husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
   },
   "private": true,
   "author": {
     "name": "Miłosz Gilga",
     "email": "personal@miloszgilga.pl",
     "url": "https://miloszgilga.pl"
+  },
+  "license": "Apache-2.0",
+  "lint-staged": {
+    "**/*.{ts,html,js,cjs,json}": [
+      "eslint . --fix",
+      "prettier --write ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     "@angular/animations": "^16.1.0",
@@ -37,7 +50,6 @@
     "tslib": "^2.3.0",
     "zone.js": "^0.13.1"
   },
-  "license": "Apache-2.0",
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.1.5",
     "@angular-eslint/builder": "^16.1.0",
@@ -68,6 +80,7 @@
     "dotenv": "^16.3.1",
     "eslint": "^8.44.0",
     "html-webpack-plugin": "^5.5.3",
+    "husky": "^8.0.3",
     "karma": "6.4.2",
     "karma-chrome-launcher": "^3.2.0",
     "karma-coverage": "^2.2.1",
@@ -78,6 +91,7 @@
     "karma-source-map-support": "^1.4.0",
     "karma-sourcemap-loader": "^0.4.0",
     "karma-webpack": "^5.0.0",
+    "lint-staged": "^13.2.3",
     "mini-css-extract-plugin": "^2.7.6",
     "moment-locales-webpack-plugin": "^1.2.0",
     "postcss": "^8.4.27",
