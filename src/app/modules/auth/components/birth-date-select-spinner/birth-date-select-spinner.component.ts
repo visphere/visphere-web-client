@@ -2,7 +2,7 @@
  * Copyright (c) 2023 by MILOSZ GILGA <http://miloszgilga.pl>
  * Silesian University of Technology
  *
- *    File name: birth-date-select-spinner.component.ts
+ *   File name: birth-date-select-spinner.component.ts
  *    Last modified: 7/12/23, 6:34 PM
  *    Project name: moonsphere
  *    Module name: moonsphere-web-client
@@ -21,18 +21,15 @@
  * governing permissions and limitations under the license.
  */
 
+import { TitleCasePipe } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { TitleCasePipe } from '@angular/common';
-
 import { takeUntil } from 'rxjs';
-
+import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
 import { IDateComponentsType } from '~/shared-mod/types/date-components.type';
 import { ISpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
-
-import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
