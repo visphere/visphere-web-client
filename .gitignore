@@ -1,10 +1,3 @@
-# idea
-**/.idea/discord.xml
-**/.idea/misc.xml
-**/.idea/workspace.xml
-**/.idea/vcs.xml
-
-# app
-.env.local
+.husky
 node_modules
 dist
