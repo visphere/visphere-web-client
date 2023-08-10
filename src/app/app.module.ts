@@ -1,19 +1,21 @@
 /*
- * Copyright (c) 2023 by MILOSZ GILGA <http://miloszgilga.pl>
+ * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *    File name: app.module.ts
- *    Last modified: 6/26/23, 2:45 AM
- *    Project name: moonsphere
- *    Module name: moonsphere-web-client
+ *   File name: app.module.ts
+ *   Created at: 2023-08-06, 18:55:39
+ *   Last updated at: 2023-08-10, 02:45:10
  *
- * This project is a part of "MoonSphere" instant messenger system. This is a project completing a
- * engineers degree in computer science at Silesian University of Technology.
+ *   Project name: moonsphere
+ *   Module name: moonsphere-web-client
+ *
+ * This project is a part of "MoonSphere" instant messenger system. This is a project
+ * completing a engineers degree in computer science at Silesian University of Technology.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  *
- *     <http://www.apache.org/license/LICENSE-2.0>
+ *   <http://www.apache.org/license/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software distributed under
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
@@ -21,46 +23,36 @@
  * governing permissions and limitations under the license.
  */
 
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { TranslateModule } from "@ngx-translate/core";
-import { HttpClientModule } from "@angular/common/http";
-
-import { AppRootComponent } from "~/root-mod/app-root.component";
-import { AppRoutingModule } from "~/root-mod/app-routing.module";
-
-import { i18nConfig } from "~/shared-mod/i18n/http-translate.loader";
-import { titleStrategyProvider } from "~/shared-mod/config/template-page-title.strategy";
-import { i18nAutoChangerInitializer } from "~/shared-mod/i18n/auto-change-lang.service";
-import { languageSwitcherInitializer } from "~/shared-mod/services/language-switcher/language-switcher.service";
-import { themeSwitcherInitializer } from "~/shared-mod/services/theme-switcher/theme-switcher.service";
-import { passwordStrengthMeterInitializer } from "~/shared-mod/services/password-strength-meter/password-strength-meter.service";
-
-import { SharedModule } from "~/shared-mod/shared.module";
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppRootComponent } from '~/root-mod/app-root.component';
+import { AppRoutingModule } from '~/root-mod/app-routing.module';
+import { titleStrategyProvider } from '~/shared-mod/config/template-page-title.strategy';
+import { i18nAutoChangerInitializer } from '~/shared-mod/i18n/auto-change-lang.service';
+import { i18nConfig } from '~/shared-mod/i18n/http-translate.loader';
+import { languageSwitcherInitializer } from '~/shared-mod/services/language-switcher/language-switcher.service';
+import { passwordStrengthMeterInitializer } from '~/shared-mod/services/password-strength-meter/password-strength-meter.service';
+import { themeSwitcherInitializer } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
+import { SharedModule } from '~/shared-mod/shared.module';
 
 @NgModule({
-    declarations: [
-        AppRootComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        SharedModule,
-        TranslateModule.forRoot(i18nConfig),
-    ],
-    providers: [
-        titleStrategyProvider,
-        i18nAutoChangerInitializer,
-        languageSwitcherInitializer,
-        themeSwitcherInitializer,
-        passwordStrengthMeterInitializer,
-    ],
-    bootstrap: [
-        AppRootComponent,
-    ],
+  declarations: [AppRootComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+    TranslateModule.forRoot(i18nConfig),
+  ],
+  providers: [
+    titleStrategyProvider,
+    i18nAutoChangerInitializer,
+    languageSwitcherInitializer,
+    themeSwitcherInitializer,
+    passwordStrengthMeterInitializer,
+  ],
+  bootstrap: [AppRootComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

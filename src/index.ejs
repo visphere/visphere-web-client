@@ -1,45 +1,45 @@
 <!doctype html>
 <html lang="en-US" class="">
 <head>
-    <meta charset="utf-8">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="preconnect" href="<%= externalCdnBasePath %>">
-    <link rel="icon" type="image/png" sizes="48x48" href="<%= externalCdnBasePath %>/static/favicon/favicon-nobadge.png">
-    <meta name="keywords" content="chat, web client, send messages, online, moonsphere">
-    <meta name="description" content="Make contact and communicate in real time with MoonSphere online chat system.">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
+  <meta charset="utf-8">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="preconnect" href="<%= externalCdnBasePath %>">
+  <link rel="icon" type="image/png" sizes="48x48" href="<%= externalCdnBasePath %>/static/favicon/favicon-nobadge.png">
+  <meta name="keywords" content="chat, web client, send messages, online, moonsphere">
+  <meta name="description" content="Make contact and communicate in real time with MoonSphere online chat system.">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<%= externalClientBasePath %>">
-    <meta property="og:title" content="MoonSphere">
-    <meta property="og:description" content="Make contact and communicate in real time with MoonSphere online chat system.">
-    <meta property="og:image" content="<%= externalCdnBasePath %>/static/seo/og-banner-light.png">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="<%= externalClientBasePath %>">
-    <meta property="twitter:title" content="MoonSphere">
-    <meta property="twitter:description" content="Make contact and communicate in real time with MoonSphere online chat system.">
-    <meta property="twitter:image" content="<%= externalCdnBasePath %>/static/seo/og-banner-light.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= externalClientBasePath %>">
+  <meta property="og:title" content="MoonSphere">
+  <meta property="og:description" content="Make contact and communicate in real time with MoonSphere online chat system.">
+  <meta property="og:image" content="<%= externalCdnBasePath %>/static/seo/og-banner-light.png">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="<%= externalClientBasePath %>">
+  <meta property="twitter:title" content="MoonSphere">
+  <meta property="twitter:description" content="Make contact and communicate in real time with MoonSphere online chat system.">
+  <meta property="twitter:image" content="<%= externalCdnBasePath %>/static/seo/og-banner-light.png">
 
-    <link rel="apple-touch-icon" sizes="48x48" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-48x48.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="128x128" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-128x128.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-192x192.png">
-    <link rel="apple-touch-icon" sizes="384x384" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-384x384.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-512x512.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-128x128.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="384x384" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-384x384.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="<%= externalCdnBasePath %>/static/pwa/icon/pwa-icon-512x512.png">
 
-    <link id="manifest" rel="manifest" href="/assets/manifest/en-US/pwa-manifest.json">
+  <link id="manifest" rel="manifest" href="/assets/manifest/en-US/pwa-manifest.json">
 </head>
 <body class="min-h-screen font-medium msph_main-body-container">
-    <!-- start disable script section -->
-    <noscript>
+  <!-- start disable script section -->
+  <noscript>
 
-    </noscript>
-    <!-- end of disable script section -->
-    <!-- start application renderer section -->
-    <msph-mount></msph-mount>
-    <!-- end of application renderer section -->
+  </noscript>
+  <!-- end of disable script section -->
+  <!-- start application renderer section -->
+  <msph-mount></msph-mount>
+  <!-- end of application renderer section -->
 </body>
