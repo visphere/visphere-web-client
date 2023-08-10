@@ -1,19 +1,21 @@
 /*
- * Copyright (c) 2023 by MILOSZ GILGA <http://miloszgilga.pl>
+ * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *    File name: field-validator.component.spec.ts
- *    Last modified: 7/11/23, 12:24 AM
- *    Project name: moonsphere
- *    Module name: moonsphere-web-client
+ *   File name: field-validator.component.spec.ts
+ *   Created at: 2023-08-06, 18:55:38
+ *   Last updated at: 2023-08-10, 23:50:34
  *
- * This project is a part of "MoonSphere" instant messenger system. This is a project completing a
- * engineers degree in computer science at Silesian University of Technology.
+ *   Project name: moonsphere
+ *   Module name: moonsphere-web-client
+ *
+ * This project is a part of "MoonSphere" instant messenger system. This is a project
+ * completing a engineers degree in computer science at Silesian University of Technology.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  *
- *     <http://www.apache.org/license/LICENSE-2.0>
+ *   <http://www.apache.org/license/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software distributed under
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
@@ -21,39 +23,32 @@
  * governing permissions and limitations under the license.
  */
 
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthModule } from '~/auth-mod/auth.module';
+import { AppModule } from '~/root-mod/app.module';
+import { FieldValidatorComponent } from './field-validator.component';
 
-import { AppModule } from "~/root-mod/app.module";
-import { AuthModule } from "~/auth-mod/auth.module";
+describe('FieldValidatorComponent', () => {
+  let component: FieldValidatorComponent;
+  let fixture: ComponentFixture<FieldValidatorComponent>;
 
-import { FieldValidatorComponent } from "./field-validator.component";
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AppModule, AuthModule],
+    }).compileComponents();
+    fixture = TestBed.createComponent(FieldValidatorComponent);
+    component = fixture.componentInstance;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-describe("FieldValidatorComponent", () => {
-    let component: FieldValidatorComponent;
-    let fixture: ComponentFixture<FieldValidatorComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [
-                AppModule,
-                AuthModule,
-            ],
-        }).compileComponents();
-        fixture = TestBed.createComponent(FieldValidatorComponent);
-        component = fixture.componentInstance;
-
-        component.formControlIdentifier = "testControl";
-        component.formGroup = new FormGroup({
-            "testControl": new FormControl("", [ Validators.required ]),
-        });
-
-        fixture.detectChanges();
+    component.formControlIdentifier = 'testControl';
+    component.formGroup = new FormGroup({
+      testControl: new FormControl('', [Validators.required]),
     });
 
-    it("should create", () => {
-        expect(component).toBeTruthy();
-    });
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

@@ -1,19 +1,21 @@
 /*
- * Copyright (c) 2023 by MILOSZ GILGA <http://miloszgilga.pl>
+ * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *    File name: birth-date-select-spinner.component.ts
- *    Last modified: 7/12/23, 6:34 PM
- *    Project name: moonsphere
- *    Module name: moonsphere-web-client
+ *   File name: birth-date-select-spinner.component.ts
+ *   Created at: 2023-08-06, 18:55:39
+ *   Last updated at: 2023-08-10, 23:47:49
  *
- * This project is a part of "MoonSphere" instant messenger system. This is a project completing a
- * engineers degree in computer science at Silesian University of Technology.
+ *   Project name: moonsphere
+ *   Module name: moonsphere-web-client
+ *
+ * This project is a part of "MoonSphere" instant messenger system. This is a project
+ * completing a engineers degree in computer science at Silesian University of Technology.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  *
- *     <http://www.apache.org/license/LICENSE-2.0>
+ *   <http://www.apache.org/license/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software distributed under
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
@@ -21,71 +23,73 @@
  * governing permissions and limitations under the license.
  */
 
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { TranslateService } from "@ngx-translate/core";
-import { TitleCasePipe } from "@angular/common";
-
-import { takeUntil } from "rxjs";
-
-import { IDateComponentsType } from "~/shared-mod/types/date-components.type";
-import { ISpinnerListElementType } from "~/shared-mod/types/spinner-list-element.type";
-import { AbstractReactiveProvider } from "~/shared-mod/utils/abstract-reactive-provider";
-
-import { TimeUtilsService } from "~/shared-mod/services/time-utils/time-utils.service";
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { TitleCasePipe } from '@angular/common';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { takeUntil } from 'rxjs';
+import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
+import { IDateComponentsType } from '~/shared-mod/types/date-components.type';
+import { ISpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-    selector: "msph-birth-date-select-spinner",
-    templateUrl: "./birth-date-select-spinner.component.html",
-    providers: [ TitleCasePipe ],
+  selector: 'msph-birth-date-select-spinner',
+  templateUrl: './birth-date-select-spinner.component.html',
+  providers: [TitleCasePipe],
 })
-export class BirthDateSelectSpinnerComponent extends AbstractReactiveProvider implements OnInit, OnDestroy {
+export class BirthDateSelectSpinnerComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
+  @Input() formGroup!: FormGroup;
 
-    @Input() formGroup!: FormGroup;
+  formMonths = this.generateAndConvertMonths();
+  formDays = this._timeUtilService.generateDaysForSingleMonth();
+  formYears = this._timeUtilService.generateYearsForBirthdayForm();
 
-    formMonths = this.generateAndConvertMonths();
-    formDays = this._timeUtilService.generateDaysForSingleMonth();
-    formYears = this._timeUtilService.generateYearsForBirthdayForm();
+  constructor(
+    private readonly _titleCasePipe: TitleCasePipe,
+    private readonly _timeUtilService: TimeUtilsService,
+    private readonly _translateService: TranslateService
+  ) {
+    super();
+  }
 
-    constructor(
-        private readonly _titleCasePipe: TitleCasePipe,
-        private readonly _timeUtilService: TimeUtilsService,
-        private readonly _translateService: TranslateService,
-    ) {
-        super();
-    };
+  ngOnInit(): void {
+    this._translateService.onLangChange
+      .pipe(takeUntil(this._subscriptionHook))
+      .subscribe(
+        ({ lang }) => (this.formMonths = this.generateAndConvertMonths(lang))
+      );
+  }
 
-    ngOnInit(): void {
-        this._translateService.onLangChange
-            .pipe(takeUntil(this._subscriptionHook))
-            .subscribe(({ lang }) => this.formMonths = this.generateAndConvertMonths(lang));
-    };
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
 
-    ngOnDestroy(): void {
-        this.unmountAllSubscriptions();
-    };
+  patchValue(patchingData: ISpinnerListElementType | null, key: string): void {
+    const value = patchingData ? patchingData.id : null;
+    const control = this.formGroup.get('birthDate');
+    if (!control) return;
 
-    patchValue(patchingData: ISpinnerListElementType | null, key: string): void {
-        const value = patchingData ? patchingData.id : null;
-        const control = this.formGroup.get("birthDate");
-        if (!control) return;
+    control.patchValue({ ...control.value, [key]: value });
+    control.markAsDirty();
+  }
 
-        control.patchValue({ ...control.value, [key]: value });
-        control.markAsDirty();
-    };
+  getFormControlValue(key: keyof IDateComponentsType): number | null {
+    const control = this.formGroup.get('birthDate');
+    if (control && control.value[key]) {
+      return control.value[key];
+    }
+    return null;
+  }
 
-    getFormControlValue(key: keyof IDateComponentsType): number | null {
-        const control = this.formGroup.get("birthDate");
-        if (control && control.value[key]) {
-            return control.value[key];
-        }
-        return null;
-    };
-
-    private generateAndConvertMonths(lang = this._translateService.currentLang): ISpinnerListElementType[] {
-        return this._timeUtilService.generateMonthsForDifferentLocale(lang)
-            .map(v => ({ ...v, value: this._titleCasePipe.transform(v.value) }));
-    };
+  private generateAndConvertMonths(
+    lang = this._translateService.currentLang
+  ): ISpinnerListElementType[] {
+    return this._timeUtilService
+      .generateMonthsForDifferentLocale(lang)
+      .map(v => ({ ...v, value: this._titleCasePipe.transform(v.value) }));
+  }
 }

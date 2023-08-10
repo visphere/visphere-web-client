@@ -2,7 +2,7 @@
  * Copyright (c) 2023 by MILOSZ GILGA <http://miloszgilga.pl>
  * Silesian University of Technology
  *
- *    File name: auth-checkbox-form-input.component.ts
+ *   File name: auth-checkbox-form-input.component.ts
  *    Last modified: 7/13/23, 6:25 PM
  *    Project name: moonsphere
  *    Module name: moonsphere-web-client
@@ -21,30 +21,23 @@
  * governing permissions and limitations under the license.
  */
 
-import { Component, Input } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-
-import { FormHelperService } from "~/shared-mod/services/form-helper/form-helper.service";
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 
 @Component({
-    selector: "msph-auth-checkbox-form-input",
-    templateUrl: "./auth-checkbox-form-input.component.html",
+  selector: 'msph-auth-checkbox-form-input',
+  templateUrl: './auth-checkbox-form-input.component.html',
 })
 export class AuthCheckboxFormInputComponent {
+  @Input() formGroup!: FormGroup;
+  @Input() formControlIdentifier!: string;
 
-    @Input() formGroup!: FormGroup;
-    @Input() formControlIdentifier!: string;
+  constructor(private readonly _formHelperService: FormHelperService) {}
 
-    constructor(
-        private readonly _formHelperService: FormHelperService,
-    ) {
-    };
-
-    handleSetDirtyAndTouched(): void {
-        const control = this.formGroup.get(this.formControlIdentifier);
-        control?.markAsDirty();
-        control?.markAsTouched();
-    };
+  handleSetDirtyAndTouched(): void {
+    const control = this.formGroup.get(this.formControlIdentifier);
+    control?.markAsDirty();
+    control?.markAsTouched();
+  }
 }
