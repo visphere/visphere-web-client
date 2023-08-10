@@ -35,6 +35,6 @@ module.exports = {
   arrowParens: 'avoid',
   trailingComma: 'es5',
   bracketSameLine: true,
-  importOrder: ['^(@)', '^(rxjs)', '^(~/)', '^([./]|[../])'],
+  importOrder: ['^(@angular)', '^(rxjs)', '^(~/)', '^([./]|[../])'],
   importOrderSortSpecifiers: true,
 };

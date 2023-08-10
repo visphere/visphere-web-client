@@ -5,7 +5,6 @@
     "titleBar.inactiveBackground": "#5a2323"
   },
   "prettier.configPath": "./.prettierrc.js",
-  "editor.detectIndentation": false,
   "psi-header.variables": [
     ["msph_projectName", "moonsphere"],
     ["msph_moduleName", "moonsphere-web-client"]
@@ -17,7 +16,7 @@
   "psi-header.changes-tracking": {
     "isActive": true,
     "autoHeader": "autoSave",
-    "include": ["javascript", "typescript", "shellscript", "scss", "html"],
+    "include": ["javascript", "typescript", "shellscript", "scss"],
     "exclude": ["json", "jsonl", "jsonc"],
     "enforceHeader": true,
     "replace": ["File name", "Last modified"]
@@ -35,13 +34,6 @@
       "prefix": "# ",
       "end": "#",
       "beforeHeader": ["#!/bin/bash", ""],
-      "lineLength": 64
-    },
-    {
-      "language": "html",
-      "begin": "<!--",
-      "prefix": " ~ ",
-      "end": "  -->",
       "lineLength": 64
     },
     {
