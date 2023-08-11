@@ -50,7 +50,7 @@ module.exports = merge(
       historyApiFallback: true,
       port: process.env.ENV_MSPH_WEB_CLIENT_DEV_PORT || 6053,
       static: [
-        path.join('..', '..', 'moonsphere-base', 'tailwind'),
+        path.resolve(__dirname, '..', '..', 'moonsphere-base', 'tailwind'),
         path.resolve(__dirname, '..'),
       ],
     },
