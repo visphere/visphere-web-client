@@ -35,6 +35,17 @@ module.exports = {
   arrowParens: 'avoid',
   trailingComma: 'es5',
   bracketSameLine: true,
-  importOrder: ['^(@angular)', '^(rxjs)', '^(~/)', '^([./]|[../])'],
+  importOrderParserPlugins: ['typescript', 'decorators-legacy'],
+  plugins: ['@trivago/prettier-plugin-sort-imports'],
+  importOrder: [
+    '^(zone.*)$',
+    '^(@.*)$',
+    '^([a-zA-Z].*)$',
+    '^rxjs$',
+    '^~/(.*)$',
+    '^[./]',
+    '^[../]',
+  ],
+  importOrderSeparation: false,
   importOrderSortSpecifiers: true,
 };

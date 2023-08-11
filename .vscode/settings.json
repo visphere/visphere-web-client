@@ -16,7 +16,7 @@
   "psi-header.changes-tracking": {
     "isActive": true,
     "autoHeader": "autoSave",
-    "include": ["javascript", "typescript", "shellscript", "scss"],
+    "include": ["javascript", "typescript", "shellscript", "scss", "html"],
     "exclude": ["json", "jsonl", "jsonc"],
     "enforceHeader": true,
     "replace": ["File name", "Last modified"]
@@ -34,6 +34,13 @@
       "prefix": "# ",
       "end": "#",
       "beforeHeader": ["#!/bin/bash", ""],
+      "lineLength": 64
+    },
+    {
+      "language": "html",
+      "begin": "<!--",
+      "prefix": " ~ ",
+      "end": " -->",
       "lineLength": 64
     },
     {
