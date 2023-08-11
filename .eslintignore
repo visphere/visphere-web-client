@@ -3,5 +3,6 @@ dist
 Dockerfile
 entrypoint.sh
 LICENSE
+package.json
 yarn.lock
 .gitignore

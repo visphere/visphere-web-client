@@ -6,9 +6,12 @@
     "docker:dev": "npx webpack --progress --config _webpack/webpack-docker-dev.config.cjs",
     "docker:prod": "npx webpack --progress --config _webpack/webpack-docker-prod.config.cjs",
     "lint": "npx eslint src/**/*.{ts,html}",
+    "format": "npx prettier . --write",
     "test:single": "cross-env ENV_KARMA_TYPE='single' npx karma start karma.conf.cjs",
     "test:watch": "cross-env ENV_KARMA_TYPE='watch' npx karma start karma.conf.cjs",
-    "configure:husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
+    "husky:add-pre-commit": "npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
+    "husky:add-pre-push": "npx husky add .husky/pre-push \"yarn run test:single\"",
+    "configure:husky": "npx husky install && yarn run husky:add-pre-commit && yarn run husky:add-pre-push"
   },
   "private": true,
   "author": {
@@ -26,7 +29,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn run test:single && lint-staged"
+      "pre-push": "yarn run test:single"
     }
   },
   "dependencies": {
