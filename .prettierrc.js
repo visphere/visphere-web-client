@@ -25,27 +25,4 @@
 
 'use scrict';
 
-module.exports = {
-  tabWidth: 2,
-  printWidth: 80,
-  useTabs: false,
-  singleQuote: true,
-  semi: true,
-  bracketSpacing: true,
-  arrowParens: 'avoid',
-  trailingComma: 'es5',
-  bracketSameLine: true,
-  importOrderParserPlugins: ['typescript', 'decorators-legacy'],
-  plugins: ['@trivago/prettier-plugin-sort-imports'],
-  importOrder: [
-    '^(zone.*)$',
-    '^(@.*)$',
-    '^([a-zA-Z].*)$',
-    '^rxjs$',
-    '^~/(.*)$',
-    '^[./]',
-    '^[../]',
-  ],
-  importOrderSeparation: false,
-  importOrderSortSpecifiers: true,
-};
+module.exports = require('../moonsphere-base/config/prettier/_prettier-client.config.cjs');
