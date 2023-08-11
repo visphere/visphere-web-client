@@ -23,7 +23,7 @@
  * governing permissions and limitations under the license.
  */
 
-'use scrict';
+'use strict';
 
 const webpackProdConfig = require('./webpack-prod.config.cjs');
 
