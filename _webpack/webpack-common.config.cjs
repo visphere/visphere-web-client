@@ -68,120 +68,124 @@ const commonWebpackConfig = ({
   clientBaseUrl,
   cdnBaseUrl,
   isProdMode,
-}) => {
-  process.env.CDN_TAILWIND_PATH = cdnBaseUrl;
-  return {
-    context: path.resolve(__dirname, '..'),
-    entry: {
-      polyfills: [path.resolve(__dirname, '..', 'src', 'polyfills.ts')],
-      main: [path.resolve(__dirname, '..', 'src', 'main.ts')],
-      vendor: [path.resolve(__dirname, '..', 'src', 'styles', 'vendor.scss')],
-      custom: [path.resolve(__dirname, '..', 'src', 'styles', 'combined.scss')],
-    },
-    output: {
-      path: path.resolve(__dirname, '..', 'dist'),
-      filename: `js/__msph.[${
-        isProdMode ? 'contenthash:10' : 'name'
-      }].bundle.js`,
-      chunkFilename: `js/__msph.[${
-        isProdMode ? 'contenthash:10' : 'name'
-      }].chunk.js`,
-      clean: true,
-      publicPath: '/',
-    },
-    resolve: commonResolveConfig,
-    module: {
-      rules: [
-        {
-          test: /\.[cm]?[tj]s?$/,
-          exclude: isProdMode ? [] : [/\/node_modules\//],
-          use: webpackUtils.angularCommonWebpackTsLoaders,
-        },
-        webpackUtils.angularCommonWebpackScssLoader({
-          includePath: path.resolve(__dirname, '..', 'src', 'app'),
-          excludePath: path.resolve(__dirname, '..', 'src', 'styles'),
-          postCssConfig,
+}) =>
+  webpackUtils.webpackProxyInjector(
+    { cdnBaseUrl },
+    {
+      context: path.resolve(__dirname, '..'),
+      entry: {
+        polyfills: [path.resolve(__dirname, '..', 'src', 'polyfills.ts')],
+        main: [path.resolve(__dirname, '..', 'src', 'main.ts')],
+        vendor: [path.resolve(__dirname, '..', 'src', 'styles', 'vendor.scss')],
+        custom: [
+          path.resolve(__dirname, '..', 'src', 'styles', 'combined.scss'),
+        ],
+      },
+      output: {
+        path: path.resolve(__dirname, '..', 'dist'),
+        filename: `js/__msph.[${
+          isProdMode ? 'contenthash:10' : 'name'
+        }].bundle.js`,
+        chunkFilename: `js/__msph.[${
+          isProdMode ? 'contenthash:10' : 'name'
+        }].chunk.js`,
+        clean: true,
+        publicPath: '/',
+      },
+      resolve: commonResolveConfig,
+      module: {
+        rules: [
+          {
+            test: /\.[cm]?[tj]s?$/,
+            exclude: isProdMode ? [] : [/\/node_modules\//],
+            use: webpackUtils.angularCommonWebpackTsLoaders,
+          },
+          webpackUtils.angularCommonWebpackScssLoader({
+            includePath: path.resolve(__dirname, '..', 'src', 'app'),
+            excludePath: path.resolve(__dirname, '..', 'src', 'styles'),
+            postCssConfig,
+          }),
+          webpackUtils.tailwindGlobalSassLoader({
+            stylesPath: path.resolve(__dirname, '..', 'src', 'styles'),
+            postCssConfig,
+            miniCssLoader: MiniCssExtractPlugin.loader,
+            cdnBaseUrl,
+          }),
+        ],
+      },
+      optimization: {
+        minimize: isProdMode,
+        splitChunks: webpackUtils.commonNodeModulesChunkSplitting,
+      },
+      plugins: [
+        new RemoveEmptyScriptsPlugin(),
+        new DefinePlugin({
+          'process.env.IS_PRODUCTION_MODE': JSON.stringify(isProdMode),
+          'process.env.BASE_LANDING_PAGE_URL':
+            JSON.stringify(landingPageBaseUrl),
+          'process.env.BASE_CLIENT_URL': JSON.stringify(clientBaseUrl),
+          'process.env.BASE_CDN_URL': JSON.stringify(cdnBaseUrl),
         }),
-        webpackUtils.tailwindGlobalSassLoader({
-          stylesPath: path.resolve(__dirname, '..', 'src', 'styles'),
-          postCssConfig,
-          miniCssLoader: MiniCssExtractPlugin.loader,
-          cdnBaseUrl,
+        new HtmlWebpackPlugin({
+          template: path.resolve(__dirname, '..', 'src', 'index.ejs'),
+          title: 'MoonSphere',
+          inject: 'body',
+          scriptLoading: 'blocking',
+          templateParameters: {
+            externalCdnBasePath: cdnBaseUrl,
+            externalClientBasePath: clientBaseUrl,
+          },
+          minify: {
+            minifyCSS: isProdMode,
+            minifyJS: isProdMode,
+            html5: isProdMode,
+            removeComments: false,
+            collapseWhitespace: true,
+          },
+        }),
+        new MiniCssExtractPlugin({
+          filename: `css/__msph.[${
+            isProdMode ? 'contenthash:10' : 'name'
+          }].bundle.css`,
+          chunkFilename: `css/__msph.[${
+            isProdMode ? 'contenthash:10' : 'name'
+          }].chunk.css`,
+        }),
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: path.resolve(__dirname, '..', 'src', 'assets', 'manifest'),
+              to: path.resolve(__dirname, '..', 'dist', 'assets', 'manifest'),
+              transform(content, _) {
+                return Buffer.from(
+                  content
+                    .toString()
+                    .replace(/__CDN_BASE_URL__/g, cdnBaseUrl)
+                    .replace(/__CLIENT_BASE_URL__/g, clientBaseUrl)
+                );
+              },
+            },
+            {
+              from: path.resolve(__dirname, '..', '.htaccess'),
+              to: path.resolve(__dirname, '..', 'dist'),
+            },
+          ],
+        }),
+        new MomentLocalesPlugin(webpackUtils.webpackMomentLocalesCommonConfig),
+        new AngularWebpackPlugin({
+          tsconfig: path.resolve(
+            __dirname,
+            '..',
+            '_tsconfig',
+            'tsconfig.app.json'
+          ),
+          sourceMap: !isProdMode,
+          jitMode: false,
+          directTemplateLoading: true,
         }),
       ],
-    },
-    optimization: {
-      minimize: isProdMode,
-      splitChunks: webpackUtils.commonNodeModulesChunkSplitting,
-    },
-    plugins: [
-      new RemoveEmptyScriptsPlugin(),
-      new DefinePlugin({
-        'process.env.IS_PRODUCTION_MODE': JSON.stringify(isProdMode),
-        'process.env.BASE_LANDING_PAGE_URL': JSON.stringify(landingPageBaseUrl),
-        'process.env.BASE_CLIENT_URL': JSON.stringify(clientBaseUrl),
-        'process.env.BASE_CDN_URL': JSON.stringify(cdnBaseUrl),
-      }),
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, '..', 'src', 'index.ejs'),
-        title: 'MoonSphere',
-        inject: 'body',
-        scriptLoading: 'blocking',
-        templateParameters: {
-          externalCdnBasePath: cdnBaseUrl,
-          externalClientBasePath: clientBaseUrl,
-        },
-        minify: {
-          minifyCSS: isProdMode,
-          minifyJS: isProdMode,
-          html5: isProdMode,
-          removeComments: false,
-          collapseWhitespace: true,
-        },
-      }),
-      new MiniCssExtractPlugin({
-        filename: `css/__msph.[${
-          isProdMode ? 'contenthash:10' : 'name'
-        }].bundle.css`,
-        chunkFilename: `css/__msph.[${
-          isProdMode ? 'contenthash:10' : 'name'
-        }].chunk.css`,
-      }),
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: path.resolve(__dirname, '..', 'src', 'assets', 'manifest'),
-            to: path.resolve(__dirname, '..', 'dist', 'assets', 'manifest'),
-            transform(content, _) {
-              return Buffer.from(
-                content
-                  .toString()
-                  .replace(/__CDN_BASE_URL__/g, cdnBaseUrl)
-                  .replace(/__CLIENT_BASE_URL__/g, clientBaseUrl)
-              );
-            },
-          },
-          {
-            from: path.resolve(__dirname, '..', '.htaccess'),
-            to: path.resolve(__dirname, '..', 'dist'),
-          },
-        ],
-      }),
-      new MomentLocalesPlugin(webpackUtils.webpackMomentLocalesCommonConfig),
-      new AngularWebpackPlugin({
-        tsconfig: path.resolve(
-          __dirname,
-          '..',
-          '_tsconfig',
-          'tsconfig.app.json'
-        ),
-        sourceMap: !isProdMode,
-        jitMode: false,
-        directTemplateLoading: true,
-      }),
-    ],
-  };
-};
+    }
+  );
 
 module.exports = {
   commonResolveConfig,
