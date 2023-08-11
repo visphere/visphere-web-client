@@ -16,8 +16,10 @@
   "psi-header.changes-tracking": {
     "isActive": true,
     "autoHeader": "autoSave",
-    "include": ["javascript", "typescript", "shellscript", "scss", "html"],
+    "include": ["javascript", "typescript", "scss", "html"],
+    "includeGlob": ["**/*.sh"],
     "exclude": ["json", "jsonl", "jsonc"],
+    "excludeGlob": [".husky/**/*"],
     "enforceHeader": true,
     "replace": ["File name", "Last modified"]
   },
