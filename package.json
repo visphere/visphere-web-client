@@ -5,7 +5,8 @@
     "start:dev": "npx webpack-dev-server --progress --config _webpack/webpack-dev.config.cjs",
     "docker:dev": "npx webpack --progress --config _webpack/webpack-docker-dev.config.cjs",
     "docker:prod": "npx webpack --progress --config _webpack/webpack-docker-prod.config.cjs",
-    "lint": "npx eslint src/**/*.{ts,html}",
+    "lint:check": "npx eslint src/**/*.{ts,html}",
+    "lint:fix": "npx eslint src/**/*.{ts,html} --fix",
     "format": "npx prettier . --write",
     "test:single": "cross-env ENV_KARMA_TYPE='single' npx karma start karma.conf.cjs",
     "test:watch": "cross-env ENV_KARMA_TYPE='watch' npx karma start karma.conf.cjs",
@@ -22,8 +23,8 @@
   "license": "Apache-2.0",
   "lint-staged": {
     "**/*.{ts,html,js,cjs,json}": [
-      "eslint . --fix",
-      "prettier --write ."
+      "yarn run lint:fix",
+      "yarn run format"
     ]
   },
   "husky": {
