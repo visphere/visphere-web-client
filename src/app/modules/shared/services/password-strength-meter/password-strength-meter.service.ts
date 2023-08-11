@@ -37,8 +37,6 @@ export class PasswordStrengthMeterService {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 function passwordStrengthMeteritFactory(
   passwordStrengthMeter: PasswordStrengthMeterService
 ): () => void {
