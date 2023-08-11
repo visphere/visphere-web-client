@@ -4,13 +4,13 @@
  *
  *   File name: auth-single-select-spinner.component.ts
  *   Created at: 2023-08-11, 00:19:21
- *   Last updated at: 2023-08-11, 01:40:19
+ *   Last updated at: 2023-08-11, 20:59:13
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
  *
- * This project is a part of "MoonSphere" instant messenger system. This is a project
- * completing a engineers degree in computer science at Silesian University of Technology.
+ * This project is a part of "MoonSphere" instant messenger system. This system is a part of
+ * completing an engineers degree in computer science at Silesian University of Technology.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
