@@ -37,11 +37,11 @@
   <ng-container listContent>
     <li *ngFor="let translation of traslations">
       <button
-        [class.msph_footer-select-list-element-active]="
+        [class.msph_footer__select-list-element--active]="
           (selectedLang$ | async) === translation
         "
         (click)="handleChangeLang(translation)"
-        class="msph_footer-select-list-element">
+        class="msph_footer__select-list-element hover:bg-gray-300 dark:hover:bg-gray-600">
         <img
           src="{{ path }}/static/icon/lang/{{ translation.lang }}.png"
           width="23"
@@ -62,11 +62,11 @@
   <ng-container listContent>
     <li *ngFor="let theme of themes">
       <button
-        [class.msph_footer-select-list-element-active]="
+        [class.msph_footer__select-list-element--active]="
           (selectedTheme$ | async) === theme
         "
         (click)="handleChangeTheme(theme)"
-        class="msph_footer-select-list-element">
+        class="msph_footer__select-list-element hover:bg-gray-300 dark:hover:bg-gray-600">
         <ng-icon [name]="theme.icon" class="me-2"></ng-icon>
         <p>{{ theme.i18nKey | translate }}</p>
       </button>

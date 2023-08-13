@@ -26,9 +26,11 @@
 <button
   #selectViewHolder
   (click)="onToggleVisibility()"
-  class="border border-gray-500 px-2.5 py-1.5 rounded-md flex items-center font-medium dark:font-normal">
+  class="msph_footer__select-list-button">
   <ng-content select="[buttonContent]" />
 </button>
-<ul *ngIf="isOpen" class="msph_footer-select-list-container">
+<ul
+  *ngIf="isOpen"
+  class="msph_footer__select-list-container bg-msph-primary-light dark:bg-msph-primary-dark">
   <ng-content select="[listContent]" />
 </ul>
