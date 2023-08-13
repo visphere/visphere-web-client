@@ -1,10 +1,11 @@
+'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
  *   File name: karma.conf.cjs
- *   Created at: 2023-08-11, 00:25:51
- *   Last updated at: 2023-08-11, 20:50:49
+ *   Created at: 2023-08-13, 00:20:56
+ *   Last updated at: 2023-08-14, 01:54:53
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,8 +23,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-
-'use strict';
 
 module.exports = function (config) {
   config.set({

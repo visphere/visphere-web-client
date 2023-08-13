@@ -1,10 +1,11 @@
+'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
  *   File name: webpack-spec.config.cjs
  *   Created at: 2023-08-11, 00:23:03
- *   Last updated at: 2023-08-11, 20:50:35
+ *   Last updated at: 2023-08-14, 01:54:29
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,9 +23,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
