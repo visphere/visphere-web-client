@@ -4,21 +4,27 @@ ARG BUILD_MODE
 
 WORKDIR /moonsphere
 
-COPY .env .
-COPY _moonsphere-base _moonsphere-base/
+COPY moonsphere-base moonsphere-base/
 COPY moonsphere-web-client moonsphere-web-client/
 
+WORKDIR /moonsphere/moonsphere-base
+
+RUN yarn install
+
 WORKDIR /moonsphere/moonsphere-web-client
+
+RUN mkdir dist
 
 RUN yarn install
 RUN yarn run docker:$BUILD_MODE
 
 WORKDIR /moonsphere
 
-RUN rm -f .env
-RUN rm -rf _moonsphere-base
+RUN rm -rf moonsphere-base
 
 FROM ubuntu:20.04
+
+LABEL maintainer="MoonSphere Systems <info@moonsphere.pl>"
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y apache2
 RUN rm -rf /var/lib/apt/lists/*
