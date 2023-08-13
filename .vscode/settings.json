@@ -26,8 +26,8 @@
     "autoHeader": "autoSave",
     "include": ["javascript", "typescript", "scss", "html"],
     "includeGlob": ["**/*.sh"],
-    "exclude": ["json", "jsonl", "jsonc"],
-    "excludeGlob": [".husky/**/*"],
+    "exclude": ["json", "jsonl", "jsonc", "ejs"],
+    "excludeGlob": [".husky/**/*", "./**/*.ejs"],
     "enforceHeader": true,
     "replace": ["File name", "Last modified"]
   },
