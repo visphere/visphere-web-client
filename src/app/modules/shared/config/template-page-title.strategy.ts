@@ -52,8 +52,6 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 export const titleStrategyProvider = {
   provide: TitleStrategy,
   useClass: TemplatePageTitleStrategy,
