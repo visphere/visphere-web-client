@@ -19,6 +19,7 @@
     "dbaeumer.vscode-eslint",
     "naumovs.color-highlight",
     "ecmel.vscode-html-css",
-    "vitaliymaz.vscode-svg-previewer"
+    "vitaliymaz.vscode-svg-previewer",
+    "oderwat.indent-rainbow"
   ]
 }
