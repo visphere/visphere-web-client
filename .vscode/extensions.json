@@ -18,6 +18,7 @@
     "christian-kohler.npm-intellisense",
     "dbaeumer.vscode-eslint",
     "naumovs.color-highlight",
-    "ecmel.vscode-html-css"
+    "ecmel.vscode-html-css",
+    "vitaliymaz.vscode-svg-previewer"
   ]
 }
