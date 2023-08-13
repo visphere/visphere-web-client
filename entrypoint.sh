@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #
 # Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>

@@ -43,7 +43,7 @@
       "begin": "#",
       "prefix": "# ",
       "end": "#",
-      "beforeHeader": ["#!/bin/bash", ""],
+      "beforeHeader": ["#!/bin/sh", ""],
       "lineLength": 64
     },
     {
