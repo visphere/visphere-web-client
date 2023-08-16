@@ -95,7 +95,6 @@ const commonWebpackConfig = ({
         rules: [
           {
             test: /\.[cm]?[tj]s?$/,
-            exclude: isProdMode ? [] : [/\/node_modules\//],
             use: webpackUtils.angularCommonWebpackTsLoaders,
           },
           webpackUtils.angularCommonWebpackScssLoader({
