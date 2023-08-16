@@ -22,15 +22,40 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs';
 import { environment } from '~/env/environment';
+import { ThemeSwitcherService } from '~/root-mod/modules/shared/services/theme-switcher/theme-switcher.service';
+import { AbstractReactiveProvider } from '~/root-mod/modules/shared/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-footer',
   templateUrl: './footer.component.html',
 })
-export class FooterComponent {
+export class FooterComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   path = environment.contentDistributorBaseUrl;
   landingPagePath = environment.baseLandingUrl;
   currYear = Date.now();
+  copyLogoImagePath = '';
+
+  constructor(private readonly _themeSwitcherService: ThemeSwitcherService) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this._themeSwitcherService.selectedTheme$
+      .pipe(takeUntil(this._subscriptionHook))
+      .subscribe(theme => {
+        this.copyLogoImagePath = this._themeSwitcherService.isDarkMode(theme)
+          ? 'moonsphere-light-small-variant-2.svg'
+          : 'moonsphere-dark-small-variant-2.svg';
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
 }

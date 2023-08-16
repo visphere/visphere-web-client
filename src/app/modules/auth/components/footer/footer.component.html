@@ -37,7 +37,7 @@
           alt=""
           width="50"
           height="50" />
-        <h2 class="mt-2 sm:mt-0 sm:ms-3 text-2xl font-bold">MoonSphere</h2>
+        <h2 class="mt-2 sm:mt-0 sm:ms-3 text-2xl font-logo">MoonSphere</h2>
       </a>
       <p class="mt-8 leading-[22px] mb-5 dark:font-light">
         {{ 'msph.webCommon.footer.description' | translate }}
@@ -190,20 +190,22 @@
             <span class="text-gray-500 font-medium me-1"
               >&copy; {{ currYear | date: 'yyyy' }} by</span
             >
-            <a href="/" class="hover:underline">MoonSphere Systems</a>
+            <a href="/" class="hover:underline font-medium dark:font-light"
+              >MoonSphere Systems</a
+            >
           </div>
           <div class="flex justify-center md:justify-start">
             <span class="text-gray-500 font-medium me-2">Powered by</span>
             <div class="flex">
               <img
-                ngSrc="{{
-                  path
-                }}/static/logo/moonsphere-light-small-variant-2.svg"
+                src="{{ path }}/static/logo/{{ copyLogoImagePath }}"
                 alt=""
                 width="16"
                 height="16"
                 class="mt-0.5 object-contain me-1" />
-              MoonSphere
+              <span class="font-medium dark:font-light font-logo"
+                >MoonSphere</span
+              >
             </div>
           </div>
         </div>

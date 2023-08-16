@@ -72,6 +72,12 @@ export class ThemeSwitcherService {
     this.updateTheme(selectedTheme);
   }
 
+  isDarkMode(theme: IThemeModeType): boolean {
+    return theme.id === ThemeType.DEVICE
+      ? this.isDarkBrowserTheme()
+      : theme.id === ThemeType.DARK;
+  }
+
   private updateTheme(theme: ThemeType): void {
     this._isPickedDevice = theme === ThemeType.DEVICE;
     if (theme === ThemeType.DEVICE) {
