@@ -8,3 +8,4 @@ LICENSE
 package.json
 yarn.lock
 .gitignore
+src/index.ejs

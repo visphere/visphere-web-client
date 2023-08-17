@@ -22,7 +22,7 @@
   },
   "license": "Apache-2.0",
   "lint-staged": {
-    "**/*.{ts,html,ejs,js,cjs,json}": [
+    "**/*.{ts,html,js,cjs,json}": [
       "yarn run lint:fix",
       "yarn run format"
     ]
