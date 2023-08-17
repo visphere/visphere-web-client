@@ -38,6 +38,7 @@ export class FooterComponent
 {
   path = environment.contentDistributorBaseUrl;
   landingPagePath = environment.baseLandingUrl;
+
   currYear = Date.now();
   copyLogoImagePath = '';
 
