@@ -26,6 +26,7 @@
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
+const { execSync } = require('child_process');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const { AngularWebpackPlugin } = require('@ngtools/webpack');
@@ -59,6 +60,15 @@ const postCssConfig = {
       require('tailwindcss'),
     ],
   },
+};
+
+const determinateAngularVersion = () => {
+  const angularVersion = execSync(
+    'npm list @angular/core --depth=0 --json'
+  ).toString();
+  return `Angular ${
+    JSON.parse(angularVersion).dependencies['@angular/core'].version
+  }`;
 };
 
 const commonWebpackConfig = ({
@@ -131,6 +141,7 @@ const commonWebpackConfig = ({
           templateParameters: {
             externalCdnBasePath: cdnBaseUrl,
             externalClientBasePath: clientBaseUrl,
+            frontEndGenerator: determinateAngularVersion(),
           },
           minify: {
             minifyCSS: isProdMode,
