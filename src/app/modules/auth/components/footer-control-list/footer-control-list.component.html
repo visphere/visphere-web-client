@@ -31,6 +31,7 @@
 </button>
 <ul
   *ngIf="isOpen"
+  [@dropboxFadeAndMove]
   class="msph_footer__select-list-container left-0 bottom-full bg-msph-primary-light dark:bg-msph-primary-dark">
   <ng-content select="[listContent]" />
 </ul>

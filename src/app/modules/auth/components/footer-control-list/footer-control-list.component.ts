@@ -23,11 +23,13 @@
  * governing permissions and limitations under the license.
  */
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { dropboxFadeAndMove } from '~/root-mod/modules/shared/animations/dropbox.animation';
 
 @Component({
   selector: 'msph-footer-control-list',
   templateUrl: './footer-control-list.component.html',
   host: { class: 'relative' },
+  animations: [dropboxFadeAndMove],
 })
 export class FooterControlListComponent {
   isOpen = false;

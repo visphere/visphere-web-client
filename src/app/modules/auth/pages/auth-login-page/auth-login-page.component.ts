@@ -25,11 +25,13 @@
 import { Component } from '@angular/core';
 import { Oauth2Type } from '~/auth-mod/types/oauth2.type';
 import { environment } from '~/env/environment';
+import { authWindowFadeAndMove } from '~/root-mod/modules/shared/animations/auth-window.animation';
 
 @Component({
   selector: 'msph-auth-login-page',
   templateUrl: './auth-login-page.component.html',
   host: { class: 'flex-grow flex flex-col' },
+  animations: [authWindowFadeAndMove],
 })
 export class AuthLoginPageComponent {
   path = environment.contentDistributorBaseUrl;

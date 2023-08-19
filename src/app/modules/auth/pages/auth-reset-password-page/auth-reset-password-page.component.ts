@@ -23,10 +23,12 @@
  * governing permissions and limitations under the license.
  */
 import { Component } from '@angular/core';
+import { authWindowFadeAndMove } from '~/root-mod/modules/shared/animations/auth-window.animation';
 
 @Component({
   selector: 'msph-auth-reset-password-page',
   templateUrl: './auth-reset-password-page.component.html',
   host: { class: 'flex-grow flex flex-col' },
+  animations: [authWindowFadeAndMove],
 })
 export class AuthResetPasswordPageComponent {}

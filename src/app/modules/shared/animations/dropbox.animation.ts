@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: auth-change-password-page.component.ts
- *   Created at: 2023-08-11, 00:19:21
- *   Last updated at: 2023-08-11, 20:56:54
+ *   File name: dropbox.animation.ts
+ *   Created at: 2023-08-19, 22:49:50
+ *   Last updated at: 2023-08-19, 22:49:51
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,19 +22,15 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { authWindowFadeAndMove } from '~/root-mod/modules/shared/animations/auth-window.animation';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
-@Component({
-  selector: 'msph-auth-change-password-page',
-  templateUrl: './auth-change-password-page.component.html',
-  animations: [authWindowFadeAndMove],
-})
-export class AuthChangePasswordPageComponent {
-  token: string;
-
-  constructor(private readonly _activatedRoute: ActivatedRoute) {
-    this.token = String(this._activatedRoute.snapshot.paramMap.get('token'));
-  }
-}
+export const dropboxFadeAndMove = trigger('dropboxFadeAndMove', [
+  state('void', style({ opacity: 0, transform: 'translateY(20px)' })),
+  transition(':enter, :leave', [animate('200ms ease-in-out')]),
+]);
