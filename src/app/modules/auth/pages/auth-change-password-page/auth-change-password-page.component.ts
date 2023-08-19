@@ -24,10 +24,12 @@
  */
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { authWindowFadeAndMove } from '~/root-mod/modules/shared/animations/auth-window.animation';
 
 @Component({
   selector: 'msph-auth-change-password-page',
   templateUrl: './auth-change-password-page.component.html',
+  animations: [authWindowFadeAndMove],
 })
 export class AuthChangePasswordPageComponent {
   token: string;
