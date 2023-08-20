@@ -25,6 +25,7 @@
 import { DOCUMENT } from '@angular/common';
 import { APP_INITIALIZER, Inject, Injectable } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
@@ -43,6 +44,7 @@ export class LanguageSwitcherService {
 
   constructor(
     private readonly _meta: Meta,
+    private readonly _router: Router,
     @Inject(DOCUMENT) private readonly _document: Document,
     private readonly _translateService: TranslateService,
     private readonly _localStorageService: LocalStorageService
@@ -56,13 +58,24 @@ export class LanguageSwitcherService {
     });
   }
 
-  loadLang(): void {
+  async loadLang(): Promise<void> {
     this._translateService.addLangs(this.getFlattenTranslations());
+    const searchParams = new URLSearchParams(window.location.search);
+    const proxyLang = searchParams.get('lang');
     const savedLang: { lang: string } | null = this._localStorageService.get(
       StorageKeyType.SELECTED_LANG
     );
-    const loadedLang = savedLang ? savedLang.lang : navigator.language;
+    let loadedLang;
+    if (
+      proxyLang &&
+      AVAILABLE_TRANSLATIONS.some(({ lang }) => lang === proxyLang)
+    ) {
+      loadedLang = proxyLang;
+    } else {
+      loadedLang = savedLang ? savedLang.lang : navigator.language;
+    }
     this.updateProps(this.getTranslation(loadedLang));
+    await this._router.navigate([window.location.pathname]);
   }
 
   private changeMetaProperties(loadedLang: string): void {

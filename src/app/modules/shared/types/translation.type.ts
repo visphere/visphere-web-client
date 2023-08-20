@@ -25,10 +25,11 @@
 
 export interface ITranslation {
   lang: string;
+  landingPrefix: string;
   name: string;
 }
 
 export const AVAILABLE_TRANSLATIONS: ITranslation[] = [
-  { lang: 'pl', name: 'Polski' },
-  { lang: 'en-US', name: 'English, US' },
+  { lang: 'pl', landingPrefix: '', name: 'Polski' },
+  { lang: 'en-US', landingPrefix: '/en', name: 'English, US' },
 ];
