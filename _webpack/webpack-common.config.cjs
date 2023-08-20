@@ -33,7 +33,7 @@ const { AngularWebpackPlugin } = require('@ngtools/webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { DefinePlugin } = require('webpack');
-const { axios } = require('axios');
+const axios = require('axios');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const webpackUtils = require('../../moonsphere-base/webpack/webpack-utils.cjs');
 
