@@ -35,11 +35,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { dropboxFadeAndMove } from '~/root-mod/modules/shared/animations/dropbox.animation';
 import { ISpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
 
 @Component({
   selector: 'msph-auth-single-select-spinner',
   templateUrl: './auth-single-select-spinner.component.html',
+  animations: [dropboxFadeAndMove],
 })
 export class AuthSingleSelectSpinnerComponent
   implements OnChanges, AfterViewInit

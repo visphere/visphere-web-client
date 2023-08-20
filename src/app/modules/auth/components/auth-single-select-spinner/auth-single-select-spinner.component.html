@@ -30,6 +30,7 @@
   class="relative cursor-default">
   <ul
     *ngIf="itemsListIsOpen"
+    [@dropboxFadeAndMove]
     class="msph_auth-single-select-spinner-list-container">
     <li *ngFor="let element of filteredList">
       <button
