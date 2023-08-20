@@ -170,6 +170,11 @@
         formControlIdentifier="secondEmailAddress"
         i18nPrefix="webClient.register"
         type="email" />
+      <msph-field-validator
+        [formGroup]="register2ndStageForm"
+        formControlIdentifier="secondEmailAddress"
+        i18nPrefix="webClient.register"
+        type="exact" />
       <ng-container afterInputContent>
         <span class="msph_form-out-text">
           {{

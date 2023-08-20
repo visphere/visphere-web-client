@@ -30,6 +30,7 @@ import {
 } from '~/auth-mod/models/register-form.model';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
+import { emailWithSecondaryEmail } from '~/shared-mod/validators/email-with-secondary-email.validator';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
 import { regex } from '~/shared-mod/validators/regex.constant';
 import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.validator';
@@ -79,7 +80,10 @@ export class RegisterFormComponent implements AfterViewInit {
         Validators.required,
         Validators.minLength(2),
       ]),
-      secondEmailAddress: new FormControl('', [Validators.email]),
+      secondEmailAddress: new FormControl('', [
+        Validators.email,
+        emailWithSecondaryEmail(this.register1stStageForm, 'emailAddress'),
+      ]),
       allowNotifs: new FormControl(false),
       agreeTerms: new FormControl(false, [requiredBoolValidator()]),
     });
