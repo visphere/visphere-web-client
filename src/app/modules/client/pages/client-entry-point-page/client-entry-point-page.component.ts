@@ -23,9 +23,22 @@
  * governing permissions and limitations under the license.
  */
 import { Component } from '@angular/core';
+import { FaviconBadgeNotificatorService } from '../../services/favicon-badge-notificator/favicon-badge-notificator.service';
 
 @Component({
   selector: 'msph-client-entrypoint-page',
   templateUrl: './client-entry-point-page.component.html',
 })
-export class ClientEntryPointPageComponent {}
+export class ClientEntryPointPageComponent {
+  constructor(
+    private readonly _faviconBadgeNotificationService: FaviconBadgeNotificatorService
+  ) {}
+
+  handleShowNotif(): void {
+    this._faviconBadgeNotificationService.showNotify();
+  }
+
+  handleHideNotif(): void {
+    this._faviconBadgeNotificationService.removeNotify();
+  }
+}
