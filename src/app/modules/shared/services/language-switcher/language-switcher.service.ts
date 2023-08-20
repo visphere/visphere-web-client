@@ -80,12 +80,18 @@ export class LanguageSwitcherService {
 
   private changeMetaProperties(loadedLang: string): void {
     document.documentElement.lang = loadedLang;
-    this.updateMetaName('description', 'mpsh.metaProperty.description');
-    this.updateMetaName('keywords', 'mpsh.metaProperty.keywords');
-    this.updateMetaProperty('og:description', 'mpsh.metaProperty.description');
+    this.updateMetaName(
+      'description',
+      'msph.webCommon.metaProperty.description'
+    );
+    this.updateMetaName('keywords', 'msph.webCommon.metaProperty.keywords');
+    this.updateMetaProperty(
+      'og:description',
+      'msph.webCommon.metaProperty.description'
+    );
     this.updateMetaProperty(
       'twitter:description',
-      'mpsh.metaProperty.description'
+      'msph.webCommon.metaProperty.description'
     );
     this.updateManifestLangFile(loadedLang);
   }

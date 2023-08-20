@@ -26,13 +26,14 @@
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
-const { execSync } = require('child_process');
+const { exec } = require('promisify-child-process');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const { AngularWebpackPlugin } = require('@ngtools/webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { DefinePlugin } = require('webpack');
+const { axios } = require('axios');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const webpackUtils = require('../../moonsphere-base/webpack/webpack-utils.cjs');
 
@@ -60,15 +61,6 @@ const postCssConfig = {
       require('tailwindcss'),
     ],
   },
-};
-
-const determinateAngularVersion = () => {
-  const angularVersion = execSync(
-    'npm list @angular/core --depth=0 --json'
-  ).toString();
-  return `Angular ${
-    JSON.parse(angularVersion).dependencies['@angular/core'].version
-  }`;
 };
 
 const commonWebpackConfig = ({
@@ -138,10 +130,36 @@ const commonWebpackConfig = ({
           title: 'MoonSphere',
           inject: 'body',
           scriptLoading: 'blocking',
-          templateParameters: {
-            externalCdnBasePath: cdnBaseUrl,
-            externalClientBasePath: clientBaseUrl,
-            frontEndGenerator: determinateAngularVersion(),
+          templateParameters: async (
+            compilation,
+            assets,
+            assetTags,
+            options
+          ) => {
+            const { stdout } = await exec(
+              'npm list @angular/core --depth=0 --json'
+            );
+            const { data } = await axios(
+              `${cdnBaseUrl}/static/i18n/web-common/en-US.json`
+            );
+            const { description, keywords } =
+              data['msph.webCommon.metaProperty'];
+            return {
+              compilation,
+              webpackConfig: compilation.options,
+              htmlWebpackPlugin: {
+                tags: assetTags,
+                files: assets,
+                options,
+              },
+              externalCdnBasePath: cdnBaseUrl,
+              externalClientBasePath: clientBaseUrl,
+              frontEndGenerator: `Angular ${
+                JSON.parse(stdout).dependencies['@angular/core'].version
+              }`,
+              metaDescription: description,
+              metaKeywords: keywords,
+            };
           },
           minify: {
             minifyCSS: isProdMode,
