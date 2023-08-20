@@ -25,7 +25,7 @@
 
 <button
   #selectViewHolder
-  (click)="handleShowItemsList()"
+  (focus)="handleShowItemsList()"
   type="button"
   class="relative cursor-default">
   <ul
@@ -52,11 +52,13 @@
     [class.msph_auth-invalid-input]="hasErrors"
     (input)="handleFilterElements(inputElement.value)"
     type="text"
+    (focus)="handleShowItemsList()"
     class="msph_auth-input w-full" />
   <div
-    class="absolute top-1/2 -translate-y-1/2 right-2.5 text-gray-600 dark:text-gray-300 md:text-gray-300 md:dark:text-gray-600">
-    <i
+    class="absolute top-1/2 -translate-y-1/2 right-2.5 text-gray-600 dark:text-gray-300 md:text-gray-300 md:dark:text-gray-600 flex items-center">
+    <ng-icon
+      name="selectArrowDownIcon"
       [class.msph_auth-invalid-text]="hasErrors"
-      class="bi-caret-down-fill text-sm"></i>
+      class="text-sm" />
   </div>
 </button>

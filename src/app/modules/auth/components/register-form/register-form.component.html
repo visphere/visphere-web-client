@@ -118,8 +118,8 @@
 <ng-template #reg2ndStageContent>
   <button
     (click)="nextFormStageActive = false"
-    class="msph_login-form-edit-button mb-4">
-    <i class="bi bi-arrow-left me-2"></i>
+    class="msph_login-form-edit-button mb-4 flex items-center">
+    <ng-icon name="arrowLeftIcon" class="me-2" />
     {{ 'msph.common.utils.backwardMove' | translate }}
   </button>
   <form

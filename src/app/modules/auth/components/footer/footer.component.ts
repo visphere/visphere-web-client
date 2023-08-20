@@ -68,4 +68,8 @@ export class FooterComponent
   ngOnDestroy(): void {
     this.unmountAllSubscriptions();
   }
+
+  handleLinkClick(): void {
+    window.scrollTo(0, 0);
+  }
 }

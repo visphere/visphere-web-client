@@ -106,21 +106,30 @@
         </h3>
         <ul class="grid gap-1">
           <li>
-            <a routerLink="/auth/login" class="msph_footer__link">
+            <a
+              routerLink="/auth/login"
+              class="msph_footer__link"
+              (click)="handleLinkClick()">
               {{
                 'msph.webCommon.footer.headers.start.links.login' | translate
               }}
             </a>
           </li>
           <li>
-            <a routerLink="/auth/register" class="msph_footer__link">
+            <a
+              routerLink="/auth/register"
+              class="msph_footer__link"
+              (click)="handleLinkClick()">
               {{
                 'msph.webCommon.footer.headers.start.links.register' | translate
               }}
             </a>
           </li>
           <li>
-            <a routerLink="/auth/reset-password" class="msph_footer__link">
+            <a
+              routerLink="/auth/reset-password"
+              class="msph_footer__link"
+              (click)="handleLinkClick()">
               {{
                 'msph.webCommon.footer.headers.start.links.resetPassword'
                   | translate

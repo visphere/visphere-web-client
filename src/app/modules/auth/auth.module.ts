@@ -92,10 +92,13 @@ import { SharedModule } from '~/shared-mod/shared.module';
     SharedModule,
     FormsModule,
     NgIconsModule.withIcons({
-      selectArrowDown: BtsIcon.bootstrapCaretDownFill,
+      selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
       lightModeIcon: BtsIcon.bootstrapSunFill,
       darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
       systemModeIcon: BtsIcon.bootstrapCircleHalf,
+      eyeIcon: BtsIcon.bootstrapEye,
+      eyeSlashIcon: BtsIcon.bootstrapEyeSlash,
+      arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
     }),
   ],
 })

@@ -32,7 +32,7 @@
       class="me-2"
       alt="" />
     <p>{{ (selectedLang$ | async)?.name }}</p>
-    <ng-icon name="selectArrowDown" class="ms-2"></ng-icon>
+    <ng-icon name="selectArrowDownIcon" class="ms-2" />
   </ng-container>
   <ng-container listContent>
     <li *ngFor="let translation of traslations">
@@ -55,9 +55,9 @@
 </msph-footer-control-list>
 <msph-footer-control-list *ngIf="selectedTheme$ | async">
   <ng-container buttonContent>
-    <ng-icon [name]="(selectedTheme$ | async)!.icon" class="me-2"></ng-icon>
+    <ng-icon [name]="(selectedTheme$ | async)!.icon" class="me-2" />
     <p>{{ (selectedTheme$ | async)!.i18nKey | translate }}</p>
-    <ng-icon name="selectArrowDown" class="ms-2"></ng-icon>
+    <ng-icon name="selectArrowDownIcon" class="ms-2" />
   </ng-container>
   <ng-container listContent>
     <li *ngFor="let theme of themes">
@@ -67,7 +67,7 @@
         "
         (click)="handleChangeTheme(theme)"
         class="msph_footer__select-list-element hover:bg-gray-300 dark:hover:bg-gray-600">
-        <ng-icon [name]="theme.icon" class="me-2"></ng-icon>
+        <ng-icon [name]="theme.icon" class="me-2" />
         <p>{{ theme.i18nKey | translate }}</p>
       </button>
     </li>
