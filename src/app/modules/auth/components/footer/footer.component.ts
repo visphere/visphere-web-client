@@ -25,6 +25,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { environment } from '~/env/environment';
+import { LanguageSwitcherService } from '~/root-mod/modules/shared/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/root-mod/modules/shared/services/theme-switcher/theme-switcher.service';
 import { AbstractReactiveProvider } from '~/root-mod/modules/shared/utils/abstract-reactive-provider';
 
@@ -42,7 +43,10 @@ export class FooterComponent
   currYear = Date.now();
   copyLogoImagePath = '';
 
-  constructor(private readonly _themeSwitcherService: ThemeSwitcherService) {
+  constructor(
+    private readonly _themeSwitcherService: ThemeSwitcherService,
+    private readonly _languageSwitcherService: LanguageSwitcherService
+  ) {
     super();
   }
 
@@ -53,6 +57,11 @@ export class FooterComponent
         this.copyLogoImagePath = this._themeSwitcherService.isDarkMode(theme)
           ? 'moonsphere-light-small-variant-2.svg'
           : 'moonsphere-dark-small-variant-2.svg';
+      });
+    this._languageSwitcherService.selectedLang$
+      .pipe(takeUntil(this._subscriptionHook))
+      .subscribe(lang => {
+        this.landingPagePath = `${environment.baseLandingUrl}${lang.landingPrefix}`;
       });
   }
 
