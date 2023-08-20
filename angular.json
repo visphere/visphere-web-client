@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "moonsphere-web-client": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "msph"
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}
