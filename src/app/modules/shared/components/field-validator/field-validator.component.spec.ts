@@ -24,8 +24,8 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthModule } from '~/auth-mod/auth.module';
 import { AppModule } from '~/root-mod/app.module';
+import { SharedModule } from '~/shared-mod/shared.module';
 import { FieldValidatorComponent } from './field-validator.component';
 
 describe('FieldValidatorComponent', () => {
@@ -34,7 +34,7 @@ describe('FieldValidatorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, AuthModule],
+      imports: [AppModule, SharedModule],
     }).compileComponents();
     fixture = TestBed.createComponent(FieldValidatorComponent);
     component = fixture.componentInstance;
