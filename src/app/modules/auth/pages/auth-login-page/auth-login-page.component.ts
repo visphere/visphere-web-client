@@ -23,7 +23,6 @@
  * governing permissions and limitations under the license.
  */
 import { Component } from '@angular/core';
-import { Oauth2Type } from '~/auth-mod/types/oauth2.type';
 import { environment } from '~/env/environment';
 import { authWindowFadeAndMove } from '~/root-mod/modules/shared/animations/auth-window.animation';
 
@@ -37,8 +36,4 @@ export class AuthLoginPageComponent {
   path = environment.contentDistributorBaseUrl;
   qrCode =
     'https://upload.wikimedia.org/wikipedia/commons/5/5e/QR_Code_example.png';
-
-  oauth2Google = Oauth2Type.GOOGLE;
-  oauth2Facebook = Oauth2Type.FACEBOOK;
-  oauth2Twitter = Oauth2Type.TWITTER;
 }

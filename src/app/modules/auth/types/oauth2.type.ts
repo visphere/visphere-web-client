@@ -23,8 +23,4 @@
  * governing permissions and limitations under the license.
  */
 
-export enum Oauth2Type {
-  GOOGLE = 'google',
-  FACEBOOK = 'facebook',
-  TWITTER = 'twitter',
-}
+export type Oauth2Type = 'google' | 'facebook' | 'twitter';
