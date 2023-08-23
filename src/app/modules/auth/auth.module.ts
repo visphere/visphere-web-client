@@ -38,7 +38,6 @@ import { AuthFormHeaderComponent } from '~/auth-mod/components/auth-form-header/
 import { AuthSingleSelectSpinnerComponent } from '~/auth-mod/components/auth-single-select-spinner/auth-single-select-spinner.component';
 import { BirthDateSelectSpinnerComponent } from '~/auth-mod/components/birth-date-select-spinner/birth-date-select-spinner.component';
 import { ChangePasswordFormComponent } from '~/auth-mod/components/change-password-form/change-password-form.component';
-import { FieldValidatorComponent } from '~/auth-mod/components/field-validator/field-validator.component';
 import { FooterControlListComponent } from '~/auth-mod/components/footer-control-list/footer-control-list.component';
 import { FooterControlsComponent } from '~/auth-mod/components/footer-controls/footer-controls.component';
 import { FooterComponent } from '~/auth-mod/components/footer/footer.component';
@@ -69,7 +68,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     ResetPasswordFormComponent,
     ChangePasswordFormComponent,
     AuthCommonFormInputComponent,
-    FieldValidatorComponent,
     AuthSingleSelectSpinnerComponent,
     BirthDateSelectSpinnerComponent,
     AuthCheckboxFormInputComponent,
