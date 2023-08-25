@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: environment.ts
- *   Created at: 2023-08-11, 00:25:13
- *   Last updated at: 2023-08-11, 20:51:42
+ *   File name: modal-wrapper.component.spec.ts
+ *   Created at: 2023-08-23, 00:24:31
+ *   Last updated at: 2023-08-23, 00:24:50
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,11 +22,23 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ModalWrapperComponent } from './modal-wrapper.component';
 
-export const environment = {
-  production: process.env['IS_PRODUCTION_MODE'],
-  baseLandingUrl: process.env['BASE_LANDING_PAGE_URL'],
-  clientBaseUrl: process.env['BASE_CLIENT_URL'],
-  contentDistributorBaseUrl: process.env['BASE_CDN_URL'],
-  hCaptchaSiteKey: process.env['HCAPTCHA_SITE_KEY'],
-};
+describe('ModalWrapperComponent', () => {
+  let component: ModalWrapperComponent;
+  let fixture: ComponentFixture<ModalWrapperComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ModalWrapperComponent],
+    });
+    fixture = TestBed.createComponent(ModalWrapperComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

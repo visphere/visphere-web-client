@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: environment.ts
- *   Created at: 2023-08-11, 00:25:13
- *   Last updated at: 2023-08-11, 20:51:42
+ *   File name: modal.type.ts
+ *   Created at: 2023-08-22, 20:10:09
+ *   Last updated at: 2023-08-22, 20:10:10
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,10 +23,4 @@
  * governing permissions and limitations under the license.
  */
 
-export const environment = {
-  production: process.env['IS_PRODUCTION_MODE'],
-  baseLandingUrl: process.env['BASE_LANDING_PAGE_URL'],
-  clientBaseUrl: process.env['BASE_CLIENT_URL'],
-  contentDistributorBaseUrl: process.env['BASE_CDN_URL'],
-  hCaptchaSiteKey: process.env['HCAPTCHA_SITE_KEY'],
-};
+export type ModalSize = 'sm' | 'xl';

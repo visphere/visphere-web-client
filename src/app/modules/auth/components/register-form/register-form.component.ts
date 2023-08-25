@@ -24,6 +24,7 @@
  */
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import {
   Register1stFormModel,
   Register2ndFormModel,
@@ -43,6 +44,7 @@ export class RegisterFormComponent implements AfterViewInit {
   register1stStageForm: FormGroup;
   register2ndStageForm: FormGroup;
   nextFormStageActive = false;
+  captchaModalIsActive$?: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   @ViewChild('passwordStrengthMeter')
   passwordStrengthMeterComponent!: PasswordStrengthMeterComponent;
@@ -114,5 +116,9 @@ export class RegisterFormComponent implements AfterViewInit {
       this.register2ndStageForm.getRawValue() as Register2ndFormModel;
     // next
     console.log(data1stPart, data2ndPart);
+  }
+
+  handleSubmitRegisterForm(): void {
+    this.captchaModalIsActive$?.next(true);
   }
 }

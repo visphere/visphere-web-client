@@ -1,0 +1,61 @@
+<!--
+ ~ Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ ~ 
+ ~   File name: verify-captcha-modal.component.html
+ ~   Created at: 2023-08-22, 19:54:08
+ ~   Last updated at: 2023-08-22, 19:54:33
+ ~ 
+ ~   Project name: moonsphere
+ ~   Module name: moonsphere-web-client
+ ~ 
+ ~ This project is a part of "MoonSphere" instant messenger system. This system is a part of
+ ~ completing an engineers degree in computer science at Silesian University of Technology.
+ ~ 
+ ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ ~ file except in compliance with the License. You may obtain a copy of the License at
+ ~ 
+ ~   <http://www.apache.org/license/LICENSE-2.0>
+ ~ 
+ ~ Unless required by applicable law or agreed to in writing, software distributed under
+ ~ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ ~ OF ANY KIND, either express or implied. See the License for the specific language
+ ~ governing permissions and limitations under the license.
+ -->
+
+<msph-modal-wrapper
+  [isActive$]="isActive$"
+  (emitOnClose)="handleEmitOnClose()"
+  (emitOnAnimationDone)="handleShowHcaptchaWebcomponent()"
+  modalType="verify-captcha"
+  [header]="'msph.webClient.modal.captchaHeader' | translate"
+  [paragraph]="paragraph">
+  <ng-container content>
+    <ng-template
+      *ngIf="isCaptchaVisible; then showCaptcha; else showLoadingSpinner" />
+    <ng-template #showLoadingSpinner>
+      <div class="flex justify-center">loading...</div>
+    </ng-template>
+    <ng-template #showCaptcha>
+      <div *ngIf="isCaptchaVisible" class="flex flex-col items-center">
+        <h-captcha
+          *mcRerender="selectedLang"
+          [attr.site-key]="captchaSitekey"
+          [attr.hl]="selectedLang"
+          (verified)="handleOnVerified($event)"
+          (error)="handleOnError($event)" />
+        <p
+          *ngIf="errorMessage"
+          class="text-msph-danger-primary dark:msph-danger-secondary text-sm text-center mt-2">
+          {{ errorMessage }}
+        </p>
+        <p *ngIf="isVerified" class="text-sm mt-1 text-gray-400">
+          {{ 'msph.common.utils.responseTime' | translate }}:
+          <span class="text-msph-primary-dark dark:text-msph-primary-light">{{
+            responseTime | date: 'mm:ss'
+          }}</span>
+        </p>
+      </div>
+    </ng-template>
+  </ng-container>
+</msph-modal-wrapper>

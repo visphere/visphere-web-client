@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: environment.ts
- *   Created at: 2023-08-11, 00:25:13
- *   Last updated at: 2023-08-11, 20:51:42
+ *   File name: verify-captcha-modal.component.spec.ts
+ *   Created at: 2023-08-22, 19:54:08
+ *   Last updated at: 2023-08-22, 19:54:40
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,11 +22,25 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from '~/root-mod/app.module';
+import { SharedModule } from '~/shared-mod/shared.module';
+import { VerifyCaptchaModalComponent } from './verify-captcha-modal.component';
 
-export const environment = {
-  production: process.env['IS_PRODUCTION_MODE'],
-  baseLandingUrl: process.env['BASE_LANDING_PAGE_URL'],
-  clientBaseUrl: process.env['BASE_CLIENT_URL'],
-  contentDistributorBaseUrl: process.env['BASE_CDN_URL'],
-  hCaptchaSiteKey: process.env['HCAPTCHA_SITE_KEY'],
-};
+describe('VerifyCaptchaModalComponent', () => {
+  let component: VerifyCaptchaModalComponent;
+  let fixture: ComponentFixture<VerifyCaptchaModalComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AppModule, SharedModule],
+    }).compileComponents();
+    fixture = TestBed.createComponent(VerifyCaptchaModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

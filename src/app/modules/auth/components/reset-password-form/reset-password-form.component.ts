@@ -25,6 +25,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import {
   ResetPassword1stStageFormModel,
   ResetPassword2ndStageFormModel,
@@ -41,6 +42,7 @@ export class ResetPasswordFormComponent {
   resetPassword1stStageForm: FormGroup;
   resetPassword2ndStageForm: FormGroup;
   nextFormStageActive = false;
+  captchaModalIsActive$?: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private readonly _router: Router,
@@ -75,5 +77,13 @@ export class ResetPasswordFormComponent {
     // on next
     console.log(formData);
     await this._router.navigate(['/auth/change-password/tokenData']);
+  }
+
+  handleSubmitResetPassword1stStage(): void {
+    this.captchaModalIsActive$?.next(true);
+  }
+
+  handleResendMessage(): void {
+    console.log('resend email message');
   }
 }

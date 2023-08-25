@@ -131,6 +131,11 @@ const commonWebpackConfig = ({
             JSON.stringify(landingPageBaseUrl),
           'process.env.BASE_CLIENT_URL': JSON.stringify(clientBaseUrl),
           'process.env.BASE_CDN_URL': JSON.stringify(cdnBaseUrl),
+          'process.env.HCAPTCHA_SITE_KEY': JSON.stringify(
+            isProdMode
+              ? process.env.ENV_HCAPTCHA_SITE_KEY
+              : process.env.ENV_DEV_HCAPTCHA_SITE_KEY
+          ),
         }),
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, '..', 'src', 'index.ejs'),
