@@ -2,9 +2,9 @@
  ~ Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  ~ Silesian University of Technology
  ~ 
- ~   File name: client-entry-point-page.component.html
- ~   Created at: 2023-08-11, 00:19:21
- ~   Last updated at: 2023-08-11, 20:55:43
+ ~   File name: ota-token-form-field.component.html
+ ~   Created at: 2023-08-25, 22:56:20
+ ~   Last updated at: 2023-08-25, 22:56:28
  ~ 
  ~   Project name: moonsphere
  ~   Module name: moonsphere-web-client
@@ -23,10 +23,26 @@
  ~ governing permissions and limitations under the license.
  -->
 
-<a routerLink="/auth/login">login</a><br />
-<a routerLink="/auth/register">register</a><br />
-<a routerLink="/auth/reset-password">reset password</a><br />
-<a routerLink="/auth/activate-account">activate-account</a><br />
-<br />
-<button (click)="handleShowNotif()">show notif</button><br />
-<button (click)="handleHideNotif()">hide notif</button>
+<msph-password-input-toggler
+  [formGroup]="formGroup"
+  [maxLength]="10"
+  placeholder="Xtg4vCt49D"
+  formControlIdentifier="token"
+  [i18nLabel]="
+    'msph.webClient.' + i18nFieldKey + 'Page.formFields.token.value'
+  ">
+  <msph-field-validator
+    [formGroup]="formGroup"
+    formControlIdentifier="token"
+    [i18nPrefix]="'webClient.' + i18nFieldKey" />
+  <msph-field-validator
+    [formGroup]="formGroup"
+    formControlIdentifier="token"
+    type="exactLength"
+    [i18nPrefix]="'webClient.' + i18nFieldKey" />
+  <msph-field-validator
+    [formGroup]="formGroup"
+    formControlIdentifier="token"
+    type="pattern"
+    [i18nPrefix]="'webClient.' + i18nFieldKey" />
+</msph-password-input-toggler>

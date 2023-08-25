@@ -1,11 +1,10 @@
-'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: tailwind.config.cjs
- *   Created at: 2023-08-11, 00:22:42
- *   Last updated at: 2023-08-14, 01:55:01
+ *   File name: activate-account-form.model.ts
+ *   Created at: 2023-08-25, 23:05:02
+ *   Last updated at: 2023-08-25, 23:05:02
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -24,12 +23,6 @@
  * governing permissions and limitations under the license.
  */
 
-module.exports = {
-  presets: [
-    require('../moonsphere-base/tailwind/_tailwind.config.cjs')({
-      cdnBaseUrl: process.env.CDN_TAILWIND_PATH,
-      loadableModules: ['auth', 'common', 'footer', 'snackbar', 'modal'],
-    }),
-  ],
-  content: ['./src/**/*.{ejs,ts,html}'],
-};
+export interface ActivateAccountFormModel {
+  token: string;
+}

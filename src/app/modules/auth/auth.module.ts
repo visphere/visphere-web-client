@@ -28,9 +28,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import * as BtsIcon from '@ng-icons/bootstrap-icons';
 import { NgIconsModule } from '@ng-icons/core';
+import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthRootComponent } from '~/auth-mod/auth-root.component';
 import { AuthRoutingModule } from '~/auth-mod/auth-routing.module';
+import { ActivateAccountFormComponent } from '~/auth-mod/components/activate-account/activate-account-form.component';
 import { AuthCheckboxFormInputComponent } from '~/auth-mod/components/auth-checkbox-form-input/auth-checkbox-form-input.component';
 import { AuthCommonFormInputComponent } from '~/auth-mod/components/auth-common-form-input/auth-common-form-input.component';
 import { AuthContentWrapperComponent } from '~/auth-mod/components/auth-content-wrapper/auth-content-wrapper.component';
@@ -43,14 +45,18 @@ import { FooterControlsComponent } from '~/auth-mod/components/footer-controls/f
 import { FooterComponent } from '~/auth-mod/components/footer/footer.component';
 import { LoginFormComponent } from '~/auth-mod/components/login-form/login-form.component';
 import { Oauth2ButtonComponent } from '~/auth-mod/components/oauth2-button/oauth2-button.component';
+import { OtaTokenFormFieldComponent } from '~/auth-mod/components/ota-token-form-field/ota-token-form-field.component';
 import { PasswordInputTogglerComponent } from '~/auth-mod/components/password-input-toggler/password-input-toggler.component';
 import { RegisterFormConsentsComponent } from '~/auth-mod/components/register-form-consents/register-form-consents.component';
 import { RegisterFormComponent } from '~/auth-mod/components/register-form/register-form.component';
 import { ResetPasswordFormComponent } from '~/auth-mod/components/reset-password-form/reset-password-form.component';
+import { ActivateAccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
+import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
+import { authReduxStore } from '~/auth-mod/store/reducer';
 import { SharedModule } from '~/shared-mod/shared.module';
 
 @NgModule({
@@ -58,6 +64,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
     // components
     LoginFormComponent,
     AuthContentWrapperComponent,
+    ActivateAccountFormComponent,
     Oauth2ButtonComponent,
     PasswordInputTogglerComponent,
     FooterComponent,
@@ -73,12 +80,14 @@ import { SharedModule } from '~/shared-mod/shared.module';
     AuthCheckboxFormInputComponent,
     RegisterFormConsentsComponent,
     // pages
+    AuthActivateAccountPageComponent,
+    AuthChangePasswordPageComponent,
     AuthLoginPageComponent,
     AuthRegisterPageComponent,
     AuthResetPasswordPageComponent,
-    AuthChangePasswordPageComponent,
     // root page
     AuthRootComponent,
+    OtaTokenFormFieldComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +98,10 @@ import { SharedModule } from '~/shared-mod/shared.module';
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
+    StoreModule.forFeature(
+      authReduxStore.reducerName,
+      authReduxStore.reducerFunction
+    ),
     NgIconsModule.withIcons({
       selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
       lightModeIcon: BtsIcon.bootstrapSunFill,
@@ -97,7 +110,9 @@ import { SharedModule } from '~/shared-mod/shared.module';
       eyeIcon: BtsIcon.bootstrapEye,
       eyeSlashIcon: BtsIcon.bootstrapEyeSlash,
       arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
+      outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
     }),
   ],
+  providers: [ActivateAccountGuard],
 })
 export class AuthModule {}

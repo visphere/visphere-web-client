@@ -2,9 +2,9 @@
  ~ Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  ~ Silesian University of Technology
  ~ 
- ~   File name: client-entry-point-page.component.html
- ~   Created at: 2023-08-11, 00:19:21
- ~   Last updated at: 2023-08-11, 20:55:43
+ ~   File name: deferred-button.component.html
+ ~   Created at: 2023-08-25, 20:36:33
+ ~   Last updated at: 2023-08-25, 20:36:43
  ~ 
  ~   Project name: moonsphere
  ~   Module name: moonsphere-web-client
@@ -23,10 +23,29 @@
  ~ governing permissions and limitations under the license.
  -->
 
-<a routerLink="/auth/login">login</a><br />
-<a routerLink="/auth/register">register</a><br />
-<a routerLink="/auth/reset-password">reset password</a><br />
-<a routerLink="/auth/activate-account">activate-account</a><br />
-<br />
-<button (click)="handleShowNotif()">show notif</button><br />
-<button (click)="handleHideNotif()">hide notif</button>
+<div>
+  <p class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
+    {{ labelI18nText | translate }}
+  </p>
+  <button
+    [disabled]="isDeferred"
+    (click)="handleButtonClick()"
+    [class]="styles">
+    <div class="flex justify-center items-center">
+      {{ innerI18nText | translate }}
+      <ng-container *ngIf="isDeferred">{{ '(' }}</ng-container>
+      <cd-timer
+        #timerEntry
+        [hidden]="!isDeferred"
+        [countdown]="true"
+        [autoStart]="false"
+        [startTime]="deferTimeSec"
+        (onComplete)="handleResetDeferredTime()"
+        format="intelli" />
+      <ng-container *ngIf="isDeferred">{{ ')' }}</ng-container>
+      <div *ngIf="isLoading">
+        <div class="msph-button__spinner"></div>
+      </div>
+    </div>
+  </button>
+</div>

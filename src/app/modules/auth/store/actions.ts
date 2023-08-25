@@ -1,11 +1,10 @@
-'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: tailwind.config.cjs
- *   Created at: 2023-08-11, 00:22:42
- *   Last updated at: 2023-08-14, 01:55:01
+ *   File name: actions.ts
+ *   Created at: 2023-08-25, 22:26:55
+ *   Last updated at: 2023-08-25, 22:26:55
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,13 +22,17 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { createAction, props } from '@ngrx/store';
 
-module.exports = {
-  presets: [
-    require('../moonsphere-base/tailwind/_tailwind.config.cjs')({
-      cdnBaseUrl: process.env.CDN_TAILWIND_PATH,
-      loadableModules: ['auth', 'common', 'footer', 'snackbar', 'modal'],
-    }),
-  ],
-  content: ['./src/**/*.{ejs,ts,html}'],
-};
+const SET_ACTIVATE_ACCOUNT_EMAIL = '[AUTH] SET ACTIVATE ACCOUNT EMAIL' as const;
+const REMOVE_ACTIVATE_ACCOUNT_EMAIL =
+  '[AUTH] REMOVE ACTIVATE ACCOUNT EMAIL' as const;
+
+export const __setActivateAccountEmail = createAction(
+  SET_ACTIVATE_ACCOUNT_EMAIL,
+  props<{ email: string }>()
+);
+
+export const __removeActivateAccountEmail = createAction(
+  REMOVE_ACTIVATE_ACCOUNT_EMAIL
+);

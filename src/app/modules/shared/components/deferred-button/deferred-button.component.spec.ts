@@ -1,11 +1,10 @@
-'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: tailwind.config.cjs
- *   Created at: 2023-08-11, 00:22:42
- *   Last updated at: 2023-08-14, 01:55:01
+ *   File name: deferred-button.component.spec.ts
+ *   Created at: 2023-08-25, 20:36:33
+ *   Last updated at: 2023-08-25, 20:36:49
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,13 +22,25 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from '~/root-mod/app.module';
+import { SharedModule } from '~/shared-mod/shared.module';
+import { DeferredButtonComponent } from './deferred-button.component';
 
-module.exports = {
-  presets: [
-    require('../moonsphere-base/tailwind/_tailwind.config.cjs')({
-      cdnBaseUrl: process.env.CDN_TAILWIND_PATH,
-      loadableModules: ['auth', 'common', 'footer', 'snackbar', 'modal'],
-    }),
-  ],
-  content: ['./src/**/*.{ejs,ts,html}'],
-};
+describe('DeferredButtonComponent', () => {
+  let component: DeferredButtonComponent;
+  let fixture: ComponentFixture<DeferredButtonComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AppModule, SharedModule],
+    }).compileComponents();
+    fixture = TestBed.createComponent(DeferredButtonComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
