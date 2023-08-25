@@ -26,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppRootComponent } from '~/root-mod/app-root.component';
 import { AppRoutingModule } from '~/root-mod/app-routing.module';
@@ -36,6 +38,7 @@ import { languageSwitcherInitializer } from '~/shared-mod/services/language-swit
 import { passwordStrengthMeterInitializer } from '~/shared-mod/services/password-strength-meter/password-strength-meter.service';
 import { themeSwitcherInitializer } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import { SharedModule } from '~/shared-mod/shared.module';
+import buildSpecifics from '../environments/build-specifics';
 
 @NgModule({
   declarations: [AppRootComponent],
@@ -46,6 +49,9 @@ import { SharedModule } from '~/shared-mod/shared.module';
     SharedModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(i18nConfig),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    ...buildSpecifics,
   ],
   providers: [
     titleStrategyProvider,
