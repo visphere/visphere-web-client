@@ -1,0 +1,49 @@
+/*
+ * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
+ * Silesian University of Technology
+ *
+ *   File name: snackbars-container.component.ts
+ *   Created at: 2023-08-23, 00:38:11
+ *   Last updated at: 2023-08-23, 00:38:11
+ *
+ *   Project name: moonsphere
+ *   Module name: moonsphere-web-client
+ *
+ * This project is a part of "MoonSphere" instant messenger system. This system is a part of
+ * completing an engineers degree in computer science at Silesian University of Technology.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ * file except in compliance with the License. You may obtain a copy of the License at
+ *
+ *   <http://www.apache.org/license/LICENSE-2.0>
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the license.
+ */
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { snackbarFadeAndMove } from '~/shared-mod/animations/snackbar.animation';
+import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
+import { Snackbar } from '~/shared-mod/types/snackbar.type';
+
+@Component({
+  selector: 'msph-snackbars-container',
+  templateUrl: './snackbars-container.component.html',
+  animations: [snackbarFadeAndMove],
+})
+export class SnackbarsContainerComponent {
+  snackbarStack$: Observable<Snackbar[]> = this._store.select(
+    NgrxSelector_SHA.selectSnackbarsStack
+  );
+
+  constructor(private readonly _store: Store<SharedReducer>) {}
+
+  handleRemoveSnackbar(id: string) {
+    this._store.dispatch(NgrxAction_SHA.__removeSnackbar({ id }));
+  }
+}
