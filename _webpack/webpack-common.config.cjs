@@ -42,16 +42,23 @@ if (fs.existsSync(envPath)) {
   dotenv.config({ path: envPath });
 }
 
-const commonResolveConfig = {
+const commonResolveConfig = isProdMode => ({
   extensions: ['.js', '.ts'],
   alias: {
+    '../environments/build-specifics': path.resolve(
+      __dirname,
+      '..',
+      'src',
+      'environments',
+      `build-specifics${isProdMode ? '.prod' : ''}`
+    ),
     '~/env': path.resolve(__dirname, 'src', 'environments'),
     '~/root-mod': path.resolve(__dirname, 'src', 'app'),
     '~/auth-mod': path.resolve(__dirname, 'src', 'app', 'modules', 'auth'),
     '~/client-mod': path.resolve(__dirname, 'src', 'app', 'modules', 'client'),
     '~/shared-mod': path.resolve(__dirname, 'src', 'app', 'modules', 'shared'),
   },
-};
+});
 
 const postCssConfig = {
   postcssOptions: {
@@ -92,7 +99,7 @@ const commonWebpackConfig = ({
         clean: true,
         publicPath: '/',
       },
-      resolve: commonResolveConfig,
+      resolve: commonResolveConfig(isProdMode),
       module: {
         rules: [
           {
