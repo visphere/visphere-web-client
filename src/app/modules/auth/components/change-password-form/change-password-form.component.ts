@@ -24,7 +24,7 @@
  */
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
+import { ChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
@@ -61,7 +61,7 @@ export class ChangePasswordFormComponent implements AfterViewInit {
 
   onSubmitSetNewPassword(): void {
     const formData =
-      this.newPasswordFormGroup.getRawValue() as IChangePasswordFormModel;
+      this.newPasswordFormGroup.getRawValue() as ChangePasswordFormModel;
     // next
     console.log(formData);
     this.successfullSetNewPassword = true;

@@ -23,8 +23,8 @@
  * governing permissions and limitations under the license.
  */
 
-export interface IDateComponentsType {
+export type DateComponentsType = {
   day: number;
   month: number;
   year: number;
-}
+};

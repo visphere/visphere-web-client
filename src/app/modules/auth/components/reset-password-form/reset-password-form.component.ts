@@ -26,8 +26,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  IResetPassword1stStageFormModel,
-  IResetPassword2ndStageFormModel,
+  ResetPassword1stStageFormModel,
+  ResetPassword2ndStageFormModel,
 } from '~/auth-mod/models/reset-password-form.model';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import { exactLengthValidator } from '~/shared-mod/validators/exact-length.validator';
@@ -61,17 +61,17 @@ export class ResetPasswordFormComponent {
     });
   }
 
-  onSubmitResetPassword1stStage(): void {
+  handleEmitOnAcceptCaptcha(): void {
     const formData =
-      this.resetPassword1stStageForm.getRawValue() as IResetPassword1stStageFormModel;
+      this.resetPassword1stStageForm.getRawValue() as ResetPassword1stStageFormModel;
     // on next
     console.log(formData);
     this.nextFormStageActive = true;
   }
 
-  async onSubmitResetPassword2ndStage(): Promise<void> {
+  async handleSubmitResetPassword2ndStage(): Promise<void> {
     const formData =
-      this.resetPassword2ndStageForm.getRawValue() as IResetPassword2ndStageFormModel;
+      this.resetPassword2ndStageForm.getRawValue() as ResetPassword2ndStageFormModel;
     // on next
     console.log(formData);
     await this._router.navigate(['/auth/change-password/tokenData']);

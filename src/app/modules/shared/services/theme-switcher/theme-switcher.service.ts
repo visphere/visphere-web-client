@@ -26,19 +26,18 @@ import { DOCUMENT } from '@angular/common';
 import { APP_INITIALIZER, Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import { StorageKeyType } from '~/shared-mod/types/storage-key.type';
 import {
-  IThemeModeType,
-  THEME_MODES,
+  ThemeModeType,
   ThemeType,
+  themeModes,
 } from '~/shared-mod/types/theme-mode.type';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeSwitcherService {
-  private _deviceTheme = this.getThemeBasedId(ThemeType.DEVICE);
+  private _deviceTheme = this.getThemeBasedId('device');
   private _isPickedDevice = true;
-  private _selectedTheme$: BehaviorSubject<IThemeModeType> =
-    new BehaviorSubject<IThemeModeType>(this._deviceTheme);
+  private _selectedTheme$: BehaviorSubject<ThemeModeType> =
+    new BehaviorSubject<ThemeModeType>(this._deviceTheme);
 
   constructor(
     @Inject(DOCUMENT) private readonly _document: Document,
@@ -52,7 +51,7 @@ export class ThemeSwitcherService {
       this.setTheme(e.matches);
     });
     const savedTheme: { theme: ThemeType } | null =
-      this._localStorageService.get(StorageKeyType.SELECTED_THEME);
+      this._localStorageService.get('selectedTheme');
     if (savedTheme) {
       this.updateTheme(savedTheme.theme);
       this._selectedTheme$.next(this.getThemeBasedId(savedTheme.theme));
@@ -66,25 +65,25 @@ export class ThemeSwitcherService {
     const theme = this.getThemeBasedId(selectedTheme);
     if (!theme) return;
     this._selectedTheme$.next(theme);
-    this._localStorageService.save(StorageKeyType.SELECTED_THEME, {
+    this._localStorageService.save('selectedTheme', {
       theme: selectedTheme,
     });
     this.updateTheme(selectedTheme);
   }
 
-  isDarkMode(theme: IThemeModeType): boolean {
-    return theme.id === ThemeType.DEVICE
+  isDarkMode(theme: ThemeModeType): boolean {
+    return theme.id === 'device'
       ? this.isDarkBrowserTheme()
-      : theme.id === ThemeType.DARK;
+      : theme.id === 'dark';
   }
 
   private updateTheme(theme: ThemeType): void {
-    this._isPickedDevice = theme === ThemeType.DEVICE;
-    if (theme === ThemeType.DEVICE) {
+    this._isPickedDevice = theme === 'device';
+    if (theme === 'device') {
       this.setTheme(this.isDarkBrowserTheme());
       return;
     }
-    this.setTheme(theme === ThemeType.DARK);
+    this.setTheme(theme === 'dark');
   }
 
   private setTheme(isDark: boolean): void {
@@ -98,15 +97,15 @@ export class ThemeSwitcherService {
     );
   }
 
-  private getThemeBasedId(themeId: ThemeType): IThemeModeType {
-    const theme = THEME_MODES.find(t => t.id === themeId);
-    return theme || THEME_MODES[0];
+  private getThemeBasedId(themeId: ThemeType): ThemeModeType {
+    const theme = themeModes.find(t => t.id === themeId);
+    return theme || themeModes[0];
   }
 
-  get availableThemes(): IThemeModeType[] {
-    return THEME_MODES;
+  get availableThemes(): ThemeModeType[] {
+    return themeModes;
   }
-  get selectedTheme$(): Observable<IThemeModeType> {
+  get selectedTheme$(): Observable<ThemeModeType> {
     return this._selectedTheme$.asObservable();
   }
 }

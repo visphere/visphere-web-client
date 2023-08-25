@@ -23,13 +23,13 @@
  * governing permissions and limitations under the license.
  */
 
-export interface ITranslation {
+export type TranslationRow = {
   lang: string;
   landingPrefix: string;
   name: string;
-}
+};
 
-export const AVAILABLE_TRANSLATIONS: ITranslation[] = [
+export const AVAILABLE_TRANSLATIONS: TranslationRow[] = [
   { lang: 'pl', landingPrefix: '', name: 'Polski' },
   { lang: 'en-US', landingPrefix: '/en', name: 'English, US' },
 ];

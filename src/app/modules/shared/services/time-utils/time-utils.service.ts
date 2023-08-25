@@ -24,24 +24,24 @@
  */
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { IDateComponentsType } from '~/shared-mod/types/date-components.type';
-import { ISpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
+import { DateComponentsType } from '~/shared-mod/types/date-components.type';
+import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
 
 @Injectable({ providedIn: 'root' })
 export class TimeUtilsService {
-  generateMonthsForDifferentLocale(lang: string): ISpinnerListElementType[] {
+  generateMonthsForDifferentLocale(lang: string): SpinnerListElementType[] {
     moment.locale(lang);
     return moment.months().map((value, idx) => ({ id: idx + 1, value }));
   }
 
-  generateDaysForSingleMonth(): ISpinnerListElementType[] {
+  generateDaysForSingleMonth(): SpinnerListElementType[] {
     return Array.from({ length: 31 }, (_, idx) => idx + 1).map(value => ({
       id: value,
       value: String(value),
     }));
   }
 
-  generateYearsForBirthdayForm(): ISpinnerListElementType[] {
+  generateYearsForBirthdayForm(): SpinnerListElementType[] {
     const maxYear = new Date().getFullYear() - 3;
     const minYear = 1900;
     return Array.from({ length: maxYear - minYear }, (_, idx) => minYear + idx)
@@ -49,12 +49,12 @@ export class TimeUtilsService {
       .map(value => ({ id: value, value: String(value) }));
   }
 
-  checkIfDateIsValid({ day, month, year }: IDateComponentsType): boolean {
+  checkIfDateIsValid({ day, month, year }: DateComponentsType): boolean {
     const parsedDate = moment(`${year}-${month}-${day}`, 'YYYY-M-D');
     return parsedDate.isValid();
   }
 
-  checkIfUserHas13YearsOld({ day, month, year }: IDateComponentsType): boolean {
+  checkIfUserHas13YearsOld({ day, month, year }: DateComponentsType): boolean {
     const userBirthdate = moment(`${year}-${month}-${day}`, 'YYYY-M-D');
     return (
       userBirthdate.isValid() &&

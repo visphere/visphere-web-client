@@ -32,7 +32,7 @@
 <ng-template #reg1stStageContent>
   <form
     [formGroup]="register1stStageForm"
-    (ngSubmit)="onMoveToNextStage()"
+    (ngSubmit)="handleMoveToNextStage()"
     class="grid gap-y-5">
     <msph-auth-common-form-input
       [maxLength]="30"
@@ -124,7 +124,7 @@
   </button>
   <form
     [formGroup]="register2ndStageForm"
-    (ngSubmit)="onSubmitRegisterForm()"
+    (ngSubmit)="handleSubmitRegisterForm()"
     class="grid gap-y-5">
     <msph-auth-common-form-input
       [maxLength]="80"

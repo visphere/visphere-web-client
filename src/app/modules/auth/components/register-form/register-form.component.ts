@@ -25,8 +25,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
-  IRegister1stFormModel,
-  IRegister2ndFormModel,
+  Register1stFormModel,
+  Register2ndFormModel,
 } from '~/auth-mod/models/register-form.model';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
@@ -103,15 +103,15 @@ export class RegisterFormComponent implements AfterViewInit {
     );
   }
 
-  onMoveToNextStage(): void {
+  handleMoveToNextStage(): void {
     this.nextFormStageActive = true;
   }
 
-  onSubmitRegisterForm(): void {
+  handleEmitOnAcceptCaptcha(): void {
     const data1stPart =
-      this.register1stStageForm.getRawValue() as IRegister1stFormModel;
+      this.register1stStageForm.getRawValue() as Register1stFormModel;
     const data2ndPart =
-      this.register2ndStageForm.getRawValue() as IRegister2ndFormModel;
+      this.register2ndStageForm.getRawValue() as Register2ndFormModel;
     // next
     console.log(data1stPart, data2ndPart);
   }

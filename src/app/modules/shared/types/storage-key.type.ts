@@ -23,7 +23,4 @@
  * governing permissions and limitations under the license.
  */
 
-export enum StorageKeyType {
-  SELECTED_LANG = 'SELECTED_LANG',
-  SELECTED_THEME = 'SELECTED_THEME',
-}
+export type StorageKeyType = 'selectedLang' | 'selectedTheme';

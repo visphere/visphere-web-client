@@ -23,7 +23,7 @@
  * governing permissions and limitations under the license.
  */
 
-export interface ISpinnerListElementType {
+export type SpinnerListElementType = {
   id: number;
   value: string;
-}
+};

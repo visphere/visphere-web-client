@@ -36,7 +36,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { dropboxFadeAndMove } from '~/root-mod/modules/shared/animations/dropbox.animation';
-import { ISpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
+import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
 
 @Component({
   selector: 'msph-auth-single-select-spinner',
@@ -53,13 +53,13 @@ export class AuthSingleSelectSpinnerComponent
   @Input() formControlIdentifier!: string;
   @Input() initIdValue!: number | null;
   @Input() i18nPlaceholder = '';
-  @Input() listElements: ISpinnerListElementType[] = [];
-  @Output() persistElement: EventEmitter<ISpinnerListElementType | null> =
+  @Input() listElements: SpinnerListElementType[] = [];
+  @Output() persistElement: EventEmitter<SpinnerListElementType | null> =
     new EventEmitter();
 
   itemsListIsOpen = false;
   isTouched = false;
-  filteredList: ISpinnerListElementType[] = [];
+  filteredList: SpinnerListElementType[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes['listElements']) return;
@@ -100,7 +100,7 @@ export class AuthSingleSelectSpinnerComponent
     );
   }
 
-  handleSelectItem(element: ISpinnerListElementType): void {
+  handleSelectItem(element: SpinnerListElementType): void {
     this.itemsListIsOpen = false;
     this.inputElement.nativeElement.value = element.value;
     this.persistElement.emit(element);

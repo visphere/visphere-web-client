@@ -36,21 +36,23 @@
       (persistElement)="patchValue($event, 'month')"
       i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.month"
       formControlIdentifier="birthDate"
-      class="flex-none w-[170px]" />
+      class="flex-none w-[180px]" />
     <msph-auth-single-select-spinner
       [formGroup]="formGroup"
       [listElements]="formDays"
       [initIdValue]="getFormControlValue('day')"
       (persistElement)="patchValue($event, 'day')"
       formControlIdentifier="birthDate"
-      i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.day" />
+      i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.day"
+      class="flex-grow" />
     <msph-auth-single-select-spinner
       [formGroup]="formGroup"
       [listElements]="formYears"
       [initIdValue]="getFormControlValue('year')"
       (persistElement)="patchValue($event, 'year')"
       formControlIdentifier="birthDate"
-      i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.year" />
+      i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.year"
+      class="flex-grow" />
   </div>
   <div class="text-sm mt-1 mx-2 msph_auth-invalid-text">
     <msph-field-validator

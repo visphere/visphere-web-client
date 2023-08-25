@@ -24,7 +24,7 @@
  */
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ILoginFormModel } from '~/auth-mod/models/login-form.model';
+import { LoginFormModel } from '~/auth-mod/models/login-form.model';
 
 @Component({
   selector: 'msph-login-form',
@@ -58,8 +58,8 @@ export class LoginFormComponent {
   }
 
   onSubmitLoginForm(): void {
-    const formData: ILoginFormModel =
-      this.loginForm.getRawValue() as ILoginFormModel;
+    const formData: LoginFormModel =
+      this.loginForm.getRawValue() as LoginFormModel;
     // next
     console.log(formData);
   }

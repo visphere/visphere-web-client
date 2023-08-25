@@ -27,8 +27,8 @@ import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
-import { IThemeModeType } from '~/shared-mod/types/theme-mode.type';
-import { ITranslation } from '~/shared-mod/types/translation.type';
+import { ThemeModeType } from '~/shared-mod/types/theme-mode.type';
+import { TranslationRow } from '~/shared-mod/types/translation.type';
 
 @Component({
   selector: 'msph-footer-controls',
@@ -38,12 +38,12 @@ import { ITranslation } from '~/shared-mod/types/translation.type';
 export class FooterControlsComponent {
   path = environment.contentDistributorBaseUrl;
 
-  traslations: ITranslation[] = this._languageSwitcherService.availableLangs;
-  selectedLang$: Observable<ITranslation> =
+  traslations: TranslationRow[] = this._languageSwitcherService.availableLangs;
+  selectedLang$: Observable<TranslationRow> =
     this._languageSwitcherService.selectedLang$;
 
-  themes: IThemeModeType[] = this._themeSwitcherService.availableThemes;
-  selectedTheme$: Observable<IThemeModeType> =
+  themes: ThemeModeType[] = this._themeSwitcherService.availableThemes;
+  selectedTheme$: Observable<ThemeModeType> =
     this._themeSwitcherService.selectedTheme$;
 
   constructor(
@@ -51,11 +51,11 @@ export class FooterControlsComponent {
     private readonly _languageSwitcherService: LanguageSwitcherService
   ) {}
 
-  handleChangeLang(translation: ITranslation): void {
+  handleChangeLang(translation: TranslationRow): void {
     this._languageSwitcherService.changeLang(translation);
   }
 
-  handleChangeTheme(theme: IThemeModeType): void {
+  handleChangeTheme(theme: ThemeModeType): void {
     this._themeSwitcherService.changeTheme(theme.id);
   }
 }

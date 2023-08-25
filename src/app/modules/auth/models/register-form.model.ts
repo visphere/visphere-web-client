@@ -23,7 +23,7 @@
  * governing permissions and limitations under the license.
  */
 
-export interface IRegister1stFormModel {
+export interface Register1stFormModel {
   login: string;
   emailAddress: string;
   password: string;
@@ -31,7 +31,7 @@ export interface IRegister1stFormModel {
   birthDate: { day: number; month: number; year: number };
 }
 
-export interface IRegister2ndFormModel {
+export interface Register2ndFormModel {
   firstName: string;
   lastName: string;
   secondEmailAddress: string;

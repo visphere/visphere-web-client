@@ -29,16 +29,15 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import { StorageKeyType } from '~/shared-mod/types/storage-key.type';
 import {
   AVAILABLE_TRANSLATIONS,
-  ITranslation,
+  TranslationRow,
 } from '~/shared-mod/types/translation.type';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageSwitcherService {
   private _availableLangs = AVAILABLE_TRANSLATIONS;
-  private _selectedLang$: BehaviorSubject<ITranslation> = new BehaviorSubject(
+  private _selectedLang$: BehaviorSubject<TranslationRow> = new BehaviorSubject(
     this.getTranslation(navigator.language)
   );
 
@@ -50,10 +49,10 @@ export class LanguageSwitcherService {
     private readonly _localStorageService: LocalStorageService
   ) {}
 
-  changeLang(translation: ITranslation): void {
+  changeLang(translation: TranslationRow): void {
     if (!this.getFlattenTranslations().includes(translation.lang)) return;
     this.updateProps(translation);
-    this._localStorageService.save(StorageKeyType.SELECTED_LANG, {
+    this._localStorageService.save('selectedLang', {
       lang: translation.lang,
     });
   }
@@ -62,9 +61,8 @@ export class LanguageSwitcherService {
     this._translateService.addLangs(this.getFlattenTranslations());
     const searchParams = new URLSearchParams(window.location.search);
     const proxyLang = searchParams.get('lang');
-    const savedLang: { lang: string } | null = this._localStorageService.get(
-      StorageKeyType.SELECTED_LANG
-    );
+    const savedLang: { lang: string } | null =
+      this._localStorageService.get('selectedLang');
     let loadedLang;
     if (
       proxyLang &&
@@ -115,7 +113,7 @@ export class LanguageSwitcherService {
     );
   }
 
-  private updateProps(translation: ITranslation): void {
+  private updateProps(translation: TranslationRow): void {
     this._translateService
       .use(translation.lang)
       .subscribe(() => this.changeMetaProperties(translation.lang));
@@ -126,14 +124,14 @@ export class LanguageSwitcherService {
     return this._availableLangs.map(l => l.lang);
   }
 
-  private getTranslation(lang: string): ITranslation {
+  private getTranslation(lang: string): TranslationRow {
     return this._availableLangs.find(l => l.lang === lang)!;
   }
 
-  get selectedLang$(): Observable<ITranslation> {
+  get selectedLang$(): Observable<TranslationRow> {
     return this._selectedLang$.asObservable();
   }
-  get availableLangs(): ITranslation[] {
+  get availableLangs(): TranslationRow[] {
     return this._availableLangs;
   }
 }

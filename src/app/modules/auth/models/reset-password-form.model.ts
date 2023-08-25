@@ -23,10 +23,10 @@
  * governing permissions and limitations under the license.
  */
 
-export interface IResetPassword1stStageFormModel {
+export interface ResetPassword1stStageFormModel {
   usernameOrEmailAddress: string;
 }
 
-export interface IResetPassword2ndStageFormModel {
+export interface ResetPassword2ndStageFormModel {
   token: string;
 }

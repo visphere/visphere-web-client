@@ -28,8 +28,8 @@ import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs';
 import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
-import { IDateComponentsType } from '~/shared-mod/types/date-components.type';
-import { ISpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
+import { DateComponentsType } from '~/shared-mod/types/date-components.type';
+import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
@@ -67,7 +67,7 @@ export class BirthDateSelectSpinnerComponent
     this.unmountAllSubscriptions();
   }
 
-  patchValue(patchingData: ISpinnerListElementType | null, key: string): void {
+  patchValue(patchingData: SpinnerListElementType | null, key: string): void {
     const value = patchingData ? patchingData.id : null;
     const control = this.formGroup.get('birthDate');
     if (!control) return;
@@ -76,7 +76,7 @@ export class BirthDateSelectSpinnerComponent
     control.markAsDirty();
   }
 
-  getFormControlValue(key: keyof IDateComponentsType): number | null {
+  getFormControlValue(key: keyof DateComponentsType): number | null {
     const control = this.formGroup.get('birthDate');
     if (control && control.value[key]) {
       return control.value[key];
@@ -86,7 +86,7 @@ export class BirthDateSelectSpinnerComponent
 
   private generateAndConvertMonths(
     lang = this._translateService.currentLang
-  ): ISpinnerListElementType[] {
+  ): SpinnerListElementType[] {
     return this._timeUtilService
       .generateMonthsForDifferentLocale(lang)
       .map(v => ({ ...v, value: this._titleCasePipe.transform(v.value) }));

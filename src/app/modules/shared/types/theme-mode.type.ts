@@ -23,31 +23,27 @@
  * governing permissions and limitations under the license.
  */
 
-export interface IThemeModeType {
+export type ThemeModeType = {
   id: ThemeType;
   i18nKey: string;
   icon: string;
-}
+};
 
-export enum ThemeType {
-  LIGHT = 'LIGHT',
-  DARK = 'DARK',
-  DEVICE = 'DEVICE',
-}
+export type ThemeType = 'light' | 'dark' | 'device';
 
-export const THEME_MODES: IThemeModeType[] = [
+export const themeModes: ThemeModeType[] = [
   {
-    id: ThemeType.LIGHT,
+    id: 'light',
     i18nKey: 'msph.common.theme.lightTheme',
     icon: 'lightModeIcon',
   },
   {
-    id: ThemeType.DARK,
+    id: 'dark',
     i18nKey: 'msph.common.theme.darkTheme',
     icon: 'darkModeIcon',
   },
   {
-    id: ThemeType.DEVICE,
+    id: 'device',
     i18nKey: 'msph.common.theme.deviceTheme',
     icon: 'systemModeIcon',
   },
