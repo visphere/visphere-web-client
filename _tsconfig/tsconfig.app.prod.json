@@ -3,6 +3,11 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "include": ["../src/main.ts", "../src/polyfills.ts", "../src/**/*.d.ts"],
+  "include": [
+    "../src/main.ts",
+    "../src/polyfills.ts",
+    "../src/environments/build-specifics.prod.ts",
+    "../src/**/*.d.ts"
+  ],
   "exclude": ["../node_modules", "../src/**/*.spec.ts", "../src/spec.ts"]
 }

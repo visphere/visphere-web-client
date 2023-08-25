@@ -203,7 +203,7 @@ const commonWebpackConfig = ({
             __dirname,
             '..',
             '_tsconfig',
-            'tsconfig.app.json'
+            `tsconfig.app${isProdMode ? '.prod' : ''}.json`
           ),
           sourceMap: !isProdMode,
           jitMode: false,
