@@ -25,6 +25,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRootComponent } from '~/auth-mod/auth-root.component';
+import { activateAccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
+import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
@@ -55,6 +57,12 @@ const routes: Routes = [
         path: 'change-password/:token',
         component: AuthChangePasswordPageComponent,
         title: 'authChangePasswordPage',
+      },
+      {
+        path: 'activate-account',
+        component: AuthActivateAccountPageComponent,
+        title: 'authActivateAccountPage',
+        canActivate: [activateAccountGuard],
       },
     ],
   },
