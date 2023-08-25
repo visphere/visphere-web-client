@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: app-root.component.ts
- *   Created at: 2023-08-06, 18:55:39
- *   Last updated at: 2023-08-11, 20:52:05
+ *   File name: snackbar.type.ts
+ *   Created at: 2023-08-23, 01:14:35
+ *   Last updated at: 2023-08-23, 01:14:35
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,16 +22,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
 
-@Component({
-  selector: 'msph-mount',
-  template: `
-    <msph-snackbars-container />
-    <div class="flex flex-col flex-grow">
-      <router-outlet></router-outlet>
-    </div>
-  `,
-  host: { class: 'flex flex-col h-full min-h-screen' },
-})
-export class AppRootComponent {}
+export type Severity =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger';
+
+export type SnackbarI18n = {
+  placeholder: string;
+  parameters?: { [key: string]: any };
+};
+
+export type Snackbar = {
+  id: string;
+  header?: SnackbarI18n;
+  content: SnackbarI18n;
+  severity?: Severity;
+};

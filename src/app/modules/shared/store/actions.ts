@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: app-root.component.ts
- *   Created at: 2023-08-06, 18:55:39
- *   Last updated at: 2023-08-11, 20:52:05
+ *   File name: actions.ts
+ *   Created at: 2023-08-22, 19:57:07
+ *   Last updated at: 2023-08-22, 19:57:07
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,16 +22,18 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { createAction, props } from '@ngrx/store';
+import { Severity, SnackbarI18n } from '~/shared-mod/types/snackbar.type';
 
-@Component({
-  selector: 'msph-mount',
-  template: `
-    <msph-snackbars-container />
-    <div class="flex flex-col flex-grow">
-      <router-outlet></router-outlet>
-    </div>
-  `,
-  host: { class: 'flex flex-col h-full min-h-screen' },
-})
-export class AppRootComponent {}
+const ADD_SNACKBAR = '[SHARED] ADD SNACKBAR' as const;
+const REMOVE_SNACKBAR = '[SHARED] REMOVE SNACKBAR' as const;
+
+export const __addSnackbar = createAction(
+  ADD_SNACKBAR,
+  props<{ header?: SnackbarI18n; content: SnackbarI18n; severity?: Severity }>()
+);
+
+export const __removeSnackbar = createAction(
+  REMOVE_SNACKBAR,
+  props<{ id?: string }>()
+);
