@@ -46,7 +46,7 @@ const cdnBaseUrl = `http://localhost:${process.env.ENV_MSPH_CONTENT_DISTRIBUTOR_
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  resolve: commonResolveConfig,
+  resolve: commonResolveConfig(false),
   module: {
     rules: [
       {
@@ -82,6 +82,9 @@ module.exports = {
       'process.env.BASE_LANDING_PAGE_URL': JSON.stringify(landingPageBaseUrl),
       'process.env.BASE_CLIENT_URL': JSON.stringify(clientBaseUrl),
       'process.env.BASE_CDN_URL': JSON.stringify(cdnBaseUrl),
+      'process.env.HCAPTCHA_SITE_KEY': JSON.stringify(
+        process.env.ENV_DEV_HCAPTCHA_SITE_KEY
+      ),
     }),
     new AngularWebpackPlugin({
       tsconfig: path.resolve(
