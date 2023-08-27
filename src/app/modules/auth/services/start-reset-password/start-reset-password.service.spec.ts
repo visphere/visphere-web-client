@@ -23,7 +23,9 @@
  * governing permissions and limitations under the license.
  */
 import { TestBed } from '@angular/core/testing';
+import { AuthModule } from '~/auth-mod/auth.module';
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
+import { AppModule } from '~/root-mod/app.module';
 import { StartResetPasswordService } from './start-reset-password.service';
 
 describe('StartResetPasswordService', () => {
@@ -31,6 +33,7 @@ describe('StartResetPasswordService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [AppModule, AuthModule],
       providers: [ResetPasswordService, StartResetPasswordService],
     });
     service = TestBed.inject(StartResetPasswordService);
