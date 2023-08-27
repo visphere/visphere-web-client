@@ -41,6 +41,7 @@ import { combineLatest } from 'rxjs';
 import { dropboxFadeAndMove } from '~/shared-mod/animations/dropbox.animation';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -69,8 +70,10 @@ export class AuthSingleSelectSpinnerComponent
   filteredList: SpinnerListElementType[] = [];
   formControlName = '';
   i18nPlaceholder = '';
+  formDisabled = false;
 
   constructor(
+    private readonly _formHelperService: FormHelperService,
     private readonly _populateFormGroupService: PopulateFormGroupService,
     private readonly _populateFormControlService: PopulateFormControlService
   ) {
@@ -82,15 +85,21 @@ export class AuthSingleSelectSpinnerComponent
       combineLatest([
         this._populateFormGroupService.field$,
         this._populateFormControlService.fields$,
+        this._populateFormGroupService.formDisabled$,
       ])
-    ).subscribe(([formGroup, populateData]) => {
+    ).subscribe(([formGroup, populateData, formDisabled]) => {
       const [formControlName, i18nPrefix] = populateData;
       this.formGroup = formGroup;
       this.formControlName = formControlName;
-      if (this.multiSpinnerId) {
-        this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholders.${this.multiSpinnerId}`;
-      } else {
-        this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholder`;
+      this.formDisabled = formDisabled;
+      this._formHelperService.toggleFormField(
+        formGroup,
+        formControlName,
+        formDisabled
+      );
+      this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholder`;
+      if (!this.multiSpinnerId) {
+        this.i18nPlaceholder += `s.${this.multiSpinnerId}`;
       }
     });
   }

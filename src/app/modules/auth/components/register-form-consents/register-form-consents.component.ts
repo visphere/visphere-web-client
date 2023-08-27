@@ -26,7 +26,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { combineLatest } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { environment } from '~/env/environment';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
@@ -46,6 +46,9 @@ export class RegisterFormConsentsComponent
   agreeTermsContent: SafeHtml = '';
   formGroup!: FormGroup;
   path = environment.baseLandingUrl;
+
+  formDisabled$: Observable<boolean> =
+    this._populateFormGroupService.formDisabled$;
 
   constructor(
     private readonly _sanitizePipe: SanitizePipe,

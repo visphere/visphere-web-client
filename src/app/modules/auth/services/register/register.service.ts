@@ -24,6 +24,7 @@
  */
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { RegisterFormModel } from '~/auth-mod/models/register-form.model';
@@ -37,7 +38,10 @@ export class RegisterService extends AbstractMultistageFormProvider<RegisterForm
   private _captchaModalState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  constructor(private readonly _store: Store<AuthReducer>) {
+  constructor(
+    private readonly _router: Router,
+    private readonly _store: Store<AuthReducer>
+  ) {
     super('first');
   }
 
@@ -68,6 +72,11 @@ export class RegisterService extends AbstractMultistageFormProvider<RegisterForm
         email: data.firstStage.emailAddress,
       })
     );
+    this.moveToActivateAccount();
+  }
+
+  private async moveToActivateAccount(): Promise<void> {
+    await this._router.navigate([`/auth/activate-account`]);
   }
 
   getFormGroupStage(stage: RegisterFormStage): FormGroup {

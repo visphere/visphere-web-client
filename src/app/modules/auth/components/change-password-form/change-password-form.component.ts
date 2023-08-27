@@ -22,13 +22,20 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ChangePasswordService } from '~/auth-mod/services/change-password/change-password.service';
 import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
 import { regex } from '~/shared-mod/validators/regex.constant';
 
@@ -37,7 +44,10 @@ import { regex } from '~/shared-mod/validators/regex.constant';
   templateUrl: './change-password-form.component.html',
   providers: [ChangePasswordService, PopulateFormGroupService],
 })
-export class ChangePasswordFormComponent implements AfterViewInit {
+export class ChangePasswordFormComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @ViewChild('meter') strengthMeter!: PasswordStrengthMeterComponent;
 
   changePasswordForm: FormGroup;
@@ -50,6 +60,7 @@ export class ChangePasswordFormComponent implements AfterViewInit {
     private readonly _changePasswordService: ChangePasswordService,
     private readonly _populateFormGroupService: PopulateFormGroupService
   ) {
+    super();
     this.changePasswordForm = new FormGroup(
       {
         newPassword: new FormControl('', [
@@ -66,7 +77,17 @@ export class ChangePasswordFormComponent implements AfterViewInit {
       }
     );
     this._changePasswordService.setReactiveForm(this.changePasswordForm);
+  }
+
+  ngOnInit(): void {
     this._populateFormGroupService.setField(this.changePasswordForm);
+    this.wrapAsObservable(this._changePasswordService.isLoading$).subscribe(
+      isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
   }
 
   handleSubmitChangePasswordForm(): void {

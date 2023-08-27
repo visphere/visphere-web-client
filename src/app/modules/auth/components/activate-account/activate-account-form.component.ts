@@ -22,7 +22,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -31,6 +31,7 @@ import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { ActivateAccountFormStage } from '~/auth-mod/types/form-stage.type';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { exactLengthValidator } from '~/shared-mod/validators/exact-length.validator';
 import { regex } from '~/shared-mod/validators/regex.constant';
 
@@ -39,7 +40,10 @@ import { regex } from '~/shared-mod/validators/regex.constant';
   templateUrl: './activate-account-form.component.html',
   providers: [PopulateFormGroupService, ActivateAccountService],
 })
-export class ActivateAccountFormComponent {
+export class ActivateAccountFormComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   activateAccountForm: FormGroup;
 
   userEmail$: Observable<string> = this._store.select(
@@ -54,6 +58,7 @@ export class ActivateAccountFormComponent {
     private readonly _activateAccountService: ActivateAccountService,
     private readonly _populateFormGroupService: PopulateFormGroupService
   ) {
+    super();
     this.activateAccountForm = new FormGroup({
       token: new FormControl('', [
         Validators.required,
@@ -61,8 +66,18 @@ export class ActivateAccountFormComponent {
         exactLengthValidator(10),
       ]),
     });
-    this._populateFormGroupService.setField(this.activateAccountForm);
     this._activateAccountService.setReactiveForm(this.activateAccountForm);
+  }
+
+  ngOnInit(): void {
+    this._populateFormGroupService.setField(this.activateAccountForm);
+    this.wrapAsObservable(this._activateAccountService.isLoading$).subscribe(
+      isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
   }
 
   handleSubmitactivateAccountForm(): void {

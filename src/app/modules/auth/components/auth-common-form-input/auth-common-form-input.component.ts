@@ -24,6 +24,7 @@
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable, combineLatest } from 'rxjs';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
@@ -48,6 +49,9 @@ export class AuthCommonFormInputComponent
   formGroup!: FormGroup;
   i18nLabel = '';
 
+  formDisabled$: Observable<boolean> =
+    this._populateFormGroupService.formDisabled$;
+
   constructor(
     private readonly _formHelperService: FormHelperService,
     private readonly _populateFormGroupService: PopulateFormGroupService,
@@ -62,9 +66,19 @@ export class AuthCommonFormInputComponent
       this.formControlIdentifier,
       this.i18nPrefix
     );
-    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
-      formGroup => (this.formGroup = formGroup)
-    );
+    this.wrapAsObservable(
+      combineLatest([
+        this._populateFormGroupService.field$,
+        this._populateFormGroupService.formDisabled$,
+      ])
+    ).subscribe(([formGroup, formDisabled]) => {
+      this.formGroup = formGroup;
+      this._formHelperService.toggleFormField(
+        formGroup,
+        this.formControlIdentifier,
+        formDisabled
+      );
+    });
   }
 
   ngOnDestroy(): void {

@@ -27,6 +27,7 @@
   <div formGroupName="secondStage" class="grid gap-y-4">
     <button
       (click)="handleGotoPreviousStage()"
+      [disabled]="isLoading$ | async"
       class="msph_login-form-edit-button px-2 flex items-center w-fit">
       <ng-icon name="arrowLeftIcon" class="me-2" />
       {{ 'msph.common.utils.backwardMove' | translate }}

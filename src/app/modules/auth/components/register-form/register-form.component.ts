@@ -22,7 +22,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
@@ -36,7 +36,7 @@ import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.val
   templateUrl: './register-form.component.html',
   providers: [RegisterService],
 })
-export class RegisterFormComponent {
+export class RegisterFormComponent implements OnInit {
   registerForm: FormGroup;
   currentStage$ = this._registerService.currentStage$;
   captchaModalState$ = this._registerService.captchaModalState$;
@@ -96,6 +96,9 @@ export class RegisterFormComponent {
         }),
       }
     );
+  }
+
+  ngOnInit(): void {
     this._registerService.setReactiveForm(this.registerForm);
   }
 

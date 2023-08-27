@@ -27,6 +27,7 @@
   #selectViewHolder
   (focus)="handleShowItemsList()"
   type="button"
+  [disabled]="formDisabled"
   class="relative cursor-default w-full">
   <ul
     *ngIf="itemsListIsOpen"
@@ -52,6 +53,7 @@
     [class.msph_auth-invalid-input]="hasErrors"
     (input)="handleFilterElements(inputElement.value)"
     type="text"
+    [disabled]="formDisabled"
     (focus)="handleShowItemsList()"
     class="msph_auth-input w-full" />
   <div
