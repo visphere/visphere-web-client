@@ -42,6 +42,7 @@ if (fs.existsSync(envPath)) {
 const landingPageBaseUrl = `http://localhost:${process.env.ENV_MSPH_LANDING_PAGE_DEV_PORT}`;
 const clientBaseUrl = `http://localhost:${process.env.ENV_MSPH_WEB_CLIENT_DEV_PORT}`;
 const cdnBaseUrl = `http://localhost:${process.env.ENV_MSPH_CONTENT_DISTRIBUTOR_PORT}`;
+const javaApiEurekaUrl = `http://localhost:${process.env.ENV_MSPH_JAVA_API_EUREKA_DEV_PORT}`;
 
 module.exports = {
   mode: 'development',
@@ -85,6 +86,7 @@ module.exports = {
       'process.env.HCAPTCHA_SITE_KEY': JSON.stringify(
         process.env.ENV_DEV_HCAPTCHA_SITE_KEY
       ),
+      'process.env.JAVA_API_EUREKA_URL': JSON.stringify(javaApiEurekaUrl),
     }),
     new AngularWebpackPlugin({
       tsconfig: path.resolve(

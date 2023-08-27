@@ -29,4 +29,5 @@ module.exports = webpackProdConfig({
   landingPageBaseUrl: `https://${process.env.ENV_MSPH_PROD_LANDING_PAGE_DOMAIN}`,
   clientBaseUrl: `https://${process.env.ENV_MSPH_PROD_WEB_CLIENT_DOMAIN}`,
   cdnBaseUrl: `https://${process.env.ENV_MSPH_PROD_CONTENT_DISTRIBUTOR_DOMAIN}`,
+  javaApiEurekaUrl: `https://${process.env.ENV_MSPH_PROD_JAVA_API_EUREKA_DOMAIN}`,
 });
