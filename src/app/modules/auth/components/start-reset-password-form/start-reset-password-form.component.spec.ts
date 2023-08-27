@@ -24,6 +24,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthModule } from '~/auth-mod/auth.module';
+import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { AppModule } from '~/root-mod/app.module';
 import { StartResetPasswordFormComponent } from './start-reset-password-form.component';
 
@@ -34,6 +35,7 @@ describe('StartResetPasswordFormComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
+      providers: [ResetPasswordService],
     }).compileComponents();
     fixture = TestBed.createComponent(StartResetPasswordFormComponent);
     component = fixture.componentInstance;

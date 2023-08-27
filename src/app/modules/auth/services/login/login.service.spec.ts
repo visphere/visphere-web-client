@@ -29,7 +29,9 @@ describe('LoginService', () => {
   let service: LoginService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [LoginService],
+    });
     service = TestBed.inject(LoginService);
   });
 

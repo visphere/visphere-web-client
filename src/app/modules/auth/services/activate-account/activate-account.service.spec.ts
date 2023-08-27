@@ -23,13 +23,18 @@
  * governing permissions and limitations under the license.
  */
 import { TestBed } from '@angular/core/testing';
+import { AuthModule } from '~/auth-mod/auth.module';
+import { AppModule } from '~/root-mod/app.module';
 import { ActivateAccountService } from './activate-account.service';
 
 describe('ActivateAccountService', () => {
   let service: ActivateAccountService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [AppModule, AuthModule],
+      providers: [ActivateAccountService],
+    });
     service = TestBed.inject(ActivateAccountService);
   });
 

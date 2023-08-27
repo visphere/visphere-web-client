@@ -29,7 +29,9 @@ describe('ResetPasswordService', () => {
   let service: ResetPasswordService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [ResetPasswordService],
+    });
     service = TestBed.inject(ResetPasswordService);
   });
 

@@ -29,7 +29,9 @@ describe('PopulateFormGroupService', () => {
   let service: PopulateFormGroupService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [PopulateFormGroupService],
+    });
     service = TestBed.inject(PopulateFormGroupService);
   });
 

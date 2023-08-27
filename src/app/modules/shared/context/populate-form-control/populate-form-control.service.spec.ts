@@ -29,7 +29,9 @@ describe('PopulateFormControlService', () => {
   let service: PopulateFormControlService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [PopulateFormControlService],
+    });
     service = TestBed.inject(PopulateFormControlService);
   });
 
