@@ -23,17 +23,18 @@
  * governing permissions and limitations under the license.
  */
 
-export interface Register1stFormModel {
-  login: string;
-  emailAddress: string;
-  password: string;
-  confirmedPassword: string;
-  birthDate: { day: number; month: number; year: number };
-}
-
-export interface Register2ndFormModel {
-  firstName: string;
-  lastName: string;
-  secondEmailAddress: string;
-  allowNotifs: boolean;
-}
+export type RegisterFormModel = {
+  firstStage: {
+    login: string;
+    emailAddress: string;
+    password: string;
+    confirmedPassword: string;
+    birthDate: { day: number; month: number; year: number };
+  };
+  secondStage: {
+    firstName: string;
+    lastName: string;
+    secondEmailAddress: string;
+    allowNotifs: boolean;
+  };
+};

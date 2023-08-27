@@ -22,28 +22,57 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { takeUntil } from 'rxjs';
+import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-password-input-toggler',
   templateUrl: './password-input-toggler.component.html',
-  providers: [SanitizePipe],
+  providers: [SanitizePipe, PopulateFormControlService],
 })
-export class PasswordInputTogglerComponent {
-  @Input() formGroup!: FormGroup;
+export class PasswordInputTogglerComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   @Input() formControlIdentifier!: string;
   @Input() maxLength = 80;
   @Input() placeholder = '';
-  @Input() i18nLabel!: string;
+  @Input() i18nPrefix!: string;
   @Input() requiredStar = false;
 
+  formGroup!: FormGroup;
+  i18nLabel = '';
   isVisible = false;
   capsLockIsOn = false;
 
-  constructor(private readonly _formHelperService: FormHelperService) {}
+  constructor(
+    private readonly _formHelperService: FormHelperService,
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _populateFormControlService: PopulateFormControlService
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.i18nLabel = `msph.${this.i18nPrefix}Page.formFields.${this.formControlIdentifier}.value`;
+    this._populateFormControlService.setFields(
+      this.formControlIdentifier,
+      this.i18nPrefix
+    );
+    this._populateFormGroupService.field$
+      .pipe(takeUntil(this._subscriptionHook))
+      .subscribe(formGroup => (this.formGroup = formGroup));
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
 
   onChangeVisibility(inputData: string): void {
     if (inputData === '') return;

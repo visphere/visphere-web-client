@@ -32,8 +32,9 @@ import { dropboxFadeAndMove } from '~/root-mod/modules/shared/animations/dropbox
   animations: [dropboxFadeAndMove],
 })
 export class FooterControlListComponent {
-  isOpen = false;
   @ViewChild('selectViewHolder') selectViewHolder!: ElementRef;
+
+  isOpen = false;
 
   onToggleVisibility(): void {
     this.isOpen = !this.isOpen;

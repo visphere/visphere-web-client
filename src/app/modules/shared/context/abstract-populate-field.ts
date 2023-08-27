@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: ota-token-form-field.component.ts
- *   Created at: 2023-08-25, 22:56:20
- *   Last updated at: 2023-08-25, 22:56:20
+ *   File name: asbtact-populate-field.ts
+ *   Created at: 2023-08-26, 13:54:59
+ *   Last updated at: 2023-08-26, 13:54:59
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,14 +22,16 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Observable, ReplaySubject } from 'rxjs';
 
-@Component({
-  selector: 'msph-ota-token-form-field',
-  templateUrl: './ota-token-form-field.component.html',
-})
-export class OtaTokenFormFieldComponent {
-  @Input() i18nFieldKey!: string;
-  @Input() formGroup!: FormGroup;
+export abstract class AbstractPopulateField<T> {
+  private _field$: ReplaySubject<T> = new ReplaySubject<T>(1);
+
+  setField(field: T): void {
+    this._field$.next(field);
+  }
+
+  get field$(): Observable<T> {
+    return this._field$;
+  }
 }

@@ -22,24 +22,54 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-auth-common-form-input',
   templateUrl: './auth-common-form-input.component.html',
+  providers: [PopulateFormControlService],
 })
-export class AuthCommonFormInputComponent {
-  @Input() formGroup!: FormGroup;
+export class AuthCommonFormInputComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   @Input() formControlIdentifier!: string;
+  @Input() i18nPrefix!: string;
   @Input() maxLength!: number;
   @Input() type = 'text';
-  @Input() i18nLabel!: string;
   @Input() placeholder = '';
   @Input() requiredStar = false;
 
-  constructor(private readonly _formHelperService: FormHelperService) {}
+  formGroup!: FormGroup;
+  i18nLabel = '';
+
+  constructor(
+    private readonly _formHelperService: FormHelperService,
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _populateFormControlService: PopulateFormControlService
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.i18nLabel = `msph.${this.i18nPrefix}Page.formFields.${this.formControlIdentifier}.value`;
+    this._populateFormControlService.setFields(
+      this.formControlIdentifier,
+      this.i18nPrefix
+    );
+    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+      formGroup => (this.formGroup = formGroup)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
 
   isFieldInvalid(): boolean {
     return this._formHelperService.validateField(

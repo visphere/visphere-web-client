@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: ota-token-form-field.component.spec.ts
- *   Created at: 2023-08-25, 22:56:20
- *   Last updated at: 2023-08-25, 22:56:32
+ *   File name: finish-reset-password-form.component.spec.ts
+ *   Created at: 2023-08-27, 00:11:14
+ *   Last updated at: 2023-08-27, 00:16:00
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,31 +23,22 @@
  * governing permissions and limitations under the license.
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthModule } from '~/auth-mod/auth.module';
+import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { AppModule } from '~/root-mod/app.module';
-import { exactLengthValidator } from '~/root-mod/modules/shared/validators/exact-length.validator';
-import { regex } from '~/root-mod/modules/shared/validators/regex.constant';
-import { OtaTokenFormFieldComponent } from './ota-token-form-field.component';
+import { FinishResetPasswordFormComponent } from './finish-reset-password-form.component';
 
-describe('OtaTokenFormFieldComponent', () => {
-  let component: OtaTokenFormFieldComponent;
-  let fixture: ComponentFixture<OtaTokenFormFieldComponent>;
+describe('FinishResetPasswordFormComponent', () => {
+  let component: FinishResetPasswordFormComponent;
+  let fixture: ComponentFixture<FinishResetPasswordFormComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
-    });
-    fixture = TestBed.createComponent(OtaTokenFormFieldComponent);
+      providers: [ResetPasswordService],
+    }).compileComponents();
+    fixture = TestBed.createComponent(FinishResetPasswordFormComponent);
     component = fixture.componentInstance;
-
-    component.formGroup = new FormGroup({
-      token: new FormControl('', [
-        Validators.required,
-        Validators.pattern(regex.OTA_TOKEN),
-        exactLengthValidator(10),
-      ]),
-    });
     fixture.detectChanges();
   });
 

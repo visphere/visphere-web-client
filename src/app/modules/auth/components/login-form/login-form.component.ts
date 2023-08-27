@@ -22,45 +22,52 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginFormModel } from '~/auth-mod/models/login-form.model';
+import { Observable } from 'rxjs';
+import { LoginService } from '~/auth-mod/services/login/login.service';
+import { LoginFormStage } from '~/root-mod/modules/auth/types/form-stage.type';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 
 @Component({
   selector: 'msph-login-form',
   templateUrl: './login-form.component.html',
+  providers: [LoginService, PopulateFormGroupService],
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
-  loginOrEmailProvided = false;
   nextButtonEnabled = false;
 
-  constructor() {
+  activeStage$: Observable<LoginFormStage> = this._loginService.currentStage$;
+  isNextButtonEnabled$: Observable<boolean> =
+    this._loginService.isNextButtonEnabled$;
+  isLoading$: Observable<boolean> = this._loginService.isLoading$;
+
+  constructor(
+    private readonly _loginService: LoginService,
+    private readonly _populateFormGroupService: PopulateFormGroupService
+  ) {
     this.loginForm = new FormGroup({
       usernameOrEmailAddress: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
+    this._loginService.setReactiveForm(this.loginForm);
+    this._loginService.onValueChange();
   }
 
-  changeNextButtonState(): void {
-    this.nextButtonEnabled = Boolean(
-      this.loginForm.get('usernameOrEmailAddress')?.value.length !== 0
-    );
+  ngOnInit(): void {
+    this._populateFormGroupService.setField(this.loginForm);
   }
 
-  moveForward(): void {
-    this.loginOrEmailProvided = true;
+  handleMoveForward(): void {
+    this._loginService.moveForward();
   }
 
-  moveBackward(): void {
-    this.loginOrEmailProvided = false;
-    this.loginForm.get('password')?.reset();
+  handleMoveBackward(): void {
+    this._loginService.moveBackward();
   }
 
-  onSubmitLoginForm(): void {
-    const formData: LoginFormModel =
-      this.loginForm.getRawValue() as LoginFormModel;
-    // next
-    console.log(formData);
+  handleSubmitLoginForm(): void {
+    this._loginService.submitForm();
   }
 }

@@ -33,16 +33,16 @@ export function passwordMatchValidator(
   confirmedPasswordFieldName: string
 ): ReturnType {
   return (control: AbstractControl) => {
-    const password = control.root.get(rootPasswordFieldName)!;
-    const confirmedPassword = control.root.get(confirmedPasswordFieldName)!;
-    if (password.value !== confirmedPassword.value) {
-      confirmedPassword.setErrors({
+    const password = control.get(rootPasswordFieldName);
+    const confirmedPassword = control.get(confirmedPasswordFieldName);
+    if (password?.value !== confirmedPassword?.value) {
+      confirmedPassword?.setErrors({
         ...confirmedPassword.errors,
         mismatch: true,
       });
       return { mismatch: true };
     }
-    if (confirmedPassword.errors && confirmedPassword.errors['mismatch']) {
+    if (confirmedPassword?.errors && confirmedPassword.errors['mismatch']) {
       delete confirmedPassword.errors['mismatch'];
       if (Object.keys(confirmedPassword.errors).length === 0) {
         confirmedPassword.setErrors(null);

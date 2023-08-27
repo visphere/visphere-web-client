@@ -37,9 +37,7 @@
     </label>
   </div>
   <div class="ms-4 grid gap-y-2">
-    <msph-auth-checkbox-form-input
-      [formGroup]="formGroup"
-      formControlIdentifier="allowNotifs">
+    <msph-auth-checkbox-form-input formControlIdentifier="allowNotifs">
       <ng-container labelContent>
         {{
           'msph.webClient.registerPage.formFields.allowNotifs.value' | translate
@@ -47,17 +45,14 @@
       </ng-container>
     </msph-auth-checkbox-form-input>
     <msph-auth-checkbox-form-input
-      [formGroup]="formGroup"
-      formControlIdentifier="agreeTerms">
+      formControlIdentifier="agreeTerms"
+      i18nPrefix="webClient.register">
       <ng-container labelContent>
         <span [innerHTML]="agreeTermsContent"></span>
         <span class="ms-0.5 text-msph-primary-tint">*</span>
       </ng-container>
       <ng-container errorsContent>
-        <msph-field-validator
-          [formGroup]="formGroup"
-          formControlIdentifier="agreeTerms"
-          i18nPrefix="webClient.register" />
+        <msph-field-validator />
       </ng-container>
     </msph-auth-checkbox-form-input>
   </div>

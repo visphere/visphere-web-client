@@ -23,7 +23,8 @@
  * governing permissions and limitations under the license.
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { PasswordStrengthMeterComponent } from './password-strength-meter.component';
 
 describe('PasswordStrenghtMeterComponent', () => {
@@ -33,14 +34,18 @@ describe('PasswordStrenghtMeterComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PasswordStrengthMeterComponent],
+      providers: [PopulateFormGroupService],
     });
+
+    const populateFormGroup = TestBed.inject(PopulateFormGroupService);
+    const formGroup = new FormGroup({
+      testField: new FormControl(''),
+    });
+    populateFormGroup.setField(formGroup);
+
     fixture = TestBed.createComponent(PasswordStrengthMeterComponent);
     component = fixture.componentInstance;
-
-    component.formControlIdentifier = 'password';
-    component.formGroup = new FormGroup({
-      password: new FormControl('', [Validators.required]),
-    });
+    component.formControlIdentifier = 'testField';
 
     fixture.detectChanges();
   });

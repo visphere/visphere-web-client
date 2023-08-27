@@ -1,0 +1,79 @@
+<!--
+ ~ Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ ~ 
+ ~   File name: register-second-stage-form.component.html
+ ~   Created at: 2023-08-26, 16:03:09
+ ~   Last updated at: 2023-08-26, 16:03:35
+ ~ 
+ ~   Project name: moonsphere
+ ~   Module name: moonsphere-web-client
+ ~ 
+ ~ This project is a part of "MoonSphere" instant messenger system. This system is a part of
+ ~ completing an engineers degree in computer science at Silesian University of Technology.
+ ~ 
+ ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ ~ file except in compliance with the License. You may obtain a copy of the License at
+ ~ 
+ ~   <http://www.apache.org/license/LICENSE-2.0>
+ ~ 
+ ~ Unless required by applicable law or agreed to in writing, software distributed under
+ ~ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ ~ OF ANY KIND, either express or implied. See the License for the specific language
+ ~ governing permissions and limitations under the license.
+ -->
+
+<ng-container [formGroup]="rootForm">
+  <div formGroupName="secondStage" class="grid gap-y-4">
+    <button
+      (click)="handleGotoPreviousStage()"
+      class="msph_login-form-edit-button px-2 flex items-center w-fit">
+      <ng-icon name="arrowLeftIcon" class="me-2" />
+      {{ 'msph.common.utils.backwardMove' | translate }}
+    </button>
+
+    <msph-auth-common-form-input
+      [maxLength]="80"
+      [requiredStar]="true"
+      formControlIdentifier="firstName"
+      i18nPrefix="webClient.register">
+      <msph-field-validator />
+      <msph-field-validator type="minlength" />
+    </msph-auth-common-form-input>
+
+    <msph-auth-common-form-input
+      [maxLength]="80"
+      [requiredStar]="true"
+      formControlIdentifier="lastName"
+      i18nPrefix="webClient.register">
+      <msph-field-validator />
+      <msph-field-validator type="minlength" />
+    </msph-auth-common-form-input>
+
+    <msph-auth-common-form-input
+      [maxLength]="100"
+      formControlIdentifier="secondEmailAddress"
+      i18nPrefix="webClient.register">
+      <msph-field-validator type="email" />
+      <msph-field-validator type="exact" />
+      <ng-container afterInputContent>
+        <span class="msph_form-out-text">
+          {{
+            'msph.webClient.registerPage.secondEmailAddressUsage' | translate
+          }}
+        </span>
+      </ng-container>
+    </msph-auth-common-form-input>
+
+    <msph-register-form-consents />
+
+    <!-- TODO: nr telefonu, wprowadzanie, wybieranie spośród kodów, niewymagany  -->
+
+    <button
+      [disabled]="checkIfFormIsInvalid || (isLoading$ | async)"
+      class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full">
+      {{ 'msph.webClient.registerPage.submitFormButton' | translate }}
+      <div *ngIf="isLoading$ | async" class="msph-button__spinner"></div>
+    </button>
+  </div>
+</ng-container>

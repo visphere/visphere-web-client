@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: reset-password-form.component.spec.ts
- *   Created at: 2023-08-11, 00:19:21
- *   Last updated at: 2023-08-11, 21:01:41
+ *   File name: start-reset-password-form.component.spec.ts
+ *   Created at: 2023-08-27, 00:10:52
+ *   Last updated at: 2023-08-27, 00:15:44
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -24,18 +24,20 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthModule } from '~/auth-mod/auth.module';
+import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { AppModule } from '~/root-mod/app.module';
-import { ResetPasswordFormComponent } from './reset-password-form.component';
+import { StartResetPasswordFormComponent } from './start-reset-password-form.component';
 
-describe('ResetPasswordFormComponent', () => {
-  let component: ResetPasswordFormComponent;
-  let fixture: ComponentFixture<ResetPasswordFormComponent>;
+describe('StartResetPasswordFormComponent', () => {
+  let component: StartResetPasswordFormComponent;
+  let fixture: ComponentFixture<StartResetPasswordFormComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
+      providers: [ResetPasswordService],
     }).compileComponents();
-    fixture = TestBed.createComponent(ResetPasswordFormComponent);
+    fixture = TestBed.createComponent(StartResetPasswordFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

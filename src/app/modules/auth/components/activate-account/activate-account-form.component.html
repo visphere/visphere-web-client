@@ -23,46 +23,49 @@
  ~ governing permissions and limitations under the license.
  -->
 
-<ng-template *ngIf="isActivated; then activatedMessage; else activateForm" />
-<ng-template #activateForm>
-  <form
-    [formGroup]="activateAccountForm"
-    (ngSubmit)="handleSubmitactivateAccount()"
-    class="grid gap-y-3">
-    <div
-      [innerHtml]="
-        'msph.webClient.resetPasswordPage.successfullSendEmailMessage'
-          | translate: { emailAddress: 'mocked@gmail.com' }
-      "
-      class="msph_auth-info-card-container"></div>
-    <msph-ota-token-form-field
-      [formGroup]="activateAccountForm"
-      i18nFieldKey="resetPassword" />
-    <button
-      [disabled]="activateAccountForm.invalid"
-      class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full">
-      {{
-        'msph.webClient.activateAccountPage.activateAccountButton' | translate
-      }}
-    </button>
-    <msph-deferred-button
-      (emitOnAction)="handleResendMessage()"
-      styles="msph-auth__resend-message-button"
-      innerI18nText="msph.common.utils.resendMessageButton"
-      labelI18nText="msph.common.utils.emailMessageNotReceived" />
-  </form>
-</ng-template>
-<ng-template #activatedMessage>
+<form
+  *ngIf="(currentStage$ | async) === 'activate'"
+  [formGroup]="activateAccountForm"
+  (ngSubmit)="handleSubmitactivateAccountForm()"
+  class="grid gap-y-3">
+  <div
+    [innerHtml]="
+      'msph.webClient.resetPasswordPage.successfullSendEmailMessage'
+        | translate: { emailAddress: (userEmail$ | async) }
+    "
+    class="msph_auth-info-card-container"></div>
+  <msph-password-input-toggler
+    [maxLength]="10"
+    placeholder="Xtg4vCt49D"
+    formControlIdentifier="token"
+    i18nPrefix="webClient.activateAccount">
+    <msph-field-validator />
+    <msph-field-validator type="exactLength" />
+    <msph-field-validator type="pattern" />
+  </msph-password-input-toggler>
+  <button
+    [disabled]="activateAccountForm.invalid || (isLoading$ | async)"
+    class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full">
+    {{ 'msph.webClient.activateAccountPage.activateAccountButton' | translate }}
+    <div *ngIf="isLoading$ | async" class="msph-button__spinner"></div>
+  </button>
+  <msph-deferred-button
+    (emitOnAction)="handleResendMessage()"
+    styles="msph-auth__resend-message-button"
+    innerI18nText="msph.common.utils.resendMessageButton"
+    labelI18nText="msph.common.utils.emailMessageNotReceived" />
+</form>
+<div class="grid gap-y-3" *ngIf="(currentStage$ | async) === 'success'">
   <div class="msph_auth-info-card-container mb-4">
     {{
       'msph.webClient.activateAccountPage.successfullyActivatedMessage'
         | translate
     }}
   </div>
-  <a
-    routerLink="/auth/login"
+  <button
+    (click)="handleReturnToLoginAndClearState()"
     class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full flex items-center justify-center">
     <ng-icon name="outsideLinkIcon" class="me-2" />
     {{ 'msph.webClient.activateAccountPage.moveToLoginPage' | translate }}
-  </a>
-</ng-template>
+  </button>
+</div>

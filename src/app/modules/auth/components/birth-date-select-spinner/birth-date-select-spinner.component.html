@@ -30,49 +30,28 @@
   </div>
   <div class="flex gap-3">
     <msph-auth-single-select-spinner
-      [formGroup]="formGroup"
       [listElements]="formMonths"
-      [initIdValue]="getFormControlValue('month')"
+      [initValueId]="getFormControlValue('month')"
       (persistElement)="patchValue($event, 'month')"
-      i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.month"
-      formControlIdentifier="birthDate"
+      multiSpinnerId="month"
       class="flex-none w-[180px]" />
     <msph-auth-single-select-spinner
-      [formGroup]="formGroup"
       [listElements]="formDays"
-      [initIdValue]="getFormControlValue('day')"
+      [initValueId]="getFormControlValue('day')"
       (persistElement)="patchValue($event, 'day')"
-      formControlIdentifier="birthDate"
-      i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.day"
+      multiSpinnerId="day"
       class="flex-grow" />
     <msph-auth-single-select-spinner
-      [formGroup]="formGroup"
       [listElements]="formYears"
-      [initIdValue]="getFormControlValue('year')"
+      [initValueId]="getFormControlValue('year')"
       (persistElement)="patchValue($event, 'year')"
-      formControlIdentifier="birthDate"
-      i18nPlaceholder="msph.webClient.registerPage.formFields.birthDate.placeholders.year"
+      multiSpinnerId="year"
       class="flex-grow" />
   </div>
   <div class="text-sm mt-1 mx-2 msph_auth-invalid-text">
-    <msph-field-validator
-      [formGroup]="formGroup"
-      formControlIdentifier="birthDate"
-      i18nPrefix="webClient.register" />
-    <msph-field-validator
-      [formGroup]="formGroup"
-      formControlIdentifier="birthDate"
-      i18nPrefix="webClient.register"
-      type="notAll" />
-    <msph-field-validator
-      [formGroup]="formGroup"
-      formControlIdentifier="birthDate"
-      i18nPrefix="webClient.register"
-      type="invalid" />
-    <msph-field-validator
-      [formGroup]="formGroup"
-      formControlIdentifier="birthDate"
-      i18nPrefix="webClient.register"
-      type="inappropriateAge" />
+    <msph-field-validator />
+    <msph-field-validator type="notAll" />
+    <msph-field-validator type="invalid" />
+    <msph-field-validator type="inappropriateAge" />
   </div>
 </div>

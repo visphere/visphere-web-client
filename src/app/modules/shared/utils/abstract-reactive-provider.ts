@@ -22,7 +22,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Subject } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 export abstract class AbstractReactiveProvider {
   protected readonly _subscriptionHook: Subject<void> = new Subject<void>();
@@ -30,5 +30,9 @@ export abstract class AbstractReactiveProvider {
   protected unmountAllSubscriptions(): void {
     this._subscriptionHook.next();
     this._subscriptionHook.complete();
+  }
+
+  protected wrapAsObservable<T>(input: Observable<T>): Observable<T> {
+    return input.pipe(takeUntil(this._subscriptionHook));
   }
 }

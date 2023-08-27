@@ -22,14 +22,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import {
-  Register1stFormModel,
-  Register2ndFormModel,
-} from '~/auth-mod/models/register-form.model';
-import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
+import { RegisterService } from '~/auth-mod/services/register/register.service';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
 import { emailWithSecondaryEmail } from '~/shared-mod/validators/email-with-secondary-email.validator';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
@@ -39,86 +34,76 @@ import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.val
 @Component({
   selector: 'msph-register-form',
   templateUrl: './register-form.component.html',
+  providers: [RegisterService],
 })
-export class RegisterFormComponent implements AfterViewInit {
-  register1stStageForm: FormGroup;
-  register2ndStageForm: FormGroup;
-  nextFormStageActive = false;
-  captchaModalIsActive$?: BehaviorSubject<boolean> = new BehaviorSubject(false);
+export class RegisterFormComponent {
+  registerForm: FormGroup;
+  currentStage$ = this._registerService.currentStage$;
+  captchaModalState$ = this._registerService.captchaModalState$;
 
-  @ViewChild('passwordStrengthMeter')
-  passwordStrengthMeterComponent!: PasswordStrengthMeterComponent;
-
-  constructor(private readonly _birthDateValidator: BirthDateValidator) {
-    this.register1stStageForm = new FormGroup(
+  constructor(
+    private readonly _birthDateValidator: BirthDateValidator,
+    private readonly _registerService: RegisterService
+  ) {
+    this.registerForm = new FormGroup(
       {
-        username: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.pattern(regex.USERNAME),
-        ]),
-        emailAddress: new FormControl('', [
-          Validators.required,
-          Validators.email,
-        ]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.pattern(regex.PASSWORD),
-        ]),
-        confirmedPassword: new FormControl('', [Validators.required]),
-        birthDate: new FormControl(
-          { day: null, month: null, year: null },
-          this._birthDateValidator.validate()
+        firstStage: new FormGroup(
+          {
+            username: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.pattern(regex.USERNAME),
+            ]),
+            emailAddress: new FormControl('', [
+              Validators.required,
+              Validators.email,
+            ]),
+            password: new FormControl('', [
+              Validators.required,
+              Validators.pattern(regex.PASSWORD),
+            ]),
+            confirmedPassword: new FormControl('', [Validators.required]),
+            birthDate: new FormControl(
+              { day: null, month: null, year: null },
+              this._birthDateValidator.validate()
+            ),
+          },
+          {
+            validators: passwordMatchValidator('password', 'confirmedPassword'),
+          }
         ),
+        secondStage: new FormGroup({
+          firstName: new FormControl('', [
+            Validators.required,
+            Validators.minLength(2),
+          ]),
+          lastName: new FormControl('', [
+            Validators.required,
+            Validators.minLength(2),
+          ]),
+          secondEmailAddress: new FormControl('', [Validators.email]),
+          allowNotifs: new FormControl(false),
+          agreeTerms: new FormControl(false, [requiredBoolValidator()]),
+        }),
       },
-      { validators: passwordMatchValidator('password', 'confirmedPassword') }
+      {
+        validators: emailWithSecondaryEmail({
+          primary: { nestedForm: 'firstStage', formField: 'emailAddress' },
+          secondary: {
+            nestedForm: 'secondStage',
+            formField: 'secondEmailAddress',
+          },
+        }),
+      }
     );
-    this.register2ndStageForm = new FormGroup({
-      firstName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-      ]),
-      lastName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-      ]),
-      secondEmailAddress: new FormControl('', [
-        Validators.email,
-        emailWithSecondaryEmail(this.register1stStageForm, 'emailAddress'),
-      ]),
-      allowNotifs: new FormControl(false),
-      agreeTerms: new FormControl(false, [requiredBoolValidator()]),
-    });
-  }
-
-  ngAfterViewInit(): void {
-    this.passwordStrengthMeterComponent?.debounceCalcStrength();
-  }
-
-  get checkIfFormIsInvalid(): boolean {
-    const agreeTermsControl = this.register2ndStageForm.get('agreeTerms');
-    if (!agreeTermsControl) return true;
-    return (
-      this.register1stStageForm.invalid ||
-      this.register2ndStageForm.invalid ||
-      !agreeTermsControl.value
-    );
-  }
-
-  handleMoveToNextStage(): void {
-    this.nextFormStageActive = true;
+    this._registerService.setReactiveForm(this.registerForm);
   }
 
   handleEmitOnAcceptCaptcha(): void {
-    const data1stPart =
-      this.register1stStageForm.getRawValue() as Register1stFormModel;
-    const data2ndPart =
-      this.register2ndStageForm.getRawValue() as Register2ndFormModel;
-    // next
-    console.log(data1stPart, data2ndPart);
+    this._registerService.submitForm();
   }
 
   handleSubmitRegisterForm(): void {
-    this.captchaModalIsActive$?.next(true);
+    this._registerService.activeCaptchaModal();
   }
 }

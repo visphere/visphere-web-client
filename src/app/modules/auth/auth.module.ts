@@ -40,16 +40,18 @@ import { AuthFormHeaderComponent } from '~/auth-mod/components/auth-form-header/
 import { AuthSingleSelectSpinnerComponent } from '~/auth-mod/components/auth-single-select-spinner/auth-single-select-spinner.component';
 import { BirthDateSelectSpinnerComponent } from '~/auth-mod/components/birth-date-select-spinner/birth-date-select-spinner.component';
 import { ChangePasswordFormComponent } from '~/auth-mod/components/change-password-form/change-password-form.component';
+import { FinishResetPasswordFormComponent } from '~/auth-mod/components/finish-reset-password-form/finish-reset-password-form.component';
 import { FooterControlListComponent } from '~/auth-mod/components/footer-control-list/footer-control-list.component';
 import { FooterControlsComponent } from '~/auth-mod/components/footer-controls/footer-controls.component';
 import { FooterComponent } from '~/auth-mod/components/footer/footer.component';
 import { LoginFormComponent } from '~/auth-mod/components/login-form/login-form.component';
 import { Oauth2ButtonComponent } from '~/auth-mod/components/oauth2-button/oauth2-button.component';
-import { OtaTokenFormFieldComponent } from '~/auth-mod/components/ota-token-form-field/ota-token-form-field.component';
 import { PasswordInputTogglerComponent } from '~/auth-mod/components/password-input-toggler/password-input-toggler.component';
+import { RegisterFirstStageFormComponent } from '~/auth-mod/components/register-first-stage-form/register-first-stage-form.component';
 import { RegisterFormConsentsComponent } from '~/auth-mod/components/register-form-consents/register-form-consents.component';
 import { RegisterFormComponent } from '~/auth-mod/components/register-form/register-form.component';
-import { ResetPasswordFormComponent } from '~/auth-mod/components/reset-password-form/reset-password-form.component';
+import { RegisterSecondStageFormComponent } from '~/auth-mod/components/register-second-stage-form/register-second-stage-form.component';
+import { StartResetPasswordFormComponent } from '~/auth-mod/components/start-reset-password-form/start-reset-password-form.component';
 import { ActivateAccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
@@ -62,23 +64,26 @@ import { SharedModule } from '~/shared-mod/shared.module';
 @NgModule({
   declarations: [
     // components
-    LoginFormComponent,
-    AuthContentWrapperComponent,
     ActivateAccountFormComponent,
-    Oauth2ButtonComponent,
-    PasswordInputTogglerComponent,
-    FooterComponent,
-    AuthFormHeaderComponent,
-    FooterControlsComponent,
-    FooterControlListComponent,
-    RegisterFormComponent,
-    ResetPasswordFormComponent,
-    ChangePasswordFormComponent,
+    AuthCheckboxFormInputComponent,
     AuthCommonFormInputComponent,
+    AuthContentWrapperComponent,
+    AuthFormHeaderComponent,
     AuthSingleSelectSpinnerComponent,
     BirthDateSelectSpinnerComponent,
-    AuthCheckboxFormInputComponent,
+    ChangePasswordFormComponent,
+    FinishResetPasswordFormComponent,
+    FooterControlListComponent,
+    FooterControlsComponent,
+    FooterComponent,
+    LoginFormComponent,
+    Oauth2ButtonComponent,
+    PasswordInputTogglerComponent,
+    RegisterFirstStageFormComponent,
     RegisterFormConsentsComponent,
+    RegisterFormComponent,
+    RegisterSecondStageFormComponent,
+    StartResetPasswordFormComponent,
     // pages
     AuthActivateAccountPageComponent,
     AuthChangePasswordPageComponent,
@@ -87,31 +92,30 @@ import { SharedModule } from '~/shared-mod/shared.module';
     AuthResetPasswordPageComponent,
     // root page
     AuthRootComponent,
-    OtaTokenFormFieldComponent,
   ],
   imports: [
-    CommonModule,
-    RouterModule,
     AuthRoutingModule,
-    TranslateModule,
-    NgOptimizedImage,
-    ReactiveFormsModule,
-    SharedModule,
+    CommonModule,
     FormsModule,
+    NgOptimizedImage,
+    NgIconsModule.withIcons({
+      arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
+      darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
+      eyeIcon: BtsIcon.bootstrapEye,
+      eyeSlashIcon: BtsIcon.bootstrapEyeSlash,
+      lightModeIcon: BtsIcon.bootstrapSunFill,
+      outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
+      selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
+      systemModeIcon: BtsIcon.bootstrapCircleHalf,
+    }),
+    ReactiveFormsModule,
+    RouterModule,
+    SharedModule,
     StoreModule.forFeature(
       authReduxStore.reducerName,
       authReduxStore.reducerFunction
     ),
-    NgIconsModule.withIcons({
-      selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
-      lightModeIcon: BtsIcon.bootstrapSunFill,
-      darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
-      systemModeIcon: BtsIcon.bootstrapCircleHalf,
-      eyeIcon: BtsIcon.bootstrapEye,
-      eyeSlashIcon: BtsIcon.bootstrapEyeSlash,
-      arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
-      outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
-    }),
+    TranslateModule,
   ],
   providers: [ActivateAccountGuard],
 })

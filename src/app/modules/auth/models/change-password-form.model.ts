@@ -23,7 +23,7 @@
  * governing permissions and limitations under the license.
  */
 
-export interface ChangePasswordFormModel {
+export type ChangePasswordFormModel = {
   newPassword: string;
   repeatNewPassword: string;
-}
+};

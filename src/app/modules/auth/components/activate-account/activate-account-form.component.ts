@@ -24,19 +24,36 @@
  */
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivateAccountFormModel } from '~/auth-mod/models/activate-account-form.model';
-import { exactLengthValidator } from '~/root-mod/modules/shared/validators/exact-length.validator';
-import { regex } from '~/root-mod/modules/shared/validators/regex.constant';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ActivateAccountService } from '~/auth-mod/services/activate-account/activate-account.service';
+import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
+import { ActivateAccountFormStage } from '~/auth-mod/types/form-stage.type';
+import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { exactLengthValidator } from '~/shared-mod/validators/exact-length.validator';
+import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
   selector: 'msph-activate-account-form',
   templateUrl: './activate-account-form.component.html',
+  providers: [PopulateFormGroupService, ActivateAccountService],
 })
 export class ActivateAccountFormComponent {
   activateAccountForm: FormGroup;
-  isActivated = false;
 
-  constructor() {
+  userEmail$: Observable<string> = this._store.select(
+    NgrxSelector_ATH.selectActivateAccountEmail
+  );
+  isLoading$: Observable<boolean> = this._activateAccountService.isLoading$;
+  currentStage$: Observable<ActivateAccountFormStage> =
+    this._activateAccountService.currentStage$;
+
+  constructor(
+    private readonly _store: Store<AuthReducer>,
+    private readonly _activateAccountService: ActivateAccountService,
+    private readonly _populateFormGroupService: PopulateFormGroupService
+  ) {
     this.activateAccountForm = new FormGroup({
       token: new FormControl('', [
         Validators.required,
@@ -44,17 +61,19 @@ export class ActivateAccountFormComponent {
         exactLengthValidator(10),
       ]),
     });
+    this._populateFormGroupService.setField(this.activateAccountForm);
+    this._activateAccountService.setReactiveForm(this.activateAccountForm);
   }
 
-  handleSubmitactivateAccount(): void {
-    const formData =
-      this.activateAccountForm.getRawValue() as ActivateAccountFormModel;
-    // on next
-    console.log(formData);
-    this.isActivated = true;
+  handleSubmitactivateAccountForm(): void {
+    this._activateAccountService.submitForm();
   }
 
   handleResendMessage(): void {
-    console.log('resend email message');
+    this._activateAccountService.resendEmailMessage();
+  }
+
+  handleReturnToLoginAndClearState(): void {
+    this._activateAccountService.returnToLoginAndClearState();
   }
 }
