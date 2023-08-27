@@ -55,4 +55,17 @@ export class FormHelperService {
     }
     return null;
   }
+
+  toggleFormField(
+    formGroup: FormGroup,
+    formControlName: string,
+    isDisabled: boolean
+  ): void {
+    const formControl = formGroup.get(formControlName);
+    if (isDisabled) {
+      formControl?.disable();
+    } else {
+      formControl?.enable();
+    }
+  }
 }

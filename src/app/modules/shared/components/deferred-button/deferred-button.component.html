@@ -28,7 +28,7 @@
     {{ labelI18nText | translate }}
   </p>
   <button
-    [disabled]="isDeferred"
+    [disabled]="isDeferred || isDisabled"
     (click)="handleButtonClick()"
     [class]="styles">
     <div class="flex justify-center items-center">

@@ -29,6 +29,7 @@
       <input
         [(ngModel)]="selectAllToggle"
         (input)="handleToggleAllValues()"
+        [disabled]="!!(formDisabled$ | async)"
         type="checkbox"
         class="msph_auth-checkbox mt-0.5" />
       <div class="leading-5">

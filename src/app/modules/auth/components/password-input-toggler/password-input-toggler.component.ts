@@ -24,7 +24,7 @@
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
@@ -50,6 +50,7 @@ export class PasswordInputTogglerComponent
   i18nLabel = '';
   isVisible = false;
   capsLockIsOn = false;
+  formDisabled = false;
 
   constructor(
     private readonly _formHelperService: FormHelperService,
@@ -65,9 +66,20 @@ export class PasswordInputTogglerComponent
       this.formControlIdentifier,
       this.i18nPrefix
     );
-    this._populateFormGroupService.field$
-      .pipe(takeUntil(this._subscriptionHook))
-      .subscribe(formGroup => (this.formGroup = formGroup));
+    this.wrapAsObservable(
+      combineLatest([
+        this._populateFormGroupService.field$,
+        this._populateFormGroupService.formDisabled$,
+      ])
+    ).subscribe(([formGroup, formDisabled]) => {
+      this.formGroup = formGroup;
+      this.formDisabled = formDisabled;
+      this._formHelperService.toggleFormField(
+        formGroup,
+        this.formControlIdentifier,
+        formDisabled
+      );
+    });
   }
 
   ngOnDestroy(): void {

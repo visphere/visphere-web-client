@@ -22,18 +22,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-register-second-stage-form',
   templateUrl: './register-second-stage-form.component.html',
   providers: [PopulateFormGroupService],
 })
-export class RegisterSecondStageFormComponent implements OnInit {
+export class RegisterSecondStageFormComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   rootForm: FormGroup;
   secondStageForm: FormGroup;
 
@@ -43,12 +47,20 @@ export class RegisterSecondStageFormComponent implements OnInit {
     private readonly _registerService: RegisterService,
     private readonly _populateFormGroupService: PopulateFormGroupService
   ) {
+    super();
     this.rootForm = this._registerService.rootForm;
     this.secondStageForm = this._registerService.getFormGroupStage('second');
   }
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.secondStageForm);
+    this.wrapAsObservable(this._registerService.isLoading$).subscribe(
+      isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
   }
 
   handleGotoPreviousStage(): void {

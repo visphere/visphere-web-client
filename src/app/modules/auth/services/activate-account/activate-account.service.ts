@@ -50,6 +50,7 @@ export class ActivateAccountService
   }
 
   ngOnDestroy(): void {
+    this._store.dispatch(NgrxAction_ATH.__removeActivateAccountEmail());
     this.unmountAllSubscriptions();
   }
 

@@ -22,19 +22,23 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { LoginService } from '~/auth-mod/services/login/login.service';
-import { LoginFormStage } from '~/root-mod/modules/auth/types/form-stage.type';
+import { LoginFormStage } from '~/auth-mod/types/form-stage.type';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-login-form',
   templateUrl: './login-form.component.html',
   providers: [LoginService, PopulateFormGroupService],
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   loginForm: FormGroup;
   nextButtonEnabled = false;
 
@@ -47,6 +51,7 @@ export class LoginFormComponent implements OnInit {
     private readonly _loginService: LoginService,
     private readonly _populateFormGroupService: PopulateFormGroupService
   ) {
+    super();
     this.loginForm = new FormGroup({
       usernameOrEmailAddress: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -57,6 +62,13 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.loginForm);
+    this.wrapAsObservable(this._loginService.isLoading$).subscribe(isLoading =>
+      this._populateFormGroupService.setFormDisabled(isLoading)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
   }
 
   handleMoveForward(): void {

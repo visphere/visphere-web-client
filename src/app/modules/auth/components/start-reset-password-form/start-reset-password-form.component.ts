@@ -22,11 +22,12 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StartResetPasswordService } from '~/auth-mod/services/start-reset-password/start-reset-password.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
@@ -34,7 +35,10 @@ import { regex } from '~/shared-mod/validators/regex.constant';
   templateUrl: './start-reset-password-form.component.html',
   providers: [StartResetPasswordService, PopulateFormGroupService],
 })
-export class StartResetPasswordFormComponent {
+export class StartResetPasswordFormComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   startResetPasswordForm: FormGroup;
 
   captchaModalIsActive$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -44,16 +48,27 @@ export class StartResetPasswordFormComponent {
     private readonly _populateFormGroupService: PopulateFormGroupService,
     private readonly _startResetPasswordService: StartResetPasswordService
   ) {
+    super();
     this.startResetPasswordForm = new FormGroup({
       usernameOrEmailAddress: new FormControl('', [
         Validators.required,
         Validators.pattern(regex.USERNAME_OR_EMAIL),
       ]),
     });
-    this._populateFormGroupService.setField(this.startResetPasswordForm);
     this._startResetPasswordService.setReactiveForm(
       this.startResetPasswordForm
     );
+  }
+
+  ngOnInit(): void {
+    this._populateFormGroupService.setField(this.startResetPasswordForm);
+    this.wrapAsObservable(this._startResetPasswordService.isLoading$).subscribe(
+      isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
   }
 
   handleEmitOnAcceptCaptcha(): void {
