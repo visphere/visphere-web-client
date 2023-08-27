@@ -23,6 +23,6 @@
  * governing permissions and limitations under the license.
  */
 
-export interface ActivateAccountFormModel {
+export type ActivateAccountFormModel = {
   token: string;
-}
+};

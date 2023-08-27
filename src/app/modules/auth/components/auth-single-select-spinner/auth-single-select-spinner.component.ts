@@ -37,8 +37,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { PopulateFormControlService } from '~/root-mod/modules/shared/context/populate-form-control/populate-form-control.service';
+import { combineLatest } from 'rxjs';
 import { dropboxFadeAndMove } from '~/shared-mod/animations/dropbox.animation';
+import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -52,15 +53,15 @@ export class AuthSingleSelectSpinnerComponent
   extends AbstractReactiveProvider
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
-  @ViewChild('selectViewHolder') selectViewHolder!: ElementRef;
-  @ViewChild('inputElement') inputElement!: ElementRef;
-
   @Input() multiSpinnerId!: string;
   @Input() initValueId!: number | null;
   @Input() listElements: SpinnerListElementType[] = [];
 
   @Output() persistElement: EventEmitter<SpinnerListElementType | null> =
     new EventEmitter();
+
+  @ViewChild('selectViewHolder') selectViewHolder!: ElementRef;
+  @ViewChild('inputElement') inputElement!: ElementRef;
 
   itemsListIsOpen = false;
   isTouched = false;
@@ -77,19 +78,21 @@ export class AuthSingleSelectSpinnerComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
-      formGroup => (this.formGroup = formGroup)
-    );
-    this.wrapAsObservable(this._populateFormControlService.fields$).subscribe(
-      ([formControlName, i18nPrefix]) => {
-        this.formControlName = formControlName;
-        if (this.multiSpinnerId) {
-          this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholders.${this.multiSpinnerId}`;
-        } else {
-          this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholder`;
-        }
+    this.wrapAsObservable(
+      combineLatest([
+        this._populateFormGroupService.field$,
+        this._populateFormControlService.fields$,
+      ])
+    ).subscribe(([formGroup, populateData]) => {
+      const [formControlName, i18nPrefix] = populateData;
+      this.formGroup = formGroup;
+      this.formControlName = formControlName;
+      if (this.multiSpinnerId) {
+        this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholders.${this.multiSpinnerId}`;
+      } else {
+        this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholder`;
       }
-    );
+    });
   }
 
   ngOnDestroy(): void {

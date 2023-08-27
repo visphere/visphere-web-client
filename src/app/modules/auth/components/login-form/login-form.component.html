@@ -25,77 +25,59 @@
 
 <form
   [formGroup]="loginForm"
-  (ngSubmit)="onSubmitLoginForm()"
+  (ngSubmit)="handleSubmitLoginForm()"
   class="grid gap-3">
-  <ng-template
-    *ngIf="
-      loginOrEmailProvided;
-      then passwordFormContent;
-      else loginFormContent
-    " />
-  <ng-template #loginFormContent>
-    <div class="grid gap-3">
-      <msph-auth-common-form-input
-        [maxLength]="100"
-        [formGroup]="loginForm"
-        (input)="changeNextButtonState()"
-        formControlIdentifier="usernameOrEmailAddress"
-        i18nLabel="msph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value">
-        <msph-field-validator
-          [formGroup]="loginForm"
-          formControlIdentifier="usernameOrEmailAddress"
-          i18nPrefix="clientCommon.login" />
-      </msph-auth-common-form-input>
-      <button
-        type="button"
-        class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full"
-        [disabled]="!nextButtonEnabled"
-        (click)="moveForward()">
-        {{ 'msph.common.utils.continue' | translate }}
-        <i class="bi bi-arrow-right ms-2"></i>
-      </button>
-    </div>
-  </ng-template>
-  <ng-template #passwordFormContent>
-    <div class="grid gap-3">
-      <div class="flex flex-col">
-        <p
-          class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
-          {{
-            'msph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value'
-              | translate
-          }}
-        </p>
-        <div class="relative w-full">
-          <input
-            [value]="loginForm.get('usernameOrEmailAddress')?.value"
-            disabled
-            type="text"
-            class="msph_auth-input w-full" />
-          <button
-            type="button"
-            class="absolute right-2.5 top-1/2 -translate-y-1/2 msph_login-form-edit-button"
-            (click)="moveBackward()">
-            {{ 'msph.common.utils.edit' | translate }}
-          </button>
-        </div>
+  <div class="grid gap-3" *ngIf="(activeStage$ | async) === 'login'">
+    <msph-auth-common-form-input
+      [maxLength]="100"
+      formControlIdentifier="usernameOrEmailAddress"
+      i18nPrefix="clientCommon.login">
+      <msph-field-validator />
+    </msph-auth-common-form-input>
+    <button
+      type="button"
+      class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full"
+      [disabled]="(isNextButtonEnabled$ | async) === false"
+      (click)="handleMoveForward()">
+      {{ 'msph.common.utils.continue' | translate }}
+      <i class="bi bi-arrow-right ms-2"></i>
+    </button>
+  </div>
+  <div class="grid gap-3" *ngIf="(activeStage$ | async) === 'password'">
+    <div class="flex flex-col">
+      <p
+        class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
+        {{
+          'msph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value'
+            | translate
+        }}
+      </p>
+      <div class="relative w-full">
+        <input
+          [value]="loginForm.get('usernameOrEmailAddress')?.value"
+          disabled
+          type="text"
+          class="msph_auth-input w-full" />
+        <button
+          type="button"
+          class="absolute right-2.5 top-1/2 -translate-y-1/2 msph_login-form-edit-button"
+          (click)="handleMoveBackward()">
+          {{ 'msph.common.utils.edit' | translate }}
+        </button>
       </div>
-      <div class="flex flex-col">
-        <msph-password-input-toggler
-          [formGroup]="loginForm"
-          formControlIdentifier="password"
-          i18nLabel="msph.clientCommon.loginPage.formFields.password.value">
-          <msph-field-validator
-            [formGroup]="loginForm"
-            formControlIdentifier="password"
-            i18nPrefix="clientCommon.login" />
-        </msph-password-input-toggler>
-      </div>
-      <button
-        [disabled]="loginForm.invalid"
-        class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full">
-        {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
-      </button>
     </div>
-  </ng-template>
+    <div class="flex flex-col">
+      <msph-password-input-toggler
+        formControlIdentifier="password"
+        i18nPrefix="clientCommon.login">
+        <msph-field-validator />
+      </msph-password-input-toggler>
+    </div>
+    <button
+      [disabled]="loginForm.invalid || (isLoading$ | async)"
+      class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full">
+      {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
+      <div *ngIf="isLoading$ | async" class="msph-button__spinner"></div>
+    </button>
+  </div>
 </form>

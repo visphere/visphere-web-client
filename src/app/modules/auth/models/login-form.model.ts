@@ -23,7 +23,7 @@
  * governing permissions and limitations under the license.
  */
 
-export interface LoginFormModel {
-  loginOrEmail: string;
+export type LoginFormModel = {
+  usernameOrEmailAddress: string;
   password: string;
-}
+};

@@ -32,6 +32,6 @@ import { environment } from '~/env/environment';
   host: { class: 'flex' },
 })
 export class Oauth2ButtonComponent {
-  path = environment.contentDistributorBaseUrl;
   @Input() oauth2Type!: Oauth2Type;
+  path = environment.contentDistributorBaseUrl;
 }
