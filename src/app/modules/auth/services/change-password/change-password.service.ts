@@ -24,12 +24,13 @@
  */
 import { Injectable } from '@angular/core';
 import { ChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
-import { ChangePasswordFormStage } from '~/root-mod/modules/auth/types/form-stage.type';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
+import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
 import { AbstractSimpleFormStateProvider } from '~/shared-mod/services/abstract-simple-form-state-provider';
 
 @Injectable()
 export class ChangePasswordService extends AbstractSimpleFormStateProvider<ChangePasswordFormStage> {
-  constructor() {
+  constructor(private readonly _authHttpClientService: AuthHttpClientService) {
     super('change');
   }
 

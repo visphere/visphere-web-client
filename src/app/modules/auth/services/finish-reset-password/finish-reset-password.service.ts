@@ -24,7 +24,8 @@
  */
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { FinishResetPasswordFormModel } from '~/auth-mod/models/reset-password-form.model';
+import { FinishResetPasswordViaEmailFormModel } from '~/auth-mod/models/reset-password-form.model';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 
@@ -36,8 +37,9 @@ export class FinishResetPasswordService
   userEmail = '';
 
   constructor(
-    private readonly _router: Router,
-    private readonly _resetPasswordService: ResetPasswordService
+    private readonly _authHttpClientService: AuthHttpClientService,
+    private readonly _resetPasswordService: ResetPasswordService,
+    private readonly _router: Router
   ) {
     super();
     this.wrapAsObservable(this._resetPasswordService.userEmail$).subscribe(
@@ -50,7 +52,7 @@ export class FinishResetPasswordService
   }
 
   override abstractSubmitForm(): void {
-    const data = this.parseFormValues<FinishResetPasswordFormModel>();
+    const data = this.parseFormValues<FinishResetPasswordViaEmailFormModel>();
     // next
     console.log(data, this.userEmail);
     // on success

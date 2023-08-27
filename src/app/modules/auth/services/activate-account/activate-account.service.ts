@@ -26,6 +26,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ActivateAccountFormModel } from '~/auth-mod/models/activate-account-form.model';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { ActivateAccountFormStage } from '~/auth-mod/types/form-stage.type';
@@ -40,8 +41,9 @@ export class ActivateAccountService
   userEmail = '';
 
   constructor(
-    private readonly _store: Store<AuthReducer>,
-    private readonly _router: Router
+    private readonly _authHttpClientService: AuthHttpClientService,
+    private readonly _router: Router,
+    private readonly _store: Store<AuthReducer>
   ) {
     super('activate');
     this.wrapAsObservable(
