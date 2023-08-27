@@ -23,7 +23,6 @@
  * governing permissions and limitations under the license.
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthModule } from '~/auth-mod/auth.module';
 import { AppModule } from '~/root-mod/app.module';
 import { RegisterFormConsentsComponent } from './register-form-consents.component';
@@ -38,12 +37,6 @@ describe('RegisterFormConsentsComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(RegisterFormConsentsComponent);
     component = fixture.componentInstance;
-
-    component.formGroup = new FormGroup({
-      allowNotifs: new FormControl(false),
-      agreeTerms: new FormControl(false, [Validators.required]),
-    });
-
     fixture.detectChanges();
   });
 

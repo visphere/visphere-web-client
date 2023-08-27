@@ -22,21 +22,54 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
+
+type FieldProp = {
+  nestedForm?: string;
+  formField: string;
+};
+
+type Props = {
+  primary: FieldProp;
+  secondary: FieldProp;
+};
 
 type ReturnType = (
   control: AbstractControl
 ) => { [key: string]: boolean } | null;
 
-export function emailWithSecondaryEmail(
-  formGroup: FormGroup,
-  primaryEmailFieldName: string
-): ReturnType {
+export function emailWithSecondaryEmail({
+  primary,
+  secondary,
+}: Props): ReturnType {
+  const checkIfFieldIsNestedAndReturnValue = (
+    control: AbstractControl,
+    field: FieldProp
+  ): AbstractControl => {
+    if (field.nestedForm) {
+      return control.get(field.nestedForm)!.get(field.formField)!;
+    }
+    return control.get(field.formField)!;
+  };
+
   return (control: AbstractControl) => {
-    const primaryEmail = formGroup.get(primaryEmailFieldName)?.value || '';
-    const secondaryEmail: string = control.value;
-    if (primaryEmail === secondaryEmail) {
+    const primaryEmail = checkIfFieldIsNestedAndReturnValue(control, primary);
+    const secondaryEmail = checkIfFieldIsNestedAndReturnValue(
+      control,
+      secondary
+    );
+    if (primaryEmail.value === secondaryEmail.value) {
+      secondaryEmail.setErrors({
+        ...secondaryEmail.errors,
+        exact: true,
+      });
       return { exact: true };
+    }
+    if (secondaryEmail.errors && secondaryEmail.errors['exact']) {
+      delete secondaryEmail.errors['mismatch'];
+      if (Object.keys(secondaryEmail.errors).length === 0) {
+        secondaryEmail.setErrors(null);
+      }
     }
     return null;
   };

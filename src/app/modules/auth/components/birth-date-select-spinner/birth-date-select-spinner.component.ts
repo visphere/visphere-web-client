@@ -23,10 +23,11 @@
  * governing permissions and limitations under the license.
  */
 import { TitleCasePipe } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { takeUntil } from 'rxjs';
+import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
 import { DateComponentsType } from '~/shared-mod/types/date-components.type';
 import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
@@ -35,13 +36,13 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 @Component({
   selector: 'msph-birth-date-select-spinner',
   templateUrl: './birth-date-select-spinner.component.html',
-  providers: [TitleCasePipe],
+  providers: [TitleCasePipe, PopulateFormControlService],
 })
 export class BirthDateSelectSpinnerComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  @Input() formGroup!: FormGroup;
+  formGroup!: FormGroup;
 
   formMonths = this.generateAndConvertMonths();
   formDays = this._timeUtilService.generateDaysForSingleMonth();
@@ -50,17 +51,24 @@ export class BirthDateSelectSpinnerComponent
   constructor(
     private readonly _titleCasePipe: TitleCasePipe,
     private readonly _timeUtilService: TimeUtilsService,
-    private readonly _translateService: TranslateService
+    private readonly _translateService: TranslateService,
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _populateFormControlervice: PopulateFormControlService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this._translateService.onLangChange
-      .pipe(takeUntil(this._subscriptionHook))
-      .subscribe(
-        ({ lang }) => (this.formMonths = this.generateAndConvertMonths(lang))
-      );
+    this._populateFormControlervice.setFields(
+      'birthDate',
+      'webClient.register'
+    );
+    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+      formGroup => (this.formGroup = formGroup)
+    );
+    this.wrapAsObservable(this._translateService.onLangChange).subscribe(
+      ({ lang }) => (this.formMonths = this.generateAndConvertMonths(lang))
+    );
   }
 
   ngOnDestroy(): void {

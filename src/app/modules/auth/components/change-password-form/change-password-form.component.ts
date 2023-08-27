@@ -24,25 +24,33 @@
  */
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
+import { Observable } from 'rxjs';
+import { ChangePasswordService } from '~/auth-mod/services/change-password/change-password.service';
+import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
-import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
 import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
   selector: 'msph-change-password-form',
   templateUrl: './change-password-form.component.html',
+  providers: [ChangePasswordService, PopulateFormGroupService],
 })
 export class ChangePasswordFormComponent implements AfterViewInit {
-  newPasswordFormGroup: FormGroup;
-  successfullSetNewPassword = false;
+  @ViewChild('meter') strengthMeter!: PasswordStrengthMeterComponent;
 
-  @ViewChild('passwordStrengthMeter')
-  passwordStrengthMeterComponent!: PasswordStrengthMeterComponent;
+  changePasswordForm: FormGroup;
 
-  constructor(private readonly _formHelperService: FormHelperService) {
-    this.newPasswordFormGroup = new FormGroup(
+  isLoading$: Observable<boolean> = this._changePasswordService.isLoading$;
+  currentStage$: Observable<ChangePasswordFormStage> =
+    this._changePasswordService.currentStage$;
+
+  constructor(
+    private readonly _changePasswordService: ChangePasswordService,
+    private readonly _populateFormGroupService: PopulateFormGroupService
+  ) {
+    this.changePasswordForm = new FormGroup(
       {
         newPassword: new FormControl('', [
           Validators.required,
@@ -57,17 +65,15 @@ export class ChangePasswordFormComponent implements AfterViewInit {
         ),
       }
     );
+    this._changePasswordService.setReactiveForm(this.changePasswordForm);
+    this._populateFormGroupService.setField(this.changePasswordForm);
   }
 
-  onSubmitSetNewPassword(): void {
-    const formData =
-      this.newPasswordFormGroup.getRawValue() as ChangePasswordFormModel;
-    // next
-    console.log(formData);
-    this.successfullSetNewPassword = true;
+  handleSubmitChangePasswordForm(): void {
+    this._changePasswordService.submitForm();
   }
 
   ngAfterViewInit(): void {
-    this.passwordStrengthMeterComponent.debounceCalcStrength();
+    this.strengthMeter.debounceCalcStrength();
   }
 }

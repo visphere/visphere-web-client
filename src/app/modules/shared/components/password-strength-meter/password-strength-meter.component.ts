@@ -25,6 +25,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { PasswordStrengthMeterService } from '~/shared-mod/services/password-strength-meter/password-strength-meter.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -41,21 +42,26 @@ export class PasswordStrengthMeterComponent
 
   @Input() tailwindClass = 'msph_auth-password-strenght-meter-colors';
   @Input() tailwindBgClass = 'msph_auth-password-strenght-meter-bg';
-
-  @Input() formGroup!: FormGroup;
   @Input() formControlIdentifier = 'password';
+  formGroup!: FormGroup;
 
   constructor(
+    private readonly _populateFormGroupService: PopulateFormGroupService,
     private readonly _passwordStrengthMeterService: PasswordStrengthMeterService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    const passwordFormControl = this.formGroup.get(this.formControlIdentifier);
-    if (passwordFormControl) {
-      this.calcPasswordStrength(passwordFormControl.value);
-    }
+    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+      formGroup => {
+        this.formGroup = formGroup;
+        const passwordFormControl = formGroup.get(this.formControlIdentifier);
+        if (passwordFormControl) {
+          this.calcPasswordStrength(passwordFormControl.value);
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {

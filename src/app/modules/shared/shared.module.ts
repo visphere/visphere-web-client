@@ -32,15 +32,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CdTimerModule } from 'angular-cd-timer';
 import { NgxRerenderModule } from 'ngx-rerender';
 import { SharedEffects } from '~/root-mod/modules/shared/store/side-effects/shared-effects';
+import { DeferredButtonComponent } from '~/shared-mod/components/deferred-button/deferred-button.component';
 import { FieldValidatorComponent } from '~/shared-mod/components/field-validator/field-validator.component';
+import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
+import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
+import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-captcha-modal/verify-captcha-modal.component';
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
-import { DeferredButtonComponent } from './components/deferred-button/deferred-button.component';
-import { ModalWrapperComponent } from './components/modal-wrapper/modal-wrapper.component';
-import { SnackbarsContainerComponent } from './components/snackbars-container/snackbars-container.component';
-import { VerifyCaptchaModalComponent } from './components/verify-captcha-modal/verify-captcha-modal.component';
-import { sharedReduxStore } from './store/reducer';
+import { sharedReduxStore } from '~/shared-mod/store/reducer';
 
 @NgModule({
   declarations: [
@@ -60,16 +60,16 @@ import { sharedReduxStore } from './store/reducer';
   imports: [
     CdTimerModule,
     CommonModule,
+    EffectsModule.forFeature([SharedEffects]),
     TranslateModule,
+    NgIconsModule.withIcons({
+      xIcon: BtsIcon.bootstrapXLg,
+    }),
     NgxRerenderModule,
     StoreModule.forFeature(
       sharedReduxStore.reducerName,
       sharedReduxStore.reducerFunction
     ),
-    EffectsModule.forFeature([SharedEffects]),
-    NgIconsModule.withIcons({
-      xIcon: BtsIcon.bootstrapXLg,
-    }),
   ],
   exports: [
     DeferredButtonComponent,

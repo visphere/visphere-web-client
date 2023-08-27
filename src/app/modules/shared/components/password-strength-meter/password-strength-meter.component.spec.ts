@@ -23,7 +23,6 @@
  * governing permissions and limitations under the license.
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PasswordStrengthMeterComponent } from './password-strength-meter.component';
 
 describe('PasswordStrenghtMeterComponent', () => {
@@ -38,10 +37,6 @@ describe('PasswordStrenghtMeterComponent', () => {
     component = fixture.componentInstance;
 
     component.formControlIdentifier = 'password';
-    component.formGroup = new FormGroup({
-      password: new FormControl('', [Validators.required]),
-    });
-
     fixture.detectChanges();
   });
 

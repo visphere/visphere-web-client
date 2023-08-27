@@ -22,19 +22,45 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
+import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-auth-checkbox-form-input',
   templateUrl: './auth-checkbox-form-input.component.html',
+  providers: [PopulateFormControlService],
 })
-export class AuthCheckboxFormInputComponent {
-  @Input() formGroup!: FormGroup;
+export class AuthCheckboxFormInputComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
+  @Input() i18nPrefix!: string;
   @Input() formControlIdentifier!: string;
 
-  constructor(private readonly _formHelperService: FormHelperService) {}
+  formGroup!: FormGroup;
+
+  constructor(
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _populateFormControlService: PopulateFormControlService
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this._populateFormControlService.setFields(
+      this.formControlIdentifier,
+      this.i18nPrefix
+    );
+    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+      formGroup => (this.formGroup = formGroup)
+    );
+  }
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
 
   handleSetDirtyAndTouched(): void {
     const control = this.formGroup.get(this.formControlIdentifier);

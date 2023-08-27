@@ -30,13 +30,18 @@ import {
   HostListener,
   Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
   Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { dropboxFadeAndMove } from '~/root-mod/modules/shared/animations/dropbox.animation';
+import { PopulateFormControlService } from '~/root-mod/modules/shared/context/populate-form-control/populate-form-control.service';
+import { dropboxFadeAndMove } from '~/shared-mod/animations/dropbox.animation';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-auth-single-select-spinner',
@@ -44,22 +49,52 @@ import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.
   animations: [dropboxFadeAndMove],
 })
 export class AuthSingleSelectSpinnerComponent
-  implements OnChanges, AfterViewInit
+  extends AbstractReactiveProvider
+  implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   @ViewChild('selectViewHolder') selectViewHolder!: ElementRef;
   @ViewChild('inputElement') inputElement!: ElementRef;
 
-  @Input() formGroup!: FormGroup;
-  @Input() formControlIdentifier!: string;
-  @Input() initIdValue!: number | null;
-  @Input() i18nPlaceholder = '';
+  @Input() multiSpinnerId!: string;
+  @Input() initValueId!: number | null;
   @Input() listElements: SpinnerListElementType[] = [];
+
   @Output() persistElement: EventEmitter<SpinnerListElementType | null> =
     new EventEmitter();
 
   itemsListIsOpen = false;
   isTouched = false;
+  formGroup!: FormGroup;
   filteredList: SpinnerListElementType[] = [];
+  formControlName = '';
+  i18nPlaceholder = '';
+
+  constructor(
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _populateFormControlService: PopulateFormControlService
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+      formGroup => (this.formGroup = formGroup)
+    );
+    this.wrapAsObservable(this._populateFormControlService.fields$).subscribe(
+      ([formControlName, i18nPrefix]) => {
+        this.formControlName = formControlName;
+        if (this.multiSpinnerId) {
+          this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholders.${this.multiSpinnerId}`;
+        } else {
+          this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholder`;
+        }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes['listElements']) return;
@@ -90,7 +125,7 @@ export class AuthSingleSelectSpinnerComponent
   handleShowItemsList(): void {
     this.itemsListIsOpen = true;
     this.isTouched = true;
-    this.formGroup.get(this.formControlIdentifier)?.markAsTouched();
+    this.formGroup.get(this.formControlName)?.markAsTouched();
   }
 
   handleFilterElements(phrase: string): void {
@@ -107,12 +142,12 @@ export class AuthSingleSelectSpinnerComponent
   }
 
   private setInitialValue(): void {
-    const initValue = this.filteredList.find(e => e.id === this.initIdValue);
+    const initValue = this.filteredList.find(e => e.id === this.initValueId);
     if (!initValue || !this.inputElement) return;
     this.inputElement.nativeElement.value = initValue.value;
   }
 
   get hasErrors(): boolean {
-    return Boolean(this.formGroup.get(this.formControlIdentifier)?.errors);
+    return Boolean(this.formGroup.get(this.formControlName)?.errors);
   }
 }

@@ -22,13 +22,15 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { takeUntil } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { environment } from '~/env/environment';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
+import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
@@ -40,23 +42,33 @@ export class RegisterFormConsentsComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  @Input() formGroup!: FormGroup;
-
   selectAllToggle = false;
   agreeTermsContent: SafeHtml = '';
+  formGroup!: FormGroup;
+  path = environment.baseLandingUrl;
 
   constructor(
     private readonly _sanitizePipe: SanitizePipe,
-    private readonly _translateService: TranslateService
+    private readonly _translateService: TranslateService,
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _languageSwitcherService: LanguageSwitcherService
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.agreeTermsContent = this.generateTermsContent();
-    this._translateService.onLangChange
-      .pipe(takeUntil(this._subscriptionHook))
-      .subscribe(() => (this.agreeTermsContent = this.generateTermsContent()));
+
+    this.wrapAsObservable(
+      combineLatest([
+        this._populateFormGroupService.field$,
+        this._languageSwitcherService.selectedLang$,
+      ])
+    ).subscribe(([formGroup, lang]) => {
+      this.formGroup = formGroup;
+      this.path = `${environment.baseLandingUrl}${lang.landingPrefix}`;
+      this.agreeTermsContent = this.generateTermsContent();
+    });
   }
 
   ngOnDestroy(): void {
@@ -95,7 +107,7 @@ export class RegisterFormConsentsComponent
 
   private generateBaseUrl(path: string, i18nPlaceholder: string): string {
     return `<a href="${
-      environment.baseLandingUrl
+      this.path
     }/${path}" target="_blank" class="text-msph-primary-tint hover:underline">
             ${this._translateService.instant(
               'msph.webClient.registerPage.formFields.agreeTerms.' +

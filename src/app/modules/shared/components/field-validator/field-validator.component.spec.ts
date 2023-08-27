@@ -23,7 +23,6 @@
  * governing permissions and limitations under the license.
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppModule } from '~/root-mod/app.module';
 import { SharedModule } from '~/shared-mod/shared.module';
 import { FieldValidatorComponent } from './field-validator.component';
@@ -38,12 +37,6 @@ describe('FieldValidatorComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(FieldValidatorComponent);
     component = fixture.componentInstance;
-
-    component.formControlIdentifier = 'testControl';
-    component.formGroup = new FormGroup({
-      testControl: new FormControl('', [Validators.required]),
-    });
-
     fixture.detectChanges();
   });
 

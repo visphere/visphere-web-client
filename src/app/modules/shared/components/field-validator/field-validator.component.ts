@@ -22,9 +22,12 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-field-validator',
@@ -34,25 +37,51 @@ import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper
         'msph.' +
           i18nPrefix +
           'Page.formFields.' +
-          formControlIdentifier +
+          formControlName +
           '.errors.' +
           type | translate
       }}
     </div>
   `,
 })
-export class FieldValidatorComponent {
-  @Input() formGroup!: FormGroup;
-  @Input() formControlIdentifier!: string;
-  @Input() i18nPrefix!: string;
+export class FieldValidatorComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   @Input() type = 'required';
 
-  constructor(private readonly _formHelperService: FormHelperService) {}
+  formGroup!: FormGroup;
+  formControlName = '';
+  i18nPrefix = '';
+
+  constructor(
+    private readonly _formHelperService: FormHelperService,
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _populateFormControlService: PopulateFormControlService
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+      formGroup => (this.formGroup = formGroup)
+    );
+    this.wrapAsObservable(this._populateFormControlService.fields$).subscribe(
+      ([formControlName, i18nPrefix]) => {
+        this.formControlName = formControlName;
+        this.i18nPrefix = i18nPrefix;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
 
   checkError(): boolean {
     return this._formHelperService.checkError(
       this.formGroup,
-      this.formControlIdentifier,
+      this.formControlName,
       this.type
     );
   }
