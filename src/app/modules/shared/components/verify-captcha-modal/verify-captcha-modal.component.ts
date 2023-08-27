@@ -48,7 +48,9 @@ export class VerifyCaptchaModalComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  @Input() isActive$?: BehaviorSubject<boolean>;
+  @Input() isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
   @Input() paragraph?: string;
   @Input() snackbarPlaceholder?: string;
 
@@ -76,17 +78,15 @@ export class VerifyCaptchaModalComponent
     this.wrapAsObservable(
       this._languageSwitcherService.selectedLang$
     ).subscribe(({ lang }) => (this.selectedLang = lang));
-    this.wrapAsObservable(this.isActive$!.asObservable()).subscribe(
-      isActive => {
-        this.isActive = isActive;
-        if (!isActive) {
-          this.isVerified = false;
-          this.errorMessage = '';
-          this.responseTime = undefined;
-          this.isCaptchaVisible = false;
-        }
+    this.wrapAsObservable(this.isActive$.asObservable()).subscribe(isActive => {
+      this.isActive = isActive;
+      if (!isActive) {
+        this.isVerified = false;
+        this.errorMessage = '';
+        this.responseTime = undefined;
+        this.isCaptchaVisible = false;
       }
-    );
+    });
   }
 
   ngOnDestroy(): void {
