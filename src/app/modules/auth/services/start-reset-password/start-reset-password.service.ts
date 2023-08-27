@@ -23,18 +23,22 @@
  * governing permissions and limitations under the license.
  */
 import { Injectable } from '@angular/core';
-import { StartResetPasswordFormModel } from '~/auth-mod/models/reset-password-form.model';
+import { StartResetPasswordViaEmailFormModel } from '~/auth-mod/models/reset-password-form.model';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 
 @Injectable()
 export class StartResetPasswordService extends AbstractSimpleFormProvider {
-  constructor(private readonly _resetPasswordService: ResetPasswordService) {
+  constructor(
+    private readonly _authHttpClientService: AuthHttpClientService,
+    private readonly _resetPasswordService: ResetPasswordService
+  ) {
     super();
   }
 
   override abstractSubmitForm(): void {
-    const data = this.parseFormValues<StartResetPasswordFormModel>();
+    const data = this.parseFormValues<StartResetPasswordViaEmailFormModel>();
     // next
     console.log(data);
     // on success

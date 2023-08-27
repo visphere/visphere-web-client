@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: login.service.spec.ts
- *   Created at: 2023-08-26, 15:25:21
- *   Last updated at: 2023-08-26, 19:15:06
+ *   File name: abstract-http-provider.ts
+ *   Created at: 2023-08-27, 14:52:11
+ *   Last updated at: 2023-08-27, 14:52:11
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,23 +22,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { TestBed } from '@angular/core/testing';
-import { AuthModule } from '~/auth-mod/auth.module';
-import { AppModule } from '~/root-mod/app.module';
-import { LoginService } from './login.service';
+import { environment } from '~/env/environment';
 
-describe('LoginService', () => {
-  let service: LoginService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [AppModule, AuthModule],
-      providers: [LoginService],
-    });
-    service = TestBed.inject(LoginService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+export abstract class AbstractHttpProvider {
+  protected _infraApiPath = environment.javaApiEurekaUrl;
+}

@@ -28,6 +28,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { RegisterFormModel } from '~/auth-mod/models/register-form.model';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import { RegisterFormStage } from '~/auth-mod/types/form-stage.type';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
@@ -39,6 +40,7 @@ export class RegisterService extends AbstractMultistageFormProvider<RegisterForm
     new BehaviorSubject<boolean>(false);
 
   constructor(
+    private readonly _authHttpClientService: AuthHttpClientService,
     private readonly _router: Router,
     private readonly _store: Store<AuthReducer>
   ) {

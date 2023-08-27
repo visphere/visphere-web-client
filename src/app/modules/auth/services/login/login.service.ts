@@ -25,7 +25,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginFormModel } from '~/auth-mod/models/login-form.model';
-import { LoginFormStage } from '~/root-mod/modules/auth/types/form-stage.type';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
+import { LoginFormStage } from '~/auth-mod/types/form-stage.type';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
 
 @Injectable()
@@ -36,7 +37,7 @@ export class LoginService
   private _isNextButtonEnabled$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(private readonly _authHttpClientService: AuthHttpClientService) {
     super('login');
   }
 

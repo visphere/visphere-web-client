@@ -29,4 +29,5 @@ export const environment = {
   clientBaseUrl: process.env['BASE_CLIENT_URL'],
   contentDistributorBaseUrl: process.env['BASE_CDN_URL'],
   hCaptchaSiteKey: process.env['HCAPTCHA_SITE_KEY'],
+  javaApiEurekaUrl: process.env['JAVA_API_EUREKA_URL'],
 };

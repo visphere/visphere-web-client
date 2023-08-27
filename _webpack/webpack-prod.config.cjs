@@ -39,12 +39,18 @@ const {
 } = require('@angular-devkit/build-angular/src/tools/webpack/plugins/css-optimizer-plugin');
 const { commonWebpackConfig } = require('./webpack-common.config.cjs');
 
-module.exports = ({ landingPageBaseUrl, clientBaseUrl, cdnBaseUrl }) =>
+module.exports = ({
+  landingPageBaseUrl,
+  clientBaseUrl,
+  cdnBaseUrl,
+  javaApiEurekaUrl,
+}) =>
   merge(
     commonWebpackConfig({
       landingPageBaseUrl,
       clientBaseUrl,
       cdnBaseUrl,
+      javaApiEurekaUrl,
       isProdMode: true,
     }),
     {

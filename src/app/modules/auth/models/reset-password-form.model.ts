@@ -23,10 +23,10 @@
  * governing permissions and limitations under the license.
  */
 
-export type StartResetPasswordFormModel = {
+export type StartResetPasswordViaEmailFormModel = {
   usernameOrEmailAddress: string;
 };
 
-export type FinishResetPasswordFormModel = {
+export type FinishResetPasswordViaEmailFormModel = {
   token: string;
 };

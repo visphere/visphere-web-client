@@ -23,6 +23,8 @@
  * governing permissions and limitations under the license.
  */
 import { TestBed } from '@angular/core/testing';
+import { AuthModule } from '~/auth-mod/auth.module';
+import { AppModule } from '~/root-mod/app.module';
 import { ChangePasswordService } from './change-password.service';
 
 describe('ChangePasswordService', () => {
@@ -30,6 +32,7 @@ describe('ChangePasswordService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [AppModule, AuthModule],
       providers: [ChangePasswordService],
     });
     service = TestBed.inject(ChangePasswordService);

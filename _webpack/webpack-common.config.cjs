@@ -74,6 +74,7 @@ const commonWebpackConfig = ({
   landingPageBaseUrl,
   clientBaseUrl,
   cdnBaseUrl,
+  javaApiEurekaUrl,
   isProdMode,
 }) =>
   webpackUtils.webpackProxyInjector(
@@ -133,9 +134,10 @@ const commonWebpackConfig = ({
           'process.env.BASE_CDN_URL': JSON.stringify(cdnBaseUrl),
           'process.env.HCAPTCHA_SITE_KEY': JSON.stringify(
             isProdMode
-              ? process.env.ENV_HCAPTCHA_SITE_KEY
-              : process.env.ENV_DEV_HCAPTCHA_SITE_KEY
+              ? process.env.ENV_MSPH_HCAPTCHA_SITE_KEY
+              : process.env.ENV_MSPH_DEV_HCAPTCHA_SITE_KEY
           ),
+          'process.env.JAVA_API_EUREKA_URL': JSON.stringify(javaApiEurekaUrl),
         }),
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, '..', 'src', 'index.ejs'),

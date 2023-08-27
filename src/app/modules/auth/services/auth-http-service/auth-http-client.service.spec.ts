@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: login.service.spec.ts
- *   Created at: 2023-08-26, 15:25:21
- *   Last updated at: 2023-08-26, 19:15:06
+ *   File name: auth-http-client.service.spec.ts
+ *   Created at: 2023-08-27, 14:47:04
+ *   Last updated at: 2023-08-27, 15:13:02
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -25,17 +25,16 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthModule } from '~/auth-mod/auth.module';
 import { AppModule } from '~/root-mod/app.module';
-import { LoginService } from './login.service';
+import { AuthHttpClientService } from './auth-http-client.service';
 
-describe('LoginService', () => {
-  let service: LoginService;
+describe('AuthHttpServiceService', () => {
+  let service: AuthHttpClientService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
-      providers: [LoginService],
     });
-    service = TestBed.inject(LoginService);
+    service = TestBed.inject(AuthHttpClientService);
   });
 
   it('should be created', () => {
