@@ -31,31 +31,29 @@
   [header]="'msph.webClient.modal.captchaHeader' | translate"
   [paragraph]="paragraph">
   <ng-container content>
-    <ng-template
-      *ngIf="isCaptchaVisible; then showCaptcha; else showLoadingSpinner" />
-    <ng-template #showLoadingSpinner>
-      <div class="flex justify-center">loading...</div>
-    </ng-template>
-    <ng-template #showCaptcha>
-      <div *ngIf="isCaptchaVisible" class="flex flex-col items-center">
+    <div class="relative w-[302px] h-[76px] w-full mx-auto">
+      <div class="msph-captcha-modal__skeleton-loader"></div>
+      <div class="absolute top-0 left-0" *ngIf="isCaptchaVisible">
         <h-captcha
           *mcRerender="selectedLang"
           [attr.site-key]="captchaSitekey"
           [attr.hl]="selectedLang"
           (verified)="handleOnVerified($event)"
           (error)="handleOnError($event)" />
-        <p
-          *ngIf="errorMessage"
-          class="text-msph-danger-primary dark:msph-danger-secondary text-sm text-center mt-2">
-          {{ errorMessage }}
-        </p>
-        <p *ngIf="isVerified" class="text-sm mt-1 text-gray-400">
-          {{ 'msph.common.utils.responseTime' | translate }}:
-          <span class="text-msph-primary-dark dark:text-msph-primary-light">{{
-            responseTime | date: 'mm:ss'
-          }}</span>
-        </p>
       </div>
-    </ng-template>
+    </div>
+    <div class="flex flex-col items-center">
+      <p
+        *ngIf="errorMessage"
+        class="text-msph-danger-primary dark:msph-danger-secondary text-sm text-center mt-2">
+        {{ errorMessage }}
+      </p>
+      <p *ngIf="isVerified" class="text-sm mt-1 text-gray-400">
+        {{ 'msph.common.utils.responseTime' | translate }}:
+        <span class="text-msph-primary-dark dark:text-msph-primary-light">{{
+          responseTime | date: 'mm:ss'
+        }}</span>
+      </p>
+    </div>
   </ng-container>
 </msph-modal-wrapper>

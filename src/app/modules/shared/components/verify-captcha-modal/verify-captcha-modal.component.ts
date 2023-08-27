@@ -73,13 +73,11 @@ export class VerifyCaptchaModalComponent
   }
 
   ngOnInit(): void {
-    this._languageSwitcherService.selectedLang$
-      .pipe(takeUntil(this._subscriptionHook))
-      .subscribe(({ lang }) => (this.selectedLang = lang));
-    this.isActive$
-      ?.asObservable()
-      .pipe(takeUntil(this._subscriptionHook))
-      .subscribe(isActive => {
+    this.wrapAsObservable(
+      this._languageSwitcherService.selectedLang$
+    ).subscribe(({ lang }) => (this.selectedLang = lang));
+    this.wrapAsObservable(this.isActive$!.asObservable()).subscribe(
+      isActive => {
         this.isActive = isActive;
         if (!isActive) {
           this.isVerified = false;
@@ -87,7 +85,8 @@ export class VerifyCaptchaModalComponent
           this.responseTime = undefined;
           this.isCaptchaVisible = false;
         }
-      });
+      }
+    );
   }
 
   ngOnDestroy(): void {
