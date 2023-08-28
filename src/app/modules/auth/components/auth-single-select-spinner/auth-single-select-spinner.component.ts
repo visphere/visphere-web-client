@@ -98,7 +98,7 @@ export class AuthSingleSelectSpinnerComponent
         formDisabled
       );
       this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholder`;
-      if (!this.multiSpinnerId) {
+      if (this.multiSpinnerId) {
         this.i18nPlaceholder += `s.${this.multiSpinnerId}`;
       }
     });
