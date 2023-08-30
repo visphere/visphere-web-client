@@ -8,10 +8,11 @@
     "lint:check": "npx eslint src/**/*.{ts,html}",
     "lint:fix": "npx eslint src/**/*.{ts,html} --fix",
     "format": "npx prettier . --write",
+    "types:check": "npx tsc --noEmit",
     "test:single": "cross-env ENV_KARMA_TYPE='single' npx karma start karma.conf.cjs",
     "test:watch": "cross-env ENV_KARMA_TYPE='watch' npx karma start karma.conf.cjs",
     "husky:add-pre-commit": "npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
-    "husky:add-pre-push": "npx husky add .husky/pre-push \"yarn run test:single\"",
+    "husky:add-pre-push": "npx husky add .husky/pre-push \"yarn run types:check && yarn run test:single\"",
     "configure:husky": "npx husky install && yarn run husky:add-pre-commit && yarn run husky:add-pre-push"
   },
   "private": true,
@@ -30,7 +31,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn run test:single"
+      "pre-push": "yarn run types:check && yarn run test:single"
     }
   },
   "dependencies": {
