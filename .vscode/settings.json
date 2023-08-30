@@ -30,7 +30,7 @@
     "include": ["javascript", "typescript", "scss", "html"],
     "includeGlob": ["**/*.sh"],
     "exclude": ["json", "jsonl", "jsonc", "ejs"],
-    "excludeGlob": [".husky/**/*", "./**/*.ejs"],
+    "excludeGlob": [".husky/**/*", ".vscode/**/*", "./**/*.ejs", "./.htaccess"],
     "enforceHeader": true,
     "replace": ["File name", "Last modified"]
   },
