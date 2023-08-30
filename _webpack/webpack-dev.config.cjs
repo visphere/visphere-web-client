@@ -25,6 +25,7 @@
  */
 const path = require('path');
 const { merge } = require('webpack-merge');
+const { SourceMapDevToolPlugin } = require('webpack');
 const { commonWebpackConfig } = require('./webpack-common.config.cjs');
 
 const landingPageBaseUrl = `http://localhost:${process.env.ENV_MSPH_LANDING_PAGE_DEV_PORT}`;
@@ -53,5 +54,10 @@ module.exports = merge(
         path.resolve(__dirname, '..'),
       ],
     },
+    plugins: [
+      new SourceMapDevToolPlugin({
+        filename: '[file].map',
+      }),
+    ],
   }
 );
