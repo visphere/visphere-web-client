@@ -77,7 +77,7 @@
       [disabled]="loginForm.invalid || (isLoading$ | async)"
       class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full">
       {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
-      <div *ngIf="isLoading$ | async" class="msph-button__spinner"></div>
+      <msph-lazy-button-spinner *ngIf="isLoading$ | async" />
     </button>
   </div>
 </form>
