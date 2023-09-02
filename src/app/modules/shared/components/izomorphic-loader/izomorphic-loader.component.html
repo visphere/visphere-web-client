@@ -1,0 +1,61 @@
+<!--
+ ~ Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ ~ 
+ ~   File name: izomorphic-loader.component.html
+ ~   Created at: 2023-09-02, 01:32:14
+ ~   Last updated at: 2023-09-02, 01:33:45
+ ~ 
+ ~   Project name: moonsphere
+ ~   Module name: moonsphere-web-client
+ ~ 
+ ~ This project is a part of "MoonSphere" instant messenger system. This system is a part of
+ ~ completing an engineers degree in computer science at Silesian University of Technology.
+ ~ 
+ ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ ~ file except in compliance with the License. You may obtain a copy of the License at
+ ~ 
+ ~   <http://www.apache.org/license/LICENSE-2.0>
+ ~ 
+ ~ Unless required by applicable law or agreed to in writing, software distributed under
+ ~ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ ~ OF ANY KIND, either express or implied. See the License for the specific language
+ ~ governing permissions and limitations under the license.
+ -->
+
+<div
+  class="msph-page-loader__container"
+  [class.msph-page-loader__container--small]="size === 'small'"
+  [class.msph-page-loader__container--large]="size === 'large'">
+  <div
+    class="msph-page-loader__planet"
+    [class.msph-page-loader__planet--color-device]="color === 'device'"
+    [class.msph-page-loader__planet--color-tint]="color === 'tint'"
+    [style.filter]="url('#izomorphicImageLoader')">
+    <div
+      class="msph-page-loader__ring"
+      [class.msph-page-loader__ring--color-device]="color === 'device'"
+      [class.msph-page-loader__ring--color-tint]="color === 'tint'"></div>
+    <div
+      *ngFor="let satellite of satellites"
+      [ngClass]="['msph-page-loader__satellite', satellite]"
+      [class.msph-page-loader__satellite--color-device]="color === 'device'"
+      [class.msph-page-loader__satellite--color-tint]="color === 'tint'"></div>
+    <svg>
+      <defs>
+        <filter id="izomorphicImageLoader">
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="15"
+            result="blur"></feGaussianBlur>
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -7"
+            result="izomorphicImageLoader"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="izomorphicImageLoader"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+</div>

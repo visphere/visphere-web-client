@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: app-root.component.ts
- *   Created at: 2023-08-06, 18:55:39
- *   Last updated at: 2023-08-11, 20:52:05
+ *   File name: izomorphic-loader.component.spec.ts
+ *   Created at: 2023-09-02, 01:32:14
+ *   Last updated at: 2023-09-02, 01:34:00
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,17 +22,24 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from '~/root-mod/app.module';
+import { IzomorphicLoaderComponent } from './izomorphic-loader.component';
 
-@Component({
-  selector: 'msph-mount',
-  template: `
-    <msph-lazy-page-loader />
-    <msph-snackbars-container />
-    <div class="flex flex-col flex-grow">
-      <router-outlet></router-outlet>
-    </div>
-  `,
-  host: { class: 'flex flex-col h-full min-h-screen' },
-})
-export class AppRootComponent {}
+describe('IzomorphicLoaderComponent', () => {
+  let component: IzomorphicLoaderComponent;
+  let fixture: ComponentFixture<IzomorphicLoaderComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AppModule],
+    }).compileComponents();
+    fixture = TestBed.createComponent(IzomorphicLoaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

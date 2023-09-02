@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: app-root.component.ts
- *   Created at: 2023-08-06, 18:55:39
- *   Last updated at: 2023-08-11, 20:52:05
+ *   File name: izomorphic-loader.component.ts
+ *   Created at: 2023-09-02, 01:32:14
+ *   Last updated at: 2023-09-02, 01:32:15
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,17 +22,29 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'msph-mount',
-  template: `
-    <msph-lazy-page-loader />
-    <msph-snackbars-container />
-    <div class="flex flex-col flex-grow">
-      <router-outlet></router-outlet>
-    </div>
-  `,
-  host: { class: 'flex flex-col h-full min-h-screen' },
+  selector: 'msph-izomorphic-loader',
+  templateUrl: './izomorphic-loader.component.html',
 })
-export class AppRootComponent {}
+export class IzomorphicLoaderComponent {
+  @Input() size?: 'small' | 'large' = 'large';
+  @Input() color?: 'device' | 'tint' = 'device';
+
+  satellites: string[] = [
+    'msph-page-loader__satellite--first',
+    'msph-page-loader__satellite--second',
+    'msph-page-loader__satellite--third',
+  ];
+
+  constructor(private location: Location) {}
+
+  url(id: string): string {
+    if (this.color === 'tint') {
+      return '';
+    }
+    return `url(${this.location.path()}${id})`;
+  }
+}

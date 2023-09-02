@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: app-root.component.ts
- *   Created at: 2023-08-06, 18:55:39
- *   Last updated at: 2023-08-11, 20:52:05
+ *   File name: lazy-page-loader.animation.ts
+ *   Created at: 2023-09-01, 13:55:19
+ *   Last updated at: 2023-09-01, 13:55:19
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,17 +22,16 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
-@Component({
-  selector: 'msph-mount',
-  template: `
-    <msph-lazy-page-loader />
-    <msph-snackbars-container />
-    <div class="flex flex-col flex-grow">
-      <router-outlet></router-outlet>
-    </div>
-  `,
-  host: { class: 'flex flex-col h-full min-h-screen' },
-})
-export class AppRootComponent {}
+export const lazyPageLoaderFade = trigger('lazyPageLoaderFade', [
+  state('void', style({ opacity: 0 })),
+  state('*', style({ opacity: 1 })),
+  transition(':leave', animate('400ms ease-in')),
+]);

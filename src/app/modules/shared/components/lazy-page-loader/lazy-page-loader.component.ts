@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: app-root.component.ts
- *   Created at: 2023-08-06, 18:55:39
- *   Last updated at: 2023-08-11, 20:52:05
+ *   File name: lazy-page-loader.component.ts
+ *   Created at: 2023-09-01, 13:42:53
+ *   Last updated at: 2023-09-01, 13:42:53
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,16 +23,18 @@
  * governing permissions and limitations under the license.
  */
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { lazyPageLoaderFade } from '../../animations/lazy-page-loader.animation';
+import { LazyPageLoaderService } from '../../services/lazy-page-loader/lazy-page-loader.service';
 
 @Component({
-  selector: 'msph-mount',
-  template: `
-    <msph-lazy-page-loader />
-    <msph-snackbars-container />
-    <div class="flex flex-col flex-grow">
-      <router-outlet></router-outlet>
-    </div>
-  `,
-  host: { class: 'flex flex-col h-full min-h-screen' },
+  selector: 'msph-lazy-page-loader',
+  templateUrl: './lazy-page-loader.component.html',
+  animations: [lazyPageLoaderFade],
 })
-export class AppRootComponent {}
+export class LazyPageLoaderComponent {
+  isVisible$: Observable<boolean> =
+    this._lazyPageLoaderService.lazyLoaderIsVisible$;
+
+  constructor(private readonly _lazyPageLoaderService: LazyPageLoaderService) {}
+}
