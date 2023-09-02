@@ -32,7 +32,7 @@ describe('LazyPageLoaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppModule],
+      imports: [AppModule],
     }).compileComponents();
     fixture = TestBed.createComponent(LazyPageLoaderComponent);
     component = fixture.componentInstance;
