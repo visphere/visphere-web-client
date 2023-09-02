@@ -41,21 +41,23 @@ import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-capt
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { sharedReduxStore } from '~/shared-mod/store/reducer';
+import { IzomorphicLoaderComponent } from './components/izomorphic-loader/izomorphic-loader.component';
+import { LazyButtonSpinnerComponent } from './components/lazy-button-spinner/lazy-button-spinner.component';
+import { LazyPageLoaderComponent } from './components/lazy-page-loader/lazy-page-loader.component';
 
 @NgModule({
   declarations: [
-    // components
     DeferredButtonComponent,
     FieldValidatorComponent,
+    IzomorphicLoaderComponent,
+    LazyButtonSpinnerComponent,
+    LazyPageLoaderComponent,
     ModalWrapperComponent,
+    NotFoundPageComponent,
     PasswordStrengthMeterComponent,
+    SanitizePipe,
     SnackbarsContainerComponent,
     VerifyCaptchaModalComponent,
-    // pages
-    NotFoundPageComponent,
-    // directives
-    // pipes
-    SanitizePipe,
   ],
   imports: [
     CdTimerModule,
@@ -74,6 +76,8 @@ import { sharedReduxStore } from '~/shared-mod/store/reducer';
   exports: [
     DeferredButtonComponent,
     FieldValidatorComponent,
+    LazyPageLoaderComponent,
+    LazyButtonSpinnerComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
     SnackbarsContainerComponent,

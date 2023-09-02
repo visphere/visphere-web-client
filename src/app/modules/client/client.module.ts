@@ -32,13 +32,7 @@ import { ClientRoutingModule } from '~/client-mod/client-routing.module';
 import { ClientEntryPointPageComponent } from '~/client-mod/pages/client-entry-point-page/client-entry-point-page.component';
 
 @NgModule({
-  declarations: [
-    // components
-    // pages
-    ClientEntryPointPageComponent,
-    // root page
-    ClientRootComponent,
-  ],
+  declarations: [ClientEntryPointPageComponent, ClientRootComponent],
   imports: [
     CommonModule,
     RouterModule,
