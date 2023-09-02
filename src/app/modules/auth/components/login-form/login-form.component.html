@@ -40,7 +40,6 @@
       [disabled]="(isNextButtonEnabled$ | async) === false"
       (click)="handleMoveForward()">
       {{ 'msph.common.utils.continue' | translate }}
-      <i class="bi bi-arrow-right ms-2"></i>
     </button>
   </div>
   <div class="grid gap-3" *ngIf="(activeStage$ | async) === 'password'">
