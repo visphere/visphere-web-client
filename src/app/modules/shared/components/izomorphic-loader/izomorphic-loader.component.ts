@@ -1,11 +1,10 @@
-'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: tailwind.config.cjs
- *   Created at: 2023-08-11, 00:22:42
- *   Last updated at: 2023-08-14, 01:55:01
+ *   File name: izomorphic-loader.component.ts
+ *   Created at: 2023-09-02, 01:32:14
+ *   Last updated at: 2023-09-02, 01:32:15
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,21 +22,29 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { Location } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
-module.exports = {
-  presets: [
-    require('../moonsphere-base/tailwind/_tailwind.config.cjs')({
-      cdnBaseUrl: process.env.CDN_TAILWIND_PATH,
-      loadableModules: [
-        'auth',
-        'common',
-        'footer',
-        'snackbar',
-        'modal',
-        'pageLoader',
-        'buttonSpinner',
-      ],
-    }),
-  ],
-  content: ['./src/**/*.{ejs,ts,html}'],
-};
+@Component({
+  selector: 'msph-izomorphic-loader',
+  templateUrl: './izomorphic-loader.component.html',
+})
+export class IzomorphicLoaderComponent {
+  @Input() size?: 'small' | 'large' = 'large';
+  @Input() color?: 'device' | 'tint' = 'device';
+
+  satellites: string[] = [
+    'msph-page-loader__satellite--first',
+    'msph-page-loader__satellite--second',
+    'msph-page-loader__satellite--third',
+  ];
+
+  constructor(private location: Location) {}
+
+  url(id: string): string {
+    if (this.color === 'tint') {
+      return '';
+    }
+    return `url(${this.location.path()}${id})`;
+  }
+}

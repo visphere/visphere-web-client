@@ -2,9 +2,9 @@
  ~ Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  ~ Silesian University of Technology
  ~ 
- ~   File name: deferred-button.component.html
- ~   Created at: 2023-08-25, 20:36:33
- ~   Last updated at: 2023-08-25, 20:36:43
+ ~   File name: lazy-page-loader.component.html
+ ~   Created at: 2023-09-01, 13:42:53
+ ~   Last updated at: 2023-09-01, 13:43:00
  ~ 
  ~   Project name: moonsphere
  ~   Module name: moonsphere-web-client
@@ -23,27 +23,9 @@
  ~ governing permissions and limitations under the license.
  -->
 
-<div>
-  <p class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
-    {{ labelI18nText | translate }}
-  </p>
-  <button
-    [disabled]="isDeferred || isDisabled"
-    (click)="handleButtonClick()"
-    [class]="styles">
-    <div class="flex justify-center items-center">
-      {{ innerI18nText | translate }}
-      <ng-container *ngIf="isDeferred">{{ '(' }}</ng-container>
-      <cd-timer
-        #timerEntry
-        [hidden]="!isDeferred"
-        [countdown]="true"
-        [autoStart]="false"
-        [startTime]="deferTimeSec"
-        (onComplete)="handleResetDeferredTime()"
-        format="intelli" />
-      <ng-container *ngIf="isDeferred">{{ ')' }}</ng-container>
-      <msph-lazy-button-spinner *ngIf="isLoading" />
-    </div>
-  </button>
+<div
+  *ngIf="isVisible$ | async"
+  [@lazyPageLoaderFade]
+  class="fixed w-full h-full flex justify-center items-center bg-msph-primary-light dark:bg-msph-primary-dark z-[1000]">
+  <msph-izomorphic-loader />
 </div>

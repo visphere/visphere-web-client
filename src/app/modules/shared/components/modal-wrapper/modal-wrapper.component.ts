@@ -22,14 +22,17 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { authWindowFadeAndMove } from '../../animations/auth-window.animation';
 import { ModalSize } from '../../types/modal.type';
@@ -54,10 +57,21 @@ export class ModalWrapperComponent
   @Output() emitOnClose: EventEmitter<void> = new EventEmitter<void>();
   @Output() emitOnAnimationDone: EventEmitter<void> = new EventEmitter<void>();
 
+  constructor(@Inject(DOCUMENT) private readonly _document: Document) {
+    super();
+  }
+
   ngOnInit(): void {
     this.isActive$
       ?.pipe(takeUntil(this._subscriptionHook))
-      .subscribe(active => (this.isActive = active));
+      .subscribe(active => {
+        if (active) {
+          disableBodyScroll(this._document.documentElement);
+        } else {
+          enableBodyScroll(this._document.documentElement);
+        }
+        this.isActive = active;
+      });
   }
   ngOnDestroy(): void {
     this.unmountAllSubscriptions();

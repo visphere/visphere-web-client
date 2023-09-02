@@ -1,11 +1,10 @@
-'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: tailwind.config.cjs
- *   Created at: 2023-08-11, 00:22:42
- *   Last updated at: 2023-08-14, 01:55:01
+ *   File name: lazy-page-loader.component.ts
+ *   Created at: 2023-09-01, 13:42:53
+ *   Last updated at: 2023-09-01, 13:42:53
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,21 +22,19 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { lazyPageLoaderFade } from '../../animations/lazy-page-loader.animation';
+import { LazyPageLoaderService } from '../../services/lazy-page-loader/lazy-page-loader.service';
 
-module.exports = {
-  presets: [
-    require('../moonsphere-base/tailwind/_tailwind.config.cjs')({
-      cdnBaseUrl: process.env.CDN_TAILWIND_PATH,
-      loadableModules: [
-        'auth',
-        'common',
-        'footer',
-        'snackbar',
-        'modal',
-        'pageLoader',
-        'buttonSpinner',
-      ],
-    }),
-  ],
-  content: ['./src/**/*.{ejs,ts,html}'],
-};
+@Component({
+  selector: 'msph-lazy-page-loader',
+  templateUrl: './lazy-page-loader.component.html',
+  animations: [lazyPageLoaderFade],
+})
+export class LazyPageLoaderComponent {
+  isVisible$: Observable<boolean> =
+    this._lazyPageLoaderService.lazyLoaderIsVisible$;
+
+  constructor(private readonly _lazyPageLoaderService: LazyPageLoaderService) {}
+}

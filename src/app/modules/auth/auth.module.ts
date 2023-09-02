@@ -63,12 +63,17 @@ import { SharedModule } from '~/shared-mod/shared.module';
 
 @NgModule({
   declarations: [
-    // components
     ActivateAccountFormComponent,
+    AuthActivateAccountPageComponent,
+    AuthChangePasswordPageComponent,
     AuthCheckboxFormInputComponent,
     AuthCommonFormInputComponent,
     AuthContentWrapperComponent,
     AuthFormHeaderComponent,
+    AuthLoginPageComponent,
+    AuthRegisterPageComponent,
+    AuthResetPasswordPageComponent,
+    AuthRootComponent,
     AuthSingleSelectSpinnerComponent,
     BirthDateSelectSpinnerComponent,
     ChangePasswordFormComponent,
@@ -84,14 +89,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     RegisterFormComponent,
     RegisterSecondStageFormComponent,
     StartResetPasswordFormComponent,
-    // pages
-    AuthActivateAccountPageComponent,
-    AuthChangePasswordPageComponent,
-    AuthLoginPageComponent,
-    AuthRegisterPageComponent,
-    AuthResetPasswordPageComponent,
-    // root page
-    AuthRootComponent,
   ],
   imports: [
     AuthRoutingModule,

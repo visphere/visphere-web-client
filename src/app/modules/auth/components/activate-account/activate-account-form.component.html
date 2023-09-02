@@ -47,7 +47,7 @@
     [disabled]="activateAccountForm.invalid || (isLoading$ | async)"
     class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full">
     {{ 'msph.webClient.activateAccountPage.activateAccountButton' | translate }}
-    <div *ngIf="isLoading$ | async" class="msph-button__spinner"></div>
+    <msph-lazy-button-spinner *ngIf="isLoading$ | async" />
   </button>
   <msph-deferred-button
     (emitOnAction)="handleResendMessage()"

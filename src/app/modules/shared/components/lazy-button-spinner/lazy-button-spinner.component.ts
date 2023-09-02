@@ -1,11 +1,10 @@
-'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: tailwind.config.cjs
- *   Created at: 2023-08-11, 00:22:42
- *   Last updated at: 2023-08-14, 01:55:01
+ *   File name: lazy-button-spinner.component.ts
+ *   Created at: 2023-09-02, 02:30:24
+ *   Last updated at: 2023-09-02, 02:30:25
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,21 +22,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { Component } from '@angular/core';
 
-module.exports = {
-  presets: [
-    require('../moonsphere-base/tailwind/_tailwind.config.cjs')({
-      cdnBaseUrl: process.env.CDN_TAILWIND_PATH,
-      loadableModules: [
-        'auth',
-        'common',
-        'footer',
-        'snackbar',
-        'modal',
-        'pageLoader',
-        'buttonSpinner',
-      ],
-    }),
-  ],
-  content: ['./src/**/*.{ejs,ts,html}'],
-};
+@Component({
+  selector: 'msph-lazy-button-spinner',
+  templateUrl: './lazy-button-spinner.component.html',
+})
+export class LazyButtonSpinnerComponent {}

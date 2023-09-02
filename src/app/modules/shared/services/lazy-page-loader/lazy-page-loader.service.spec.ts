@@ -1,11 +1,10 @@
-'use strict';
 /*
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: tailwind.config.cjs
- *   Created at: 2023-08-11, 00:22:42
- *   Last updated at: 2023-08-14, 01:55:01
+ *   File name: lazy-page-loader.service.spec.ts
+ *   Created at: 2023-09-01, 13:42:27
+ *   Last updated at: 2023-09-02, 02:48:36
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,21 +22,21 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
+import { TestBed } from '@angular/core/testing';
+import { AppModule } from '~/root-mod/app.module';
+import { LazyPageLoaderService } from './lazy-page-loader.service';
 
-module.exports = {
-  presets: [
-    require('../moonsphere-base/tailwind/_tailwind.config.cjs')({
-      cdnBaseUrl: process.env.CDN_TAILWIND_PATH,
-      loadableModules: [
-        'auth',
-        'common',
-        'footer',
-        'snackbar',
-        'modal',
-        'pageLoader',
-        'buttonSpinner',
-      ],
-    }),
-  ],
-  content: ['./src/**/*.{ejs,ts,html}'],
-};
+describe('LazyPageLoaderService', () => {
+  let service: LazyPageLoaderService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AppModule],
+    });
+    service = TestBed.inject(LazyPageLoaderService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

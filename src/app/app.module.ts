@@ -35,6 +35,7 @@ import { titleStrategyProvider } from '~/shared-mod/config/template-page-title.s
 import { i18nAutoChangerInitializer } from '~/shared-mod/i18n/auto-change-lang.service';
 import { i18nConfig } from '~/shared-mod/i18n/http-translate.loader';
 import { languageSwitcherInitializer } from '~/shared-mod/services/language-switcher/language-switcher.service';
+import { lazyPageLoaderInitializer } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { passwordStrengthMeterInitializer } from '~/shared-mod/services/password-strength-meter/password-strength-meter.service';
 import { themeSwitcherInitializer } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import { SharedModule } from '~/shared-mod/shared.module';
@@ -59,6 +60,7 @@ import buildSpecifics from '../environments/build-specifics';
     languageSwitcherInitializer,
     themeSwitcherInitializer,
     passwordStrengthMeterInitializer,
+    lazyPageLoaderInitializer,
   ],
   bootstrap: [AppRootComponent],
 })
