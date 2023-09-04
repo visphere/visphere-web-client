@@ -43,7 +43,7 @@ module.exports = merge(
   }),
   {
     mode: 'development',
-    devtool: 'eval',
+    devtool: false,
     stats: 'normal',
     devServer: {
       hot: false,
@@ -57,6 +57,7 @@ module.exports = merge(
     plugins: [
       new SourceMapDevToolPlugin({
         filename: '[file].map',
+        exclude: path.resolve(__dirname, '..', 'node_modules'),
       }),
     ],
   }
