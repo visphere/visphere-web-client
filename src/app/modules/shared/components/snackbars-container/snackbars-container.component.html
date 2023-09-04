@@ -41,16 +41,38 @@
       <ng-icon name="xIcon" />
     </button>
     <h2 *ngIf="snackbar.header" class="msph-snackbar__header">
-      {{
-        'msph.webClient.snackbar.' + snackbar.header.placeholder
-          | translate: snackbar.header.parameters
-      }}
+      <ng-template
+        *ngIf="
+          snackbar.header.omitTransformation;
+          then omitHeader;
+          else transformHeader
+        " />
+      <ng-template #omitHeader>
+        {{ snackbar.header.placeholder }}
+      </ng-template>
+      <ng-template #transformHeader>
+        {{
+          'msph.webClient.snackbar.' + snackbar.header.placeholder
+            | translate: snackbar.header.parameters
+        }}
+      </ng-template>
     </h2>
     <p class="msph-snackbar__content">
-      {{
-        'msph.webClient.snackbar.' + snackbar.content.placeholder
-          | translate: snackbar.content.parameters
-      }}
+      <ng-template
+        *ngIf="
+          snackbar.content.omitTransformation;
+          then omitContent;
+          else transformContent
+        " />
+      <ng-template #omitContent>
+        {{ snackbar.content.placeholder }}
+      </ng-template>
+      <ng-template #transformContent>
+        {{
+          'msph.webClient.snackbar.' + snackbar.content.placeholder
+            | translate: snackbar.content.parameters
+        }}
+      </ng-template>
     </p>
   </li>
 </ul>
