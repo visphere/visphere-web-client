@@ -25,7 +25,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FinishResetPasswordViaEmailFormModel } from '~/auth-mod/models/reset-password-form.model';
-import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 

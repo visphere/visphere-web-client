@@ -24,7 +24,7 @@
  */
 import { Injectable } from '@angular/core';
 import { ChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
-import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
 import { AbstractSimpleFormStateProvider } from '~/shared-mod/services/abstract-simple-form-state-provider';
 
