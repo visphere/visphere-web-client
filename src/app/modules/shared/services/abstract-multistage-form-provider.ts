@@ -27,7 +27,8 @@ import { AbstractSimpleFormProvider } from './abstract-simple-form-provider';
 
 export abstract class AbstractMultistageFormProvider<
   T,
-> extends AbstractSimpleFormProvider {
+  U,
+> extends AbstractSimpleFormProvider<U> {
   protected _currentStage$: BehaviorSubject<T>;
 
   constructor(initialStage: T) {

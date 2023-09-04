@@ -25,7 +25,9 @@
 import { FormGroup } from '@angular/forms';
 import { AbstractLazyProvider } from './abstract-lazy-provider';
 
-export abstract class AbstractSimpleFormProvider extends AbstractLazyProvider {
+export abstract class AbstractSimpleFormProvider<
+  T,
+> extends AbstractLazyProvider<T> {
   protected _rootForm!: FormGroup;
 
   setReactiveForm(formGroup: FormGroup): void {

@@ -26,7 +26,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { RegisterFormModel } from '~/auth-mod/models/register-form.model';
 import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
@@ -35,7 +35,10 @@ import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
 
 @Injectable()
-export class RegisterService extends AbstractMultistageFormProvider<RegisterFormStage> {
+export class RegisterService extends AbstractMultistageFormProvider<
+  RegisterFormStage,
+  void
+> {
   private _captchaModalState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
@@ -64,7 +67,7 @@ export class RegisterService extends AbstractMultistageFormProvider<RegisterForm
     );
   }
 
-  override abstractSubmitForm(): void {
+  override abstractSubmitForm(): Observable<void> {
     const data = this.parseFormValues<RegisterFormModel>();
     // next
     console.log(data);
@@ -75,6 +78,8 @@ export class RegisterService extends AbstractMultistageFormProvider<RegisterForm
       })
     );
     this.moveToActivateAccount();
+
+    return of();
   }
 
   private async moveToActivateAccount(): Promise<void> {

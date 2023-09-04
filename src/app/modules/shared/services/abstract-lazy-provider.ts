@@ -25,7 +25,7 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
-export abstract class AbstractLazyProvider extends AbstractReactiveProvider {
+export abstract class AbstractLazyProvider<T> extends AbstractReactiveProvider {
   private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
@@ -34,12 +34,12 @@ export abstract class AbstractLazyProvider extends AbstractReactiveProvider {
     this._isLoading$.next(isLoading);
   }
 
-  submitForm(): void {
+  submitForm(): Observable<T> {
     this._isLoading$.next(true);
-    this.abstractSubmitForm();
+    return this.abstractSubmitForm();
   }
 
-  abstract abstractSubmitForm(): void;
+  abstract abstractSubmitForm(): Observable<T>;
 
   get isLoading$(): Observable<boolean> {
     return this._isLoading$.asObservable();
