@@ -32,36 +32,37 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
+import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
+import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
+import { ModalService } from '~/shared-mod/services/modal/modal.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import { LanguageSwitcherService } from '../../services/language-switcher/language-switcher.service';
-import { HcaptchaErrorEvent } from '../../types/hcaptcha.type';
-import { SharedReducer } from '../../types/ngrx-store.type';
-import { AbstractReactiveProvider } from '../../utils/abstract-reactive-provider';
+import { HcaptchaErrorEvent } from '~/shared-mod/types/hcaptcha.type';
+import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-verify-captcha-modal',
   templateUrl: './verify-captcha-modal.component.html',
+  providers: [CaptchaVerificationService],
 })
 export class VerifyCaptchaModalComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  @Input() isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
   @Input() paragraph?: string;
   @Input() snackbarPlaceholder?: string;
 
   @Output() emitOnAccept: EventEmitter<boolean> = new EventEmitter();
 
+  isActive$: Observable<boolean> = this._modalService.isOpen$;
+  isLoading$: Observable<boolean> = this._captchaVerificationService.isLoading$;
+
   isActive = false;
   errorMessage = '';
   isCaptchaVisible = false;
-  isVerified = false;
   selectedLang = 'en';
-  responseTime?: Date;
 
   captchaSitekey = environment.hCaptchaSiteKey;
   allLanguages = this._languageSwitcherService.availableLangs;
@@ -69,7 +70,9 @@ export class VerifyCaptchaModalComponent
   constructor(
     private readonly _store: Store<SharedReducer>,
     private readonly _translateService: TranslateService,
-    private readonly _languageSwitcherService: LanguageSwitcherService
+    private readonly _languageSwitcherService: LanguageSwitcherService,
+    private readonly _captchaVerificationService: CaptchaVerificationService,
+    private readonly _modalService: ModalService
   ) {
     super();
   }
@@ -78,12 +81,10 @@ export class VerifyCaptchaModalComponent
     this.wrapAsObservable(
       this._languageSwitcherService.selectedLang$
     ).subscribe(({ lang }) => (this.selectedLang = lang));
-    this.wrapAsObservable(this.isActive$.asObservable()).subscribe(isActive => {
+    this.wrapAsObservable(this.isActive$).subscribe(isActive => {
       this.isActive = isActive;
       if (!isActive) {
-        this.isVerified = false;
         this.errorMessage = '';
-        this.responseTime = undefined;
         this.isCaptchaVisible = false;
       }
     });
@@ -110,20 +111,17 @@ export class VerifyCaptchaModalComponent
     this.isCaptchaVisible = this.isActive;
   }
 
-  handleOnVerified(event: Event): void {
-    this.isVerified = true;
-    this.responseTime = new Date(event.timeStamp / 60);
-    setTimeout(() => {
-      this.emitOnAccept.emit();
-      this.isActive$?.next(false);
-    }, 1000);
+  handleOnVerified(): void {
+    this.wrapAsObservable(
+      this._captchaVerificationService.submitForm()
+    ).subscribe({
+      next: () => this.emitOnAccept.emit(),
+    });
   }
 
   handleOnError(event: HcaptchaErrorEvent): void {
-    this.responseTime = new Date(event.timeStamp / 60);
-    this._translateService
-      .get('msph.common.utils.unknowError')
-      .pipe(takeUntil(this._subscriptionHook))
-      .subscribe(message => (this.errorMessage = event.error || message));
+    this.wrapAsObservable(
+      this._translateService.get('msph.common.utils.unknowError')
+    ).subscribe(message => (this.errorMessage = event.error || message));
   }
 }

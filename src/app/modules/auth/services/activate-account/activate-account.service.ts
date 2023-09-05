@@ -25,8 +25,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 import { ActivateAccountFormModel } from '~/auth-mod/models/activate-account-form.model';
-import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { ActivateAccountFormStage } from '~/auth-mod/types/form-stage.type';
@@ -35,7 +36,7 @@ import { AbstractSimpleFormStateProvider } from '~/shared-mod/services/abstract-
 
 @Injectable()
 export class ActivateAccountService
-  extends AbstractSimpleFormStateProvider<ActivateAccountFormStage>
+  extends AbstractSimpleFormStateProvider<ActivateAccountFormStage, void>
   implements OnDestroy
 {
   userEmail = '';
@@ -56,12 +57,13 @@ export class ActivateAccountService
     this.unmountAllSubscriptions();
   }
 
-  override abstractSubmitForm(): void {
+  override abstractSubmitForm(): Observable<void> {
     const data = this.parseFormValues<ActivateAccountFormModel>();
     // next
     console.log(data, this.userEmail);
     // success
     this._currentStage$.next('success');
+    return of();
   }
 
   async returnToLoginAndClearState(): Promise<void> {

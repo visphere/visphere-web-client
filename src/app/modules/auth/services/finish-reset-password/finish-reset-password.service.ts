@@ -24,14 +24,15 @@
  */
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { FinishResetPasswordViaEmailFormModel } from '~/auth-mod/models/reset-password-form.model';
-import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 
 @Injectable()
 export class FinishResetPasswordService
-  extends AbstractSimpleFormProvider
+  extends AbstractSimpleFormProvider<void>
   implements OnDestroy
 {
   userEmail = '';
@@ -51,12 +52,14 @@ export class FinishResetPasswordService
     this.unmountAllSubscriptions();
   }
 
-  override abstractSubmitForm(): void {
+  override abstractSubmitForm(): Observable<void> {
     const data = this.parseFormValues<FinishResetPasswordViaEmailFormModel>();
     // next
     console.log(data, this.userEmail);
     // on success
     this.moveToInsertNewPasswordPage('1233211233');
+
+    return of();
   }
 
   resendEmailMessage(): void {

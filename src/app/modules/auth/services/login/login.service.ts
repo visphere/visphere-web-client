@@ -23,15 +23,15 @@
  * governing permissions and limitations under the license.
  */
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LoginFormModel } from '~/auth-mod/models/login-form.model';
-import { AuthHttpClientService } from '~/auth-mod/services/auth-http-service/auth-http-client.service';
+import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import { LoginFormStage } from '~/auth-mod/types/form-stage.type';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
 
 @Injectable()
 export class LoginService
-  extends AbstractMultistageFormProvider<LoginFormStage>
+  extends AbstractMultistageFormProvider<LoginFormStage, void>
   implements OnDestroy
 {
   private _isNextButtonEnabled$: BehaviorSubject<boolean> =
@@ -62,10 +62,12 @@ export class LoginService
     this._rootForm.get('password')?.reset();
   }
 
-  override abstractSubmitForm(): void {
+  override abstractSubmitForm(): Observable<void> {
     const data = this.parseFormValues<LoginFormModel>();
     // next
     console.log(data);
+
+    return of();
   }
 
   get isNextButtonEnabled$(): Observable<boolean> {

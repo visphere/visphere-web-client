@@ -22,64 +22,32 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { authWindowFadeAndMove } from '../../animations/auth-window.animation';
+import { ModalService } from '../../services/modal/modal.service';
 import { ModalSize } from '../../types/modal.type';
-import { AbstractReactiveProvider } from '../../utils/abstract-reactive-provider';
 
 @Component({
   selector: 'msph-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   animations: [authWindowFadeAndMove],
 })
-export class ModalWrapperComponent
-  extends AbstractReactiveProvider
-  implements OnInit, OnDestroy
-{
-  isActive = false;
+export class ModalWrapperComponent {
+  isActive$: Observable<boolean> = this._modalService.isOpen$;
 
-  @Input() isActive$?: BehaviorSubject<boolean>;
   @Input() modalSize: ModalSize = 'sm';
   @Input() header = '';
   @Input() paragraph?: string;
+  @Input() isLoading = false;
 
   @Output() emitOnClose: EventEmitter<void> = new EventEmitter<void>();
   @Output() emitOnAnimationDone: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(@Inject(DOCUMENT) private readonly _document: Document) {
-    super();
-  }
-
-  ngOnInit(): void {
-    this.isActive$
-      ?.pipe(takeUntil(this._subscriptionHook))
-      .subscribe(active => {
-        if (active) {
-          disableBodyScroll(this._document.documentElement);
-        } else {
-          enableBodyScroll(this._document.documentElement);
-        }
-        this.isActive = active;
-      });
-  }
-  ngOnDestroy(): void {
-    this.unmountAllSubscriptions();
-  }
+  constructor(private readonly _modalService: ModalService) {}
 
   handleCloseModal(): void {
-    this.isActive = false;
-    this.isActive$?.next(false);
+    this._modalService.setIsOpen(false);
     this.emitOnClose.emit();
   }
 

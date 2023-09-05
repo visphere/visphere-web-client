@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: abstract-lazy-provider.ts
- *   Created at: 2023-08-26, 16:35:33
- *   Last updated at: 2023-08-26, 16:35:33
+ *   File name: append-lang-header.interceptor.spec.ts
+ *   Created at: 2023-09-04, 17:11:32
+ *   Last updated at: 2023-09-04, 17:28:11
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,26 +22,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
+import { TestBed } from '@angular/core/testing';
+import { AppModule } from '~/root-mod/app.module';
+import { AppendLangHeaderInterceptor } from './append-lang-header.interceptor';
 
-export abstract class AbstractLazyProvider<T> extends AbstractReactiveProvider {
-  private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
+describe('AppendLangHeaderInterceptor', () => {
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [AppModule],
+      providers: [AppendLangHeaderInterceptor],
+    })
   );
 
-  protected setLoading(isLoading: boolean): void {
-    this._isLoading$.next(isLoading);
-  }
-
-  submitForm(): Observable<T> {
-    this._isLoading$.next(true);
-    return this.abstractSubmitForm();
-  }
-
-  abstract abstractSubmitForm(): Observable<T>;
-
-  get isLoading$(): Observable<boolean> {
-    return this._isLoading$.asObservable();
-  }
-}
+  it('should be created', () => {
+    const interceptor: AppendLangHeaderInterceptor = TestBed.inject(
+      AppendLangHeaderInterceptor
+    );
+    expect(interceptor).toBeTruthy();
+  });
+});

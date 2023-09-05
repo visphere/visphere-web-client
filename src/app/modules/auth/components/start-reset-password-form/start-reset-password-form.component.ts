@@ -24,16 +24,21 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StartResetPasswordService } from '~/auth-mod/services/start-reset-password/start-reset-password.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { ModalService } from '~/shared-mod/services/modal/modal.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
   selector: 'msph-start-reset-password-form',
   templateUrl: './start-reset-password-form.component.html',
-  providers: [StartResetPasswordService, PopulateFormGroupService],
+  providers: [
+    StartResetPasswordService,
+    PopulateFormGroupService,
+    ModalService,
+  ],
 })
 export class StartResetPasswordFormComponent
   extends AbstractReactiveProvider
@@ -41,12 +46,12 @@ export class StartResetPasswordFormComponent
 {
   startResetPasswordForm: FormGroup;
 
-  captchaModalIsActive$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isLoading$: Observable<boolean> = this._startResetPasswordService.isLoading$;
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,
-    private readonly _startResetPasswordService: StartResetPasswordService
+    private readonly _startResetPasswordService: StartResetPasswordService,
+    private readonly _modalService: ModalService
   ) {
     super();
     this.startResetPasswordForm = new FormGroup({
@@ -76,6 +81,6 @@ export class StartResetPasswordFormComponent
   }
 
   handleSubmitStartResetPasswordForm(): void {
-    this.captchaModalIsActive$.next(true);
+    this._modalService.setIsOpen(true);
   }
 }

@@ -32,6 +32,8 @@ export type Severity =
 
 export type SnackbarI18n = {
   placeholder: string;
+  omitTransformation?: boolean;
+  i18nPrefix?: string;
   parameters?: { [key: string]: any };
 };
 

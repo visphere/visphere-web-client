@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: abstract-lazy-provider.ts
- *   Created at: 2023-08-26, 16:35:33
- *   Last updated at: 2023-08-26, 16:35:33
+ *   File name: verify-captcha.model.ts
+ *   Created at: 2023-09-04, 12:41:26
+ *   Last updated at: 2023-09-04, 12:41:26
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,26 +22,17 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
-export abstract class AbstractLazyProvider<T> extends AbstractReactiveProvider {
-  private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+export type IpAddressModel = {
+  ip: string;
+};
 
-  protected setLoading(isLoading: boolean): void {
-    this._isLoading$.next(isLoading);
-  }
+export type VerifyCaptchaModel = {
+  response: string;
+  remoteIp: string | null;
+  siteKey: string;
+};
 
-  submitForm(): Observable<T> {
-    this._isLoading$.next(true);
-    return this.abstractSubmitForm();
-  }
-
-  abstract abstractSubmitForm(): Observable<T>;
-
-  get isLoading$(): Observable<boolean> {
-    return this._isLoading$.asObservable();
-  }
+export interface CaptchaEvent extends Event {
+  token: string;
 }

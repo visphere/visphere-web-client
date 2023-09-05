@@ -23,8 +23,14 @@
  ~ governing permissions and limitations under the license.
  -->
 
-<svg class="msph-button-spinner__container" viewBox="0 0 50 50">
+<svg
+  [class.msph-button-spinner__container--large]="size === 'lg'"
+  [class.msph-button-spinner__container--small]="size === 'sm'"
+  class="msph-button-spinner__container"
+  viewBox="0 0 50 50">
   <circle
+    [class.msph-button-spinner__path--mono-color]="color === 'mono'"
+    [class.msph-button-spinner__path--device-color]="color === 'device'"
     class="msph-button-spinner__path"
     cx="25"
     cy="25"

@@ -34,6 +34,7 @@ import { AppRoutingModule } from '~/root-mod/app-routing.module';
 import { titleStrategyProvider } from '~/shared-mod/config/template-page-title.strategy';
 import { i18nAutoChangerInitializer } from '~/shared-mod/i18n/auto-change-lang.service';
 import { i18nConfig } from '~/shared-mod/i18n/http-translate.loader';
+import { appendLangInterceptorInitializer } from '~/shared-mod/interceptors/append-lang-header/append-lang-header.interceptor';
 import { languageSwitcherInitializer } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { lazyPageLoaderInitializer } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { passwordStrengthMeterInitializer } from '~/shared-mod/services/password-strength-meter/password-strength-meter.service';
@@ -61,6 +62,7 @@ import buildSpecifics from '../environments/build-specifics';
     themeSwitcherInitializer,
     passwordStrengthMeterInitializer,
     lazyPageLoaderInitializer,
+    appendLangInterceptorInitializer,
   ],
   bootstrap: [AppRootComponent],
 })
