@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: verify-captcha-modal.component.spec.ts
- *   Created at: 2023-08-22, 19:54:08
- *   Last updated at: 2023-08-22, 19:54:40
+ *   File name: shared-http-client.service.spec.ts
+ *   Created at: 2023-09-04, 12:39:55
+ *   Last updated at: 2023-09-04, 12:44:11
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,28 +22,21 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
-import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
-import { ModalService } from '~/shared-mod/services/modal/modal.service';
-import { SharedModule } from '~/shared-mod/shared.module';
-import { VerifyCaptchaModalComponent } from './verify-captcha-modal.component';
+import { SharedHttpClientService } from './shared-http-client.service';
 
-describe('VerifyCaptchaModalComponent', () => {
-  let component: VerifyCaptchaModalComponent;
-  let fixture: ComponentFixture<VerifyCaptchaModalComponent>;
+describe('SharedHttpClientService', () => {
+  let service: SharedHttpClientService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, SharedModule],
-      providers: [CaptchaVerificationService, ModalService],
-    }).compileComponents();
-    fixture = TestBed.createComponent(VerifyCaptchaModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      imports: [AppModule],
+    });
+    service = TestBed.inject(SharedHttpClientService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 });

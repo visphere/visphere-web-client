@@ -24,7 +24,7 @@
  -->
 
 <msph-modal-wrapper
-  [isActive$]="isActive$"
+  [isLoading]="(isLoading$ | async)!"
   (emitOnClose)="handleEmitOnClose()"
   (emitOnAnimationDone)="handleShowHcaptchaWebcomponent()"
   modalType="verify-captcha"
@@ -38,7 +38,7 @@
           *mcRerender="selectedLang"
           [attr.site-key]="captchaSitekey"
           [attr.hl]="selectedLang"
-          (verified)="handleOnVerified($event)"
+          (verified)="handleOnVerified()"
           (error)="handleOnError($event)" />
       </div>
     </div>
@@ -47,12 +47,6 @@
         *ngIf="errorMessage"
         class="text-msph-danger-primary dark:msph-danger-secondary text-sm text-center mt-2">
         {{ errorMessage }}
-      </p>
-      <p *ngIf="isVerified" class="text-sm mt-1 text-gray-400">
-        {{ 'msph.common.utils.responseTime' | translate }}:
-        <span class="text-msph-primary-dark dark:text-msph-primary-light">{{
-          responseTime | date: 'mm:ss'
-        }}</span>
       </p>
     </div>
   </ng-container>
