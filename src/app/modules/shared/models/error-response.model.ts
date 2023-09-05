@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: snackbar.type.ts
- *   Created at: 2023-08-23, 01:14:35
- *   Last updated at: 2023-08-23, 01:14:35
+ *   File name: error-response.model.ts
+ *   Created at: 2023-09-05, 10:27:38
+ *   Last updated at: 2023-09-05, 10:27:38
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -23,23 +23,19 @@
  * governing permissions and limitations under the license.
  */
 
-export type Severity =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'danger';
-
-export type SnackbarI18n = {
-  placeholder: string;
-  omitTransformation?: boolean;
-  i18nPrefix?: string;
-  parameters?: { [key: string]: any };
+export type BaseErrorModel = {
+  timestamp: string;
+  status: number;
+  path: string;
+  method: string;
 };
 
-export type Snackbar = {
-  id: string;
-  header?: SnackbarI18n;
-  content: SnackbarI18n;
-  severity?: Severity;
-};
+export interface MessageErrorModel extends BaseErrorModel {
+  message: string;
+}
+
+export interface MultiFieldsErrorModel extends BaseErrorModel {
+  errors: {
+    [key: string]: string;
+  };
+}
