@@ -2,9 +2,9 @@
  * Copyright (c) 2023 by MILOSZ GILGA <https://miloszgilga.pl>
  * Silesian University of Technology
  *
- *   File name: modal-wrapper.component.spec.ts
- *   Created at: 2023-08-23, 00:24:31
- *   Last updated at: 2023-08-23, 00:24:50
+ *   File name: modal.service.ts
+ *   Created at: 2023-09-04, 13:14:10
+ *   Last updated at: 2023-09-04, 13:14:10
  *
  *   Project name: moonsphere
  *   Module name: moonsphere-web-client
@@ -22,26 +22,29 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppModule } from '~/root-mod/app.module';
-import { ModalService } from '~/shared-mod/services/modal/modal.service';
-import { ModalWrapperComponent } from './modal-wrapper.component';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-describe('ModalWrapperComponent', () => {
-  let component: ModalWrapperComponent;
-  let fixture: ComponentFixture<ModalWrapperComponent>;
+@Injectable()
+export class ModalService {
+  private _isOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [AppModule],
-      providers: [ModalService],
-    });
-    fixture = TestBed.createComponent(ModalWrapperComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  constructor(@Inject(DOCUMENT) private readonly _document: Document) {}
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  setIsOpen(isOpen: boolean): void {
+    if (isOpen) {
+      disableBodyScroll(this._document.documentElement);
+    } else {
+      enableBodyScroll(this._document.documentElement);
+    }
+    this._isOpen$.next(isOpen);
+  }
+
+  get isOpen$(): Observable<boolean> {
+    return this._isOpen$.asObservable();
+  }
+}

@@ -23,7 +23,7 @@
  ~ governing permissions and limitations under the license.
  -->
 
-<div *ngIf="isActive" class="msph-modal__container">
+<div *ngIf="isActive$ | async" class="msph-modal__container">
   <div class="msph-modal__background"></div>
   <div
     [@authWindowFadeAndMove]
@@ -34,7 +34,10 @@
       [class.max-w-[720px]]="modalSize === 'sm'"
       class="msph-modal__window-wrapper">
       <div class="msph-modal__window-notch"></div>
-      <button (click)="handleCloseModal()" class="msph-modal__window-x-button">
+      <button
+        [disabled]="isLoading"
+        (click)="handleCloseModal()"
+        class="msph-modal__window-x-button">
         <ng-icon name="xIcon" />
       </button>
       <h2 class="msph-modal__window-header">
@@ -47,8 +50,15 @@
         <ng-content select="[content]" />
       </div>
       <div class="flex justify-end gap-x-3">
-        <button (click)="handleCloseModal()" class="msph-modal__close-button">
+        <button
+          [disabled]="isLoading"
+          (click)="handleCloseModal()"
+          class="msph-modal__close-button">
           {{ 'msph.webClient.modal.button.close' | translate }}
+          <msph-lazy-button-spinner
+            size="sm"
+            color="device"
+            *ngIf="isLoading" />
         </button>
         <ng-content select="[buttons]" />
       </div>
