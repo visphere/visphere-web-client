@@ -22,10 +22,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the license.
  */
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'msph-lazy-button-spinner',
   templateUrl: './lazy-button-spinner.component.html',
 })
-export class LazyButtonSpinnerComponent {}
+export class LazyButtonSpinnerComponent {
+  @Input() size: 'sm' | 'lg' = 'lg';
+  @Input() color: 'mono' | 'device' = 'mono';
+}
