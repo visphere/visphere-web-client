@@ -29,7 +29,7 @@ export type IpAddressModel = {
 
 export type VerifyCaptchaModel = {
   response: string;
-  remoteIp: string | null;
+  remoteIp: string;
   siteKey: string;
 };
 
