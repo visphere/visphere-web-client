@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link
+      href="<%= externalCdnBasePath %>"
+      rel="stylesheet"
+      onerror="document.body.innerHTML = 'Could not connect with CDN server';document.body.className = ''" />
     <link rel="preconnect" href="<%= externalCdnBasePath %>" />
     <link
       id="faviconIcon"
@@ -76,7 +80,7 @@
       href="/assets/manifest/en-US/pwa-manifest.json" />
     <!-- end PWA -->
   </head>
-  <body class="min-h-screen font-medium msph_main-body-container">
+  <body class="msph_main-body-container min-h-screen font-medium">
     <!-- start disable script section -->
     <noscript> </noscript>
     <!-- end of disable script section -->
