@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link
+      href="<%= externalCdnBasePath %>"
+      rel="stylesheet"
+      onerror="document.body.innerHTML = 'Could not connect with CDN server';document.body.className = ''" />
     <link rel="preconnect" href="<%= externalCdnBasePath %>" />
     <link
       id="faviconIcon"
