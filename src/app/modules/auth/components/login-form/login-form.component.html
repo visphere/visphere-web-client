@@ -40,7 +40,8 @@
         <button
           type="button"
           class="absolute right-2.5 top-1/2 -translate-y-1/2 msph_login-form-edit-button"
-          (click)="handleMoveBackward()">
+          (click)="handleMoveBackward()"
+          [disabled]="(isLoading$ | async) === true">
           {{ 'msph.common.utils.edit' | translate }}
         </button>
       </div>
