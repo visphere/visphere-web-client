@@ -36,10 +36,10 @@
           [value]="loginForm.get('usernameOrEmailAddress')?.value"
           disabled
           type="text"
-          class="msph_auth-input w-full" />
+          class="msph-auth__input msph-auth__input--viewport w-full" />
         <button
           type="button"
-          class="absolute right-2.5 top-1/2 -translate-y-1/2 msph_login-form-edit-button"
+          class="absolute right-2.5 top-1/2 -translate-y-1/2 msph-auth__top-nav-button"
           (click)="handleMoveBackward()"
           [disabled]="(isLoading$ | async) === true">
           {{ 'msph.common.utils.edit' | translate }}

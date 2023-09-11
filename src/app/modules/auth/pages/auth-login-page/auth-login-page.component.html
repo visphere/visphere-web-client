@@ -5,7 +5,7 @@
 
 <msph-auth-content-wrapper>
   <div
-    class="msph_container-inv-colors msph_auth-container max-w-[900px]"
+    class="msph-auth__container-inv-colors msph-auth__container max-w-[900px]"
     [@authWindowFadeAndMove]>
     <div class="grid grid-cols-12 gap-y-10 md:gap-10 p-5 sm:p-10">
       <div class="col-span-12 md:col-span-6 flex">
@@ -15,13 +15,13 @@
           <div class="mt-4">
             <p class="font-medium md:font-light dark:font-medium">
               {{ 'msph.clientCommon.loginPage.dontHaveAccount' | translate }}
-              <a class="msph_auth-link" routerLink="/auth/register">
+              <a class="msph-auth__link" routerLink="/auth/register">
                 {{ 'msph.clientCommon.loginPage.createAccount' | translate }}
               </a>
             </p>
             <p class="font-medium md:font-light dark:font-medium">
               {{ 'msph.clientCommon.auth.forgotPassword' | translate }}
-              <a class="msph_auth-link" routerLink="/auth/reset-password">
+              <a class="msph-auth__link" routerLink="/auth/reset-password">
                 {{ 'msph.clientCommon.auth.resetPassword' | translate }}
               </a>
             </p>
@@ -29,32 +29,33 @@
         </div>
       </div>
       <div class="col-span-12 md:col-span-6 flex">
-        <hr class="border-l me-10 h-full msph_auth-separator hidden md:block" />
-        <div class="flex-grow flex flex-col justify-center">
+        <hr
+          class="border-l me-10 h-full msph-auth__separator hidden md:block" />
+        <div class="flex-grow flex flex-col">
           <div class="bg-msph-primary-light shadow-md mx-auto rounded-lg p-1">
             <img ngSrc="{{ qrCode }}" width="150" height="150" alt="" />
           </div>
-          <h2 class="msph_auth__header">
+          <h2 class="msph-auth__header">
             {{ 'msph.clientCommon.loginPage.qrHeader' | translate }}
           </h2>
           <p class="leading-5 px-5 text-center md:font-light dark:font-medium">
             {{ 'msph.clientCommon.loginPage.qrDescription' | translate }}
           </p>
           <div class="flex items-center my-5">
-            <hr class="msph_auth-separator flex-grow" />
+            <hr class="msph-auth__separator flex-grow" />
             <div class="mx-5 text-gray-500">
               {{ 'msph.clientCommon.auth.or' | translate }}
             </div>
-            <hr class="msph_auth-separator flex-grow" />
+            <hr class="msph-auth__separator flex-grow" />
           </div>
           <div class="grid gap-3">
-            <a class="msph_google-oauth-button" href="#">
+            <a class="msph-auth__google-oauth-button" href="#">
               <msph-oauth2-button oauth2Type="google" />
             </a>
-            <a class="msph_facebook-oauth-button" href="#">
+            <a class="msph-auth__facebook-oauth-button" href="#">
               <msph-oauth2-button oauth2Type="facebook" />
             </a>
-            <a class="msph_x-oauth-button" href="#">
+            <a class="msph-auth__x-oauth-button" href="#">
               <msph-oauth2-button oauth2Type="x" />
             </a>
           </div>

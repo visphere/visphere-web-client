@@ -16,14 +16,14 @@
     <li *ngFor="let element of filteredList">
       <button
         type="button"
-        class="msph_auth-single-select-spinner-list-element hover:bg-msph-primary-tint hover:text-msph-primary-light cursor-pointer"
+        class="msph-auth__single-select-spinner-list__element hover:bg-msph-primary-tint hover:text-msph-primary-light cursor-pointer"
         (click)="handleSelectItem(element)">
         {{ element.value }}
       </button>
     </li>
     <li
       *ngIf="filteredList.length === 0"
-      class="msph_auth-single-select-spinner-list-element text-gray-500">
+      class="msph-auth__single-select-spinner-list__element text-gray-500">
       {{ 'msph.common.utils.notFound' | translate }}
     </li>
   </ul>

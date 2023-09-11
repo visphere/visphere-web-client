@@ -8,7 +8,7 @@
     <button
       (click)="handleGotoPreviousStage()"
       [disabled]="isLoading$ | async"
-      class="msph_login-form-edit-button px-2 flex items-center w-fit">
+      class="msph-auth__top-nav-button px-2 flex items-center w-fit">
       <ng-icon name="arrowLeftIcon" class="me-2" />
       {{ 'msph.common.utils.backwardMove' | translate }}
     </button>
@@ -38,7 +38,7 @@
       <msph-field-validator type="email" />
       <msph-field-validator type="exact" />
       <ng-container afterInputContent>
-        <span class="msph_form-out-text">
+        <span class="msph-auth__form-out-text">
           {{
             'msph.webClient.registerPage.secondEmailAddressUsage' | translate
           }}
