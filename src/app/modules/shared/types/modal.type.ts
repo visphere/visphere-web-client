@@ -3,4 +3,4 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type ModalSize = 'sm' | 'xl';
+export type ModalSize = 'xs' | 'sm' | 'xl';
