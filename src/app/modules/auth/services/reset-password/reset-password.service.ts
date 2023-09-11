@@ -8,8 +8,7 @@ import { ResetPasswordFormStage } from '~/root-mod/modules/auth/types/form-stage
 
 @Injectable()
 export class ResetPasswordService {
-  private _currentStage$: BehaviorSubject<ResetPasswordFormStage> =
-    new BehaviorSubject<ResetPasswordFormStage>('login');
+  private _currentStage$ = new BehaviorSubject<ResetPasswordFormStage>('login');
 
   private _userEmail$: ReplaySubject<string> = new ReplaySubject<string>(1);
 

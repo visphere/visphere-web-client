@@ -26,7 +26,7 @@ export class DeferredButtonComponent implements OnDestroy {
 
   @ViewChild('timerEntry') timerEntry?: CdTimerComponent;
 
-  @Output() emitOnAction: EventEmitter<void> = new EventEmitter<void>();
+  @Output() emitOnAction = new EventEmitter<void>();
 
   isDeferred = false;
   currentTime = this.deferTimeSec;

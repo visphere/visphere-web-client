@@ -39,8 +39,7 @@ export class AuthSingleSelectSpinnerComponent
   @Input() listElements: SpinnerListElementType[] = [];
   @Input() inputStyle: 'viewport' | 'static' = 'viewport';
 
-  @Output() persistElement: EventEmitter<SpinnerListElementType | null> =
-    new EventEmitter();
+  @Output() persistElement = new EventEmitter<SpinnerListElementType | null>();
 
   @ViewChild('selectViewHolder') selectViewHolder!: ElementRef;
   @ViewChild('inputElement') inputElement!: ElementRef;

@@ -6,9 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 export abstract class AbstractLazyProvider<T> extends AbstractReactiveProvider {
-  private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+  private _isLoading$ = new BehaviorSubject<boolean>(false);
 
   protected setLoading(isLoading: boolean): void {
     this._isLoading$.next(isLoading);

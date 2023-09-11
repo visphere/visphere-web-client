@@ -18,6 +18,6 @@ export class ModalWrapperComponent {
   @Input() paragraph?: string;
   @Input() isLoading = false;
 
-  @Output() emitOnClose: EventEmitter<void> = new EventEmitter<void>();
-  @Output() emitOnAnimationDone: EventEmitter<void> = new EventEmitter<void>();
+  @Output() emitOnClose = new EventEmitter<void>();
+  @Output() emitOnAnimationDone = new EventEmitter<void>();
 }

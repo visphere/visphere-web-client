@@ -14,8 +14,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LazyPageLoaderService {
-  private _lazyLoaderIsVisible$: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(true);
+  private _lazyLoaderIsVisible$ = new BehaviorSubject<boolean>(true);
 
   constructor(
     private readonly _router: Router,
