@@ -17,7 +17,7 @@
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="firstName"
-      i18nPrefix="webClient.register">
+      i18nPrefix="webClient.registerPage">
       <msph-field-validator />
       <msph-field-validator type="minlength" />
     </msph-auth-common-form-input>
@@ -26,7 +26,7 @@
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="lastName"
-      i18nPrefix="webClient.register">
+      i18nPrefix="webClient.registerPage">
       <msph-field-validator />
       <msph-field-validator type="minlength" />
     </msph-auth-common-form-input>
@@ -34,7 +34,7 @@
     <msph-auth-common-form-input
       [maxLength]="100"
       formControlIdentifier="secondEmailAddress"
-      i18nPrefix="webClient.register">
+      i18nPrefix="webClient.registerPage">
       <msph-field-validator type="email" />
       <msph-field-validator type="exact" />
       <ng-container afterInputContent>

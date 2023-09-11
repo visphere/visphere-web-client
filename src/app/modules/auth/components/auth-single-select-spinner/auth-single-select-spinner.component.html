@@ -12,7 +12,13 @@
   <ul
     *ngIf="itemsListIsOpen"
     [@dropboxFadeAndMove]
-    class="msph_auth-single-select-spinner-list-container">
+    class="msph-auth__single-select-spinner-list__container"
+    [class.msph-auth__single-select-spinner-list__container--static]="
+      inputStyle === 'static'
+    "
+    [class.msph-auth__single-select-spinner-list__container--viewport]="
+      inputStyle === 'viewport'
+    ">
     <li *ngFor="let element of filteredList">
       <button
         type="button"
@@ -30,17 +36,31 @@
   <input
     #inputElement
     [placeholder]="i18nPlaceholder | translate"
-    [class.msph_auth-invalid-input]="hasErrors"
     (input)="handleFilterElements(inputElement.value)"
     type="text"
     [disabled]="formDisabled"
     (focus)="handleShowItemsList()"
-    class="msph_auth-input w-full" />
+    class="msph-auth__input w-full"
+    [class.msph-auth__input--static]="inputStyle === 'static'"
+    [class.msph-auth__input--viewport]="inputStyle === 'viewport'"
+    [class.msph-auth__input--invalid]="hasErrors"
+    [class.msph-auth__input--static--invalid]="
+      inputStyle === 'static' && hasErrors
+    "
+    [class.msph-auth__input--viewport--invalid]="
+      inputStyle === 'viewport' && hasErrors
+    " />
   <div
     class="absolute top-1/2 -translate-y-1/2 right-2.5 text-gray-600 dark:text-gray-300 md:text-gray-300 md:dark:text-gray-600 flex items-center">
     <ng-icon
       name="selectArrowDownIcon"
-      [class.msph_auth-invalid-text]="hasErrors"
+      [class.msph-auth__text--invalid]="hasErrors"
+      [class.msph-auth__text--static--invalid]="
+        inputStyle === 'static' && hasErrors
+      "
+      [class.msph-auth__text--viewport--invalid]="
+        inputStyle === 'viewport' && hasErrors
+      "
       class="text-sm" />
   </div>
 </button>
