@@ -3,4 +3,4 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type Oauth2Type = 'google' | 'facebook' | 'twitter';
+export type Oauth2Type = 'google' | 'facebook' | 'x';
