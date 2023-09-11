@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
-import { ModalService } from '~/root-mod/modules/shared/services/modal/modal.service';
+import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
 import { emailWithSecondaryEmail } from '~/shared-mod/validators/email-with-secondary-email.validator';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
@@ -15,7 +15,7 @@ import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.val
 @Component({
   selector: 'msph-register-form',
   templateUrl: './register-form.component.html',
-  providers: [RegisterService, ModalService],
+  providers: [RegisterService, CaptchaVerificationService],
 })
 export class RegisterFormComponent implements OnInit {
   registerForm: FormGroup;
@@ -25,7 +25,7 @@ export class RegisterFormComponent implements OnInit {
   constructor(
     private readonly _birthDateValidator: BirthDateValidator,
     private readonly _registerService: RegisterService,
-    private readonly _modalService: ModalService
+    private readonly _captchaVerificationService: CaptchaVerificationService
   ) {
     this.registerForm = new FormGroup(
       {
@@ -89,6 +89,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
   handleSubmitRegisterForm(): void {
-    this._modalService.setIsOpen(true);
+    this._captchaVerificationService.setModalVisibility(true);
   }
 }

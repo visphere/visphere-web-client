@@ -4,10 +4,10 @@
  -->
 
 <msph-modal-wrapper
+  [isActive]="(isActive$ | async)!"
   [isLoading]="(isLoading$ | async)!"
   (emitOnClose)="handleEmitOnClose()"
   (emitOnAnimationDone)="handleShowHcaptchaWebcomponent()"
-  modalType="verify-captcha"
   [header]="'msph.webClient.modal.captchaHeader' | translate"
   [paragraph]="paragraph">
   <ng-container content>

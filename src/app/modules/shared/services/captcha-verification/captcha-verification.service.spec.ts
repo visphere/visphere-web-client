@@ -4,7 +4,6 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
-import { ModalService } from '../modal/modal.service';
 import { CaptchaVerificationService } from './captcha-verification.service';
 
 describe('CaptchaVerificationService', () => {
@@ -13,7 +12,7 @@ describe('CaptchaVerificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule],
-      providers: [CaptchaVerificationService, ModalService],
+      providers: [CaptchaVerificationService],
     });
     service = TestBed.inject(CaptchaVerificationService);
   });

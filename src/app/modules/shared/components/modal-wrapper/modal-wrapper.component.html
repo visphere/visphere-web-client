@@ -3,11 +3,11 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<div *ngIf="isActive$ | async" class="msph-modal__container">
+<div *ngIf="isActive" class="msph-modal__container">
   <div class="msph-modal__background"></div>
   <div
     [@authWindowFadeAndMove]
-    (@authWindowFadeAndMove.done)="animationDone()"
+    (@authWindowFadeAndMove.done)="emitOnAnimationDone.emit()"
     class="msph-modal__window-container">
     <div
       [class.max-w-[1280px]]="modalSize === 'xl'"
@@ -16,7 +16,8 @@
       <div class="msph-modal__window-notch"></div>
       <button
         [disabled]="isLoading"
-        (click)="handleCloseModal()"
+        (click)="emitOnClose.emit()"
+        type="button"
         class="msph-modal__window-x-button">
         <ng-icon name="xIcon" />
       </button>
@@ -32,7 +33,8 @@
       <div class="flex justify-end gap-x-3">
         <button
           [disabled]="isLoading"
-          (click)="handleCloseModal()"
+          (click)="emitOnClose.emit()"
+          type="button"
           class="msph-modal__close-button">
           {{ 'msph.webClient.modal.button.close' | translate }}
           <msph-lazy-button-spinner

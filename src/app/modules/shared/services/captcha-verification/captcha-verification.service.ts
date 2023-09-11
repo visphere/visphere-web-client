@@ -19,7 +19,7 @@ import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractLazyProvider } from '../abstract-lazy-provider';
-import { ModalService } from '../modal/modal.service';
+import { ModalUtilsService } from '../modal-utils/modal-utils.service';
 import { SharedHttpClientService } from '../shared-http-client/shared-http-client.service';
 
 @Injectable()
@@ -27,16 +27,15 @@ export class CaptchaVerificationService
   extends AbstractLazyProvider<BaseMessageModel>
   implements OnDestroy
 {
-  private _isVerified$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  private _isCaptchaVisible$: BehaviorSubject<boolean> = new BehaviorSubject(
-    false
-  );
+  private _isVerified$ = new BehaviorSubject(false);
+  private _isCaptchaVisible$ = new BehaviorSubject(false);
+  private _isModalOpen$ = new BehaviorSubject(false);
   private _clientIpAddress = '';
 
   constructor(
     private readonly _sharedHttpClientService: SharedHttpClientService,
-    private readonly _modalService: ModalService,
     private readonly _store: Store<SharedReducer>,
+    private readonly _modalUtilsService: ModalUtilsService,
     @Inject(DOCUMENT) private readonly _document: Document
   ) {
     super();
@@ -51,6 +50,11 @@ export class CaptchaVerificationService
 
   toggleCaptchaVisibility(isVisible: boolean): void {
     this._isCaptchaVisible$.next(isVisible);
+  }
+
+  setModalVisibility(isOpen: boolean): void {
+    this._modalUtilsService.blockBodyScroll(isOpen);
+    this._isModalOpen$.next(isOpen);
   }
 
   override abstractSubmitForm(): Observable<BaseMessageModel> {
@@ -78,7 +82,7 @@ export class CaptchaVerificationService
         }),
         catchError(err => {
           this.setLoading(false);
-          this._modalService.setIsOpen(false);
+          this.setModalVisibility(false);
           this._store.dispatch(
             NgrxAction_SHA.__addSnackbar({
               content: flattedErrorResponse(err.error),
@@ -90,7 +94,7 @@ export class CaptchaVerificationService
         delay(1000),
         tap(() => {
           this.setLoading(false);
-          this._modalService.setIsOpen(false);
+          this.setModalVisibility(false);
         })
       );
   }
@@ -100,5 +104,8 @@ export class CaptchaVerificationService
   }
   get isCaptchaVisible$(): Observable<boolean> {
     return this._isCaptchaVisible$.asObservable();
+  }
+  get isModalOpen$(): Observable<boolean> {
+    return this._isModalOpen$.asObservable();
   }
 }
