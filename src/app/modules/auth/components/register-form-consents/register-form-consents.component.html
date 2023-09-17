@@ -30,7 +30,7 @@
       formControlIdentifier="agreeTerms"
       i18nPrefix="webClient.registerPage">
       <ng-container labelContent>
-        <span [innerHTML]="agreeTermsContent"></span>
+        <span [innerHTML]="(agreeTermsContent$ | async)! | sanitize"></span>
         <span class="ms-0.5 text-msph-primary-tint">*</span>
       </ng-container>
       <ng-container errorsContent>
