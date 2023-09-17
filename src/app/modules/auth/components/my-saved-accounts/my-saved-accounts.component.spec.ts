@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthModule } from '~/auth-mod/auth.module';
+import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.service';
 import { AppModule } from '~/root-mod/app.module';
 import { MySavedAccountsComponent } from './my-saved-accounts.component';
 
@@ -14,6 +15,7 @@ describe('MySavedAccountsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
+      providers: [MyAccountsService],
     }).compileComponents();
     fixture = TestBed.createComponent(MySavedAccountsComponent);
     component = fixture.componentInstance;

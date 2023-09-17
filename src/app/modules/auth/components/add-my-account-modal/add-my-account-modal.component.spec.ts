@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthModule } from '~/auth-mod/auth.module';
+import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.service';
 import { AppModule } from '~/root-mod/app.module';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AddMyAccountModalComponent } from './add-my-account-modal.component';
@@ -15,7 +16,7 @@ describe('AddMyAccountModalComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
-      providers: [PopulateFormGroupService],
+      providers: [PopulateFormGroupService, MyAccountsService],
     }).compileComponents();
     fixture = TestBed.createComponent(AddMyAccountModalComponent);
     component = fixture.componentInstance;
