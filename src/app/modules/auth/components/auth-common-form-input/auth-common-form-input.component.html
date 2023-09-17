@@ -6,9 +6,16 @@
 <div [formGroup]="formGroup" class="flex flex-col">
   <label
     [for]="formControlIdentifier"
-    class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
+    class="mb-1 text-sm flex dark:font-normal md:font-normal md:dark:font-medium">
     {{ i18nLabel | translate }}
     <span *ngIf="requiredStar" class="ms-0.5 text-msph-primary-tint">*</span>
+    <div
+      *ngIf="additionalInfo"
+      [ngxTippy]="inputTooltip"
+      [tippyProps]="tooltipProps"
+      class="ms-1 flex items-center">
+      <ng-icon name="questionCircleIcon" />
+    </div>
   </label>
   <input
     [id]="formControlIdentifier"
@@ -33,5 +40,7 @@
     [class.msph-auth__text--viewport--invalid]="inputStyle === 'viewport'">
     <ng-content />
   </div>
-  <ng-content select="[afterInputContent]" />
 </div>
+<ng-template #inputTooltip>
+  {{ additionalInfo }}
+</ng-template>
