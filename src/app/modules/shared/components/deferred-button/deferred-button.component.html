@@ -18,7 +18,7 @@
         #timerEntry
         [hidden]="!isDeferred"
         [countdown]="true"
-        [autoStart]="false"
+        [autoStart]="enabledOnMount"
         [startTime]="deferTimeSec"
         (onComplete)="handleResetDeferredTime()"
         format="intelli" />
