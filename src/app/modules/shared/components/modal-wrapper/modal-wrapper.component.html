@@ -28,7 +28,7 @@
       <p class="msph-modal__window-paragraph">
         {{ paragraph! | translate }}
       </p>
-      <div class="my-8">
+      <div class="mt-8 mb-5">
         <ng-content select="[content]" />
       </div>
       <div class="flex justify-end gap-x-3">
@@ -38,10 +38,7 @@
           type="button"
           class="msph-modal__close-button">
           {{ 'msph.webClient.modal.button.close' | translate }}
-          <msph-lazy-button-spinner
-            size="sm"
-            color="device"
-            *ngIf="isLoading" />
+          <msph-lazy-button-spinner size="sm" color="modal" *ngIf="isLoading" />
         </button>
         <ng-content select="[buttons]" />
       </div>

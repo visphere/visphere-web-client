@@ -3,10 +3,21 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { createAction, props } from '@ngrx/store';
+import {
+  MySavedAccountModel,
+  MySavedAccountPayload,
+} from '../models/my-saved-account.model';
 
 const SET_ACTIVATE_ACCOUNT_EMAIL = '[AUTH] SET ACTIVATE ACCOUNT EMAIL' as const;
+const LOAD_MY_SAVED_ACCOUNTS = '[AUTH] LOAD MY SAVED ACCOUNTS' as const;
 const REMOVE_ACTIVATE_ACCOUNT_EMAIL =
   '[AUTH] REMOVE ACTIVATE ACCOUNT EMAIL' as const;
+const ADD_NEW_MY_SAVED_ACCOUNT = '[AUTH] ADD NEW MY SAVED ACCOUNT' as const;
+const REMOVE_MY_SAVED_ACCOUNT = '[AUTH] REMOVE MY SAVED ACCOUNT' as const;
+const REMOVE_ALL_MY_SAVED_ACCOUNT =
+  '[AUTH] REMOVE ALL MY SAVED ACCOUNT' as const;
+const SET_MY_SAVED_ACCOUNT_VERIFIED =
+  '[AUTH] SET MY SAVED ACCOUNT VERIFIED' as const;
 
 export const __setActivateAccountEmail = createAction(
   SET_ACTIVATE_ACCOUNT_EMAIL,
@@ -15,4 +26,28 @@ export const __setActivateAccountEmail = createAction(
 
 export const __removeActivateAccountEmail = createAction(
   REMOVE_ACTIVATE_ACCOUNT_EMAIL
+);
+
+export const __loadMySavedAccounts = createAction(
+  LOAD_MY_SAVED_ACCOUNTS,
+  props<{ accounts: MySavedAccountModel[] }>()
+);
+
+export const __addNewMySavedAccount = createAction(
+  ADD_NEW_MY_SAVED_ACCOUNT,
+  props<{ account: MySavedAccountPayload }>()
+);
+
+export const __removeMySavedAccount = createAction(
+  REMOVE_MY_SAVED_ACCOUNT,
+  props<{ accountId: string }>()
+);
+
+export const __removeAllMySavedAccount = createAction(
+  REMOVE_ALL_MY_SAVED_ACCOUNT
+);
+
+export const __setMySavedAccountVerified = createAction(
+  SET_MY_SAVED_ACCOUNT_VERIFIED,
+  props<{ uuid: string; thumbnailUrl: string; username: string }>()
 );

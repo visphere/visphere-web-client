@@ -13,6 +13,7 @@ import { CdTimerModule } from 'angular-cd-timer';
 import { NgxRerenderModule } from 'ngx-rerender';
 import { SharedEffects } from '~/root-mod/modules/shared/store/side-effects/shared-effects';
 import { DeferredButtonComponent } from '~/shared-mod/components/deferred-button/deferred-button.component';
+import { DevastateActionModalComponent } from '~/shared-mod/components/devastate-action-modal/devastate-action-modal.component';
 import { FieldValidatorComponent } from '~/shared-mod/components/field-validator/field-validator.component';
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
@@ -28,6 +29,7 @@ import { LazyPageLoaderComponent } from './components/lazy-page-loader/lazy-page
 @NgModule({
   declarations: [
     DeferredButtonComponent,
+    DevastateActionModalComponent,
     FieldValidatorComponent,
     IzomorphicLoaderComponent,
     LazyButtonSpinnerComponent,
@@ -55,9 +57,11 @@ import { LazyPageLoaderComponent } from './components/lazy-page-loader/lazy-page
   ],
   exports: [
     DeferredButtonComponent,
+    DevastateActionModalComponent,
     FieldValidatorComponent,
     LazyPageLoaderComponent,
     LazyButtonSpinnerComponent,
+    ModalWrapperComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
     SnackbarsContainerComponent,

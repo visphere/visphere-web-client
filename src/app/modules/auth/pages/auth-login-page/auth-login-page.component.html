@@ -12,6 +12,18 @@
         <div class="flex-grow">
           <msph-auth-form-header i18nPrefix="clientCommon.loginPage" />
           <msph-login-form />
+          <div class="flex items-center my-5">
+            <hr class="msph-auth__separator flex-grow" />
+            <div class="mx-5 text-gray-500">
+              {{ 'msph.clientCommon.auth.or' | translate }}
+            </div>
+            <hr class="msph-auth__separator flex-grow" />
+          </div>
+          <a
+            routerLink="/auth/my-accounts"
+            class="msph-auth__my-accounts-button">
+            {{ 'msph.clientCommon.loginPage.gotoMyAccounts' | translate }}
+          </a>
           <div class="mt-4">
             <p class="font-medium md:font-light dark:font-medium">
               {{ 'msph.clientCommon.loginPage.dontHaveAccount' | translate }}

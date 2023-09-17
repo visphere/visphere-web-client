@@ -3,8 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type StorageKeyType =
-  | 'selectedLang'
-  | 'selectedTheme'
-  | 'mySavedAccounts'
-  | 'loggedUser';
+export type AddNewMyAccountFormModel = {
+  usernameOrEmailAddress: string;
+};

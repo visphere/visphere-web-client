@@ -1,0 +1,83 @@
+<!--
+ ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<msph-devastate-action-modal
+  [isActive]="(isRemoveModalOpen$ | async)!"
+  (emitOnClose)="handleCloseRemoveAccountModal()"
+  (emitDevstateAction)="handleRemoveAccount()"
+  i18nPrefix="msph.clientCommon.myAccountsPage.modals.remove">
+  <span
+    [innerHTML]="
+      'msph.clientCommon.myAccountsPage.modals.remove.paragraph'
+        | translate: { accountLogin: removingAccount?.usernameOrEmailAddress }
+    "></span>
+</msph-devastate-action-modal>
+<msph-login-my-account-modal [loggedUser]="loggedUser" />
+<div class="my-6">
+  <div
+    *ngIf="(mySavedAccounts$ | async)!.length === 0"
+    class="mt-8 mb-12 flex flex-col justify-center items-center">
+    <img src="{{ cdnPath }}/static/icon/user-id.svg" alt="" />
+    <p class="msph-my-account__not-found-paragraph">
+      {{ 'msph.clientCommon.myAccountsPage.noAccountsMessage' | translate }}
+    </p>
+  </div>
+  <ul
+    *ngIf="(mySavedAccounts$ | async)!.length !== 0"
+    class="msph-my-account__container">
+    <li
+      *ngFor="let account of mySavedAccounts$ | async"
+      class="msph-my-account__element-scaffold msph-my-account__element msph-my-account__element--viewport">
+      <button
+        (click)="handleOpenLoginModal(account)"
+        class="msph-my-account__element-content">
+        <div
+          *ngIf="!account.isVerified"
+          [ngxTippy]="usernameTooptip"
+          [tippyContext]="{ username: account.usernameOrEmailAddress }"
+          [tippyProps]="tooltipProps">
+          <div
+            class="msph-my-account__not-verified msph-my-account__not-verified--tile msph-my-account__content-colors--tile--viewport">
+            <img
+              src="{{ cdnPath }}/static/icon/user.svg"
+              alt=""
+              width="50"
+              height="50"
+              loading="eager" />
+          </div>
+        </div>
+        <div
+          *ngIf="account.isVerified"
+          [ngxTippy]="usernameTooptip"
+          [tippyContext]="{ username: account.usernameOrEmailAddress }"
+          [tippyProps]="tooltipProps">
+          <img
+            src="{{ account.thumbnailUrl }}"
+            width="70px"
+            height="70px"
+            class="msph-my-account__verified-image msph-my-account__verified-image--tile msph-my-account__content-colors--tile--viewport"
+            alt="" />
+        </div>
+      </button>
+      <button
+        (click)="handleMarkSelectedAccountAsRemoved(account)"
+        class="msph-my-account__element-remove-button">
+        {{ 'msph.clientCommon.myAccountsPage.removeAccountButton' | translate }}
+      </button>
+    </li>
+    <li class="msph-my-account__element-scaffold">
+      <button
+        (click)="handleOpenAddNewAccountModal()"
+        class="msph-my-account__element-add-button msph-my-account__element--viewport">
+        <ng-icon
+          name="plusCircleIcon"
+          class="msph-my-account__element-add-icon msph-my-account__element-add-icon--viewport" />
+      </button>
+    </li>
+  </ul>
+</div>
+<ng-template #usernameTooptip let-username="username">
+  {{ username }}
+</ng-template>

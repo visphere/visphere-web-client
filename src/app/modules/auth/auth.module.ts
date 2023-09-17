@@ -8,11 +8,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import * as BtsIcon from '@ng-icons/bootstrap-icons';
 import { NgIconsModule } from '@ng-icons/core';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { AuthRootComponent } from '~/auth-mod/auth-root.component';
 import { AuthRoutingModule } from '~/auth-mod/auth-routing.module';
 import { ActivateAccountFormComponent } from '~/auth-mod/components/activate-account/activate-account-form.component';
+import { AddMyAccountModalComponent } from '~/auth-mod/components/add-my-account-modal/add-my-account-modal.component';
 import { AuthCheckboxFormInputComponent } from '~/auth-mod/components/auth-checkbox-form-input/auth-checkbox-form-input.component';
 import { AuthCommonFormInputComponent } from '~/auth-mod/components/auth-common-form-input/auth-common-form-input.component';
 import { AuthContentWrapperComponent } from '~/auth-mod/components/auth-content-wrapper/auth-content-wrapper.component';
@@ -25,6 +28,8 @@ import { FooterControlListComponent } from '~/auth-mod/components/footer-control
 import { FooterControlsComponent } from '~/auth-mod/components/footer-controls/footer-controls.component';
 import { FooterComponent } from '~/auth-mod/components/footer/footer.component';
 import { LoginFormComponent } from '~/auth-mod/components/login-form/login-form.component';
+import { LoginMyAccountModalComponent } from '~/auth-mod/components/login-my-account-modal/login-my-account-modal.component';
+import { MySavedAccountsComponent } from '~/auth-mod/components/my-saved-accounts/my-saved-accounts.component';
 import { Oauth2ButtonComponent } from '~/auth-mod/components/oauth2-button/oauth2-button.component';
 import { PasswordInputTogglerComponent } from '~/auth-mod/components/password-input-toggler/password-input-toggler.component';
 import { RegisterFirstStageFormComponent } from '~/auth-mod/components/register-first-stage-form/register-first-stage-form.component';
@@ -36,14 +41,17 @@ import { ActivateAccountGuard } from '~/auth-mod/guards/activate-account/activat
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
+import { AuthMyAccountsPageComponent } from '~/auth-mod/pages/auth-my-accounts-page/auth-my-accounts-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
 import { authReduxStore } from '~/auth-mod/store/reducer';
+import { AuthEffects } from '~/auth-mod/store/side-effects/auth-effects';
 import { SharedModule } from '~/shared-mod/shared.module';
 
 @NgModule({
   declarations: [
     ActivateAccountFormComponent,
+    AddMyAccountModalComponent,
     AuthActivateAccountPageComponent,
     AuthChangePasswordPageComponent,
     AuthCheckboxFormInputComponent,
@@ -51,6 +59,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
     AuthContentWrapperComponent,
     AuthFormHeaderComponent,
     AuthLoginPageComponent,
+    AuthMyAccountsPageComponent,
     AuthRegisterPageComponent,
     AuthResetPasswordPageComponent,
     AuthRootComponent,
@@ -62,6 +71,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
     FooterControlsComponent,
     FooterComponent,
     LoginFormComponent,
+    MySavedAccountsComponent,
     Oauth2ButtonComponent,
     PasswordInputTogglerComponent,
     RegisterFirstStageFormComponent,
@@ -69,12 +79,15 @@ import { SharedModule } from '~/shared-mod/shared.module';
     RegisterFormComponent,
     RegisterSecondStageFormComponent,
     StartResetPasswordFormComponent,
+    LoginMyAccountModalComponent,
   ],
   imports: [
     AuthRoutingModule,
     CommonModule,
+    EffectsModule.forFeature([AuthEffects]),
     FormsModule,
     NgOptimizedImage,
+    NgxTippyModule,
     NgIconsModule.withIcons({
       arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
       darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
@@ -84,6 +97,8 @@ import { SharedModule } from '~/shared-mod/shared.module';
       outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
       selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
       systemModeIcon: BtsIcon.bootstrapCircleHalf,
+      plusCircleIcon: BtsIcon.bootstrapPlusCircle,
+      questionCircleIcon: BtsIcon.bootstrapQuestionCircle,
     }),
     ReactiveFormsModule,
     RouterModule,

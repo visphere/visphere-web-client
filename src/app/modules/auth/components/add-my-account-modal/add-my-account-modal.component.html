@@ -1,0 +1,33 @@
+<!--
+ ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<msph-modal-wrapper
+  [isActive]="(isOpen$ | async)!"
+  (emitOnClose)="handleEmitOnClose()"
+  modalSize="xs"
+  [header]="'msph.clientCommon.myAccountsPage.modals.add.header' | translate">
+  <form
+    content
+    [formGroup]="addMyAccountForm"
+    (ngSubmit)="handleAddNewAccount()"
+    class="grid gap-3">
+    <msph-auth-common-form-input
+      [maxLength]="100"
+      [requiredStar]="true"
+      inputStyle="static"
+      formControlIdentifier="usernameOrEmailAddress"
+      i18nPrefix="clientCommon.myAccountsPage.modals.add">
+      <msph-field-validator />
+      <msph-field-validator type="exist" />
+    </msph-auth-common-form-input>
+    <button
+      [disabled]="addMyAccountForm.invalid"
+      class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full">
+      {{
+        'msph.clientCommon.myAccountsPage.modals.add.submitButton' | translate
+      }}
+    </button>
+  </form>
+</msph-modal-wrapper>

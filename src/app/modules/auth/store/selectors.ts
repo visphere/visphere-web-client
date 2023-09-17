@@ -19,3 +19,13 @@ export const selectIsActivateAccountEmailExist = createSelector(
   selectAuthState,
   ({ activateAccountEmail }) => activateAccountEmail !== ''
 );
+
+export const selectMySavedAccounts = createSelector(
+  selectAuthState,
+  ({ mySavedAccounts }) => mySavedAccounts
+);
+
+export const selectMySavedAccountsCount = createSelector(
+  selectAuthState,
+  ({ mySavedAccounts }) => mySavedAccounts.length
+);

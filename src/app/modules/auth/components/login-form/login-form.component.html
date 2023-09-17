@@ -46,12 +46,22 @@
         </button>
       </div>
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-y-3">
       <msph-password-input-toggler
         formControlIdentifier="password"
         i18nPrefix="clientCommon.loginPage">
         <msph-field-validator />
       </msph-password-input-toggler>
+      <msph-auth-checkbox-form-input formControlIdentifier="rememberAccount">
+        <ng-container labelContent>
+          <span class="flex items-center text-sm">
+            {{
+              'msph.clientCommon.loginPage.formFields.rememberAccount.value'
+                | translate
+            }}
+          </span>
+        </ng-container>
+      </msph-auth-checkbox-form-input>
     </div>
     <button
       [disabled]="loginForm.invalid || (isLoading$ | async)"
