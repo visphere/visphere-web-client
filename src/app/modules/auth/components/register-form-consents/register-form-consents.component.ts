@@ -61,10 +61,10 @@ export class RegisterFormConsentsComponent
   handleToggleAllValues(): void {
     const allowNotifsControl = this.formGroup.get('allowNotifs');
     const agreeTermsControl = this.formGroup.get('agreeTerms');
-    if (!allowNotifsControl || !agreeTermsControl) return;
-
+    if (!allowNotifsControl || !agreeTermsControl) {
+      return;
+    }
     this.selectAllToggle = !this.selectAllToggle;
-
     allowNotifsControl.patchValue(this.selectAllToggle);
     agreeTermsControl.patchValue(this.selectAllToggle);
     agreeTermsControl.setErrors(

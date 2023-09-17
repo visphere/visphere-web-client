@@ -11,10 +11,12 @@
       [formControlName]="formControlIdentifier"
       (input)="handleSetDirtyAndTouched()" />
     <div>
-      <div class="leading-5 cursor-pointer">
+      <div
+        class="leading-5 cursor-pointer font-medium dark:font-light md:font-light dark:md:font-medium">
         <ng-content select="[labelContent]" />
       </div>
-      <div class="text-sm mt-1 msph_auth-invalid-text">
+      <div
+        class="text-sm mt-1 msph-auth__text--invalid msph-auth__text--viewport--invalid">
         <ng-content select="[errorsContent]" />
       </div>
     </div>

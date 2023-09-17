@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { CheckUsernameExistResDtoModel } from '~/shared-mod/models/check-username-exist.model';
 import {
   IpAddressModel,
   VerifyCaptchaModel,
@@ -26,7 +27,7 @@ export class SharedHttpClientService extends AbstractHttpProvider {
 
   verifyCaptcha(req: VerifyCaptchaModel): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/misc/captcha/verification`,
+      `${this._infraApiPath}/api/v1/misc/captcha/verify`,
       req
     );
   }
