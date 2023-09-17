@@ -37,9 +37,9 @@ export class AuthSingleSelectSpinnerComponent
   @Input() multiSpinnerId!: string;
   @Input() initValueId!: number | null;
   @Input() listElements: SpinnerListElementType[] = [];
+  @Input() inputStyle: 'viewport' | 'static' = 'viewport';
 
-  @Output() persistElement: EventEmitter<SpinnerListElementType | null> =
-    new EventEmitter();
+  @Output() persistElement = new EventEmitter<SpinnerListElementType | null>();
 
   @ViewChild('selectViewHolder') selectViewHolder!: ElementRef;
   @ViewChild('inputElement') inputElement!: ElementRef;
@@ -77,7 +77,7 @@ export class AuthSingleSelectSpinnerComponent
         formControlName,
         formDisabled
       );
-      this.i18nPlaceholder = `msph.${i18nPrefix}Page.formFields.${formControlName}.placeholder`;
+      this.i18nPlaceholder = `msph.${i18nPrefix}.formFields.${formControlName}.placeholder`;
       if (this.multiSpinnerId) {
         this.i18nPlaceholder += `s.${this.multiSpinnerId}`;
       }

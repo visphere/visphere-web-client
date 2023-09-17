@@ -3,10 +3,8 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { authWindowFadeAndMove } from '../../animations/auth-window.animation';
-import { ModalService } from '../../services/modal/modal.service';
-import { ModalSize } from '../../types/modal.type';
+import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.animation';
+import { ModalSize } from '~/shared-mod/types/modal.type';
 
 @Component({
   selector: 'msph-modal-wrapper',
@@ -14,24 +12,12 @@ import { ModalSize } from '../../types/modal.type';
   animations: [authWindowFadeAndMove],
 })
 export class ModalWrapperComponent {
-  isActive$: Observable<boolean> = this._modalService.isOpen$;
-
+  @Input() isActive = false;
   @Input() modalSize: ModalSize = 'sm';
   @Input() header = '';
   @Input() paragraph?: string;
   @Input() isLoading = false;
 
-  @Output() emitOnClose: EventEmitter<void> = new EventEmitter<void>();
-  @Output() emitOnAnimationDone: EventEmitter<void> = new EventEmitter<void>();
-
-  constructor(private readonly _modalService: ModalService) {}
-
-  handleCloseModal(): void {
-    this._modalService.setIsOpen(false);
-    this.emitOnClose.emit();
-  }
-
-  animationDone(): void {
-    this.emitOnAnimationDone.emit();
-  }
+  @Output() emitOnClose = new EventEmitter<void>();
+  @Output() emitOnAnimationDone = new EventEmitter<void>();
 }

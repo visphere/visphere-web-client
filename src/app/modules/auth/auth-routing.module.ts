@@ -9,6 +9,7 @@ import { activateAccountGuard } from '~/auth-mod/guards/activate-account/activat
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
+import { AuthMyAccountsPageComponent } from '~/auth-mod/pages/auth-my-accounts-page/auth-my-accounts-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
 
@@ -43,6 +44,17 @@ const routes: Routes = [
         component: AuthActivateAccountPageComponent,
         title: 'authActivateAccountPage',
         canActivate: [activateAccountGuard],
+      },
+      {
+        path: 'activate-account/:token',
+        component: AuthActivateAccountPageComponent,
+        title: 'authActivateAccountPage',
+        canActivate: [activateAccountGuard],
+      },
+      {
+        path: 'my-accounts',
+        component: AuthMyAccountsPageComponent,
+        title: 'authMyAccountsPage',
       },
     ],
   },

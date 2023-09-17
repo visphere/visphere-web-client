@@ -7,11 +7,11 @@
   <label class="flex gap-x-2 items-start">
     <input
       type="checkbox"
-      class="msph_auth-checkbox mt-0.5"
+      class="msph-auth__checkbox mt-0.5"
       [formControlName]="formControlIdentifier"
       (input)="handleSetDirtyAndTouched()" />
     <div>
-      <div class="leading-5">
+      <div class="leading-5 cursor-pointer">
         <ng-content select="[labelContent]" />
       </div>
       <div class="text-sm mt-1 msph_auth-invalid-text">

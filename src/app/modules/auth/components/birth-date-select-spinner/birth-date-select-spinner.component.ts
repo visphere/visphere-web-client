@@ -41,7 +41,7 @@ export class BirthDateSelectSpinnerComponent
   ngOnInit(): void {
     this._populateFormControlervice.setFields(
       'birthDate',
-      'webClient.register'
+      'webClient.registerPage'
     );
     this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
       formGroup => (this.formGroup = formGroup)

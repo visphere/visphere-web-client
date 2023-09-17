@@ -13,12 +13,12 @@
       'msph.webClient.resetPasswordPage.successfullSendEmailMessage'
         | translate: { emailAddress: (userEmail$ | async) }
     "
-    class="msph_auth-info-card-container"></div>
+    class="msph-auth__info-card-container"></div>
   <msph-password-input-toggler
     [maxLength]="10"
     placeholder="Xtg4vCt49D"
     formControlIdentifier="token"
-    i18nPrefix="webClient.activateAccount">
+    i18nPrefix="webClient.activateAccountPage">
     <msph-field-validator />
     <msph-field-validator type="exactLength" />
     <msph-field-validator type="pattern" />
@@ -37,7 +37,7 @@
     labelI18nText="msph.common.utils.emailMessageNotReceived" />
 </form>
 <div class="grid gap-y-3" *ngIf="(currentStage$ | async) === 'success'">
-  <div class="msph_auth-info-card-container mb-4">
+  <div class="msph-auth__info-card-container mb-4">
     {{
       'msph.webClient.activateAccountPage.successfullyActivatedMessage'
         | translate

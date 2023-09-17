@@ -25,6 +25,7 @@ export class AuthCommonFormInputComponent
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() requiredStar = false;
+  @Input() inputStyle: 'viewport' | 'static' = 'viewport';
 
   formGroup!: FormGroup;
   i18nLabel = '';
@@ -41,7 +42,7 @@ export class AuthCommonFormInputComponent
   }
 
   ngOnInit(): void {
-    this.i18nLabel = `msph.${this.i18nPrefix}Page.formFields.${this.formControlIdentifier}.value`;
+    this.i18nLabel = `msph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}.value`;
     this._populateFormControlService.setFields(
       this.formControlIdentifier,
       this.i18nPrefix

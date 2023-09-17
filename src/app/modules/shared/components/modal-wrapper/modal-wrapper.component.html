@@ -3,20 +3,22 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<div *ngIf="isActive$ | async" class="msph-modal__container">
+<div *ngIf="isActive" class="msph-modal__container">
   <div class="msph-modal__background"></div>
   <div
     [@authWindowFadeAndMove]
-    (@authWindowFadeAndMove.done)="animationDone()"
+    (@authWindowFadeAndMove.done)="emitOnAnimationDone.emit()"
     class="msph-modal__window-container">
     <div
       [class.max-w-[1280px]]="modalSize === 'xl'"
       [class.max-w-[720px]]="modalSize === 'sm'"
+      [class.max-w-[500px]]="modalSize === 'xs'"
       class="msph-modal__window-wrapper">
       <div class="msph-modal__window-notch"></div>
       <button
         [disabled]="isLoading"
-        (click)="handleCloseModal()"
+        (click)="emitOnClose.emit()"
+        type="button"
         class="msph-modal__window-x-button">
         <ng-icon name="xIcon" />
       </button>
@@ -26,19 +28,17 @@
       <p class="msph-modal__window-paragraph">
         {{ paragraph! | translate }}
       </p>
-      <div class="my-8">
+      <div class="mt-8 mb-5">
         <ng-content select="[content]" />
       </div>
       <div class="flex justify-end gap-x-3">
         <button
           [disabled]="isLoading"
-          (click)="handleCloseModal()"
+          (click)="emitOnClose.emit()"
+          type="button"
           class="msph-modal__close-button">
           {{ 'msph.webClient.modal.button.close' | translate }}
-          <msph-lazy-button-spinner
-            size="sm"
-            color="device"
-            *ngIf="isLoading" />
+          <msph-lazy-button-spinner size="sm" color="modal" *ngIf="isLoading" />
         </button>
         <ng-content select="[buttons]" />
       </div>

@@ -17,7 +17,60 @@ const _reducer = createReducer(
   on(NgrxAction.__removeActivateAccountEmail, state => ({
     ...state,
     activateAccountEmail: '',
-  }))
+  })),
+  on(NgrxAction.__loadMySavedAccounts, (state, action) => ({
+    ...state,
+    mySavedAccounts: action.accounts,
+  })),
+  on(NgrxAction.__addNewMySavedAccount, (state, action) => ({
+    ...state,
+    mySavedAccounts: [
+      ...state.mySavedAccounts,
+      {
+        accountId: uuidv4(),
+        ...action.account,
+      },
+    ],
+  })),
+  on(NgrxAction.__removeMySavedAccount, (state, action) => ({
+    ...state,
+    mySavedAccounts: state.mySavedAccounts.filter(
+      ({ accountId }) => accountId !== action.accountId
+    ),
+  })),
+  on(NgrxAction.__removeAllMySavedAccount, state => ({
+    ...state,
+    mySavedAccounts: [],
+  })),
+  on(
+    NgrxAction.__setMySavedAccountVerified,
+    (state, { thumbnailUrl, username, uuid }) => {
+      const alreadyExist = !!state.mySavedAccounts.find(
+        ({ usernameOrEmailAddress, accountId }) =>
+          usernameOrEmailAddress === username && accountId !== uuid
+      );
+      return alreadyExist
+        ? {
+            ...state,
+            mySavedAccounts: state.mySavedAccounts.filter(
+              ({ accountId }) => accountId !== uuid
+            ),
+          }
+        : {
+            ...state,
+            mySavedAccounts: state.mySavedAccounts.map(account =>
+              account.accountId === uuid
+                ? {
+                    ...account,
+                    thumbnailUrl,
+                    usernameOrEmailAddress: username,
+                    isVerified: true,
+                  }
+                : account
+            ),
+          };
+    }
+  )
 );
 
 export const authReduxStore = {

@@ -9,8 +9,7 @@ import { AbstractPopulateField } from '~/shared-mod/context/abstract-populate-fi
 
 @Injectable()
 export class PopulateFormGroupService extends AbstractPopulateField<FormGroup> {
-  private _formDisabled$: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
+  private _formDisabled$ = new BehaviorSubject<boolean>(false);
 
   setFormDisabled(formDisabled: boolean): void {
     this._formDisabled$.next(formDisabled);

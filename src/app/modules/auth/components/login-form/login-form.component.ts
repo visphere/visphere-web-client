@@ -35,6 +35,7 @@ export class LoginFormComponent
     this.loginForm = new FormGroup({
       usernameOrEmailAddress: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
+      rememberAccount: new FormControl(true),
     });
     this._loginService.setReactiveForm(this.loginForm);
     this._loginService.onValueChange();

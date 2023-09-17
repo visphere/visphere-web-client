@@ -9,7 +9,7 @@
       [maxLength]="30"
       [requiredStar]="true"
       formControlIdentifier="username"
-      i18nPrefix="webClient.register">
+      i18nPrefix="webClient.registerPage">
       <msph-field-validator />
       <msph-field-validator type="minlength" />
       <msph-field-validator type="pattern" />
@@ -19,7 +19,7 @@
       [maxLength]="100"
       [requiredStar]="true"
       formControlIdentifier="emailAddress"
-      i18nPrefix="webClient.register">
+      i18nPrefix="webClient.registerPage">
       <msph-field-validator />
       <msph-field-validator type="email" />
     </msph-auth-common-form-input>
@@ -27,7 +27,7 @@
     <msph-password-input-toggler
       [requiredStar]="true"
       formControlIdentifier="password"
-      i18nPrefix="webClient.register">
+      i18nPrefix="webClient.registerPage">
       <msph-field-validator />
       <msph-field-validator type="pattern" />
     </msph-password-input-toggler>
@@ -37,7 +37,7 @@
     <msph-password-input-toggler
       [requiredStar]="true"
       formControlIdentifier="confirmedPassword"
-      i18nPrefix="webClient.register">
+      i18nPrefix="webClient.registerPage">
       <msph-field-validator />
       <msph-field-validator type="mismatch" />
     </msph-password-input-toggler>

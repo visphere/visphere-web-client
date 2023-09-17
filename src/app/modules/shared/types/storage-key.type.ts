@@ -3,4 +3,8 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type StorageKeyType = 'selectedLang' | 'selectedTheme';
+export type StorageKeyType =
+  | 'selectedLang'
+  | 'selectedTheme'
+  | 'mySavedAccounts'
+  | 'loggedUser';

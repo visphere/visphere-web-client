@@ -6,8 +6,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { StartResetPasswordService } from '~/auth-mod/services/start-reset-password/start-reset-password.service';
+import { CaptchaVerificationService } from '~/root-mod/modules/shared/services/captcha-verification/captcha-verification.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
-import { ModalService } from '~/shared-mod/services/modal/modal.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { regex } from '~/shared-mod/validators/regex.constant';
 
@@ -17,7 +17,7 @@ import { regex } from '~/shared-mod/validators/regex.constant';
   providers: [
     StartResetPasswordService,
     PopulateFormGroupService,
-    ModalService,
+    CaptchaVerificationService,
   ],
 })
 export class StartResetPasswordFormComponent
@@ -31,7 +31,7 @@ export class StartResetPasswordFormComponent
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,
     private readonly _startResetPasswordService: StartResetPasswordService,
-    private readonly _modalService: ModalService
+    private readonly _captchaVerificationService: CaptchaVerificationService
   ) {
     super();
     this.startResetPasswordForm = new FormGroup({
@@ -61,6 +61,6 @@ export class StartResetPasswordFormComponent
   }
 
   handleSubmitStartResetPasswordForm(): void {
-    this._modalService.setIsOpen(true);
+    this._captchaVerificationService.setModalVisibility(true);
   }
 }

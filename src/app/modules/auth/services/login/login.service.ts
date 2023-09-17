@@ -14,8 +14,7 @@ export class LoginService
   extends AbstractMultistageFormProvider<LoginFormStage, void>
   implements OnDestroy
 {
-  private _isNextButtonEnabled$: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
+  private _isNextButtonEnabled$ = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly _authHttpClientService: AuthHttpClientService) {
     super('login');

@@ -16,7 +16,6 @@ import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
 import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
-import { ModalService } from '~/shared-mod/services/modal/modal.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { HcaptchaErrorEvent } from '~/shared-mod/types/hcaptcha.type';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -25,7 +24,6 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 @Component({
   selector: 'msph-verify-captcha-modal',
   templateUrl: './verify-captcha-modal.component.html',
-  providers: [CaptchaVerificationService],
 })
 export class VerifyCaptchaModalComponent
   extends AbstractReactiveProvider
@@ -34,9 +32,10 @@ export class VerifyCaptchaModalComponent
   @Input() paragraph?: string;
   @Input() snackbarPlaceholder?: string;
 
-  @Output() emitOnAccept: EventEmitter<boolean> = new EventEmitter();
+  @Output() emitOnAccept = new EventEmitter();
 
-  isActive$: Observable<boolean> = this._modalService.isOpen$;
+  isActive$: Observable<boolean> =
+    this._captchaVerificationService.isModalOpen$;
   isLoading$: Observable<boolean> = this._captchaVerificationService.isLoading$;
 
   isActive = false;
@@ -51,8 +50,7 @@ export class VerifyCaptchaModalComponent
     private readonly _store: Store<SharedReducer>,
     private readonly _translateService: TranslateService,
     private readonly _languageSwitcherService: LanguageSwitcherService,
-    private readonly _captchaVerificationService: CaptchaVerificationService,
-    private readonly _modalService: ModalService
+    private readonly _captchaVerificationService: CaptchaVerificationService
   ) {
     super();
   }
@@ -75,6 +73,7 @@ export class VerifyCaptchaModalComponent
   }
 
   handleEmitOnClose(): void {
+    this._captchaVerificationService.setModalVisibility(false);
     if (this.snackbarPlaceholder) {
       this._store.dispatch(
         NgrxAction_SHA.__addSnackbar({

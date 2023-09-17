@@ -19,8 +19,7 @@ export class RegisterService extends AbstractMultistageFormProvider<
   RegisterFormStage,
   void
 > {
-  private _captchaModalState$: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
+  private _captchaModalState$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly _authHttpClientService: AuthHttpClientService,

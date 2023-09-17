@@ -3,18 +3,19 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { TestBed } from '@angular/core/testing';
+import { AuthModule } from '~/auth-mod/auth.module';
 import { AppModule } from '~/root-mod/app.module';
-import { ModalService } from './modal.service';
+import { MyAccountsService } from './my-accounts.service';
 
-describe('ModalService', () => {
-  let service: ModalService;
+describe('MyAccountsService', () => {
+  let service: MyAccountsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule],
-      providers: [ModalService],
+      imports: [AppModule, AuthModule],
+      providers: [MyAccountsService],
     });
-    service = TestBed.inject(ModalService);
+    service = TestBed.inject(MyAccountsService);
   });
 
   it('should be created', () => {

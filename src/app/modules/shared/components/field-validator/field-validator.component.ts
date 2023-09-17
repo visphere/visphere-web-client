@@ -16,7 +16,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
       {{
         'msph.' +
           i18nPrefix +
-          'Page.formFields.' +
+          '.formFields.' +
           formControlName +
           '.errors.' +
           type | translate

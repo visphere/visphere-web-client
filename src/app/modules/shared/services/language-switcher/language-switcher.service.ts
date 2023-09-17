@@ -17,7 +17,7 @@ import {
 @Injectable({ providedIn: 'root' })
 export class LanguageSwitcherService {
   private _availableLangs = AVAILABLE_TRANSLATIONS;
-  private _selectedLang$: BehaviorSubject<TranslationRow> = new BehaviorSubject(
+  private _selectedLang$ = new BehaviorSubject(
     this.getTranslation(navigator.language)
   );
 

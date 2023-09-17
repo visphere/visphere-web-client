@@ -16,8 +16,9 @@ import {
 export class ThemeSwitcherService {
   private _deviceTheme = this.getThemeBasedId('device');
   private _isPickedDevice = true;
-  private _selectedTheme$: BehaviorSubject<ThemeModeType> =
-    new BehaviorSubject<ThemeModeType>(this._deviceTheme);
+  private _selectedTheme$ = new BehaviorSubject<ThemeModeType>(
+    this._deviceTheme
+  );
 
   constructor(
     @Inject(DOCUMENT) private readonly _document: Document,

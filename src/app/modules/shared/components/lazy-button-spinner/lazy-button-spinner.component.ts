@@ -10,5 +10,5 @@ import { Component, Input } from '@angular/core';
 })
 export class LazyButtonSpinnerComponent {
   @Input() size: 'sm' | 'lg' = 'lg';
-  @Input() color: 'mono' | 'device' = 'mono';
+  @Input() color: 'mono' | 'device' | 'modal' = 'mono';
 }
