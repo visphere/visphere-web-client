@@ -17,7 +17,10 @@ import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.val
   templateUrl: './register-form.component.html',
   providers: [RegisterService, CaptchaVerificationService],
 })
-export class RegisterFormComponent implements OnInit {
+export class RegisterFormComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   registerForm: FormGroup;
   currentStage$ = this._registerService.currentStage$;
   captchaModalState$ = this._registerService.captchaModalState$;
@@ -27,6 +30,7 @@ export class RegisterFormComponent implements OnInit {
     private readonly _registerService: RegisterService,
     private readonly _captchaVerificationService: CaptchaVerificationService
   ) {
+    super();
     this.registerForm = new FormGroup(
       {
         firstStage: new FormGroup(
@@ -84,8 +88,12 @@ export class RegisterFormComponent implements OnInit {
     this._registerService.setReactiveForm(this.registerForm);
   }
 
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
+
   handleEmitOnAcceptCaptcha(): void {
-    this._registerService.submitForm();
+    this.wrapAsObservable(this._registerService.submitForm()).subscribe();
   }
 
   handleSubmitRegisterForm(): void {

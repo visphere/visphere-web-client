@@ -4,6 +4,7 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivateAccountService } from '~/auth-mod/services/activate-account/activate-account.service';
@@ -30,13 +31,16 @@ export class ActivateAccountFormComponent
     NgrxSelector_ATH.selectActivateAccountEmail
   );
   isLoading$: Observable<boolean> = this._activateAccountService.isLoading$;
+  isResendLoading$: Observable<boolean> =
+    this._activateAccountService.resendIsLoading$;
   currentStage$: Observable<ActivateAccountFormStage> =
     this._activateAccountService.currentStage$;
 
   constructor(
     private readonly _store: Store<AuthReducer>,
     private readonly _activateAccountService: ActivateAccountService,
-    private readonly _populateFormGroupService: PopulateFormGroupService
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _activatedRoute: ActivatedRoute
   ) {
     super();
     this.activateAccountForm = new FormGroup({
@@ -50,6 +54,12 @@ export class ActivateAccountFormComponent
   }
 
   ngOnInit(): void {
+    const token = this._activatedRoute.snapshot.paramMap.get('token');
+    if (token) {
+      this.wrapAsObservable(
+        this._activateAccountService.validateToken(token)
+      ).subscribe();
+    }
     this._populateFormGroupService.setField(this.activateAccountForm);
     this.wrapAsObservable(this._activateAccountService.isLoading$).subscribe(
       isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
@@ -61,11 +71,15 @@ export class ActivateAccountFormComponent
   }
 
   handleSubmitactivateAccountForm(): void {
-    this._activateAccountService.submitForm();
+    this.wrapAsObservable(
+      this._activateAccountService.submitForm()
+    ).subscribe();
   }
 
   handleResendMessage(): void {
-    this._activateAccountService.resendEmailMessage();
+    this.wrapAsObservable(
+      this._activateAccountService.resendEmailMessage()
+    ).subscribe();
   }
 
   handleReturnToLoginAndClearState(): void {

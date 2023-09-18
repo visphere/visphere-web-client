@@ -42,4 +42,13 @@ export class LocalStorageService {
     parsed[field] = newValue;
     this.save(storageKey, parsed);
   }
+
+  push<T>(storageKey: StorageKeyType, newValue: T): void {
+    const parsed: T[] | null = this.get(storageKey);
+    if (!parsed) {
+      return;
+    }
+    parsed.push(newValue);
+    this.save(storageKey, parsed);
+  }
 }

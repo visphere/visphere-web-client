@@ -4,9 +4,12 @@
  */
 import { createAction, props } from '@ngrx/store';
 import { Severity, SnackbarI18n } from '~/shared-mod/types/snackbar.type';
+import { LoggedUser } from '../models/logged-user.model';
 
 const ADD_SNACKBAR = '[SHARED] ADD SNACKBAR' as const;
 const REMOVE_SNACKBAR = '[SHARED] REMOVE SNACKBAR' as const;
+const SET_LOGGED_USER_DETAILS = '[SHARED] SET LOGGED USER DETAILS' as const;
+const REMOVE_USER_DETAILS = '[SHARED] REMOVE USER DETAILS' as const;
 
 export const __addSnackbar = createAction(
   ADD_SNACKBAR,
@@ -17,3 +20,10 @@ export const __removeSnackbar = createAction(
   REMOVE_SNACKBAR,
   props<{ id?: string }>()
 );
+
+export const __setLoggedUserDetails = createAction(
+  SET_LOGGED_USER_DETAILS,
+  props<{ details: LoggedUser }>()
+);
+
+export const __removeUserDetails = createAction(REMOVE_USER_DETAILS);
