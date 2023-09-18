@@ -6,25 +6,32 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { RegisterFormModel } from '~/auth-mod/models/register-form.model';
+import * as moment from 'moment';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import {
+  RegisterFormModel,
+  RegisterReqDtoModel,
+} from '~/auth-mod/models/register-form.model';
 import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import { RegisterFormStage } from '~/auth-mod/types/form-stage.type';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
+import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
+import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable()
 export class RegisterService extends AbstractMultistageFormProvider<
   RegisterFormStage,
-  void
+  BaseMessageModel
 > {
   private _captchaModalState$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly _authHttpClientService: AuthHttpClientService,
     private readonly _router: Router,
-    private readonly _store: Store<AuthReducer>
+    private readonly _store: Store<AuthReducer | SharedReducer>
   ) {
     super('first');
   }
@@ -46,19 +53,54 @@ export class RegisterService extends AbstractMultistageFormProvider<
     );
   }
 
-  override abstractSubmitForm(): Observable<void> {
+  override abstractSubmitForm(): Observable<BaseMessageModel> {
     const data = this.parseFormValues<RegisterFormModel>();
-    // next
-    console.log(data);
-    // success
-    this._store.dispatch(
-      NgrxAction_ATH.__setActivateAccountEmail({
-        email: data.firstStage.emailAddress,
-      })
-    );
-    this.moveToActivateAccount();
+    return this._authHttpClientService
+      .registerViaAppAccount(this.mapToRegiterReqDto(data))
+      .pipe(
+        tap(({ message }) => {
+          this._store.dispatch(
+            NgrxAction_SHA.__addSnackbar({
+              content: {
+                placeholder: message,
+                omitTransformation: true,
+              },
+              severity: 'success',
+            })
+          );
+          this._store.dispatch(
+            NgrxAction_ATH.__setActivateAccountEmail({
+              email: data.firstStage.emailAddress,
+            })
+          );
+          this.setLoading(false);
+          this.moveToActivateAccount();
+        }),
+        catchError(err => {
+          this.setLoading(false);
+          return throwError(() => err);
+        })
+      );
+  }
 
-    return of();
+  private mapToRegiterReqDto({
+    firstStage,
+    secondStage,
+  }: RegisterFormModel): RegisterReqDtoModel {
+    const { day, month, year } = firstStage.birthDate;
+    const birthDateObj = new Date(day, month, year);
+    return {
+      username: firstStage.username,
+      emailAddress: firstStage.emailAddress,
+      password: firstStage.password,
+      confirmedPassword: firstStage.confirmedPassword,
+      birthDate: moment(birthDateObj).format('DD/MM/YYYY'),
+      firstName: secondStage.firstName,
+      lastName: secondStage.lastName,
+      secondEmailAddress: secondStage.secondEmailAddress,
+      allowNotifs: secondStage.allowNotifs,
+      enabledMfa: secondStage.enabledMfa,
+    };
   }
 
   private async moveToActivateAccount(): Promise<void> {

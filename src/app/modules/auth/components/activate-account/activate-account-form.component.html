@@ -32,6 +32,7 @@
   <msph-deferred-button
     (emitOnAction)="handleResendMessage()"
     [isDisabled]="!!(isLoading$ | async)"
+    [isLoading]="(isResendLoading$ | async)!"
     styles="msph-auth__resend-message-button"
     innerI18nText="msph.common.utils.resendMessageButton"
     labelI18nText="msph.common.utils.emailMessageNotReceived" />

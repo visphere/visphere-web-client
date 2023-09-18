@@ -24,6 +24,14 @@ const _reducer = createReducer(
     snackbarStack: action.id
       ? state.snackbarStack.filter(({ id }) => id !== action.id)
       : state.snackbarStack.slice(0, -1),
+  })),
+  on(NgrxAction.__setLoggedUserDetails, (state, action) => ({
+    ...state,
+    loggedUser: action.details,
+  })),
+  on(NgrxAction.__removeUserDetails, state => ({
+    ...state,
+    loggedUser: null,
   }))
 );
 

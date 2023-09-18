@@ -61,6 +61,6 @@ export class LoginFormComponent
   }
 
   handleSubmitLoginForm(): void {
-    this._loginService.submitForm();
+    this.wrapAsObservable(this._loginService.submitForm()).subscribe();
   }
 }

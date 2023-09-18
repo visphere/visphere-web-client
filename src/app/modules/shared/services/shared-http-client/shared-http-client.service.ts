@@ -31,4 +31,12 @@ export class SharedHttpClientService extends AbstractHttpProvider {
       req
     );
   }
+
+  checkIfUsernameAlreadyExist(
+    username: string
+  ): Observable<CheckUsernameExistResDtoModel> {
+    return this._httpClient.get<CheckUsernameExistResDtoModel>(
+      `${this._infraApiPath}/api/v1/account/check/username/${username}/exist`
+    );
+  }
 }

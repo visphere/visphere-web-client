@@ -3,6 +3,19 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
+export type RegisterReqDtoModel = {
+  username: string;
+  emailAddress: string;
+  password: string;
+  confirmedPassword: string;
+  firstName: string;
+  lastName: string;
+  secondEmailAddress: string;
+  enabledMfa: boolean;
+  allowNotifs: boolean;
+  birthDate: string;
+};
+
 export type RegisterFormModel = {
   firstStage: {
     username: string;
@@ -16,5 +29,6 @@ export type RegisterFormModel = {
     lastName: string;
     secondEmailAddress: string;
     allowNotifs: boolean;
+    enabledMfa: boolean;
   };
 };

@@ -66,6 +66,7 @@ describe('RegisterSecondStageFormComponent', () => {
           ]),
           secondEmailAddress: new FormControl('', [Validators.email]),
           allowNotifs: new FormControl(false),
+          enabledMfa: new FormControl(true),
           agreeTerms: new FormControl(false, [requiredBoolValidator()]),
         }),
       },

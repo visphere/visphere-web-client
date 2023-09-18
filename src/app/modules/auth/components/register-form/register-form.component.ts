@@ -2,10 +2,11 @@
  * Copyright (c) 2023 by MoonSphere Systems
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
 import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
 import { emailWithSecondaryEmail } from '~/shared-mod/validators/email-with-secondary-email.validator';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
@@ -17,7 +18,10 @@ import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.val
   templateUrl: './register-form.component.html',
   providers: [RegisterService, CaptchaVerificationService],
 })
-export class RegisterFormComponent implements OnInit {
+export class RegisterFormComponent
+  extends AbstractReactiveProvider
+  implements OnInit, OnDestroy
+{
   registerForm: FormGroup;
   currentStage$ = this._registerService.currentStage$;
   captchaModalState$ = this._registerService.captchaModalState$;
@@ -27,6 +31,7 @@ export class RegisterFormComponent implements OnInit {
     private readonly _registerService: RegisterService,
     private readonly _captchaVerificationService: CaptchaVerificationService
   ) {
+    super();
     this.registerForm = new FormGroup(
       {
         firstStage: new FormGroup(
@@ -66,6 +71,7 @@ export class RegisterFormComponent implements OnInit {
           secondEmailAddress: new FormControl('', [Validators.email]),
           allowNotifs: new FormControl(false),
           agreeTerms: new FormControl(false, [requiredBoolValidator()]),
+          enabledMfa: new FormControl(true),
         }),
       },
       {
@@ -84,8 +90,12 @@ export class RegisterFormComponent implements OnInit {
     this._registerService.setReactiveForm(this.registerForm);
   }
 
+  ngOnDestroy(): void {
+    this.unmountAllSubscriptions();
+  }
+
   handleEmitOnAcceptCaptcha(): void {
-    this._registerService.submitForm();
+    this.wrapAsObservable(this._registerService.submitForm()).subscribe();
   }
 
   handleSubmitRegisterForm(): void {

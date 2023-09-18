@@ -10,6 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ChangePasswordService } from '~/auth-mod/services/change-password/change-password.service';
 import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
@@ -38,7 +39,8 @@ export class ChangePasswordFormComponent
 
   constructor(
     private readonly _changePasswordService: ChangePasswordService,
-    private readonly _populateFormGroupService: PopulateFormGroupService
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _activatedRoute: ActivatedRoute
   ) {
     super();
     this.changePasswordForm = new FormGroup(
@@ -60,6 +62,11 @@ export class ChangePasswordFormComponent
   }
 
   ngOnInit(): void {
+    this.wrapAsObservable(
+      this._changePasswordService.validateToken(
+        this._activatedRoute.snapshot.paramMap.get('token') || ''
+      )
+    ).subscribe();
     this._populateFormGroupService.setField(this.changePasswordForm);
     this.wrapAsObservable(this._changePasswordService.isLoading$).subscribe(
       isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
@@ -71,7 +78,7 @@ export class ChangePasswordFormComponent
   }
 
   handleSubmitChangePasswordForm(): void {
-    this._changePasswordService.submitForm();
+    this.wrapAsObservable(this._changePasswordService.submitForm()).subscribe();
   }
 
   ngAfterViewInit(): void {

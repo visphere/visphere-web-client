@@ -57,7 +57,9 @@ export class StartResetPasswordFormComponent
   }
 
   handleEmitOnAcceptCaptcha(): void {
-    this._startResetPasswordService.submitForm();
+    this.wrapAsObservable(
+      this._startResetPasswordService.submitForm()
+    ).subscribe();
   }
 
   handleSubmitStartResetPasswordForm(): void {

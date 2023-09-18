@@ -3,7 +3,21 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type LoginFormModel = {
+export type LoginReqDtoModel = {
   usernameOrEmailAddress: string;
   password: string;
 };
+
+export type LoginResDtoModel = {
+  fullName: string;
+  username: string;
+  emailAddress: string;
+  profileUrl: string;
+  accessToken: string;
+  refreshToken: string;
+  isActivated: boolean;
+};
+
+export interface LoginFormModel extends LoginReqDtoModel {
+  rememberAccount: boolean;
+}

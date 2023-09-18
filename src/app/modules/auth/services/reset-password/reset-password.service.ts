@@ -9,21 +9,20 @@ import { ResetPasswordFormStage } from '~/root-mod/modules/auth/types/form-stage
 @Injectable()
 export class ResetPasswordService {
   private _currentStage$ = new BehaviorSubject<ResetPasswordFormStage>('login');
-
-  private _userEmail$: ReplaySubject<string> = new ReplaySubject<string>(1);
+  private _userLoginOrEmail$ = new ReplaySubject<string>(1);
 
   setCurrentStage(stage: ResetPasswordFormStage): void {
     this._currentStage$.next(stage);
   }
 
-  setUserEmail(userEmail: string): void {
-    this._userEmail$.next(userEmail);
+  setUsernameOrEmailAddress(userEmail: string): void {
+    this._userLoginOrEmail$.next(userEmail);
   }
 
   get currentStage$(): Observable<ResetPasswordFormStage> {
     return this._currentStage$.asObservable();
   }
-  get userEmail$(): Observable<string> {
-    return this._userEmail$.asObservable();
+  get userLoginOrEmail$(): Observable<string> {
+    return this._userLoginOrEmail$.asObservable();
   }
 }

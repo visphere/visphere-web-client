@@ -22,6 +22,7 @@ describe('RegisterFormConsentsComponent', () => {
     const populateFormGroup = TestBed.inject(PopulateFormGroupService);
     const formGroup = new FormGroup({
       allowNotifs: new FormControl(false),
+      enabledMfa: new FormControl(true),
       agreeTerms: new FormControl(false),
     });
     populateFormGroup.setField(formGroup);
