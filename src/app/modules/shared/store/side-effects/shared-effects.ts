@@ -20,7 +20,7 @@ export class SharedEffects {
     () =>
       this._actions$.pipe(
         ofType(NgrxAction.__addSnackbar),
-        delay(4000),
+        delay(5000),
         tap(() => {
           this._store.dispatch(NgrxAction.__removeSnackbar({}));
         })

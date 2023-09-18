@@ -4,6 +4,7 @@
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { Observable, combineLatest } from 'rxjs';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
@@ -26,9 +27,15 @@ export class AuthCommonFormInputComponent
   @Input() placeholder = '';
   @Input() requiredStar = false;
   @Input() inputStyle: 'viewport' | 'static' = 'viewport';
+  @Input() additionalInfo = '';
 
   formGroup!: FormGroup;
   i18nLabel = '';
+  tooltipProps: NgxTippyProps = {
+    placement: 'top',
+    theme: 'msph-viewport',
+    animation: 'scale-subtle',
+  };
 
   formDisabled$: Observable<boolean> =
     this._populateFormGroupService.formDisabled$;

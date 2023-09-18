@@ -7,6 +7,7 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -16,13 +17,14 @@ import { CdTimerComponent } from 'angular-cd-timer';
   selector: 'msph-deferred-button',
   templateUrl: './deferred-button.component.html',
 })
-export class DeferredButtonComponent implements OnDestroy {
+export class DeferredButtonComponent implements OnInit, OnDestroy {
   @Input() styles = '';
   @Input() innerI18nText = '';
   @Input() labelI18nText = '';
   @Input() deferTimeSec = 30;
   @Input() isLoading = false;
   @Input() isDisabled = false;
+  @Input() enabledOnMount = true;
 
   @ViewChild('timerEntry') timerEntry?: CdTimerComponent;
 
@@ -30,6 +32,12 @@ export class DeferredButtonComponent implements OnDestroy {
 
   isDeferred = false;
   currentTime = this.deferTimeSec;
+
+  ngOnInit(): void {
+    if (this.enabledOnMount) {
+      this.isDeferred = true;
+    }
+  }
 
   ngOnDestroy(): void {
     this.timerEntry?.reset();

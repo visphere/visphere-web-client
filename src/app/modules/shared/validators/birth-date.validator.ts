@@ -12,10 +12,10 @@ export class BirthDateValidator {
 
   validate(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      if (!control.touched) return null;
-
+      if (!control.touched) {
+        return null;
+      }
       const countOfNulls = Object.values(control.value).filter(v => !v).length;
-
       if (countOfNulls === 0) {
         if (!this._timeUtilsService.checkIfDateIsValid(control.value)) {
           return { invalid: true };

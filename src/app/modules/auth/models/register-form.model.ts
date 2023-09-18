@@ -5,7 +5,7 @@
 
 export type RegisterFormModel = {
   firstStage: {
-    login: string;
+    username: string;
     emailAddress: string;
     password: string;
     confirmedPassword: string;

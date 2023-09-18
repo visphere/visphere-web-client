@@ -14,7 +14,6 @@ import {
   throwError,
 } from 'rxjs';
 import { environment } from '~/env/environment';
-import { flattedErrorResponse } from '~/root-mod/modules/shared/utils/flatted-error-response';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -83,12 +82,6 @@ export class CaptchaVerificationService
         catchError(err => {
           this.setLoading(false);
           this.setModalVisibility(false);
-          this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
-              content: flattedErrorResponse(err.error),
-              severity: 'danger',
-            })
-          );
           return throwError(() => err);
         }),
         delay(1000),

@@ -3,17 +3,16 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Action, createReducer, on } from '@ngrx/store';
+import { v4 as uuidv4 } from 'uuid';
 import * as NgrxAction from './actions';
 import { AuthStoreState, authStoreState } from './state';
 
 const _reducer = createReducer(
   authStoreState,
-  on(NgrxAction.__setActivateAccountEmail, (state, action) => {
-    return {
-      ...state,
-      activateAccountEmail: action.email,
-    };
-  }),
+  on(NgrxAction.__setActivateAccountEmail, (state, action) => ({
+    ...state,
+    activateAccountEmail: action.email,
+  })),
   on(NgrxAction.__removeActivateAccountEmail, state => ({
     ...state,
     activateAccountEmail: '',

@@ -34,16 +34,12 @@
     <msph-auth-common-form-input
       [maxLength]="100"
       formControlIdentifier="secondEmailAddress"
-      i18nPrefix="webClient.registerPage">
+      i18nPrefix="webClient.registerPage"
+      [additionalInfo]="
+        'msph.webClient.registerPage.secondEmailAddressUsage' | translate
+      ">
       <msph-field-validator type="email" />
       <msph-field-validator type="exact" />
-      <ng-container afterInputContent>
-        <span class="msph-auth__form-out-text">
-          {{
-            'msph.webClient.registerPage.secondEmailAddressUsage' | translate
-          }}
-        </span>
-      </ng-container>
     </msph-auth-common-form-input>
 
     <msph-register-form-consents />

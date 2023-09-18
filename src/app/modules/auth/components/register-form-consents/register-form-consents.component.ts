@@ -23,7 +23,7 @@ export class RegisterFormConsentsComponent
   implements OnInit, OnDestroy
 {
   selectAllToggle = false;
-  agreeTermsContent: SafeHtml = '';
+  agreeTermsContent$?: Observable<SafeHtml>;
   formGroup!: FormGroup;
   path = environment.baseLandingUrl;
 
@@ -31,7 +31,6 @@ export class RegisterFormConsentsComponent
     this._populateFormGroupService.formDisabled$;
 
   constructor(
-    private readonly _sanitizePipe: SanitizePipe,
     private readonly _translateService: TranslateService,
     private readonly _populateFormGroupService: PopulateFormGroupService,
     private readonly _languageSwitcherService: LanguageSwitcherService
@@ -40,8 +39,7 @@ export class RegisterFormConsentsComponent
   }
 
   ngOnInit(): void {
-    this.agreeTermsContent = this.generateTermsContent();
-
+    this.agreeTermsContent$ = this.generateTermsContent();
     this.wrapAsObservable(
       combineLatest([
         this._populateFormGroupService.field$,
@@ -50,7 +48,7 @@ export class RegisterFormConsentsComponent
     ).subscribe(([formGroup, lang]) => {
       this.formGroup = formGroup;
       this.path = `${environment.baseLandingUrl}${lang.landingPrefix}`;
-      this.agreeTermsContent = this.generateTermsContent();
+      this.agreeTermsContent$ = this.generateTermsContent();
     });
   }
 
@@ -61,10 +59,10 @@ export class RegisterFormConsentsComponent
   handleToggleAllValues(): void {
     const allowNotifsControl = this.formGroup.get('allowNotifs');
     const agreeTermsControl = this.formGroup.get('agreeTerms');
-    if (!allowNotifsControl || !agreeTermsControl) return;
-
+    if (!allowNotifsControl || !agreeTermsControl) {
+      return;
+    }
     this.selectAllToggle = !this.selectAllToggle;
-
     allowNotifsControl.patchValue(this.selectAllToggle);
     agreeTermsControl.patchValue(this.selectAllToggle);
     agreeTermsControl.setErrors(
@@ -72,19 +70,15 @@ export class RegisterFormConsentsComponent
     );
   }
 
-  private generateTermsContent(): string {
+  private generateTermsContent(): Observable<string> {
     const termsHref = this.generateBaseUrl('terms-and-conditions', 'terms');
     const privacyPolicyHref = this.generateBaseUrl(
       'privacy-policy',
       'privacyPolicy'
     );
-    return String(
-      this._sanitizePipe.transform(
-        this._translateService.instant(
-          'msph.webClient.registerPage.formFields.agreeTerms.value',
-          { termsUrl: termsHref, privacyPolicyUrl: privacyPolicyHref }
-        )
-      )
+    return this._translateService.get(
+      'msph.webClient.registerPage.formFields.agreeTerms.value',
+      { termsUrl: termsHref, privacyPolicyUrl: privacyPolicyHref }
     );
   }
 

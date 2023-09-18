@@ -5,5 +5,5 @@
 
 export type ChangePasswordFormModel = {
   newPassword: string;
-  repeatNewPassword: string;
+  confirmedNewPassword: string;
 };

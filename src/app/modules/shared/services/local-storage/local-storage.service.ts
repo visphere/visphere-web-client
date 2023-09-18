@@ -19,7 +19,9 @@ export class LocalStorageService {
 
   get<T>(storageKey: StorageKeyType): T | null {
     const preParsed = this.localStorage.getItem(storageKey);
-    if (!preParsed) return null;
+    if (!preParsed) {
+      return null;
+    }
     return JSON.parse(preParsed);
   }
 
@@ -34,7 +36,9 @@ export class LocalStorageService {
 
   update(storageKey: StorageKeyType, field: string, newValue: any): void {
     const parsed: any = this.get(storageKey);
-    if (!parsed) return;
+    if (!parsed) {
+      return;
+    }
     parsed[field] = newValue;
     this.save(storageKey, parsed);
   }
