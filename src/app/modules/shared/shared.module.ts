@@ -15,6 +15,9 @@ import { SharedEffects } from '~/root-mod/modules/shared/store/side-effects/shar
 import { DeferredButtonComponent } from '~/shared-mod/components/deferred-button/deferred-button.component';
 import { DevastateActionModalComponent } from '~/shared-mod/components/devastate-action-modal/devastate-action-modal.component';
 import { FieldValidatorComponent } from '~/shared-mod/components/field-validator/field-validator.component';
+import { IzomorphicLoaderComponent } from '~/shared-mod/components/izomorphic-loader/izomorphic-loader.component';
+import { LazyButtonSpinnerComponent } from '~/shared-mod/components/lazy-button-spinner/lazy-button-spinner.component';
+import { LazyPageLoaderComponent } from '~/shared-mod/components/lazy-page-loader/lazy-page-loader.component';
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
@@ -22,9 +25,6 @@ import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-capt
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { sharedReduxStore } from '~/shared-mod/store/reducer';
-import { IzomorphicLoaderComponent } from './components/izomorphic-loader/izomorphic-loader.component';
-import { LazyButtonSpinnerComponent } from './components/lazy-button-spinner/lazy-button-spinner.component';
-import { LazyPageLoaderComponent } from './components/lazy-page-loader/lazy-page-loader.component';
 
 @NgModule({
   declarations: [
