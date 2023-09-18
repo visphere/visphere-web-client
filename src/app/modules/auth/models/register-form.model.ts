@@ -29,5 +29,6 @@ export type RegisterFormModel = {
     lastName: string;
     secondEmailAddress: string;
     allowNotifs: boolean;
+    enabledMfa: boolean;
   };
 };

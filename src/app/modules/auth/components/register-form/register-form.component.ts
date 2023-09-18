@@ -2,10 +2,11 @@
  * Copyright (c) 2023 by MoonSphere Systems
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
 import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
 import { emailWithSecondaryEmail } from '~/shared-mod/validators/email-with-secondary-email.validator';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
@@ -70,6 +71,7 @@ export class RegisterFormComponent
           secondEmailAddress: new FormControl('', [Validators.email]),
           allowNotifs: new FormControl(false),
           agreeTerms: new FormControl(false, [requiredBoolValidator()]),
+          enabledMfa: new FormControl(true),
         }),
       },
       {

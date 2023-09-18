@@ -26,6 +26,13 @@
         }}
       </ng-container>
     </msph-auth-checkbox-form-input>
+    <msph-auth-checkbox-form-input formControlIdentifier="enabledMfa">
+      <ng-container labelContent>
+        {{
+          'msph.webClient.registerPage.formFields.enabledMfa.value' | translate
+        }}
+      </ng-container>
+    </msph-auth-checkbox-form-input>
     <msph-auth-checkbox-form-input
       formControlIdentifier="agreeTerms"
       i18nPrefix="webClient.registerPage">
