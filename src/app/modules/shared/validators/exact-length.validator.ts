@@ -3,12 +3,9 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { AbstractControl } from '@angular/forms';
+import { FcValidatorErrors } from '../types/validation.type';
 
-type ReturnType = (
-  control: AbstractControl
-) => { [key: string]: boolean } | null;
-
-export function exactLengthValidator(length: number): ReturnType {
+export function exactLengthValidator(length: number): FcValidatorErrors {
   return (control: AbstractControl) => {
     const value: string = control.value;
     if (value && value.length !== length) {

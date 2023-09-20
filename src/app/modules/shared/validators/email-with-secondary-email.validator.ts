@@ -3,6 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { AbstractControl } from '@angular/forms';
+import { ExtendedValidatorErrors } from '../types/validation.type';
 
 type FieldProp = {
   nestedForm?: string;
@@ -14,9 +15,7 @@ type Props = {
   secondary: FieldProp;
 };
 
-type ReturnType = (
-  control: AbstractControl
-) => { [key: string]: boolean } | null;
+type ReturnType = (control: AbstractControl) => ExtendedValidatorErrors;
 
 export function emailWithSecondaryEmail({
   primary,

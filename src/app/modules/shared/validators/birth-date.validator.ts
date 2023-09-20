@@ -5,13 +5,14 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
+import { ExtendedValidatorErrors } from '../types/validation.type';
 
 @Injectable({ providedIn: 'root' })
 export class BirthDateValidator {
   constructor(private readonly _timeUtilsService: TimeUtilsService) {}
 
   validate(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
+    return (control: AbstractControl): ExtendedValidatorErrors => {
       if (!control.touched) {
         return null;
       }
