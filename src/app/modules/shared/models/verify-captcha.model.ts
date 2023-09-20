@@ -13,6 +13,6 @@ export type VerifyCaptchaModel = {
   siteKey: string;
 };
 
-export interface CaptchaEvent extends Event {
+export type CaptchaEvent = Event & {
   token: string;
-}
+};

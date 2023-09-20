@@ -10,12 +10,12 @@ export type BaseErrorModel = {
   method: string;
 };
 
-export interface MessageErrorModel extends BaseErrorModel {
+export type MessageErrorModel = BaseErrorModel & {
   message: string;
-}
+};
 
-export interface MultiFieldsErrorModel extends BaseErrorModel {
+export type MultiFieldsErrorModel = BaseErrorModel & {
   errors: {
     [key: string]: string;
   };
-}
+};

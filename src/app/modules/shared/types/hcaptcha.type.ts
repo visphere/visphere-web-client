@@ -3,6 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export interface HcaptchaErrorEvent extends Event {
+export type HcaptchaErrorEvent = Event & {
   error: string;
-}
+};

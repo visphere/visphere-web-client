@@ -18,6 +18,6 @@ export type LoginResDtoModel = {
   isActivated: boolean;
 };
 
-export interface LoginFormModel extends LoginReqDtoModel {
+export type LoginFormModel = LoginReqDtoModel & {
   rememberAccount: boolean;
-}
+};

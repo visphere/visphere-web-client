@@ -9,9 +9,9 @@ export type MySavedAccountPayload = {
   isVerified: boolean;
 };
 
-export interface MySavedAccountModel extends MySavedAccountPayload {
+export type MySavedAccountModel = MySavedAccountPayload & {
   accountId: string;
-}
+};
 
 export type MySavedAccountAuthFormModel = {
   password: string;

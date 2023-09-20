@@ -12,6 +12,6 @@ export type ActivateAccountReqDtoModel = {
   emailAddress: string;
 };
 
-export interface ActivateAccountResDtoModel extends BaseMessageModel {
+export type ActivateAccountResDtoModel = BaseMessageModel & {
   enabledMfa: boolean;
-}
+};
