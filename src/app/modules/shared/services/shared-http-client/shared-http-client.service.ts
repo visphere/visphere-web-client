@@ -6,11 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
-import { CheckUsernameExistResDtoModel } from '~/shared-mod/models/check-username-exist.model';
+import { CheckExistResDtoModel } from '~/shared-mod/models/check-exist.model';
 import {
   IpAddressModel,
   VerifyCaptchaModel,
 } from '~/shared-mod/models/verify-captcha.model';
+import { QueryParamKey } from '~/shared-mod/types/query-param.type';
 import { AbstractHttpProvider } from '../abstract-http-provider';
 
 @Injectable({ providedIn: 'root' })
@@ -32,11 +33,13 @@ export class SharedHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  checkIfUsernameAlreadyExist(
-    username: string
-  ): Observable<CheckUsernameExistResDtoModel> {
-    return this._httpClient.get<CheckUsernameExistResDtoModel>(
-      `${this._infraApiPath}/api/v1/account/check/username/${username}/exist`
+  checkIfAccountValueAlreadyExist(
+    by: QueryParamKey,
+    value: string
+  ): Observable<CheckExistResDtoModel> {
+    return this._httpClient.get<CheckExistResDtoModel>(
+      `${this._infraApiPath}/api/v1/account/check/prop/exist`,
+      { params: { by: by.toUpperCase(), value } }
     );
   }
 }

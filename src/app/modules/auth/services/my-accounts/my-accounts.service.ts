@@ -4,7 +4,7 @@
  */
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
 import { AddNewMyAccountFormModel } from '~/auth-mod/models/add-new-my-account-form.model';
 import {
   MyAccountReqDto,
@@ -29,6 +29,7 @@ export class MyAccountsService
   private _removeAllModalIsOpen$ = new BehaviorSubject(false);
   private _addNewModalIsOpen$ = new BehaviorSubject(false);
   private _loginOnAccountModalIsOpen$ = new BehaviorSubject(false);
+  private _failedToFetch$ = new BehaviorSubject(false);
 
   constructor(
     private readonly _modalUtilsService: ModalUtilsService,
@@ -41,13 +42,20 @@ export class MyAccountsService
       this._authHttpClientService.checkIfMyAccountsExists(
         this.mapAccountsToReqDtos()
       )
-    ).subscribe(accounts => {
-      this._store.dispatch(
-        NgrxAction_ATH.__loadMySavedAccounts({
-          accounts,
+    )
+      .pipe(
+        catchError(err => {
+          this._failedToFetch$.next(true);
+          return throwError(() => err);
         })
-      );
-    });
+      )
+      .subscribe(accounts => {
+        this._store.dispatch(
+          NgrxAction_ATH.__loadMySavedAccounts({
+            accounts,
+          })
+        );
+      });
   }
 
   ngOnDestroy(): void {
@@ -148,5 +156,8 @@ export class MyAccountsService
   }
   get loginOnAccountModalIsOpen$(): Observable<boolean> {
     return this._loginOnAccountModalIsOpen$.asObservable();
+  }
+  get failedToFetch$(): Observable<boolean> {
+    return this._failedToFetch$.asObservable();
   }
 }

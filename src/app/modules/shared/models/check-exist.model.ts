@@ -3,6 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type CheckUsernameExistResDtoModel = {
+export type CheckExistResDtoModel = {
   alreadyExist: boolean;
 };
