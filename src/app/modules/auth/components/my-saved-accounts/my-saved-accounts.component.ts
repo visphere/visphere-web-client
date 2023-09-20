@@ -19,6 +19,7 @@ import { environment } from '~/env/environment';
 export class MySavedAccountsComponent {
   isRemoveModalOpen$: Observable<boolean> =
     this._myAccountsService.removeModalIsOpen$;
+  isFailedFetch$: Observable<boolean> = this._myAccountsService.failedToFetch$;
 
   mySavedAccounts$: Observable<MySavedAccountModel[]> = this._store.select(
     NgrxSelector_ATH.selectMySavedAccounts

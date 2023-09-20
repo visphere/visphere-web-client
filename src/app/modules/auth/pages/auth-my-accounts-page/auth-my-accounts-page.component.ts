@@ -24,6 +24,8 @@ export class AuthMyAccountsPageComponent {
   isAddNewModalOpen$: Observable<boolean> =
     this._myAccountsService.addNewModalIsOpen$;
 
+  isFailedFetch$: Observable<boolean> = this._myAccountsService.failedToFetch$;
+
   mySavedAccountsCount$: Observable<number> = this._store.select(
     NgrxSelector_ATH.selectMySavedAccountsCount
   );

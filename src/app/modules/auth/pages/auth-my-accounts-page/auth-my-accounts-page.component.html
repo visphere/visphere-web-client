@@ -38,6 +38,7 @@
       </button>
       <button
         (click)="handleAddNewAccount()"
+        [disabled]="isFailedFetch$ | async"
         class="msph-my-accounts__add-new-button">
         {{ 'msph.clientCommon.myAccountsPage.addNewAccountButton' | translate }}
       </button>

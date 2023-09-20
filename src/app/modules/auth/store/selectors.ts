@@ -29,3 +29,12 @@ export const selectMySavedAccountsCount = createSelector(
   selectAuthState,
   ({ mySavedAccounts }) => mySavedAccounts.length
 );
+
+export const checkIfMySavedAccountAlreadyExist = (username: string) =>
+  createSelector(
+    selectAuthState,
+    ({ mySavedAccounts }) =>
+      !!mySavedAccounts.find(
+        ({ usernameOrEmailAddress }) => usernameOrEmailAddress === username
+      )
+  );
