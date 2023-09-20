@@ -5,6 +5,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
+import { AccountValueAlreadyExistValidator } from '~/root-mod/modules/auth/validators/account-value-already-exist.validator';
 import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
@@ -29,22 +30,28 @@ export class RegisterFormComponent
   constructor(
     private readonly _birthDateValidator: BirthDateValidator,
     private readonly _registerService: RegisterService,
-    private readonly _captchaVerificationService: CaptchaVerificationService
+    private readonly _captchaVerificationService: CaptchaVerificationService,
+    private readonly _accountValueAlreadyExistValidator: AccountValueAlreadyExistValidator
   ) {
     super();
     this.registerForm = new FormGroup(
       {
         firstStage: new FormGroup(
           {
-            username: new FormControl('', [
-              Validators.required,
-              Validators.minLength(3),
-              Validators.pattern(regex.USERNAME),
-            ]),
-            emailAddress: new FormControl('', [
-              Validators.required,
-              Validators.email,
-            ]),
+            username: new FormControl(
+              '',
+              [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.pattern(regex.USERNAME),
+              ],
+              [this._accountValueAlreadyExistValidator.validate('username')]
+            ),
+            emailAddress: new FormControl(
+              '',
+              [Validators.required, Validators.email],
+              [this._accountValueAlreadyExistValidator.validate('email')]
+            ),
             password: new FormControl('', [
               Validators.required,
               Validators.pattern(regex.PASSWORD),
