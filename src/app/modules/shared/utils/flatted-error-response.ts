@@ -2,7 +2,10 @@
  * Copyright (c) 2023 by MoonSphere Systems
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { MultiFieldsErrorModel } from '../models/error-response.model';
+import {
+  MessageErrorModel,
+  MultiFieldsErrorModel,
+} from '../models/error-response.model';
 
 export const flattedErrorResponse = (
   res: object
@@ -17,11 +20,25 @@ export const flattedErrorResponse = (
     placeholder: 'unknowError',
   };
   if (!parsed.errors) {
+    const singleField = res as MessageErrorModel;
+    if (singleField.message) {
+      return getOmittedTransformationObj(singleField.message);
+    }
     return commonError;
   }
   const keys = Object.keys(parsed.errors);
   if (keys.length !== 0) {
-    return { placeholder: parsed.errors[keys[0]], omitTransformation: true };
+    return getOmittedTransformationObj(parsed.errors[keys[0]]);
   }
   return commonError;
 };
+
+const getOmittedTransformationObj = (
+  message: string
+): {
+  placeholder: string;
+  omitTransformation: boolean;
+} => ({
+  placeholder: message,
+  omitTransformation: true,
+});
