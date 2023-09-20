@@ -13,7 +13,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 @Component({
   selector: 'msph-add-my-account-modal',
   templateUrl: './add-my-account-modal.component.html',
-  providers: [PopulateFormGroupService, MyAcccountUserAlreadyExistValidator],
+  providers: [PopulateFormGroupService],
 })
 export class AddMyAccountModalComponent
   extends AbstractReactiveProvider
@@ -31,10 +31,11 @@ export class AddMyAccountModalComponent
   ) {
     super();
     this.addMyAccountForm = new FormGroup({
-      usernameOrEmailAddress: new FormControl('', [
-        Validators.required,
-        this._myAcccountUserAlreadyExistValidator.validate(),
-      ]),
+      usernameOrEmailAddress: new FormControl(
+        '',
+        [Validators.required],
+        [this._myAcccountUserAlreadyExistValidator.validate()]
+      ),
     });
     this._myAccountsService.setReactiveForm(this.addMyAccountForm);
   }
