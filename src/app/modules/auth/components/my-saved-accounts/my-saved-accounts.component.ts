@@ -11,6 +11,7 @@ import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.s
 import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { environment } from '~/env/environment';
+import { FetchingState } from '~/shared-mod/types/fetching-state.type';
 
 @Component({
   selector: 'msph-my-saved-accounts',
@@ -19,7 +20,8 @@ import { environment } from '~/env/environment';
 export class MySavedAccountsComponent {
   isRemoveModalOpen$: Observable<boolean> =
     this._myAccountsService.removeModalIsOpen$;
-  isFailedFetch$: Observable<boolean> = this._myAccountsService.failedToFetch$;
+  fetchingState$: Observable<FetchingState> =
+    this._myAccountsService.fetchingState$;
 
   mySavedAccounts$: Observable<MySavedAccountModel[]> = this._store.select(
     NgrxSelector_ATH.selectMySavedAccounts

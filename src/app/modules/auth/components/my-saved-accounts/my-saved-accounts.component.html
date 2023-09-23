@@ -16,11 +16,13 @@
 </msph-devastate-action-modal>
 <msph-login-my-account-modal [loggedUser]="loggedUser" />
 <div class="my-6">
-  <msph-my-saved-accounts-error *ngIf="isFailedFetch$ | async" />
+  <div *ngIf="(fetchingState$ | async) === 'pending'">loading</div>
+  <msph-my-saved-accounts-error
+    *ngIf="(fetchingState$ | async) === 'success'" />
   <msph-my-saved-accounts-error
     *ngIf="
       (mySavedAccounts$ | async)!.length === 0 &&
-      (isFailedFetch$ | async) === false
+      (fetchingState$ | async) === 'error'
     "
     type="noAccounts" />
   <ul

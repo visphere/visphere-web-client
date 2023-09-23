@@ -38,7 +38,10 @@
       </button>
       <button
         (click)="handleAddNewAccount()"
-        [disabled]="isFailedFetch$ | async"
+        [disabled]="
+          (fetchingState$ | async) === 'error' ||
+          (fetchingState$ | async) === 'pending'
+        "
         class="msph-my-accounts__add-new-button">
         {{ 'msph.clientCommon.myAccountsPage.addNewAccountButton' | translate }}
       </button>
