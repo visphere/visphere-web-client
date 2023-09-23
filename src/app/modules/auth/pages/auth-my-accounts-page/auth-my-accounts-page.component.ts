@@ -9,6 +9,7 @@ import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.s
 import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.animation';
+import { FetchingState } from '~/shared-mod/types/fetching-state.type';
 
 @Component({
   selector: 'msph-auth-my-accounts-page',
@@ -24,7 +25,8 @@ export class AuthMyAccountsPageComponent {
   isAddNewModalOpen$: Observable<boolean> =
     this._myAccountsService.addNewModalIsOpen$;
 
-  isFailedFetch$: Observable<boolean> = this._myAccountsService.failedToFetch$;
+  fetchingState$: Observable<FetchingState> =
+    this._myAccountsService.fetchingState$;
 
   mySavedAccountsCount$: Observable<number> = this._store.select(
     NgrxSelector_ATH.selectMySavedAccountsCount
