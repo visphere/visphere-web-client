@@ -4,7 +4,14 @@
  */
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  of,
+  tap,
+  throwError,
+} from 'rxjs';
 import { AddNewMyAccountFormModel } from '~/auth-mod/models/add-new-my-account-form.model';
 import {
   MyAccountReqDto,
@@ -16,6 +23,7 @@ import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simpl
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { ModalUtilsService } from '~/shared-mod/services/modal-utils/modal-utils.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { FetchingState } from '~/shared-mod/types/fetching-state.type';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { Severity } from '~/shared-mod/types/snackbar.type';
 import { AuthHttpClientService } from '../auth-http-client/auth-http-client.service';
@@ -29,7 +37,7 @@ export class MyAccountsService
   private _removeAllModalIsOpen$ = new BehaviorSubject(false);
   private _addNewModalIsOpen$ = new BehaviorSubject(false);
   private _loginOnAccountModalIsOpen$ = new BehaviorSubject(false);
-  private _failedToFetch$ = new BehaviorSubject(false);
+  private _fetchingState$ = new BehaviorSubject<FetchingState>('pending');
 
   constructor(
     private readonly _modalUtilsService: ModalUtilsService,
@@ -44,8 +52,9 @@ export class MyAccountsService
       )
     )
       .pipe(
+        tap(() => this._fetchingState$.next('success')),
         catchError(err => {
-          this._failedToFetch$.next(true);
+          this._fetchingState$.next('error');
           return throwError(() => err);
         })
       )
@@ -157,7 +166,7 @@ export class MyAccountsService
   get loginOnAccountModalIsOpen$(): Observable<boolean> {
     return this._loginOnAccountModalIsOpen$.asObservable();
   }
-  get failedToFetch$(): Observable<boolean> {
-    return this._failedToFetch$.asObservable();
+  get fetchingState$(): Observable<FetchingState> {
+    return this._fetchingState$.asObservable();
   }
 }
