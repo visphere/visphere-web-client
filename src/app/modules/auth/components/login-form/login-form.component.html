@@ -16,7 +16,7 @@
     </msph-auth-common-form-input>
     <button
       type="button"
-      class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full"
+      class="msph-button msph-button--primary"
       [disabled]="(isNextButtonEnabled$ | async) === false"
       (click)="handleMoveForward()">
       {{ 'msph.common.utils.continue' | translate }}
@@ -24,8 +24,7 @@
   </div>
   <div class="grid gap-3" *ngIf="(activeStage$ | async) === 'password'">
     <div class="flex flex-col">
-      <p
-        class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
+      <p class="msph-auth__input-label">
         {{
           'msph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value'
             | translate
@@ -52,22 +51,24 @@
         i18nPrefix="clientCommon.loginPage">
         <msph-field-validator />
       </msph-password-input-toggler>
-      <msph-auth-checkbox-form-input formControlIdentifier="rememberAccount">
+      <msph-auth-checkbox-form-input
+        formControlIdentifier="rememberAccount"
+        i18nPrefix="clientCommon.loginPage"
+        [additionalInfo]="true">
         <ng-container labelContent>
-          <span class="flex items-center text-sm">
-            {{
-              'msph.clientCommon.loginPage.formFields.rememberAccount.value'
-                | translate
-            }}
-          </span>
+          {{
+            'msph.clientCommon.loginPage.formFields.rememberAccount.value'
+              | translate
+          }}
         </ng-container>
       </msph-auth-checkbox-form-input>
     </div>
     <button
       [disabled]="loginForm.invalid || (isLoading$ | async)"
-      class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full">
-      {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
-      <msph-lazy-button-spinner *ngIf="isLoading$ | async" />
+      class="msph-button msph-button--primary">
+      <msph-lazy-button-spinner [isLoading]="(isLoading$ | async)!">
+        {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
+      </msph-lazy-button-spinner>
     </button>
   </div>
 </form>

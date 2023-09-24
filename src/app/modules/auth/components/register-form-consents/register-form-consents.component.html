@@ -12,8 +12,7 @@
         [disabled]="!!(formDisabled$ | async)"
         type="checkbox"
         class="msph-auth__checkbox mt-0.5" />
-      <div
-        class="leading-5 font-medium dark:font-light md:font-light dark:md:font-medium">
+      <div class="leading-5 text-msph-tint-400 dark:text-msph-tint-300">
         {{ 'msph.webClient.registerPage.selectDiselectAll' | translate }}
       </div>
     </label>
@@ -38,7 +37,7 @@
       i18nPrefix="webClient.registerPage">
       <ng-container labelContent>
         <span [innerHTML]="(agreeTermsContent$ | async)! | sanitize"></span>
-        <span class="ms-0.5 text-msph-primary-tint">*</span>
+        <span class="ms-0.5 text-msph-tint-400">*</span>
       </ng-container>
       <ng-container errorsContent>
         <msph-field-validator />

@@ -62,10 +62,11 @@
         <msph-field-validator />
       </msph-password-input-toggler>
       <button
-        [disabled]="loginForm.invalid"
-        class="msph_regular-button text-msph-primary-light bg-msph-primary-tint w-full">
-        {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
-        <msph-lazy-button-spinner *ngIf="isLoading$ | async" />
+        [disabled]="loginForm.invalid || (isLoading$ | async)"
+        class="msph-button msph-button--primary">
+        <msph-lazy-button-spinner [isLoading]="(isLoading$ | async)!">
+          {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
+        </msph-lazy-button-spinner>
       </button>
     </form>
   </div>

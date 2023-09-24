@@ -17,7 +17,7 @@
 </msph-devastate-action-modal>
 <msph-auth-content-wrapper>
   <div
-    class="msph-auth__container-inv-colors msph-auth__container p-5 sm:p-8 w-full md:max-w-[800px]"
+    class="msph-auth__container p-5 sm:p-8 w-full md:max-w-[800px]"
     [@authWindowFadeAndMove]>
     <msph-auth-form-header i18nPrefix="clientCommon.myAccountsPage" />
     <a
@@ -42,7 +42,7 @@
           (fetchingState$ | async) === 'error' ||
           (fetchingState$ | async) === 'pending'
         "
-        class="msph-my-accounts__add-new-button">
+        class="msph-button msph-button--primary">
         {{ 'msph.clientCommon.myAccountsPage.addNewAccountButton' | translate }}
       </button>
     </div>

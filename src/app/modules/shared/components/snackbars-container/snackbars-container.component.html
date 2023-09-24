@@ -9,11 +9,11 @@
     [@snackbarFadeAndMove]
     class="msph-snackbar__list-element">
     <div
-      [class.bg-msph-primary-tint]="snackbar.severity === 'primary'"
-      [class.bg-gray-400]="snackbar.severity === 'secondary'"
-      [class.bg-msph-success-primary]="snackbar.severity === 'success'"
-      [class.bg-msph-warning-primary]="snackbar.severity === 'warning'"
-      [class.bg-msph-danger-primary]="snackbar.severity === 'danger'"
+      [class.bg-msph-tint-500]="snackbar.severity === 'primary'"
+      [class.bg-msph-dark-600]="snackbar.severity === 'secondary'"
+      [class.bg-msph-green-100]="snackbar.severity === 'success'"
+      [class.bg-msph-orange-100]="snackbar.severity === 'warning'"
+      [class.bg-msph-red-100]="snackbar.severity === 'danger'"
       class="msph-snackbar__severity-indicator"></div>
     <button
       (click)="handleRemoveSnackbar(snackbar.id)"

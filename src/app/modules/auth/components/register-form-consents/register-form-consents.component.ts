@@ -58,12 +58,14 @@ export class RegisterFormConsentsComponent
 
   handleToggleAllValues(): void {
     const allowNotifsControl = this.formGroup.get('allowNotifs');
+    const enabledMfaControl = this.formGroup.get('enabledMfa');
     const agreeTermsControl = this.formGroup.get('agreeTerms');
-    if (!allowNotifsControl || !agreeTermsControl) {
+    if (!allowNotifsControl || !agreeTermsControl || !enabledMfaControl) {
       return;
     }
     this.selectAllToggle = !this.selectAllToggle;
     allowNotifsControl.patchValue(this.selectAllToggle);
+    enabledMfaControl.patchValue(this.selectAllToggle);
     agreeTermsControl.patchValue(this.selectAllToggle);
     agreeTermsControl.setErrors(
       this.selectAllToggle ? null : { required: true }
@@ -85,7 +87,7 @@ export class RegisterFormConsentsComponent
   private generateBaseUrl(path: string, i18nPlaceholder: string): string {
     return `<a href="${
       this.path
-    }/${path}" target="_blank" class="text-msph-primary-tint hover:underline">
+    }/${path}" target="_blank" class="msph-auth__link">
             ${this._translateService.instant(
               'msph.webClient.registerPage.formFields.agreeTerms.' +
                 i18nPlaceholder

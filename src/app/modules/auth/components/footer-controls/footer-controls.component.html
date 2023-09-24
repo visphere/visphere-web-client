@@ -21,7 +21,7 @@
           (selectedLang$ | async) === translation
         "
         (click)="handleChangeLang(translation)"
-        class="msph-footer__select-list-element hover:bg-gray-300 dark:hover:bg-gray-600">
+        class="msph-footer__select-list-element">
         <img
           src="{{ path }}/static/icon/lang/{{ translation.lang }}.png"
           width="23"
@@ -46,7 +46,7 @@
           (selectedTheme$ | async) === theme
         "
         (click)="handleChangeTheme(theme)"
-        class="msph-footer__select-list-element hover:bg-gray-300 dark:hover:bg-gray-600">
+        class="msph-footer__select-list-element">
         <ng-icon [name]="theme.icon" class="me-2" />
         <p>{{ theme.i18nKey | translate }}</p>
       </button>

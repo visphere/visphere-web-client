@@ -29,6 +29,7 @@
     <msph-password-input-toggler
       [requiredStar]="true"
       formControlIdentifier="password"
+      [additionalInfo]="true"
       i18nPrefix="webClient.registerPage">
       <msph-field-validator />
       <msph-field-validator type="pattern" />
@@ -50,7 +51,7 @@
       [disabled]="firstStageForm.invalid"
       (click)="handleGotoSecondStage()"
       type="button"
-      class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full">
+      class="msph-button msph-button--primary">
       {{ 'msph.common.utils.continue' | translate }}
       <i class="bi bi-arrow-right ms-2"></i>
     </button>

@@ -6,7 +6,8 @@
 <div *ngIf="isActive" class="msph-modal__container">
   <div class="msph-modal__background"></div>
   <div [@authWindowFadeAndMove] class="msph-modal__window-container">
-    <div class="msph-modal__window-wrapper max-w-[720px]">
+    <div
+      class="msph-modal__window-wrapper msph-modal__window-wrapper--devastate max-w-[720px]">
       <div
         class="msph-modal__window-notch msph-modal__window-notch--devastate"></div>
       <button
@@ -34,11 +35,9 @@
           (click)="emitDevstateAction.emit()"
           type="button"
           class="msph-modal__devastate-button">
-          {{ i18nPrefix + '.submitButton' | translate }}
-          <msph-lazy-button-spinner
-            size="sm"
-            color="device"
-            *ngIf="isLoading" />
+          <msph-lazy-button-spinner size="sm" [isLoading]="isLoading">
+            {{ i18nPrefix + '.submitButton' | translate }}
+          </msph-lazy-button-spinner>
         </button>
         <button
           [disabled]="isLoading"
@@ -46,10 +45,6 @@
           type="button"
           class="msph-modal__close-button">
           {{ 'msph.webClient.modal.button.close' | translate }}
-          <msph-lazy-button-spinner
-            size="sm"
-            color="device"
-            *ngIf="isLoading" />
         </button>
       </div>
     </div>

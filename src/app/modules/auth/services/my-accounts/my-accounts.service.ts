@@ -8,6 +8,7 @@ import {
   BehaviorSubject,
   Observable,
   catchError,
+  delay,
   of,
   tap,
   throwError,
@@ -52,11 +53,9 @@ export class MyAccountsService
       )
     )
       .pipe(
+        delay(500),
         tap(() => this._fetchingState$.next('success')),
-        catchError(err => {
-          this._fetchingState$.next('error');
-          return throwError(() => err);
-        })
+        catchError(err => throwError(() => err))
       )
       .subscribe(accounts => {
         this._store.dispatch(

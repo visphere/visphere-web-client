@@ -26,16 +26,16 @@ export class AuthCommonFormInputComponent
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() requiredStar = false;
-  @Input() inputStyle: 'viewport' | 'static' = 'viewport';
-  @Input() additionalInfo = '';
+  @Input() additionalInfo = false;
 
   formGroup!: FormGroup;
   i18nLabel = '';
   tooltipProps: NgxTippyProps = {
     placement: 'top',
-    theme: 'msph-viewport',
+    theme: 'msph-auth',
     animation: 'scale-subtle',
   };
+  i18nInfo = '';
 
   formDisabled$: Observable<boolean> =
     this._populateFormGroupService.formDisabled$;
@@ -49,7 +49,9 @@ export class AuthCommonFormInputComponent
   }
 
   ngOnInit(): void {
-    this.i18nLabel = `msph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}.value`;
+    const baseI18nFormControlName = `msph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}`;
+    this.i18nLabel = `${baseI18nFormControlName}.value`;
+    this.i18nInfo = `${baseI18nFormControlName}.info`;
     this._populateFormControlService.setFields(
       this.formControlIdentifier,
       this.i18nPrefix

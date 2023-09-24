@@ -37,8 +37,12 @@
           (click)="emitOnClose.emit()"
           type="button"
           class="msph-modal__close-button">
-          {{ 'msph.webClient.modal.button.close' | translate }}
-          <msph-lazy-button-spinner size="sm" color="modal" *ngIf="isLoading" />
+          <msph-lazy-button-spinner
+            size="sm"
+            color="modal"
+            [isLoading]="isLoading">
+            {{ 'msph.webClient.modal.button.close' | translate }}
+          </msph-lazy-button-spinner>
         </button>
         <ng-content select="[buttons]" />
       </div>

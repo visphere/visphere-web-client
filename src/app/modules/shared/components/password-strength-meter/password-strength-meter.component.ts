@@ -19,11 +19,11 @@ export class PasswordStrengthMeterComponent
 {
   countOfSpaces = Array.from({ length: 6 });
   currentStrength = 0;
+  formGroup!: FormGroup;
 
   @Input() tailwindClass = 'msph-auth__password-strenght-meter__colors';
   @Input() tailwindBgClass = 'msph-auth__password-strenght-meter__bg';
   @Input() formControlIdentifier = 'password';
-  formGroup!: FormGroup;
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,

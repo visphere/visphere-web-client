@@ -3,19 +3,10 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<svg
-  [class.msph-button-spinner__container--large]="size === 'lg'"
-  [class.msph-button-spinner__container--small]="size === 'sm'"
-  class="msph-button-spinner__container"
-  viewBox="0 0 50 50">
-  <circle
-    [class.msph-button-spinner__path--mono-color]="color === 'mono'"
-    [class.msph-button-spinner__path--device-color]="color === 'device'"
-    [class.msph-button-spinner__path--modal-color]="color === 'modal'"
-    class="msph-button-spinner__path"
-    cx="25"
-    cy="25"
-    r="20"
-    fill="none"
-    stroke-width="5"></circle>
-</svg>
+<ng-container *ngIf="!isLoading">
+  <ng-content />
+</ng-container>
+<div
+  *ngIf="isLoading"
+  class="msph-button-spinner__carousel"
+  [class.msph-button-spinner__carousel--modal]="color === 'modal'"></div>

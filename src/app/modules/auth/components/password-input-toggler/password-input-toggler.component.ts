@@ -4,6 +4,7 @@
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { combineLatest } from 'rxjs';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
@@ -25,13 +26,19 @@ export class PasswordInputTogglerComponent
   @Input() placeholder = '';
   @Input() i18nPrefix!: string;
   @Input() requiredStar = false;
-  @Input() inputStyle: 'viewport' | 'static' = 'viewport';
+  @Input() additionalInfo = false;
 
   formGroup!: FormGroup;
   i18nLabel = '';
   isVisible = false;
   capsLockIsOn = false;
   formDisabled = false;
+  tooltipProps: NgxTippyProps = {
+    placement: 'top',
+    theme: 'msph-auth',
+    animation: 'scale-subtle',
+  };
+  i18nInfo = '';
 
   constructor(
     private readonly _formHelperService: FormHelperService,
@@ -42,7 +49,9 @@ export class PasswordInputTogglerComponent
   }
 
   ngOnInit(): void {
-    this.i18nLabel = `msph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}.value`;
+    const baseI18nFormControlName = `msph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}`;
+    this.i18nLabel = `${baseI18nFormControlName}.value`;
+    this.i18nInfo = `${baseI18nFormControlName}.info`;
     this._populateFormControlService.setFields(
       this.formControlIdentifier,
       this.i18nPrefix

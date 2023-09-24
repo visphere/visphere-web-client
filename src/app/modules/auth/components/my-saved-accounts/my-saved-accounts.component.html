@@ -16,21 +16,32 @@
 </msph-devastate-action-modal>
 <msph-login-my-account-modal [loggedUser]="loggedUser" />
 <div class="my-6">
-  <div *ngIf="(fetchingState$ | async) === 'pending'">loading</div>
-  <msph-my-saved-accounts-error
-    *ngIf="(fetchingState$ | async) === 'success'" />
-  <msph-my-saved-accounts-error
+  <div
+    *ngIf="(fetchingState$ | async) === 'pending'"
+    class="flex justify-center items-center h-[104px]">
+    <div
+      class="msph-button-spinner__carousel msph-button-spinner__carousel--large"></div>
+  </div>
+  <div
     *ngIf="
       (mySavedAccounts$ | async)!.length === 0 &&
-      (fetchingState$ | async) === 'error'
+      (fetchingState$ | async) !== 'pending'
     "
-    type="noAccounts" />
+    class="msph-my-account__alter-no-content-container">
+    <img src="{{ cdnPath }}/static/icon/user-id.svg" alt="" />
+    <p class="msph-my-account__alter-no-content-paragraph">
+      {{ 'msph.clientCommon.myAccountsPage.noAccountsMessage' | translate }}
+    </p>
+  </div>
   <ul
-    *ngIf="(mySavedAccounts$ | async)!.length !== 0"
+    *ngIf="
+      (mySavedAccounts$ | async)!.length !== 0 &&
+      (fetchingState$ | async) === 'success'
+    "
     class="msph-my-account__container">
     <li
       *ngFor="let account of mySavedAccounts$ | async"
-      class="msph-my-account__element-scaffold msph-my-account__element msph-my-account__element--viewport">
+      class="msph-my-account__element-scaffold msph-my-account__element">
       <button
         (click)="handleOpenLoginModal(account)"
         class="msph-my-account__element-content">
@@ -40,7 +51,7 @@
           [tippyContext]="{ username: account.usernameOrEmailAddress }"
           [tippyProps]="tooltipProps">
           <div
-            class="msph-my-account__not-verified msph-my-account__not-verified--tile msph-my-account__content-colors--tile--viewport">
+            class="msph-my-account__not-verified msph-my-account__not-verified--tile msph-my-account__content-colors--tile">
             <img
               src="{{ cdnPath }}/static/icon/user.svg"
               alt=""
@@ -58,7 +69,7 @@
             src="{{ account.thumbnailUrl }}"
             width="70px"
             height="70px"
-            class="msph-my-account__verified-image msph-my-account__verified-image--tile msph-my-account__content-colors--tile--viewport"
+            class="msph-my-account__verified-image msph-my-account__verified-image--tile msph-my-account__content-colors--tile"
             alt="" />
         </div>
       </button>
@@ -71,10 +82,10 @@
     <li class="msph-my-account__element-scaffold">
       <button
         (click)="handleOpenAddNewAccountModal()"
-        class="msph-my-account__element-add-button msph-my-account__element--viewport">
+        class="msph-my-account__element-add-button">
         <ng-icon
           name="plusCircleIcon"
-          class="msph-my-account__element-add-icon msph-my-account__element-add-icon--viewport" />
+          class="msph-my-account__element-add-icon" />
       </button>
     </li>
   </ul>

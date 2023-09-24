@@ -5,7 +5,7 @@
 
 <msph-auth-content-wrapper>
   <div
-    class="msph-auth__container-inv-colors msph-auth__container p-5 sm:p-8 w-full md:max-w-[500px]"
+    class="msph-auth__container p-5 sm:p-8 w-full md:max-w-[500px]"
     [@authWindowFadeAndMove]>
     <msph-auth-form-header i18nPrefix="webClient.registerPage" />
     <msph-register-form />
@@ -13,13 +13,13 @@
       * {{ 'msph.clientCommon.auth.fieldsRequired' | translate }}
     </div>
     <div class="mt-4">
-      <p class="font-medium md:font-light dark:font-medium">
+      <p class="text-msph-tint-400 dark:text-msph-tint-300">
         {{ 'msph.webClient.registerPage.haveAccount' | translate }}
         <a class="msph-auth__link" routerLink="/auth/login">
           {{ 'msph.webClient.registerPage.loginOnAccount' | translate }}
         </a>
       </p>
-      <p class="font-medium md:font-light dark:font-medium">
+      <p class="text-msph-tint-400 dark:text-msph-tint-300">
         {{ 'msph.clientCommon.auth.forgotPassword' | translate }}
         <a class="msph-auth__link" routerLink="/auth/reset-password">
           {{ 'msph.clientCommon.auth.resetPassword' | translate }}

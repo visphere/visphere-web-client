@@ -3,24 +3,14 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<div
-  class="msph-page-loader__container"
-  [class.msph-page-loader__container--small]="size === 'small'"
-  [class.msph-page-loader__container--large]="size === 'large'">
+<div class="msph-page-loader__container">
   <div
     class="msph-page-loader__planet"
-    [class.msph-page-loader__planet--color-device]="color === 'device'"
-    [class.msph-page-loader__planet--color-tint]="color === 'tint'"
     [style.filter]="url('#izomorphicImageLoader')">
-    <div
-      class="msph-page-loader__ring"
-      [class.msph-page-loader__ring--color-device]="color === 'device'"
-      [class.msph-page-loader__ring--color-tint]="color === 'tint'"></div>
+    <div class="msph-page-loader__ring"></div>
     <div
       *ngFor="let satellite of satellites"
-      [ngClass]="['msph-page-loader__satellite', satellite]"
-      [class.msph-page-loader__satellite--color-device]="color === 'device'"
-      [class.msph-page-loader__satellite--color-tint]="color === 'tint'"></div>
+      [ngClass]="['msph-page-loader__satellite', satellite]"></div>
     <svg>
       <defs>
         <filter id="izomorphicImageLoader">

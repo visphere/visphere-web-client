@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
   selector: 'msph-auth-root',
   template: `
     <div class="flex-grow flex flex-col h-full">
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
-    <msph-footer></msph-footer>
+    <msph-footer />
   `,
   host: { class: 'flex flex-col h-full min-h-screen' },
 })
