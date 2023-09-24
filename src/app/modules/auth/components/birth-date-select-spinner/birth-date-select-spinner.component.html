@@ -4,9 +4,9 @@
  -->
 
 <div [formGroup]="formGroup" class="flex flex-col">
-  <div class="mb-1 text-sm dark:font-normal md:font-normal md:dark:font-medium">
+  <div class="msph-auth__input-label">
     {{ 'msph.webClient.registerPage.formFields.birthDate.value' | translate }}
-    <span class="ms-0.5 text-msph-primary-tint">*</span>
+    <span class="ms-0.5 text-msph-tint-400">*</span>
   </div>
   <div class="flex gap-3">
     <msph-auth-single-select-spinner
@@ -28,8 +28,7 @@
       multiSpinnerId="year"
       class="flex-grow" />
   </div>
-  <div
-    class="text-sm mt-1 mx-2 msph-auth__text--invalid msph-auth__text--viewport--invalid">
+  <div class="text-sm mt-1 mx-2 msph-auth__text--invalid">
     <msph-field-validator />
     <msph-field-validator type="notAll" />
     <msph-field-validator type="invalid" />

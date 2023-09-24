@@ -5,7 +5,7 @@
 
 <footer class="msph-footer__container">
   <div
-    class="grid grid-cols-12 gap-y-5 lg:gap-y-10 px-0 lg:px-10 msph_ratio-container">
+    class="grid grid-cols-12 gap-y-5 lg:gap-y-10 px-0 lg:px-10 msph-safe-container">
     <div
       class="col-span-12 md:col-span-5 lg:col-span-4 flex flex-col items-center sm:items-start sm:justify-center">
       <a
@@ -17,9 +17,12 @@
           alt=""
           width="50"
           height="50" />
-        <h2 class="mt-2 sm:mt-0 sm:ms-3 text-2xl font-logo">MoonSphere</h2>
+        <h2 class="mt-2 sm:mt-0 sm:ms-3 text-2xl font-logo font-medium">
+          MoonSphere
+        </h2>
       </a>
-      <p class="mt-8 leading-[22px] mb-5 dark:font-light">
+      <p
+        class="mt-8 leading-[21px] mb-5 text-msph-tint-400 dark:text-msph-tint-300">
         {{ 'msph.webCommon.footer.description' | translate }}
       </p>
       <msph-footer-controls />
@@ -28,8 +31,7 @@
     <div
       class="col-span-12 md:col-span-6 lg:col-span-7 grid grid-cols-12 gap-5 lg:gap-10">
       <div class="col-span-12 sm:col-span-6 lg:col-span-4">
-        <h3
-          class="font-bold dark:font-medium text-msph-primary-tint mb-2 md:mb-4">
+        <h3 class="font-bold dark:font-medium text-msph-tint-500 mb-2 md:mb-4">
           {{ 'msph.webCommon.footer.headers.application.name' | translate }}
         </h3>
         <ul class="grid gap-1">
@@ -91,8 +93,7 @@
         </ul>
       </div>
       <div class="col-span-12 sm:col-span-6 lg:col-span-4">
-        <h3
-          class="font-bold dark:font-medium text-msph-primary-tint mb-2 md:mb-4">
+        <h3 class="font-bold dark:font-medium text-msph-tint-500 mb-2 md:mb-4">
           {{ 'msph.webCommon.footer.headers.start.name' | translate }}
         </h3>
         <ul class="grid gap-1">
@@ -141,8 +142,7 @@
         </ul>
       </div>
       <div class="col-span-12 sm:col-span-6 lg:col-span-4">
-        <h3
-          class="font-bold dark:font-medium text-msph-primary-tint mb-2 md:mb-4">
+        <h3 class="font-bold dark:font-medium text-msph-tint-500 mb-2 md:mb-4">
           {{ 'msph.webCommon.footer.headers.policies.name' | translate }}
         </h3>
         <ul class="grid gap-1">
@@ -194,11 +194,12 @@
       </div>
     </div>
     <div class="col-span-12">
-      <hr class="border-msph-primary-tint mb-3" />
+      <hr class="border-msph-dark-700 dark:border-msph-dark-600 mb-3" />
       <div class="msph-copy-footer__container">
         <div class="msph-copy-footer__rights">
           <div>
-            <span class="text-gray-500 font-medium me-1"
+            <span
+              class="text-msph-tint-400 dark:text-msph-tint-300 font-medium me-1"
               >&copy; {{ currYear | date: 'yyyy' }} by</span
             >
             <a
@@ -209,7 +210,10 @@
             >
           </div>
           <div class="flex justify-center md:justify-start">
-            <span class="text-gray-500 font-medium me-2">Powered by</span>
+            <span
+              class="text-msph-tint-400 dark:text-msph-tint-300 font-medium me-2"
+              >Powered by</span
+            >
             <div class="flex">
               <img
                 src="{{ path }}/static/logo/{{ copyLogoImagePath }}"

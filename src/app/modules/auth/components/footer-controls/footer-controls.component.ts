@@ -13,7 +13,10 @@ import { TranslationRow } from '~/shared-mod/types/translation.type';
 @Component({
   selector: 'msph-footer-controls',
   templateUrl: './footer-controls.component.html',
-  host: { class: 'flex w-full gap-3 text-sm font-normal' },
+  host: {
+    class:
+      'flex w-full gap-3 justify-center sm:justify-start text-sm font-normal',
+  },
 })
 export class FooterControlsComponent {
   path = environment.contentDistributorBaseUrl;

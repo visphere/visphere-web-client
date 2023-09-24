@@ -30,7 +30,7 @@
     class="msph-my-account__container">
     <li
       *ngFor="let account of mySavedAccounts$ | async"
-      class="msph-my-account__element-scaffold msph-my-account__element msph-my-account__element--viewport">
+      class="msph-my-account__element-scaffold msph-my-account__element">
       <button
         (click)="handleOpenLoginModal(account)"
         class="msph-my-account__element-content">
@@ -40,7 +40,7 @@
           [tippyContext]="{ username: account.usernameOrEmailAddress }"
           [tippyProps]="tooltipProps">
           <div
-            class="msph-my-account__not-verified msph-my-account__not-verified--tile msph-my-account__content-colors--tile--viewport">
+            class="msph-my-account__not-verified msph-my-account__not-verified--tile msph-my-account__content-colors--tile">
             <img
               src="{{ cdnPath }}/static/icon/user.svg"
               alt=""
@@ -58,7 +58,7 @@
             src="{{ account.thumbnailUrl }}"
             width="70px"
             height="70px"
-            class="msph-my-account__verified-image msph-my-account__verified-image--tile msph-my-account__content-colors--tile--viewport"
+            class="msph-my-account__verified-image msph-my-account__verified-image--tile msph-my-account__content-colors--tile"
             alt="" />
         </div>
       </button>
@@ -71,10 +71,10 @@
     <li class="msph-my-account__element-scaffold">
       <button
         (click)="handleOpenAddNewAccountModal()"
-        class="msph-my-account__element-add-button msph-my-account__element--viewport">
+        class="msph-my-account__element-add-button">
         <ng-icon
           name="plusCircleIcon"
-          class="msph-my-account__element-add-icon msph-my-account__element-add-icon--viewport" />
+          class="msph-my-account__element-add-icon" />
       </button>
     </li>
   </ul>

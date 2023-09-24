@@ -85,7 +85,7 @@ export class RegisterFormConsentsComponent
   private generateBaseUrl(path: string, i18nPlaceholder: string): string {
     return `<a href="${
       this.path
-    }/${path}" target="_blank" class="text-msph-primary-tint hover:underline">
+    }/${path}" target="_blank" class="msph-auth__link">
             ${this._translateService.instant(
               'msph.webClient.registerPage.formFields.agreeTerms.' +
                 i18nPlaceholder

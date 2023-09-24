@@ -35,9 +35,7 @@
       [maxLength]="100"
       formControlIdentifier="secondEmailAddress"
       i18nPrefix="webClient.registerPage"
-      [additionalInfo]="
-        'msph.webClient.registerPage.secondEmailAddressUsage' | translate
-      ">
+      [additionalInfo]="true">
       <msph-field-validator type="email" />
       <msph-field-validator type="exact" />
     </msph-auth-common-form-input>
@@ -48,9 +46,10 @@
 
     <button
       [disabled]="checkIfFormIsInvalid || (isLoading$ | async)"
-      class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full">
-      {{ 'msph.webClient.registerPage.submitFormButton' | translate }}
-      <msph-lazy-button-spinner *ngIf="isLoading$ | async" />
+      class="msph-button msph-button--primary">
+      <msph-lazy-button-spinner [isLoading]="(isLoading$ | async)!">
+        {{ 'msph.webClient.registerPage.submitFormButton' | translate }}
+      </msph-lazy-button-spinner>
     </button>
   </div>
 </ng-container>

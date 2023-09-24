@@ -33,7 +33,7 @@
     (emitOnAction)="handleResendMessage()"
     [isDisabled]="!!(isLoading$ | async)"
     [isLoading]="(isResendLoading$ | async)!"
-    styles="msph-auth__resend-message-button"
+    styles="msph-button msph-button--secondary"
     innerI18nText="msph.common.utils.resendMessageButton"
     labelI18nText="msph.common.utils.emailMessageNotReceived" />
 </form>
@@ -46,7 +46,7 @@
   </div>
   <button
     (click)="handleReturnToLoginAndClearState()"
-    class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full flex items-center justify-center">
+    class="msph-button msph-button--primary flex items-center justify-center">
     <ng-icon name="outsideLinkIcon" class="me-2" />
     {{ 'msph.webClient.activateAccountPage.moveToLoginPage' | translate }}
   </button>
