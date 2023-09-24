@@ -25,9 +25,12 @@
   </msph-password-input-toggler>
   <button
     [disabled]="activateAccountForm.invalid || (isLoading$ | async)"
-    class="msph_regular-button bg-msph-primary-tint text-msph-primary-light w-full">
-    {{ 'msph.webClient.activateAccountPage.activateAccountButton' | translate }}
-    <msph-lazy-button-spinner *ngIf="isLoading$ | async" />
+    class="msph-button msph-button--primary">
+    <msph-lazy-button-spinner [isLoading]="(isLoading$ | async)!">
+      {{
+        'msph.webClient.activateAccountPage.activateAccountButton' | translate
+      }}
+    </msph-lazy-button-spinner>
   </button>
   <msph-deferred-button
     (emitOnAction)="handleResendMessage()"
