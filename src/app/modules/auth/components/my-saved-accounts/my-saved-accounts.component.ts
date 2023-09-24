@@ -32,7 +32,7 @@ export class MySavedAccountsComponent {
   cdnPath = environment.contentDistributorBaseUrl;
   tooltipProps: NgxTippyProps = {
     placement: 'bottom',
-    theme: 'msph-viewport',
+    theme: 'msph-auth',
     animation: 'scale-subtle',
   };
 
