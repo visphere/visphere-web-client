@@ -14,6 +14,16 @@
       <div
         class="leading-5 cursor-pointer text-msph-tint-400 dark:text-msph-tint-300 flex">
         <ng-content select="[labelContent]" />
+        <div
+          *ngIf="additionalInfo"
+          [ngxTippy]="inputTooltip"
+          [tippyProps]="tooltipProps"
+          class="ms-1 flex items-center">
+          <ng-icon name="questionCircleIcon" />
+          <ng-template #inputTooltip>
+            {{ this.i18nInfo | translate }}
+          </ng-template>
+        </div>
       </div>
       <div class="text-sm msph-auth__text--invalid">
         <ng-content select="[errorsContent]" />

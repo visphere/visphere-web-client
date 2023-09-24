@@ -29,7 +29,6 @@ import { FooterControlsComponent } from '~/auth-mod/components/footer-controls/f
 import { FooterComponent } from '~/auth-mod/components/footer/footer.component';
 import { LoginFormComponent } from '~/auth-mod/components/login-form/login-form.component';
 import { LoginMyAccountModalComponent } from '~/auth-mod/components/login-my-account-modal/login-my-account-modal.component';
-import { MySavedAccountsErrorComponent } from '~/auth-mod/components/my-saved-accounts-error/my-saved-accounts-error.component';
 import { MySavedAccountsComponent } from '~/auth-mod/components/my-saved-accounts/my-saved-accounts.component';
 import { Oauth2ButtonComponent } from '~/auth-mod/components/oauth2-button/oauth2-button.component';
 import { PasswordInputTogglerComponent } from '~/auth-mod/components/password-input-toggler/password-input-toggler.component';
@@ -74,7 +73,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     LoginFormComponent,
     LoginMyAccountModalComponent,
     MySavedAccountsComponent,
-    MySavedAccountsErrorComponent,
     Oauth2ButtonComponent,
     PasswordInputTogglerComponent,
     RegisterFirstStageFormComponent,

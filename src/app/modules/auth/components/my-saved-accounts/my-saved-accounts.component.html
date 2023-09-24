@@ -16,17 +16,28 @@
 </msph-devastate-action-modal>
 <msph-login-my-account-modal [loggedUser]="loggedUser" />
 <div class="my-6">
-  <div *ngIf="(fetchingState$ | async) === 'pending'">loading</div>
-  <msph-my-saved-accounts-error
-    *ngIf="(fetchingState$ | async) === 'success'" />
-  <msph-my-saved-accounts-error
+  <div
+    *ngIf="(fetchingState$ | async) === 'pending'"
+    class="flex justify-center items-center h-[104px]">
+    <div
+      class="msph-button-spinner__carousel msph-button-spinner__carousel--large"></div>
+  </div>
+  <div
     *ngIf="
       (mySavedAccounts$ | async)!.length === 0 &&
-      (fetchingState$ | async) === 'error'
+      (fetchingState$ | async) !== 'pending'
     "
-    type="noAccounts" />
+    class="msph-my-account__alter-no-content-container">
+    <img src="{{ cdnPath }}/static/icon/user-id.svg" alt="" />
+    <p class="msph-my-account__alter-no-content-paragraph">
+      {{ 'msph.clientCommon.myAccountsPage.noAccountsMessage' | translate }}
+    </p>
+  </div>
   <ul
-    *ngIf="(mySavedAccounts$ | async)!.length !== 0"
+    *ngIf="
+      (mySavedAccounts$ | async)!.length !== 0 &&
+      (fetchingState$ | async) === 'success'
+    "
     class="msph-my-account__container">
     <li
       *ngFor="let account of mySavedAccounts$ | async"
