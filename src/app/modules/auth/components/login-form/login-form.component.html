@@ -51,14 +51,15 @@
         i18nPrefix="clientCommon.loginPage">
         <msph-field-validator />
       </msph-password-input-toggler>
-      <msph-auth-checkbox-form-input formControlIdentifier="rememberAccount">
+      <msph-auth-checkbox-form-input
+        formControlIdentifier="rememberAccount"
+        i18nPrefix="clientCommon.loginPage"
+        [additionalInfo]="true">
         <ng-container labelContent>
-          <span class="flex items-center text-sm">
-            {{
-              'msph.clientCommon.loginPage.formFields.rememberAccount.value'
-                | translate
-            }}
-          </span>
+          {{
+            'msph.clientCommon.loginPage.formFields.rememberAccount.value'
+              | translate
+          }}
         </ng-container>
       </msph-auth-checkbox-form-input>
     </div>

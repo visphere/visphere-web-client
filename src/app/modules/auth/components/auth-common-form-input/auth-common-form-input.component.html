@@ -13,6 +13,9 @@
       [tippyProps]="tooltipProps"
       class="ms-1 flex items-center">
       <ng-icon name="questionCircleIcon" />
+      <ng-template #inputTooltip>
+        {{ this.i18nInfo | translate }}
+      </ng-template>
     </div>
   </label>
   <input
