@@ -25,7 +25,7 @@ module.exports = function (config) {
     preprocessors: {
       './src/spec.ts': ['webpack', 'sourcemap'],
     },
-    webpack: require('./_webpack/webpack-spec.config.cjs'),
+    webpack: require('./.webpack/webpack-spec.config.cjs'),
     webpackMiddleware: {
       logLevel: 'warn',
       stats: {

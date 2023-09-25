@@ -2,9 +2,9 @@
   "name": "moonsphere-web-client",
   "version": "1.0.0",
   "scripts": {
-    "start:dev": "npx webpack-dev-server --progress --config _webpack/webpack-dev.config.cjs",
-    "docker:dev": "npx webpack --progress --config _webpack/webpack-docker-dev.config.cjs",
-    "docker:prod": "npx webpack --progress --config _webpack/webpack-docker-prod.config.cjs",
+    "start:dev": "npx webpack-dev-server --progress --config .webpack/webpack-dev.config.cjs",
+    "docker:dev": "npx webpack --progress --config .webpack/webpack-docker-dev.config.cjs",
+    "docker:prod": "npx webpack --progress --config .webpack/webpack-docker-prod.config.cjs",
     "lint:check": "npx eslint src/**/*.{ts,html}",
     "lint:fix": "npx eslint src/**/*.{ts,html} --fix",
     "format": "npx prettier . --write",

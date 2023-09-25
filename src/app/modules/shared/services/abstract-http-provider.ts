@@ -5,5 +5,5 @@
 import { environment } from '~/env/environment';
 
 export abstract class AbstractHttpProvider {
-  protected _infraApiPath = environment.javaApiEurekaUrl;
+  protected _infraApiPath = environment.infraApiGatewayUrl;
 }

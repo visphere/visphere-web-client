@@ -23,7 +23,7 @@ export class AppendLangHeaderInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const requestUrl = new URL(req.url);
-    if (requestUrl.origin !== environment.javaApiEurekaUrl) {
+    if (requestUrl.origin !== environment.infraApiGatewayUrl) {
       return next.handle(req);
     }
     const modifiedRequest = req.clone({

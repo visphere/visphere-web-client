@@ -23,14 +23,14 @@ module.exports = ({
   landingPageBaseUrl,
   clientBaseUrl,
   cdnBaseUrl,
-  javaApiEurekaUrl,
+  infraApiGatewayUrl,
 }) =>
   merge(
     commonWebpackConfig({
       landingPageBaseUrl,
       clientBaseUrl,
       cdnBaseUrl,
-      javaApiEurekaUrl,
+      infraApiGatewayUrl,
       isProdMode: true,
     }),
     {

@@ -13,11 +13,12 @@ const { AngularWebpackPlugin } = require('@ngtools/webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { DefinePlugin } = require('webpack');
-const axios = require('axios');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const webpackUtils = require('../../moonsphere-base/webpack/webpack-utils.cjs');
 
-const envPath = path.resolve(__dirname, '..', '..', 'moonsphere-base', '.env');
+const msphBasePath = path.resolve(__dirname, '..', '..', 'moonsphere-base');
+const envPath = path.join(msphBasePath, '.env');
+
 if (fs.existsSync(envPath)) {
   dotenv.config({ path: envPath });
 }
@@ -54,7 +55,7 @@ const commonWebpackConfig = ({
   landingPageBaseUrl,
   clientBaseUrl,
   cdnBaseUrl,
-  javaApiEurekaUrl,
+  infraApiGatewayUrl,
   isProdMode,
 }) =>
   webpackUtils.webpackProxyInjector(
@@ -117,7 +118,8 @@ const commonWebpackConfig = ({
               ? process.env.ENV_MSPH_HCAPTCHA_SITE_KEY
               : process.env.ENV_MSPH_DEV_HCAPTCHA_SITE_KEY
           ),
-          'process.env.JAVA_API_EUREKA_URL': JSON.stringify(javaApiEurekaUrl),
+          'process.env.INFRA_API_GATEWAY_URL':
+            JSON.stringify(infraApiGatewayUrl),
         }),
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, '..', 'src', 'index.ejs'),
@@ -133,8 +135,10 @@ const commonWebpackConfig = ({
             const { stdout } = await exec(
               'npm list @angular/core --depth=0 --json'
             );
-            const { data } = await axios(
-              `${cdnBaseUrl}/static/i18n/web-common/en-US.json`
+            const data = JSON.parse(
+              await fs.promises.readFile(
+                `${msphBasePath}/s3-static/i18n/web-common/pl.json`
+              )
             );
             const { description, keywords } =
               data['msph.webCommon.metaProperty'];
@@ -196,7 +200,7 @@ const commonWebpackConfig = ({
           tsconfig: path.resolve(
             __dirname,
             '..',
-            '_tsconfig',
+            '.tsconfig',
             `tsconfig.app${isProdMode ? '.prod' : ''}.json`
           ),
           sourceMap: !isProdMode,
