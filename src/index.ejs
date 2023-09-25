@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en-US" class="">
+<html lang="pl" class="">
   <head>
     <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link
-      href="<%= externalCdnBasePath %>"
+      href="<%= externalCdnBasePath %>/static"
       rel="stylesheet"
       onerror="document.body.innerHTML = 'Could not connect with CDN server';document.body.className = ''" />
-    <link rel="preconnect" href="<%= externalCdnBasePath %>" />
+    <link rel="preconnect" href="<%= externalCdnBasePath %>/static" />
     <link
       id="faviconIcon"
       rel="icon"
@@ -77,7 +77,7 @@
     <link
       id="manifest"
       rel="manifest"
-      href="/assets/manifest/en-US/pwa-manifest.json" />
+      href="/assets/manifest/pl/pwa-manifest.json" />
     <!-- end PWA -->
   </head>
   <body class="min-h-screen font-medium msph-body-container">
