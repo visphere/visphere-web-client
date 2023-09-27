@@ -3,6 +3,8 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthModule } from '~/auth-mod/auth.module';
+import { AppModule } from '~/root-mod/app.module';
 import { AuthContentWrapperComponent } from './auth-content-wrapper.component';
 
 describe('AuthContentWrapperComponent', () => {
@@ -11,6 +13,7 @@ describe('AuthContentWrapperComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [AppModule, AuthModule],
       declarations: [AuthContentWrapperComponent],
     });
     fixture = TestBed.createComponent(AuthContentWrapperComponent);
