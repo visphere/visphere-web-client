@@ -15,36 +15,32 @@
         | translate: { accountsCount: (mySavedAccountsCount$ | async) }
     "></span>
 </msph-devastate-action-modal>
-<msph-auth-content-wrapper>
-  <div
-    class="msph-auth__container p-5 sm:p-8 w-full md:max-w-[800px]"
-    [@authWindowFadeAndMove]>
-    <msph-auth-form-header i18nPrefix="clientCommon.myAccountsPage" />
-    <a
-      routerLink="/auth/login"
-      class="msph-auth__top-nav-button px-2 flex items-center w-fit">
-      <ng-icon name="arrowLeftIcon" class="me-2" />
-      {{ 'msph.clientCommon.myAccountsPage.returnToLoginPage' | translate }}
-    </a>
-    <msph-my-saved-accounts />
-    <div class="flex flex-col sm:flex-row gap-y-3 sm:gap-x-4">
-      <button
-        [disabled]="(mySavedAccountsCount$ | async) === 0"
-        (click)="handleToggleRemoveAllAccountsModalVisibility(true)"
-        class="msph-my-accounts__delete-all-button">
-        {{
-          'msph.clientCommon.myAccountsPage.removeAllAccountsButton' | translate
-        }}
-      </button>
-      <button
-        (click)="handleAddNewAccount()"
-        [disabled]="
-          (fetchingState$ | async) === 'error' ||
-          (fetchingState$ | async) === 'pending'
-        "
-        class="msph-button msph-button--primary">
-        {{ 'msph.clientCommon.myAccountsPage.addNewAccountButton' | translate }}
-      </button>
-    </div>
+<msph-auth-content-wrapper size="xl">
+  <msph-auth-form-header i18nPrefix="clientCommon.myAccountsPage" />
+  <a
+    routerLink="/auth/login"
+    class="msph-auth__top-nav-button px-2 flex items-center w-fit">
+    <ng-icon name="arrowLeftIcon" class="me-2" />
+    {{ 'msph.clientCommon.myAccountsPage.returnToLoginPage' | translate }}
+  </a>
+  <msph-my-saved-accounts />
+  <div class="flex flex-col sm:flex-row gap-y-3 sm:gap-x-4">
+    <button
+      [disabled]="(mySavedAccountsCount$ | async) === 0"
+      (click)="handleToggleRemoveAllAccountsModalVisibility(true)"
+      class="msph-my-accounts__delete-all-button">
+      {{
+        'msph.clientCommon.myAccountsPage.removeAllAccountsButton' | translate
+      }}
+    </button>
+    <button
+      (click)="handleAddNewAccount()"
+      [disabled]="
+        (fetchingState$ | async) === 'error' ||
+        (fetchingState$ | async) === 'pending'
+      "
+      class="msph-button msph-button--primary">
+      {{ 'msph.clientCommon.myAccountsPage.addNewAccountButton' | translate }}
+    </button>
   </div>
 </msph-auth-content-wrapper>
