@@ -13,7 +13,7 @@ import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.anima
   animations: [authWindowFadeAndMove],
 })
 export class AuthContentWrapperComponent {
-  @Input() size: 'sm' | 'xl' = 'sm';
+  @Input() size: 'sm' | 'md' | 'xl' = 'sm';
 
   path = environment.contentDistributorBaseUrl;
   isAnimationDisabled = this.triggerDisableAnimation();
