@@ -23,15 +23,11 @@
     <msph-field-validator type="exactLength" />
     <msph-field-validator type="pattern" />
   </msph-password-input-toggler>
-  <button
-    [disabled]="activateAccountForm.invalid || (isLoading$ | async)"
-    class="msph-button msph-button--primary">
-    <msph-lazy-button-spinner [isLoading]="(isLoading$ | async)!">
-      {{
-        'msph.webClient.activateAccountPage.activateAccountButton' | translate
-      }}
-    </msph-lazy-button-spinner>
-  </button>
+  <msph-lazy-button-spinner
+    [isLoading]="(isLoading$ | async)!"
+    [buttonDisabled]="activateAccountForm.invalid">
+    {{ 'msph.webClient.activateAccountPage.activateAccountButton' | translate }}
+  </msph-lazy-button-spinner>
   <msph-deferred-button
     (emitOnAction)="handleResendMessage()"
     [isDisabled]="!!(isLoading$ | async)"

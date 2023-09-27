@@ -44,12 +44,10 @@
 
     <!-- TODO: nr telefonu, wprowadzanie, wybieranie spośród kodów, niewymagany  -->
 
-    <button
-      [disabled]="checkIfFormIsInvalid || (isLoading$ | async)"
-      class="msph-button msph-button--primary">
-      <msph-lazy-button-spinner [isLoading]="(isLoading$ | async)!">
-        {{ 'msph.webClient.registerPage.submitFormButton' | translate }}
-      </msph-lazy-button-spinner>
-    </button>
+    <msph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="checkIfFormIsInvalid">
+      {{ 'msph.webClient.registerPage.submitFormButton' | translate }}
+    </msph-lazy-button-spinner>
   </div>
 </ng-container>

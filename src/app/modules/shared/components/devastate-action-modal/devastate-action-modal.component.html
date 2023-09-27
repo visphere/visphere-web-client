@@ -30,15 +30,14 @@
         <ng-content />
       </p>
       <div class="flex justify-end gap-x-3 mt-5">
-        <button
-          [disabled]="isLoading"
-          (click)="emitDevstateAction.emit()"
-          type="button"
-          class="msph-modal__devastate-button">
-          <msph-lazy-button-spinner size="sm" [isLoading]="isLoading">
-            {{ i18nPrefix + '.submitButton' | translate }}
-          </msph-lazy-button-spinner>
-        </button>
+        <msph-lazy-button-spinner
+          size="sm"
+          [isLoading]="isLoading"
+          (emitClick)="emitDevstateAction.emit()"
+          buttonStyle="msph-modal__devastate-button"
+          buttonType="button">
+          {{ i18nPrefix + '.submitButton' | translate }}
+        </msph-lazy-button-spinner>
         <button
           [disabled]="isLoading"
           (click)="emitOnClose.emit()"

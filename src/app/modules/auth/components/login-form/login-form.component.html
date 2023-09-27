@@ -63,12 +63,10 @@
         </ng-container>
       </msph-auth-checkbox-form-input>
     </div>
-    <button
-      [disabled]="loginForm.invalid || (isLoading$ | async)"
-      class="msph-button msph-button--primary">
-      <msph-lazy-button-spinner [isLoading]="(isLoading$ | async)!">
-        {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
-      </msph-lazy-button-spinner>
-    </button>
+    <msph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="loginForm.invalid">
+      {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
+    </msph-lazy-button-spinner>
   </div>
 </form>

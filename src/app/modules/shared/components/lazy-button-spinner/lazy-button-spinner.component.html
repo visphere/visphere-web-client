@@ -3,10 +3,17 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<ng-container *ngIf="!isLoading">
-  <ng-content />
-</ng-container>
-<div
-  *ngIf="isLoading"
-  class="msph-button-spinner__carousel"
-  [class.msph-button-spinner__carousel--modal]="color === 'modal'"></div>
+<button
+  (click)="emitClick.emit()"
+  [ngClass]="buttonStyle"
+  [type]="buttonType"
+  [class.msph-button--loading]="isLoading"
+  [disabled]="buttonDisabled || isLoading">
+  <ng-container *ngIf="!isLoading">
+    <ng-content />
+  </ng-container>
+  <div
+    *ngIf="isLoading"
+    class="msph-button-spinner__carousel"
+    [class.msph-button-spinner__carousel--modal]="color === 'modal'"></div>
+</button>
