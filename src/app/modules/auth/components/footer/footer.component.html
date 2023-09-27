@@ -4,234 +4,257 @@
  -->
 
 <footer class="msph-footer__container">
-  <div
-    class="grid grid-cols-12 gap-y-5 lg:gap-y-10 px-0 lg:px-10 msph-safe-container">
+  <div class="msph-footer__wrapper">
     <div
-      class="col-span-12 md:col-span-5 lg:col-span-4 flex flex-col items-center sm:items-start sm:justify-center">
-      <a
-        href="{{ landingPagePath }}"
-        class="flex flex-col sm:flex-row w-fit items-center"
-        target="_blank">
+      class="grid grid-cols-12 gap-y-10 sm:gap-x-12 mt-10 md:mt-0 mb-10 md:mb-20">
+      <div
+        class="col-span-12 md:col-span-8 grid grid-cols-12 gap-8 text-lg order-1 md:order-0">
+        <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+          <h3 class="font-medium text-msph-tint-400 mb-2 md:mb-4">
+            {{ 'msph.webCommon.footer.headers.application.name' | translate }}
+          </h3>
+          <ul class="grid gap-y-4 text-xl">
+            <li>
+              <a
+                href="{{ landingPagePath }}/about"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.application.links.about'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ landingPagePath }}/download"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.application.links.download'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ landingPagePath }}/brand"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.application.links.brand'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ landingPagePath }}/tutorial"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.application.links.tutorial'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ landingPagePath }}/status"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.application.links.status'
+                    | translate
+                }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+          <h3 class="font-medium text-msph-tint-400 mb-2 md:mb-4">
+            {{ 'msph.webCommon.footer.headers.start.name' | translate }}
+          </h3>
+          <ul class="grid gap-y-4 text-xl">
+            <li>
+              <a
+                routerLink="/auth/login"
+                class="msph-footer__link"
+                (click)="handleLinkClick()">
+                {{
+                  'msph.webCommon.footer.headers.start.links.login' | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/auth/register"
+                class="msph-footer__link"
+                (click)="handleLinkClick()">
+                {{
+                  'msph.webCommon.footer.headers.start.links.register'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/auth/reset-password"
+                class="msph-footer__link"
+                (click)="handleLinkClick()">
+                {{
+                  'msph.webCommon.footer.headers.start.links.resetPassword'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/auth/my-accounts"
+                class="msph-footer__link"
+                (click)="handleLinkClick()">
+                {{
+                  'msph.webCommon.footer.headers.start.links.myAccounts'
+                    | translate
+                }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+          <h3 class="font-medium text-msph-tint-400 mb-2 md:mb-4">
+            {{ 'msph.webCommon.footer.headers.policies.name' | translate }}
+          </h3>
+          <ul class="grid gap-y-4 text-xl">
+            <li>
+              <a
+                href="{{ landingPagePath }}/terms-and-conditions"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.policies.links.termsAndConditions'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ landingPagePath }}/privacy-policy"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.policies.links.privacyPolicy'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ landingPagePath }}/third-party-software"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.policies.links.thirdPartySoftware'
+                    | translate
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ landingPagePath }}/license"
+                target="_blank"
+                class="msph-footer__link">
+                {{
+                  'msph.webCommon.footer.headers.policies.links.licenses'
+                    | translate
+                }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-4 order-0 md:order-1">
         <img
-          ngSrc="{{ path }}/static/logo/moonsphere-orange-variant-1.svg"
+          src="{{ path }}/static/gfx/devices-bg.svg"
           alt=""
-          width="50"
-          height="50" />
-        <h2 class="mt-2 sm:mt-0 sm:ms-3 text-2xl font-logo font-medium">
-          MoonSphere
-        </h2>
-      </a>
-      <p
-        class="mt-8 leading-[21px] mb-5 text-msph-tint-400 dark:text-msph-tint-300">
+          width="80%"
+          class="mx-auto mb-8" />
+        <a
+          href="{{ landingPagePath }}/download"
+          target="_blank"
+          class="msph-button msph-button--primary mb-2">
+          {{ 'msph.webCommon.footer.downloadAppButton' | translate }}
+        </a>
+        <a routerLink="/" class="msph-button msph-button--secondary mb-2">
+          {{ 'msph.webCommon.footer.openAppButton' | translate }}
+        </a>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 gap-5 msph-safe-container">
+      <div
+        class="col-span-12 lg:col-span-8 text-center lg:text-start text-msph-tint-400">
         {{ 'msph.webCommon.footer.description' | translate }}
-      </p>
-      <msph-footer-controls />
-    </div>
-    <div class="lg:col-span-1 hidden sm:block"></div>
-    <div
-      class="col-span-12 md:col-span-6 lg:col-span-7 grid grid-cols-12 gap-5 lg:gap-10">
-      <div class="col-span-12 sm:col-span-6 lg:col-span-4">
-        <h3 class="font-bold dark:font-medium text-msph-tint-500 mb-2 md:mb-4">
-          {{ 'msph.webCommon.footer.headers.application.name' | translate }}
-        </h3>
-        <ul class="grid gap-1">
-          <li>
-            <a
-              href="{{ landingPagePath }}/about"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.application.links.about'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ landingPagePath }}/download"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.application.links.download'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ landingPagePath }}/brand"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.application.links.brand'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ landingPagePath }}/tutorial"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.application.links.tutorial'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ landingPagePath }}/status"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.application.links.status'
-                  | translate
-              }}
-            </a>
-          </li>
-        </ul>
       </div>
-      <div class="col-span-12 sm:col-span-6 lg:col-span-4">
-        <h3 class="font-bold dark:font-medium text-msph-tint-500 mb-2 md:mb-4">
-          {{ 'msph.webCommon.footer.headers.start.name' | translate }}
-        </h3>
-        <ul class="grid gap-1">
-          <li>
-            <a
-              routerLink="/auth/login"
-              class="msph-footer__link"
-              (click)="handleLinkClick()">
-              {{
-                'msph.webCommon.footer.headers.start.links.login' | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="/auth/register"
-              class="msph-footer__link"
-              (click)="handleLinkClick()">
-              {{
-                'msph.webCommon.footer.headers.start.links.register' | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="/auth/reset-password"
-              class="msph-footer__link"
-              (click)="handleLinkClick()">
-              {{
-                'msph.webCommon.footer.headers.start.links.resetPassword'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="/auth/my-accounts"
-              class="msph-footer__link"
-              (click)="handleLinkClick()">
-              {{
-                'msph.webCommon.footer.headers.start.links.myAccounts'
-                  | translate
-              }}
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-span-12 sm:col-span-6 lg:col-span-4">
-        <h3 class="font-bold dark:font-medium text-msph-tint-500 mb-2 md:mb-4">
-          {{ 'msph.webCommon.footer.headers.policies.name' | translate }}
-        </h3>
-        <ul class="grid gap-1">
-          <li>
-            <a
-              href="{{ landingPagePath }}/terms-and-conditions"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.policies.links.termsAndConditions'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ landingPagePath }}/privacy-policy"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.policies.links.privacyPolicy'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ landingPagePath }}/third-party-software"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.policies.links.thirdPartySoftware'
-                  | translate
-              }}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ landingPagePath }}/license"
-              target="_blank"
-              class="msph-footer__link">
-              {{
-                'msph.webCommon.footer.headers.policies.links.licenses'
-                  | translate
-              }}
-            </a>
-          </li>
-        </ul>
+      <div
+        class="col-span-12 lg:col-span-4 flex justify-center lg:justify-end gap-x-6">
+        <a href="https://facebook.com" target="_blank" class="p-1">
+          <img
+            src="{{ path }}/static/icon/social/fb.svg"
+            alt="fb"
+            width="25px" />
+        </a>
+        <a href="https://youtube.com" target="_blank" class="p-1">
+          <img
+            src="{{ path }}/static/icon/social/yt.svg"
+            alt="yt"
+            width="25px" />
+        </a>
+        <a href="https://instagram.com" target="_blank" class="p-1">
+          <img
+            src="{{ path }}/static/icon/social/ig.svg"
+            alt="ig"
+            width="25px" />
+        </a>
+        <a href="https://twitter.com" target="_blank" class="p-1">
+          <img src="{{ path }}/static/icon/social/x.svg" alt="x" width="25px" />
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="p-1">
+          <img
+            src="{{ path }}/static/icon/social/tt.svg"
+            alt="tiktok"
+            width="25px" />
+        </a>
       </div>
     </div>
-    <div class="col-span-12">
-      <hr class="border-msph-dark-700 dark:border-msph-dark-600 mb-3" />
-      <div class="msph-copy-footer__container">
-        <div class="msph-copy-footer__rights">
-          <div>
-            <span
-              class="text-msph-tint-400 dark:text-msph-tint-300 font-medium me-1"
-              >&copy; {{ currYear | date: 'yyyy' }} by</span
-            >
-            <a
-              href="{{ landingPagePath }}"
-              target="_blank"
-              class="hover:underline font-medium dark:font-light"
-              >MoonSphere Systems</a
-            >
-          </div>
-          <div class="flex justify-center md:justify-start">
-            <span
-              class="text-msph-tint-400 dark:text-msph-tint-300 font-medium me-2"
-              >Powered by</span
-            >
-            <div class="flex">
-              <img
-                src="{{ path }}/static/logo/{{ copyLogoImagePath }}"
-                alt=""
-                width="16"
-                height="16"
-                class="mt-0.5 object-contain me-1" />
-              <span class="font-medium dark:font-light font-logo"
-                >MoonSphere</span
-              >
-            </div>
+    <hr class="my-8 border-msph-tint-200 dark:border-msph-dark-700" />
+    <div class="msph-copy-footer__container">
+      <div class="msph-copy-footer__rights">
+        <div class="msph-copy-footer__wrapper">
+          <span class="text-msph-tint-400 font-medium me-1"
+            >&copy; {{ currYear | date: 'yyyy' }} by</span
+          >
+          <a
+            href="{{ landingPagePath }}"
+            target="_blank"
+            class="font-medium hover:underline"
+            >MoonSphere Systems</a
+          >
+        </div>
+        <div class="msph-copy-footer__wrapper">
+          <span class="text-msph-tint-400 font-medium me-2">Powered by</span>
+          <div class="flex">
+            <img
+              src="{{ path }}/static/logo/{{ copyLogoImagePath }}"
+              alt=""
+              width="16"
+              height="16"
+              class="object-contain me-1" />
+            <span class="font-logo font-medium">Msph Technologies</span>
           </div>
         </div>
-        <div class="w-full md:w-fit">
-          <a routerLink="/" class="msph-copy-footer__open-app-button">
-            {{ 'msph.webCommon.footer.openAppButton' | translate }}
-          </a>
-        </div>
+      </div>
+      <div class="msph-copy-footer__buttons">
+        <msph-footer-controls />
       </div>
     </div>
   </div>
