@@ -7,24 +7,23 @@
   <p class="mb-1 text-sm text-msph-tint-400 dark:text-msph-tint-400">
     {{ labelI18nText | translate }}
   </p>
-  <button
-    [disabled]="isDeferred || isDisabled"
-    (click)="handleButtonClick()"
-    [class]="styles">
-    <msph-lazy-button-spinner [isLoading]="isLoading">
-      <div class="flex justify-center items-center">
-        {{ innerI18nText | translate }}
-        <ng-container *ngIf="isDeferred">{{ '(' }}</ng-container>
-        <cd-timer
-          #timerEntry
-          [hidden]="!isDeferred"
-          [countdown]="true"
-          [autoStart]="enabledOnMount"
-          [startTime]="deferTimeSec"
-          (onComplete)="handleResetDeferredTime()"
-          format="intelli" />
-        <ng-container *ngIf="isDeferred">{{ ')' }}</ng-container>
-      </div>
-    </msph-lazy-button-spinner>
-  </button>
+  <msph-lazy-button-spinner
+    [isLoading]="isLoading"
+    [buttonDisabled]="isDeferred || isDisabled"
+    (emitClick)="handleButtonClick()"
+    [buttonStyle]="styles">
+    <div class="flex justify-center items-center">
+      {{ innerI18nText | translate }}
+      <ng-container *ngIf="isDeferred">{{ '(' }}</ng-container>
+      <cd-timer
+        #timerEntry
+        [hidden]="!isDeferred"
+        [countdown]="true"
+        [autoStart]="enabledOnMount"
+        [startTime]="deferTimeSec"
+        (onComplete)="handleResetDeferredTime()"
+        format="intelli" />
+      <ng-container *ngIf="isDeferred">{{ ')' }}</ng-container>
+    </div>
+  </msph-lazy-button-spinner>
 </div>
