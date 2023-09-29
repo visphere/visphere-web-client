@@ -15,7 +15,6 @@ import { SharedEffects } from '~/root-mod/modules/shared/store/side-effects/shar
 import { DeferredButtonComponent } from '~/shared-mod/components/deferred-button/deferred-button.component';
 import { DevastateActionModalComponent } from '~/shared-mod/components/devastate-action-modal/devastate-action-modal.component';
 import { FieldValidatorComponent } from '~/shared-mod/components/field-validator/field-validator.component';
-import { IzomorphicLoaderComponent } from '~/shared-mod/components/izomorphic-loader/izomorphic-loader.component';
 import { LazyButtonSpinnerComponent } from '~/shared-mod/components/lazy-button-spinner/lazy-button-spinner.component';
 import { LazyPageLoaderComponent } from '~/shared-mod/components/lazy-page-loader/lazy-page-loader.component';
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
@@ -31,7 +30,6 @@ import { sharedReduxStore } from '~/shared-mod/store/reducer';
     DeferredButtonComponent,
     DevastateActionModalComponent,
     FieldValidatorComponent,
-    IzomorphicLoaderComponent,
     LazyButtonSpinnerComponent,
     LazyPageLoaderComponent,
     ModalWrapperComponent,
