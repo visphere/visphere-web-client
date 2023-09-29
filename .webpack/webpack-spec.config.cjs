@@ -21,7 +21,7 @@ if (fs.existsSync(envPath)) {
 
 const landingPageBaseUrl = `http://localhost:${process.env.ENV_MSPH_LANDING_PAGE_DEV_PORT}`;
 const clientBaseUrl = `http://localhost:${process.env.ENV_MSPH_WEB_CLIENT_DEV_PORT}`;
-const cdnBaseUrl = `http://localhost:${process.env.ENV_MSPH_STATIC_S3_PORT}`;
+const cdnBaseUrl = `http://localhost:${process.env.ENV_MSPH_STATIC_S3_API_PORT}`;
 const infraApiGatewayUrl = `http://localhost:${process.env.ENV_MSPH_INFRA_API_GATEWAY_DEV_PORT}`;
 
 module.exports = {
