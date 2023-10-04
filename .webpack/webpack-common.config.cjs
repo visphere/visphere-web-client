@@ -189,10 +189,6 @@ const commonWebpackConfig = ({
                 );
               },
             },
-            {
-              from: path.resolve(__dirname, '..', '.htaccess'),
-              to: path.resolve(__dirname, '..', 'dist'),
-            },
           ],
         }),
         new MomentLocalesPlugin(webpackUtils.webpackMomentLocalesCommonConfig),
