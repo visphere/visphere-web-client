@@ -38,8 +38,8 @@ export class FooterComponent
       ])
     ).subscribe(([theme, lang]) => {
       this.copyLogoImagePath = this._themeSwitcherService.isDarkMode(theme)
-        ? 'moonsphere-light-small-variant-2.svg'
-        : 'moonsphere-dark-small-variant-2.svg';
+        ? 'msph-small-light.svg'
+        : 'msph-small-dark.svg';
       this.landingPagePath = `${environment.baseLandingUrl}${lang.landingPrefix}`;
     });
   }
