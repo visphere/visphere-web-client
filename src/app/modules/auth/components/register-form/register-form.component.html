@@ -1,17 +1,17 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<msph-verify-captcha-modal
-  paragraph="msph.webClient.modal.captchaSignup"
+<vsph-verify-captcha-modal
+  paragraph="vsph.webClient.modal.captchaSignup"
   (emitOnAccept)="handleEmitOnAcceptCaptcha()"
   snackbarPlaceholder="declineCaptchaResetPassword" />
 <form
   [formGroup]="registerForm"
   (ngSubmit)="handleSubmitRegisterForm()"
   class="grid gap-y-5">
-  <msph-register-first-stage-form *ngIf="(currentStage$ | async) === 'first'" />
-  <msph-register-second-stage-form
+  <vsph-register-first-stage-form *ngIf="(currentStage$ | async) === 'first'" />
+  <vsph-register-second-stage-form
     *ngIf="(currentStage$ | async) === 'second'" />
 </form>

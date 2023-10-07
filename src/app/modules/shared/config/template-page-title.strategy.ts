@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Injectable } from '@angular/core';
@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({ providedIn: 'root' })
 export class TemplatePageTitleStrategy extends TitleStrategy {
-  private readonly DEF_SUFFIX = 'MoonSphere';
+  private readonly DEF_SUFFIX = 'Visphere';
   private readonly SEPARATOR = '|';
 
   constructor(
@@ -23,7 +23,7 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
     const titlePlaceholder = this.buildTitle(snapshot);
     if (titlePlaceholder !== undefined) {
       const title = this._translateService.instant(
-        `msph.webClient.pageTitle.${titlePlaceholder}`
+        `vsph.webClient.pageTitle.${titlePlaceholder}`
       );
       this._title.setTitle(`${title} ${this.SEPARATOR} ${this.DEF_SUFFIX}`);
     } else {

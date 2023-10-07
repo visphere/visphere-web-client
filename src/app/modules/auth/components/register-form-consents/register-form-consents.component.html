@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
@@ -11,37 +11,37 @@
         (input)="handleToggleAllValues()"
         [disabled]="!!(formDisabled$ | async)"
         type="checkbox"
-        class="msph-auth__checkbox mt-0.5" />
-      <div class="leading-5 text-msph-tint-400 dark:text-msph-tint-300">
-        {{ 'msph.webClient.registerPage.selectDiselectAll' | translate }}
+        class="vsph-auth__checkbox mt-0.5" />
+      <div class="leading-5 text-vsph-tint-400 dark:text-vsph-tint-300">
+        {{ 'vsph.webClient.registerPage.selectDiselectAll' | translate }}
       </div>
     </label>
   </div>
   <div class="ms-4 grid gap-y-2">
-    <msph-auth-checkbox-form-input formControlIdentifier="allowNotifs">
+    <vsph-auth-checkbox-form-input formControlIdentifier="allowNotifs">
       <ng-container labelContent>
         {{
-          'msph.webClient.registerPage.formFields.allowNotifs.value' | translate
+          'vsph.webClient.registerPage.formFields.allowNotifs.value' | translate
         }}
       </ng-container>
-    </msph-auth-checkbox-form-input>
-    <msph-auth-checkbox-form-input formControlIdentifier="enabledMfa">
+    </vsph-auth-checkbox-form-input>
+    <vsph-auth-checkbox-form-input formControlIdentifier="enabledMfa">
       <ng-container labelContent>
         {{
-          'msph.webClient.registerPage.formFields.enabledMfa.value' | translate
+          'vsph.webClient.registerPage.formFields.enabledMfa.value' | translate
         }}
       </ng-container>
-    </msph-auth-checkbox-form-input>
-    <msph-auth-checkbox-form-input
+    </vsph-auth-checkbox-form-input>
+    <vsph-auth-checkbox-form-input
       formControlIdentifier="agreeTerms"
       i18nPrefix="webClient.registerPage">
       <ng-container labelContent>
         <span [innerHTML]="(agreeTermsContent$ | async)! | sanitize"></span>
-        <span class="ms-0.5 text-msph-tint-400">*</span>
+        <span class="ms-0.5 text-vsph-tint-400">*</span>
       </ng-container>
       <ng-container errorsContent>
-        <msph-field-validator />
+        <vsph-field-validator />
       </ng-container>
-    </msph-auth-checkbox-form-input>
+    </vsph-auth-checkbox-form-input>
   </div>
 </div>

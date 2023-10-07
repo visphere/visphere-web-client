@@ -1,26 +1,26 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<msph-auth-content-wrapper>
-  <msph-auth-form-header i18nPrefix="webClient.registerPage" />
-  <msph-register-form />
-  <div class="msph-auth__form-out-text mt-2">
-    * {{ 'msph.clientCommon.auth.fieldsRequired' | translate }}
+<vsph-auth-content-wrapper>
+  <vsph-auth-form-header i18nPrefix="webClient.registerPage" />
+  <vsph-register-form />
+  <div class="vsph-auth__form-out-text mt-2">
+    * {{ 'vsph.clientCommon.auth.fieldsRequired' | translate }}
   </div>
   <div class="mt-4">
-    <p class="text-msph-tint-400 dark:text-msph-tint-300">
-      {{ 'msph.webClient.registerPage.haveAccount' | translate }}
-      <a class="msph-auth__link" routerLink="/auth/login">
-        {{ 'msph.webClient.registerPage.loginOnAccount' | translate }}
+    <p class="text-vsph-tint-400 dark:text-vsph-tint-300">
+      {{ 'vsph.webClient.registerPage.haveAccount' | translate }}
+      <a class="vsph-auth__link" routerLink="/auth/login">
+        {{ 'vsph.webClient.registerPage.loginOnAccount' | translate }}
       </a>
     </p>
-    <p class="text-msph-tint-400 dark:text-msph-tint-300">
-      {{ 'msph.clientCommon.auth.forgotPassword' | translate }}
-      <a class="msph-auth__link" routerLink="/auth/reset-password">
-        {{ 'msph.clientCommon.auth.resetPassword' | translate }}
+    <p class="text-vsph-tint-400 dark:text-vsph-tint-300">
+      {{ 'vsph.clientCommon.auth.forgotPassword' | translate }}
+      <a class="vsph-auth__link" routerLink="/auth/reset-password">
+        {{ 'vsph.clientCommon.auth.resetPassword' | translate }}
       </a>
     </p>
   </div>
-</msph-auth-content-wrapper>
+</vsph-auth-content-wrapper>

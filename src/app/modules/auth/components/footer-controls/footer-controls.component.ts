@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
@@ -11,7 +11,7 @@ import { ThemeModeType } from '~/shared-mod/types/theme-mode.type';
 import { TranslationRow } from '~/shared-mod/types/translation.type';
 
 @Component({
-  selector: 'msph-footer-controls',
+  selector: 'vsph-footer-controls',
   templateUrl: './footer-controls.component.html',
   host: {
     class:

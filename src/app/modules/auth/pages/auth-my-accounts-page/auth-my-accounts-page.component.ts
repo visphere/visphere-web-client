@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
@@ -11,7 +11,7 @@ import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { FetchingState } from '~/shared-mod/types/fetching-state.type';
 
 @Component({
-  selector: 'msph-auth-my-accounts-page',
+  selector: 'vsph-auth-my-accounts-page',
   templateUrl: './auth-my-accounts-page.component.html',
   host: { class: 'flex-grow flex flex-col' },
   providers: [MyAccountsService],

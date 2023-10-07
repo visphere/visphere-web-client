@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
@@ -13,7 +13,7 @@ import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-password-input-toggler',
+  selector: 'vsph-password-input-toggler',
   templateUrl: './password-input-toggler.component.html',
   providers: [SanitizePipe, PopulateFormControlService],
 })
@@ -35,7 +35,7 @@ export class PasswordInputTogglerComponent
   formDisabled = false;
   tooltipProps: NgxTippyProps = {
     placement: 'top',
-    theme: 'msph-auth',
+    theme: 'vsph-auth',
     animation: 'scale-subtle',
   };
   i18nInfo = '';
@@ -49,7 +49,7 @@ export class PasswordInputTogglerComponent
   }
 
   ngOnInit(): void {
-    const baseI18nFormControlName = `msph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}`;
+    const baseI18nFormControlName = `vsph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}`;
     this.i18nLabel = `${baseI18nFormControlName}.value`;
     this.i18nInfo = `${baseI18nFormControlName}.info`;
     this._populateFormControlService.setFields(

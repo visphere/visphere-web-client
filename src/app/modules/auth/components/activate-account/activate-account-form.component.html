@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
@@ -10,43 +10,43 @@
   class="grid gap-y-3">
   <div
     [innerHtml]="
-      'msph.webClient.resetPasswordPage.successfullSendEmailMessage'
+      'vsph.webClient.resetPasswordPage.successfullSendEmailMessage'
         | translate: { emailAddress: (userEmail$ | async) }
     "
-    class="msph-auth__info-card-container"></div>
-  <msph-password-input-toggler
+    class="vsph-auth__info-card-container"></div>
+  <vsph-password-input-toggler
     [maxLength]="10"
     placeholder="Xtg4vCt49D"
     formControlIdentifier="token"
     i18nPrefix="webClient.activateAccountPage">
-    <msph-field-validator />
-    <msph-field-validator type="exactLength" />
-    <msph-field-validator type="pattern" />
-  </msph-password-input-toggler>
-  <msph-lazy-button-spinner
+    <vsph-field-validator />
+    <vsph-field-validator type="exactLength" />
+    <vsph-field-validator type="pattern" />
+  </vsph-password-input-toggler>
+  <vsph-lazy-button-spinner
     [isLoading]="(isLoading$ | async)!"
     [buttonDisabled]="activateAccountForm.invalid">
-    {{ 'msph.webClient.activateAccountPage.activateAccountButton' | translate }}
-  </msph-lazy-button-spinner>
-  <msph-deferred-button
+    {{ 'vsph.webClient.activateAccountPage.activateAccountButton' | translate }}
+  </vsph-lazy-button-spinner>
+  <vsph-deferred-button
     (emitOnAction)="handleResendMessage()"
     [isDisabled]="!!(isLoading$ | async)"
     [isLoading]="(isResendLoading$ | async)!"
-    styles="msph-button msph-button--secondary"
-    innerI18nText="msph.common.utils.resendMessageButton"
-    labelI18nText="msph.common.utils.emailMessageNotReceived" />
+    styles="vsph-button vsph-button--secondary"
+    innerI18nText="vsph.common.utils.resendMessageButton"
+    labelI18nText="vsph.common.utils.emailMessageNotReceived" />
 </form>
 <div class="grid gap-y-3" *ngIf="(currentStage$ | async) === 'success'">
-  <div class="msph-auth__info-card-container mb-4">
+  <div class="vsph-auth__info-card-container mb-4">
     {{
-      'msph.webClient.activateAccountPage.successfullyActivatedMessage'
+      'vsph.webClient.activateAccountPage.successfullyActivatedMessage'
         | translate
     }}
   </div>
   <button
     (click)="handleReturnToLoginAndClearState()"
-    class="msph-button msph-button--primary flex items-center justify-center">
+    class="vsph-button vsph-button--primary flex items-center justify-center">
     <ng-icon name="outsideLinkIcon" class="me-2" />
-    {{ 'msph.webClient.activateAccountPage.moveToLoginPage' | translate }}
+    {{ 'vsph.webClient.activateAccountPage.moveToLoginPage' | translate }}
   </button>
 </div>

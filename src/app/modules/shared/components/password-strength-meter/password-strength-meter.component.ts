@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
@@ -10,7 +10,7 @@ import { PasswordStrengthMeterService } from '~/shared-mod/services/password-str
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-password-strength-meter',
+  selector: 'vsph-password-strength-meter',
   templateUrl: './password-strength-meter.component.html',
 })
 export class PasswordStrengthMeterComponent
@@ -21,8 +21,8 @@ export class PasswordStrengthMeterComponent
   currentStrength = 0;
   formGroup!: FormGroup;
 
-  @Input() tailwindClass = 'msph-auth__password-strenght-meter__colors';
-  @Input() tailwindBgClass = 'msph-auth__password-strenght-meter__bg';
+  @Input() tailwindClass = 'vsph-auth__password-strenght-meter__colors';
+  @Input() tailwindBgClass = 'vsph-auth__password-strenght-meter__bg';
   @Input() formControlIdentifier = 'password';
 
   constructor(

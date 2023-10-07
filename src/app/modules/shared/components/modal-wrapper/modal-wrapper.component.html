@@ -1,46 +1,46 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<div *ngIf="isActive" class="msph-modal__container">
-  <div class="msph-modal__background"></div>
+<div *ngIf="isActive" class="vsph-modal__container">
+  <div class="vsph-modal__background"></div>
   <div
     [@authWindowFadeAndMove]
     (@authWindowFadeAndMove.done)="emitOnAnimationDone.emit()"
-    class="msph-modal__window-container">
+    class="vsph-modal__window-container">
     <div
       [class.max-w-[1280px]]="modalSize === 'xl'"
       [class.max-w-[720px]]="modalSize === 'sm'"
       [class.max-w-[500px]]="modalSize === 'xs'"
-      class="msph-modal__window-wrapper">
-      <div class="msph-modal__window-notch"></div>
+      class="vsph-modal__window-wrapper">
+      <div class="vsph-modal__window-notch"></div>
       <button
         [disabled]="isLoading"
         (click)="emitOnClose.emit()"
         type="button"
-        class="msph-modal__window-x-button">
+        class="vsph-modal__window-x-button">
         <ng-icon name="xIcon" />
       </button>
-      <h2 class="msph-modal__window-header">
+      <h2 class="vsph-modal__window-header">
         {{ header | translate }}
       </h2>
-      <p class="msph-modal__window-paragraph">
+      <p class="vsph-modal__window-paragraph">
         {{ paragraph! | translate }}
       </p>
       <div class="mt-8 mb-5">
         <ng-content select="[content]" />
       </div>
       <div class="flex justify-end gap-x-3">
-        <msph-lazy-button-spinner
+        <vsph-lazy-button-spinner
           size="sm"
           color="modal"
           [isLoading]="isLoading"
           (emitClick)="emitOnClose.emit()"
-          buttonStyle="msph-modal__close-button"
+          buttonStyle="vsph-modal__close-button"
           buttonType="button">
-          {{ 'msph.webClient.modal.button.close' | translate }}
-        </msph-lazy-button-spinner>
+          {{ 'vsph.webClient.modal.button.close' | translate }}
+        </vsph-lazy-button-spinner>
         <ng-content select="[buttons]" />
       </div>
     </div>

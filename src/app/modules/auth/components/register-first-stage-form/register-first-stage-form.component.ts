@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import {
@@ -16,7 +16,7 @@ import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-gro
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-register-first-stage-form',
+  selector: 'vsph-register-first-stage-form',
   templateUrl: './register-first-stage-form.component.html',
   providers: [PopulateFormGroupService],
 })

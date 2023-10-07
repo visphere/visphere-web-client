@@ -1,5 +1,5 @@
 {
-  "name": "moonsphere-web-client",
+  "name": "visphere-web-client",
   "version": "1.0.0",
   "scripts": {
     "start:dev": "npx webpack-dev-server --progress --config .webpack/webpack-dev.config.cjs",
@@ -17,9 +17,9 @@
   },
   "private": true,
   "author": {
-    "name": "MoonSphere Systems",
-    "email": "info@moonsphere.pl",
-    "url": "https://moonsphere.pl"
+    "name": "Visphere",
+    "email": "info@visphere.pl",
+    "url": "https://visphere.pl"
   },
   "lint-staged": {
     "**/*.{ts,html,js,cjs,json}": [

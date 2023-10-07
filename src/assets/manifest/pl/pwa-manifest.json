@@ -1,7 +1,7 @@
 {
-  "name": "MoonSphere",
-  "short_name": "MoonSphere",
-  "description": "Nawiązuj kontakty i komunikuj się w czasie rzeczywistym dzięki systemowi do czatu online MoonSphere.",
+  "name": "Visphere",
+  "short_name": "Visphere",
+  "description": "Nawiązuj kontakty i komunikuj się w czasie rzeczywistym dzięki systemowi do czatu online Visphere.",
   "icons": [
     {
       "src": "__CDN_BASE_URL__/static/pwa/icon/pwa-icon-48x48.png",

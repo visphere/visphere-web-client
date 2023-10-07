@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -10,7 +10,7 @@ import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-footer',
+  selector: 'vsph-footer',
   templateUrl: './footer.component.html',
 })
 export class FooterComponent
@@ -38,8 +38,8 @@ export class FooterComponent
       ])
     ).subscribe(([theme, lang]) => {
       this.copyLogoImagePath = this._themeSwitcherService.isDarkMode(theme)
-        ? 'msph-small-light.svg'
-        : 'msph-small-dark.svg';
+        ? 'vsph-small-light.svg'
+        : 'vsph-small-dark.svg';
       this.landingPagePath = `${environment.baseLandingUrl}${lang.landingPrefix}`;
     });
   }

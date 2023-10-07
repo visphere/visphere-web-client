@@ -1,26 +1,26 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<ul class="msph-snackbar__list-container">
+<ul class="vsph-snackbar__list-container">
   <li
     *ngFor="let snackbar of snackbarStack$ | async"
     [@snackbarFadeAndMove]
-    class="msph-snackbar__list-element">
+    class="vsph-snackbar__list-element">
     <div
-      [class.bg-msph-tint-500]="snackbar.severity === 'primary'"
-      [class.bg-msph-dark-600]="snackbar.severity === 'secondary'"
-      [class.bg-msph-green-100]="snackbar.severity === 'success'"
-      [class.bg-msph-orange-100]="snackbar.severity === 'warning'"
-      [class.bg-msph-red-100]="snackbar.severity === 'danger'"
-      class="msph-snackbar__severity-indicator"></div>
+      [class.bg-vsph-tint-500]="snackbar.severity === 'primary'"
+      [class.bg-vsph-dark-600]="snackbar.severity === 'secondary'"
+      [class.bg-vsph-green-100]="snackbar.severity === 'success'"
+      [class.bg-vsph-orange-100]="snackbar.severity === 'warning'"
+      [class.bg-vsph-red-100]="snackbar.severity === 'danger'"
+      class="vsph-snackbar__severity-indicator"></div>
     <button
       (click)="handleRemoveSnackbar(snackbar.id)"
-      class="msph-snackbar__close-button">
+      class="vsph-snackbar__close-button">
       <ng-icon name="xIcon" />
     </button>
-    <h2 *ngIf="snackbar.header" class="msph-snackbar__header">
+    <h2 *ngIf="snackbar.header" class="vsph-snackbar__header">
       <ng-template
         *ngIf="
           snackbar.header.omitTransformation;
@@ -32,12 +32,12 @@
       </ng-template>
       <ng-template #transformHeader>
         {{
-          (snackbar.header.i18nPrefix || 'msph.webClient.snackbar.') +
+          (snackbar.header.i18nPrefix || 'vsph.webClient.snackbar.') +
             snackbar.header.placeholder | translate: snackbar.header.parameters
         }}
       </ng-template>
     </h2>
-    <p class="msph-snackbar__content">
+    <p class="vsph-snackbar__content">
       <ng-template
         *ngIf="
           snackbar.content.omitTransformation;
@@ -49,7 +49,7 @@
       </ng-template>
       <ng-template #transformContent>
         {{
-          (snackbar.content.i18nPrefix || 'msph.webClient.snackbar.') +
+          (snackbar.content.i18nPrefix || 'vsph.webClient.snackbar.') +
             snackbar.content.placeholder
             | translate: snackbar.content.parameters
         }}

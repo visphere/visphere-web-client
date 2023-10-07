@@ -1,13 +1,13 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
 <div>
-  <p class="mb-1 text-sm text-msph-tint-400 dark:text-msph-tint-400">
+  <p class="mb-1 text-sm text-vsph-tint-400 dark:text-vsph-tint-400">
     {{ labelI18nText | translate }}
   </p>
-  <msph-lazy-button-spinner
+  <vsph-lazy-button-spinner
     [isLoading]="isLoading"
     [buttonDisabled]="isDeferred || isDisabled"
     (emitClick)="handleButtonClick()"
@@ -25,5 +25,5 @@
         format="intelli" />
       <ng-container *ngIf="isDeferred">{{ ')' }}</ng-container>
     </div>
-  </msph-lazy-button-spinner>
+  </vsph-lazy-button-spinner>
 </div>

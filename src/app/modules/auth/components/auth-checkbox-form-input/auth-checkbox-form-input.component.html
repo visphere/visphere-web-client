@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
@@ -7,12 +7,12 @@
   <label class="flex gap-x-2 items-start">
     <input
       type="checkbox"
-      class="msph-auth__checkbox"
+      class="vsph-auth__checkbox"
       [formControlName]="formControlIdentifier"
       (input)="handleSetDirtyAndTouched()" />
     <div>
       <div
-        class="leading-5 cursor-pointer text-msph-tint-400 dark:text-msph-tint-300 flex">
+        class="leading-5 cursor-pointer text-vsph-tint-400 dark:text-vsph-tint-300 flex">
         <ng-content select="[labelContent]" />
         <div
           *ngIf="additionalInfo"
@@ -25,7 +25,7 @@
           </ng-template>
         </div>
       </div>
-      <div class="text-sm msph-auth__text--invalid">
+      <div class="text-sm vsph-auth__text--invalid">
         <ng-content select="[errorsContent]" />
       </div>
     </div>

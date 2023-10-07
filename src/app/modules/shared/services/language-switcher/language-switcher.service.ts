@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { DOCUMENT } from '@angular/common';
@@ -60,16 +60,16 @@ export class LanguageSwitcherService {
     document.documentElement.lang = loadedLang;
     this.updateMetaName(
       'description',
-      'msph.webCommon.metaProperty.description'
+      'vsph.webCommon.metaProperty.description'
     );
-    this.updateMetaName('keywords', 'msph.webCommon.metaProperty.keywords');
+    this.updateMetaName('keywords', 'vsph.webCommon.metaProperty.keywords');
     this.updateMetaProperty(
       'og:description',
-      'msph.webCommon.metaProperty.description'
+      'vsph.webCommon.metaProperty.description'
     );
     this.updateMetaProperty(
       'twitter:description',
-      'msph.webCommon.metaProperty.description'
+      'vsph.webCommon.metaProperty.description'
     );
     this.updateManifestLangFile(loadedLang);
   }

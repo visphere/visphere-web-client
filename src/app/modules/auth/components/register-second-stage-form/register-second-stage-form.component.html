@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
@@ -8,46 +8,46 @@
     <button
       (click)="handleGotoPreviousStage()"
       [disabled]="isLoading$ | async"
-      class="msph-auth__top-nav-button px-2 flex items-center w-fit">
+      class="vsph-auth__top-nav-button px-2 flex items-center w-fit">
       <ng-icon name="arrowLeftIcon" class="me-2" />
-      {{ 'msph.common.utils.backwardMove' | translate }}
+      {{ 'vsph.common.utils.backwardMove' | translate }}
     </button>
 
-    <msph-auth-common-form-input
+    <vsph-auth-common-form-input
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="firstName"
       i18nPrefix="webClient.registerPage">
-      <msph-field-validator />
-      <msph-field-validator type="minlength" />
-    </msph-auth-common-form-input>
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+    </vsph-auth-common-form-input>
 
-    <msph-auth-common-form-input
+    <vsph-auth-common-form-input
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="lastName"
       i18nPrefix="webClient.registerPage">
-      <msph-field-validator />
-      <msph-field-validator type="minlength" />
-    </msph-auth-common-form-input>
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+    </vsph-auth-common-form-input>
 
-    <msph-auth-common-form-input
+    <vsph-auth-common-form-input
       [maxLength]="100"
       formControlIdentifier="secondEmailAddress"
       i18nPrefix="webClient.registerPage"
       [additionalInfo]="true">
-      <msph-field-validator type="email" />
-      <msph-field-validator type="exact" />
-    </msph-auth-common-form-input>
+      <vsph-field-validator type="email" />
+      <vsph-field-validator type="exact" />
+    </vsph-auth-common-form-input>
 
-    <msph-register-form-consents />
+    <vsph-register-form-consents />
 
     <!-- TODO: nr telefonu, wprowadzanie, wybieranie spośród kodów, niewymagany  -->
 
-    <msph-lazy-button-spinner
+    <vsph-lazy-button-spinner
       [isLoading]="(isLoading$ | async)!"
       [buttonDisabled]="checkIfFormIsInvalid">
-      {{ 'msph.webClient.registerPage.submitFormButton' | translate }}
-    </msph-lazy-button-spinner>
+      {{ 'vsph.webClient.registerPage.submitFormButton' | translate }}
+    </vsph-lazy-button-spinner>
   </div>
 </ng-container>

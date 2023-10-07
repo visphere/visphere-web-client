@@ -1,18 +1,18 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<msph-modal-wrapper
+<vsph-modal-wrapper
   [isActive]="(isActive$ | async)!"
   [isLoading]="(isLoading$ | async)!"
   (emitOnClose)="handleEmitOnClose()"
   (emitOnAnimationDone)="handleShowHcaptchaWebcomponent()"
-  [header]="'msph.webClient.modal.captchaHeader' | translate"
+  [header]="'vsph.webClient.modal.captchaHeader' | translate"
   [paragraph]="paragraph">
   <ng-container content>
     <div class="relative w-[302px] h-[76px] mx-auto">
-      <div class="msph-captcha-modal__skeleton-loader"></div>
+      <div class="vsph-captcha-modal__skeleton-loader"></div>
       <div class="absolute top-0 left-0" *ngIf="isCaptchaVisible">
         <h-captcha
           *mcRerender="selectedLang"
@@ -25,9 +25,9 @@
     <div class="flex flex-col items-center">
       <p
         *ngIf="errorMessage"
-        class="text-msph-red-200 dark:msph-red-100 text-sm text-center mt-2">
+        class="text-vsph-red-200 dark:vsph-red-100 text-sm text-center mt-2">
         {{ errorMessage }}
       </p>
     </div>
   </ng-container>
-</msph-modal-wrapper>
+</vsph-modal-wrapper>

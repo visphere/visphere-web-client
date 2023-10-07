@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { TitleCasePipe } from '@angular/common';
@@ -14,7 +14,7 @@ import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-birth-date-select-spinner',
+  selector: 'vsph-birth-date-select-spinner',
   templateUrl: './birth-date-select-spinner.component.html',
   providers: [TitleCasePipe, PopulateFormControlService],
 })

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
@@ -7,7 +7,7 @@ import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.anima
 import { ModalSize } from '~/shared-mod/types/modal.type';
 
 @Component({
-  selector: 'msph-modal-wrapper',
+  selector: 'vsph-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   animations: [authWindowFadeAndMove],
 })

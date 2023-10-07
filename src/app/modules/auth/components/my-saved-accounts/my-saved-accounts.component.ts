@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
@@ -14,7 +14,7 @@ import { environment } from '~/env/environment';
 import { FetchingState } from '~/shared-mod/types/fetching-state.type';
 
 @Component({
-  selector: 'msph-my-saved-accounts',
+  selector: 'vsph-my-saved-accounts',
   templateUrl: './my-saved-accounts.component.html',
 })
 export class MySavedAccountsComponent {
@@ -32,7 +32,7 @@ export class MySavedAccountsComponent {
   cdnPath = environment.contentDistributorBaseUrl;
   tooltipProps: NgxTippyProps = {
     placement: 'bottom',
-    theme: 'msph-auth',
+    theme: 'vsph-auth',
     animation: 'scale-subtle',
   };
 

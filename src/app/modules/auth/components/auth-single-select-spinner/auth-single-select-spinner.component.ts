@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import {
@@ -26,7 +26,7 @@ import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-auth-single-select-spinner',
+  selector: 'vsph-auth-single-select-spinner',
   templateUrl: './auth-single-select-spinner.component.html',
   animations: [dropboxFadeAndMove],
 })
@@ -77,7 +77,7 @@ export class AuthSingleSelectSpinnerComponent
         formControlName,
         formDisabled
       );
-      this.i18nPlaceholder = `msph.${i18nPrefix}.formFields.${formControlName}.placeholder`;
+      this.i18nPlaceholder = `vsph.${i18nPrefix}.formFields.${formControlName}.placeholder`;
       if (this.multiSpinnerId) {
         this.i18nPlaceholder += `s.${this.multiSpinnerId}`;
       }

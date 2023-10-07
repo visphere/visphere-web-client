@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -12,7 +12,7 @@ import { exactLengthValidator } from '~/shared-mod/validators/exact-length.valid
 import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
-  selector: 'msph-finish-reset-password-form',
+  selector: 'vsph-finish-reset-password-form',
   templateUrl: './finish-reset-password-form.component.html',
   providers: [FinishResetPasswordService, PopulateFormGroupService],
 })

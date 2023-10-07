@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -10,7 +10,7 @@ import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-gro
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-register-second-stage-form',
+  selector: 'vsph-register-second-stage-form',
   templateUrl: './register-second-stage-form.component.html',
   providers: [PopulateFormGroupService],
 })

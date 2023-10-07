@@ -1,17 +1,17 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
 <button
   #selectViewHolder
   (click)="onToggleVisibility()"
-  class="msph-footer__select-list-button">
+  class="vsph-footer__select-list-button">
   <ng-content select="[buttonContent]" />
 </button>
 <ul
   *ngIf="isOpen"
   [@dropboxFadeAndMove]
-  class="msph-footer__select-list-container left-0 bottom-full bg-msph-light-100 dark:bg-msph-dark-900">
+  class="vsph-footer__select-list-container left-0 bottom-full bg-vsph-light-100 dark:bg-vsph-dark-900">
   <ng-content select="[listContent]" />
 </ul>

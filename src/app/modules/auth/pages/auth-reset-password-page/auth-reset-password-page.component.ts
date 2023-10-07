@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
@@ -8,7 +8,7 @@ import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-p
 import { ResetPasswordFormStage } from '~/auth-mod/types/form-stage.type';
 
 @Component({
-  selector: 'msph-auth-reset-password-page',
+  selector: 'vsph-auth-reset-password-page',
   templateUrl: './auth-reset-password-page.component.html',
   host: { class: 'flex-grow flex flex-col' },
   providers: [ResetPasswordService],

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
@@ -12,7 +12,7 @@ import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-auth-checkbox-form-input',
+  selector: 'vsph-auth-checkbox-form-input',
   templateUrl: './auth-checkbox-form-input.component.html',
   providers: [PopulateFormControlService],
 })
@@ -27,7 +27,7 @@ export class AuthCheckboxFormInputComponent
   formGroup!: FormGroup;
   tooltipProps: NgxTippyProps = {
     placement: 'top',
-    theme: 'msph-auth',
+    theme: 'vsph-auth',
     animation: 'scale-subtle',
   };
   i18nInfo = '';
@@ -41,7 +41,7 @@ export class AuthCheckboxFormInputComponent
   }
 
   ngOnInit(): void {
-    this.i18nInfo = `msph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}.info`;
+    this.i18nInfo = `vsph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}.info`;
     this._populateFormControlService.setFields(
       this.formControlIdentifier,
       this.i18nPrefix

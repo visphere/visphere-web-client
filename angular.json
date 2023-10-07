@@ -3,11 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "moonsphere-web-client": {
+    "visphere-web-client": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
-      "prefix": "msph"
+      "prefix": "vsph"
     }
   },
   "cli": {

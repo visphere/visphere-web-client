@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import {
@@ -16,7 +16,7 @@ export const flattedErrorResponse = (
 } => {
   const parsed = res as MultiFieldsErrorModel;
   const commonError = {
-    i18nPrefix: 'msph.common.utils.',
+    i18nPrefix: 'vsph.common.utils.',
     placeholder: 'unknowError',
   };
   if (!parsed.errors) {

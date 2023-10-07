@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -14,7 +14,7 @@ import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-register-form-consents',
+  selector: 'vsph-register-form-consents',
   templateUrl: './register-form-consents.component.html',
   providers: [SanitizePipe],
 })
@@ -79,7 +79,7 @@ export class RegisterFormConsentsComponent
       'privacyPolicy'
     );
     return this._translateService.get(
-      'msph.webClient.registerPage.formFields.agreeTerms.value',
+      'vsph.webClient.registerPage.formFields.agreeTerms.value',
       { termsUrl: termsHref, privacyPolicyUrl: privacyPolicyHref }
     );
   }
@@ -87,9 +87,9 @@ export class RegisterFormConsentsComponent
   private generateBaseUrl(path: string, i18nPlaceholder: string): string {
     return `<a href="${
       this.path
-    }/${path}" target="_blank" class="msph-auth__link">
+    }/${path}" target="_blank" class="vsph-auth__link">
             ${this._translateService.instant(
-              'msph.webClient.registerPage.formFields.agreeTerms.' +
+              'vsph.webClient.registerPage.formFields.agreeTerms.' +
                 i18nPlaceholder
             )}
         </a>`;

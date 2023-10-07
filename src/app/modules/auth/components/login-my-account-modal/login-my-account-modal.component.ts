@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import {
@@ -20,7 +20,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 import { MySavedAccountModel } from '../../models/my-saved-account.model';
 
 @Component({
-  selector: 'msph-login-my-account-modal',
+  selector: 'vsph-login-my-account-modal',
   templateUrl: './login-my-account-modal.component.html',
   providers: [MyAccountsCredentialsService, PopulateFormGroupService],
 })

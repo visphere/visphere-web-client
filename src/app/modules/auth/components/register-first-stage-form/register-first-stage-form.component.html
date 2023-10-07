@@ -1,58 +1,58 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
 <ng-container [formGroup]="rootForm">
   <div formGroupName="firstStage" class="grid gap-y-4">
-    <msph-auth-common-form-input
+    <vsph-auth-common-form-input
       [maxLength]="30"
       [requiredStar]="true"
       formControlIdentifier="username"
       i18nPrefix="webClient.registerPage">
-      <msph-field-validator />
-      <msph-field-validator type="minlength" />
-      <msph-field-validator type="pattern" />
-      <msph-field-validator type="exist" />
-    </msph-auth-common-form-input>
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+      <vsph-field-validator type="pattern" />
+      <vsph-field-validator type="exist" />
+    </vsph-auth-common-form-input>
 
-    <msph-auth-common-form-input
+    <vsph-auth-common-form-input
       [maxLength]="100"
       [requiredStar]="true"
       formControlIdentifier="emailAddress"
       i18nPrefix="webClient.registerPage">
-      <msph-field-validator />
-      <msph-field-validator type="email" />
-      <msph-field-validator type="exist" />
-    </msph-auth-common-form-input>
+      <vsph-field-validator />
+      <vsph-field-validator type="email" />
+      <vsph-field-validator type="exist" />
+    </vsph-auth-common-form-input>
 
-    <msph-password-input-toggler
+    <vsph-password-input-toggler
       [requiredStar]="true"
       formControlIdentifier="password"
       [additionalInfo]="true"
       i18nPrefix="webClient.registerPage">
-      <msph-field-validator />
-      <msph-field-validator type="pattern" />
-    </msph-password-input-toggler>
+      <vsph-field-validator />
+      <vsph-field-validator type="pattern" />
+    </vsph-password-input-toggler>
 
-    <msph-password-strength-meter #meter />
+    <vsph-password-strength-meter #meter />
 
-    <msph-password-input-toggler
+    <vsph-password-input-toggler
       [requiredStar]="true"
       formControlIdentifier="confirmedPassword"
       i18nPrefix="webClient.registerPage">
-      <msph-field-validator />
-      <msph-field-validator type="mismatch" />
-    </msph-password-input-toggler>
+      <vsph-field-validator />
+      <vsph-field-validator type="mismatch" />
+    </vsph-password-input-toggler>
 
-    <msph-birth-date-select-spinner />
+    <vsph-birth-date-select-spinner />
 
     <button
       [disabled]="firstStageForm.invalid"
       (click)="handleGotoSecondStage()"
       type="button"
-      class="msph-button msph-button--primary">
-      {{ 'msph.common.utils.continue' | translate }}
+      class="vsph-button vsph-button--primary">
+      {{ 'vsph.common.utils.continue' | translate }}
       <i class="bi bi-arrow-right ms-2"></i>
     </button>
   </div>

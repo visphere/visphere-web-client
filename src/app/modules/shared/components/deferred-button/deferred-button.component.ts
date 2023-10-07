@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import {
@@ -14,7 +14,7 @@ import {
 import { CdTimerComponent } from 'angular-cd-timer';
 
 @Component({
-  selector: 'msph-deferred-button',
+  selector: 'vsph-deferred-button',
   templateUrl: './deferred-button.component.html',
 })
 export class DeferredButtonComponent implements OnInit, OnDestroy {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import {
@@ -22,7 +22,7 @@ import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'msph-verify-captcha-modal',
+  selector: 'vsph-verify-captcha-modal',
   templateUrl: './verify-captcha-modal.component.html',
 })
 export class VerifyCaptchaModalComponent
@@ -100,7 +100,7 @@ export class VerifyCaptchaModalComponent
 
   handleOnError(event: HcaptchaErrorEvent): void {
     this.wrapAsObservable(
-      this._translateService.get('msph.common.utils.unknowError')
+      this._translateService.get('vsph.common.utils.unknowError')
     ).subscribe(message => (this.errorMessage = event.error || message));
   }
 }

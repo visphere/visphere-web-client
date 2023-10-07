@@ -1,6 +1,6 @@
 'use strict';
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 const fs = require('fs');
@@ -14,10 +14,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { DefinePlugin } = require('webpack');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const webpackUtils = require('../../moonsphere-base/webpack/webpack-utils.cjs');
+const webpackUtils = require('../../visphere-base/webpack/webpack-utils.cjs');
 
-const msphBasePath = path.resolve(__dirname, '..', '..', 'moonsphere-base');
-const envPath = path.join(msphBasePath, '.env');
+const vsphBasePath = path.resolve(__dirname, '..', '..', 'visphere-base');
+const envPath = path.join(vsphBasePath, '.env');
 
 if (fs.existsSync(envPath)) {
   dotenv.config({ path: envPath });
@@ -72,10 +72,10 @@ const commonWebpackConfig = ({
       },
       output: {
         path: path.resolve(__dirname, '..', 'dist'),
-        filename: `js/__msph.[${
+        filename: `js/__vsph.[${
           isProdMode ? 'contenthash:10' : 'name'
         }].bundle.js`,
-        chunkFilename: `js/__msph.[${
+        chunkFilename: `js/__vsph.[${
           isProdMode ? 'contenthash:10' : 'name'
         }].chunk.js`,
         clean: true,
@@ -115,15 +115,15 @@ const commonWebpackConfig = ({
           'process.env.BASE_CDN_URL': JSON.stringify(cdnBaseUrl),
           'process.env.HCAPTCHA_SITE_KEY': JSON.stringify(
             isProdMode
-              ? process.env.ENV_MSPH_HCAPTCHA_SITE_KEY
-              : process.env.ENV_MSPH_DEV_HCAPTCHA_SITE_KEY
+              ? process.env.ENV_VSPH_HCAPTCHA_SITE_KEY
+              : process.env.ENV_VSPH_DEV_HCAPTCHA_SITE_KEY
           ),
           'process.env.INFRA_API_GATEWAY_URL':
             JSON.stringify(infraApiGatewayUrl),
         }),
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, '..', 'src', 'index.ejs'),
-          title: 'MoonSphere',
+          title: 'Visphere',
           inject: 'body',
           scriptLoading: 'blocking',
           templateParameters: async (
@@ -137,11 +137,11 @@ const commonWebpackConfig = ({
             );
             const data = JSON.parse(
               await fs.promises.readFile(
-                `${msphBasePath}/s3-static/i18n/web-common/pl.json`
+                `${vsphBasePath}/s3-static/i18n/web-common/pl.json`
               )
             );
             const { description, keywords } =
-              data['msph.webCommon.metaProperty'];
+              data['vsph.webCommon.metaProperty'];
             return {
               compilation,
               webpackConfig: compilation.options,
@@ -168,10 +168,10 @@ const commonWebpackConfig = ({
           },
         }),
         new MiniCssExtractPlugin({
-          filename: `css/__msph.[${
+          filename: `css/__vsph.[${
             isProdMode ? 'contenthash:10' : 'name'
           }].bundle.css`,
-          chunkFilename: `css/__msph.[${
+          chunkFilename: `css/__vsph.[${
             isProdMode ? 'contenthash:10' : 'name'
           }].chunk.css`,
         }),

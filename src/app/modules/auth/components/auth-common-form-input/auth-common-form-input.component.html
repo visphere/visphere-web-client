@@ -1,12 +1,12 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
 <div [formGroup]="formGroup" class="flex flex-col">
-  <label [for]="formControlIdentifier" class="msph-auth__input-label">
+  <label [for]="formControlIdentifier" class="vsph-auth__input-label">
     {{ i18nLabel | translate }}
-    <span *ngIf="requiredStar" class="ms-0.5 text-msph-tint-400">*</span>
+    <span *ngIf="requiredStar" class="ms-0.5 text-vsph-tint-400">*</span>
     <div
       *ngIf="additionalInfo"
       [ngxTippy]="inputTooltip"
@@ -24,11 +24,11 @@
     [maxlength]="maxLength"
     [formControlName]="formControlIdentifier"
     [placeholder]="placeholder"
-    class="msph-auth__input"
-    [class.msph-auth__input--invalid]="isFieldInvalid()" />
+    class="vsph-auth__input"
+    [class.vsph-auth__input--invalid]="isFieldInvalid()" />
   <div
     *ngIf="isFieldInvalid()"
-    class="text-sm mt-1 mx-2 msph-auth__text--invalid">
+    class="text-sm mt-1 mx-2 vsph-auth__text--invalid">
     <ng-content />
   </div>
 </div>

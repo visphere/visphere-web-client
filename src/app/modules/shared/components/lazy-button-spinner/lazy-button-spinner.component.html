@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
@@ -7,13 +7,13 @@
   (click)="emitClick.emit()"
   [ngClass]="buttonStyle"
   [type]="buttonType"
-  [class.msph-button--loading]="isLoading"
+  [class.vsph-button--loading]="isLoading"
   [disabled]="buttonDisabled || isLoading">
   <ng-container *ngIf="!isLoading">
     <ng-content />
   </ng-container>
   <div
     *ngIf="isLoading"
-    class="msph-button-spinner__carousel"
-    [class.msph-button-spinner__carousel--modal]="color === 'modal'"></div>
+    class="vsph-button-spinner__carousel"
+    [class.vsph-button-spinner__carousel--modal]="color === 'modal'"></div>
 </button>

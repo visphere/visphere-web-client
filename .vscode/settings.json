@@ -16,10 +16,6 @@
   "workbench.iconTheme": "vsc-jetbrains-icons-enhanced",
   "workbench.preferredDarkColorTheme": "One Dark Pro Monokai Darker",
   "files.insertFinalNewline": true,
-  "psi-header.variables": [
-    ["msph_projectName", "moonsphere"],
-    ["msph_moduleName", "moonsphere-web-client"]
-  ],
   "psi-header.config": {
     "forceToTop": true,
     "blankLinesAfter": 1
@@ -59,6 +55,8 @@
     {
       "language": "*",
       "begin": "/*",
+      "prefix": " * ",
+      "end": " */",
       "lineLength": 64
     }
   ],
@@ -66,7 +64,7 @@
     {
       "language": "*",
       "template": [
-        "Copyright (c) <<year>> by MoonSphere Systems",
+        "Copyright (c) <<year>> by Visphere & Vsph Technologies",
         "Originally developed by Miłosz Gilga <https://miloszgilga.pl>"
       ]
     }

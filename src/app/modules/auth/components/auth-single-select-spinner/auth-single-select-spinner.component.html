@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
@@ -12,19 +12,19 @@
   <ul
     *ngIf="itemsListIsOpen"
     [@dropboxFadeAndMove]
-    class="msph-auth__single-select-spinner-list__container">
+    class="vsph-auth__single-select-spinner-list__container">
     <li *ngFor="let element of filteredList">
       <button
         type="button"
-        class="msph-auth__single-select-spinner-list__element hover:bg-msph-tint-500 hover:text-msph-light-100 cursor-pointer"
+        class="vsph-auth__single-select-spinner-list__element hover:bg-vsph-tint-500 hover:text-vsph-light-100 cursor-pointer"
         (click)="handleSelectItem(element)">
         {{ element.value }}
       </button>
     </li>
     <li
       *ngIf="filteredList.length === 0"
-      class="msph-auth__single-select-spinner-list__element text-msph-dark-800 dark:text-msph-tint-100">
-      {{ 'msph.common.utils.notFound' | translate }}
+      class="vsph-auth__single-select-spinner-list__element text-vsph-dark-800 dark:text-vsph-tint-100">
+      {{ 'vsph.common.utils.notFound' | translate }}
     </li>
   </ul>
   <input
@@ -34,12 +34,12 @@
     type="text"
     [disabled]="formDisabled"
     (focus)="handleShowItemsList()"
-    class="msph-auth__input w-full"
-    [class.msph-auth__input--invalid]="hasErrors" />
-  <div class="msph-auth__input-icon-container">
+    class="vsph-auth__input w-full"
+    [class.vsph-auth__input--invalid]="hasErrors" />
+  <div class="vsph-auth__input-icon-container">
     <ng-icon
       name="selectArrowDownIcon"
-      [class.msph-auth__text--invalid]="hasErrors"
+      [class.vsph-auth__text--invalid]="hasErrors"
       class="text-sm" />
   </div>
 </button>

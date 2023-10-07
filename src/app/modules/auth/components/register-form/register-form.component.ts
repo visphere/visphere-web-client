@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -15,7 +15,7 @@ import { regex } from '~/shared-mod/validators/regex.constant';
 import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.validator';
 
 @Component({
-  selector: 'msph-register-form',
+  selector: 'vsph-register-form',
   templateUrl: './register-form.component.html',
   providers: [RegisterService, CaptchaVerificationService],
 })

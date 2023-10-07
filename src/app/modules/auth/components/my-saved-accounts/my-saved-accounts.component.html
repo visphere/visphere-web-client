@@ -1,36 +1,36 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<msph-devastate-action-modal
+<vsph-devastate-action-modal
   [isActive]="(isRemoveModalOpen$ | async)!"
   (emitOnClose)="handleCloseRemoveAccountModal()"
   (emitDevstateAction)="handleRemoveAccount()"
-  i18nPrefix="msph.clientCommon.myAccountsPage.modals.remove">
+  i18nPrefix="vsph.clientCommon.myAccountsPage.modals.remove">
   <span
     [innerHTML]="
-      'msph.clientCommon.myAccountsPage.modals.remove.paragraph'
+      'vsph.clientCommon.myAccountsPage.modals.remove.paragraph'
         | translate: { accountLogin: removingAccount?.usernameOrEmailAddress }
     "></span>
-</msph-devastate-action-modal>
-<msph-login-my-account-modal [loggedUser]="loggedUser" />
+</vsph-devastate-action-modal>
+<vsph-login-my-account-modal [loggedUser]="loggedUser" />
 <div class="my-6">
   <div
     *ngIf="(fetchingState$ | async) === 'pending'"
     class="flex justify-center items-center h-[104px]">
     <div
-      class="msph-button-spinner__carousel msph-button-spinner__carousel--large"></div>
+      class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
   </div>
   <div
     *ngIf="
       (mySavedAccounts$ | async)!.length === 0 &&
       (fetchingState$ | async) !== 'pending'
     "
-    class="msph-my-account__alter-no-content-container">
+    class="vsph-my-account__alter-no-content-container">
     <img src="{{ cdnPath }}/static/icon/user-id.svg" alt="" />
-    <p class="msph-my-account__alter-no-content-paragraph">
-      {{ 'msph.clientCommon.myAccountsPage.noAccountsMessage' | translate }}
+    <p class="vsph-my-account__alter-no-content-paragraph">
+      {{ 'vsph.clientCommon.myAccountsPage.noAccountsMessage' | translate }}
     </p>
   </div>
   <ul
@@ -38,20 +38,20 @@
       (mySavedAccounts$ | async)!.length !== 0 &&
       (fetchingState$ | async) === 'success'
     "
-    class="msph-my-account__container">
+    class="vsph-my-account__container">
     <li
       *ngFor="let account of mySavedAccounts$ | async"
-      class="msph-my-account__element-scaffold msph-my-account__element">
+      class="vsph-my-account__element-scaffold vsph-my-account__element">
       <button
         (click)="handleOpenLoginModal(account)"
-        class="msph-my-account__element-content">
+        class="vsph-my-account__element-content">
         <div
           *ngIf="!account.isVerified"
           [ngxTippy]="usernameTooptip"
           [tippyContext]="{ username: account.usernameOrEmailAddress }"
           [tippyProps]="tooltipProps">
           <div
-            class="msph-my-account__not-verified msph-my-account__not-verified--tile msph-my-account__content-colors--tile">
+            class="vsph-my-account__not-verified vsph-my-account__not-verified--tile vsph-my-account__content-colors--tile">
             <img
               src="{{ cdnPath }}/static/icon/user.svg"
               alt=""
@@ -69,23 +69,23 @@
             src="{{ account.thumbnailUrl }}"
             width="70px"
             height="70px"
-            class="msph-my-account__verified-image msph-my-account__verified-image--tile msph-my-account__content-colors--tile"
+            class="vsph-my-account__verified-image vsph-my-account__verified-image--tile vsph-my-account__content-colors--tile"
             alt="" />
         </div>
       </button>
       <button
         (click)="handleMarkSelectedAccountAsRemoved(account)"
-        class="msph-my-account__element-remove-button">
-        {{ 'msph.clientCommon.myAccountsPage.removeAccountButton' | translate }}
+        class="vsph-my-account__element-remove-button">
+        {{ 'vsph.clientCommon.myAccountsPage.removeAccountButton' | translate }}
       </button>
     </li>
-    <li class="msph-my-account__element-scaffold">
+    <li class="vsph-my-account__element-scaffold">
       <button
         (click)="handleOpenAddNewAccountModal()"
-        class="msph-my-account__element-add-button">
+        class="vsph-my-account__element-add-button">
         <ng-icon
           name="plusCircleIcon"
-          class="msph-my-account__element-add-icon" />
+          class="vsph-my-account__element-add-icon" />
       </button>
     </li>
   </ul>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
@@ -12,7 +12,7 @@ import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { Snackbar } from '~/shared-mod/types/snackbar.type';
 
 @Component({
-  selector: 'msph-snackbars-container',
+  selector: 'vsph-snackbars-container',
   templateUrl: './snackbars-container.component.html',
   animations: [snackbarFadeAndMove],
 })

@@ -1,6 +1,6 @@
 'use strict';
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 const fs = require('fs');
@@ -12,17 +12,17 @@ const {
   commonResolveConfig,
   postCssConfig,
 } = require('./webpack-common.config.cjs');
-const webpackUtils = require('../../moonsphere-base/webpack/webpack-utils.cjs');
+const webpackUtils = require('../../visphere-base/webpack/webpack-utils.cjs');
 
-const envPath = path.resolve(__dirname, '..', '..', 'moonsphere-base', '.env');
+const envPath = path.resolve(__dirname, '..', '..', 'visphere-base', '.env');
 if (fs.existsSync(envPath)) {
   dotenv.config({ path: envPath });
 }
 
-const landingPageBaseUrl = `http://localhost:${process.env.ENV_MSPH_LANDING_PAGE_DEV_PORT}`;
-const clientBaseUrl = `http://localhost:${process.env.ENV_MSPH_WEB_CLIENT_DEV_PORT}`;
-const cdnBaseUrl = `http://localhost:${process.env.ENV_MSPH_STATIC_S3_API_PORT}`;
-const infraApiGatewayUrl = `http://localhost:${process.env.ENV_MSPH_INFRA_API_GATEWAY_DEV_PORT}`;
+const landingPageBaseUrl = `http://localhost:${process.env.ENV_VSPH_LANDING_PAGE_DEV_PORT}`;
+const clientBaseUrl = `http://localhost:${process.env.ENV_VSPH_WEB_CLIENT_DEV_PORT}`;
+const cdnBaseUrl = `http://localhost:${process.env.ENV_VSPH_STATIC_S3_API_PORT}`;
+const infraApiGatewayUrl = `http://localhost:${process.env.ENV_VSPH_INFRA_API_GATEWAY_DEV_PORT}`;
 
 module.exports = {
   mode: 'development',

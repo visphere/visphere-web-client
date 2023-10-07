@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -12,7 +12,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
-  selector: 'msph-start-reset-password-form',
+  selector: 'vsph-start-reset-password-form',
   templateUrl: './start-reset-password-form.component.html',
   providers: [
     StartResetPasswordService,

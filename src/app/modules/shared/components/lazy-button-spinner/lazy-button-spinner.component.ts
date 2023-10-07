@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'msph-lazy-button-spinner',
+  selector: 'vsph-lazy-button-spinner',
   templateUrl: './lazy-button-spinner.component.html',
 })
 export class LazyButtonSpinnerComponent {
@@ -13,7 +13,7 @@ export class LazyButtonSpinnerComponent {
   @Input() color: 'modal' | '' = '';
   @Input() isLoading = false;
   @Input() i18nText = '';
-  @Input() buttonStyle = 'msph-button msph-button--primary';
+  @Input() buttonStyle = 'vsph-button vsph-button--primary';
   @Input() buttonDisabled = false;
   @Input() buttonType: 'button' | 'submit' = 'submit';
 

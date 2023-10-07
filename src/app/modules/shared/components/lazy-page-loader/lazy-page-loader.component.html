@@ -1,20 +1,20 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
 <div
   *ngIf="isVisible$ | async"
   [@lazyPageLoaderFade]
-  class="fixed w-full h-full flex justify-center items-center bg-msph-light-300 dark:bg-msph-dark-900 z-[1000]">
-  <div class="msph-page-loader__container">
+  class="fixed w-full h-full flex justify-center items-center bg-vsph-light-300 dark:bg-vsph-dark-900 z-[1000]">
+  <div class="vsph-page-loader__container">
     <div
-      class="msph-page-loader__planet"
+      class="vsph-page-loader__planet"
       [style.filter]="url('#izomorphicImageLoader')">
-      <div class="msph-page-loader__ring"></div>
+      <div class="vsph-page-loader__ring"></div>
       <div
         *ngFor="let satellite of satellites"
-        [ngClass]="['msph-page-loader__satellite', satellite]"></div>
+        [ngClass]="['vsph-page-loader__satellite', satellite]"></div>
       <svg>
         <defs>
           <filter id="izomorphicImageLoader">

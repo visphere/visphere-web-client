@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
 import { FaviconBadgeNotificatorService } from '../../services/favicon-badge-notificator/favicon-badge-notificator.service';
 
 @Component({
-  selector: 'msph-client-entrypoint-page',
+  selector: 'vsph-client-entrypoint-page',
   templateUrl: './client-entry-point-page.component.html',
 })
 export class ClientEntryPointPageComponent {

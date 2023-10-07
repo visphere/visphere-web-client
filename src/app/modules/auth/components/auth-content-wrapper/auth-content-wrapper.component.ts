@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, HostListener, Input } from '@angular/core';
@@ -7,7 +7,7 @@ import { environment } from '~/env/environment';
 import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.animation';
 
 @Component({
-  selector: 'msph-auth-content-wrapper',
+  selector: 'vsph-auth-content-wrapper',
   templateUrl: './auth-content-wrapper.component.html',
   host: { class: 'flex-grow flex flex-col h-full' },
   animations: [authWindowFadeAndMove],

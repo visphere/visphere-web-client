@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import {
@@ -21,7 +21,7 @@ import { passwordMatchValidator } from '~/shared-mod/validators/password-match.v
 import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
-  selector: 'msph-change-password-form',
+  selector: 'vsph-change-password-form',
   templateUrl: './change-password-form.component.html',
   providers: [ChangePasswordService, PopulateFormGroupService],
 })

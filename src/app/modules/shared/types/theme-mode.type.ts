@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
@@ -14,17 +14,17 @@ export type ThemeType = 'light' | 'dark' | 'device';
 export const themeModes: ThemeModeType[] = [
   {
     id: 'light',
-    i18nKey: 'msph.common.theme.lightTheme',
+    i18nKey: 'vsph.common.theme.lightTheme',
     icon: 'lightModeIcon',
   },
   {
     id: 'dark',
-    i18nKey: 'msph.common.theme.darkTheme',
+    i18nKey: 'vsph.common.theme.darkTheme',
     icon: 'darkModeIcon',
   },
   {
     id: 'device',
-    i18nKey: 'msph.common.theme.deviceTheme',
+    i18nKey: 'vsph.common.theme.deviceTheme',
     icon: 'systemModeIcon',
   },
 ];

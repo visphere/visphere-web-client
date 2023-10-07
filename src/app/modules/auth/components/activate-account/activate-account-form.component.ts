@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -17,7 +17,7 @@ import { exactLengthValidator } from '~/shared-mod/validators/exact-length.valid
 import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
-  selector: 'msph-activate-account-form',
+  selector: 'vsph-activate-account-form',
   templateUrl: './activate-account-form.component.html',
   providers: [PopulateFormGroupService, ActivateAccountService],
 })

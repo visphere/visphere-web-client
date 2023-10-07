@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'msph-auth-register-page',
+  selector: 'vsph-auth-register-page',
   templateUrl: './auth-register-page.component.html',
   host: { class: 'flex-grow flex flex-col' },
 })

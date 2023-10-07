@@ -1,5 +1,5 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
@@ -8,25 +8,25 @@
   (ngSubmit)="handleSubmitLoginForm()"
   class="grid gap-3">
   <div class="grid gap-3" *ngIf="(activeStage$ | async) === 'login'">
-    <msph-auth-common-form-input
+    <vsph-auth-common-form-input
       [maxLength]="100"
       formControlIdentifier="usernameOrEmailAddress"
       i18nPrefix="clientCommon.loginPage">
-      <msph-field-validator />
-    </msph-auth-common-form-input>
+      <vsph-field-validator />
+    </vsph-auth-common-form-input>
     <button
       type="button"
-      class="msph-button msph-button--primary"
+      class="vsph-button vsph-button--primary"
       [disabled]="(isNextButtonEnabled$ | async) === false"
       (click)="handleMoveForward()">
-      {{ 'msph.common.utils.continue' | translate }}
+      {{ 'vsph.common.utils.continue' | translate }}
     </button>
   </div>
   <div class="grid gap-3" *ngIf="(activeStage$ | async) === 'password'">
     <div class="flex flex-col">
-      <p class="msph-auth__input-label">
+      <p class="vsph-auth__input-label">
         {{
-          'msph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value'
+          'vsph.clientCommon.loginPage.formFields.usernameOrEmailAddress.value'
             | translate
         }}
       </p>
@@ -35,38 +35,38 @@
           [value]="loginForm.get('usernameOrEmailAddress')?.value"
           disabled
           type="text"
-          class="msph-auth__input msph-auth__input--viewport w-full" />
+          class="vsph-auth__input vsph-auth__input--viewport w-full" />
         <button
           type="button"
-          class="absolute right-2.5 top-1/2 -translate-y-1/2 msph-auth__top-nav-button"
+          class="absolute right-2.5 top-1/2 -translate-y-1/2 vsph-auth__top-nav-button"
           (click)="handleMoveBackward()"
           [disabled]="(isLoading$ | async) === true">
-          {{ 'msph.common.utils.edit' | translate }}
+          {{ 'vsph.common.utils.edit' | translate }}
         </button>
       </div>
     </div>
     <div class="flex flex-col gap-y-3">
-      <msph-password-input-toggler
+      <vsph-password-input-toggler
         formControlIdentifier="password"
         i18nPrefix="clientCommon.loginPage">
-        <msph-field-validator />
-      </msph-password-input-toggler>
-      <msph-auth-checkbox-form-input
+        <vsph-field-validator />
+      </vsph-password-input-toggler>
+      <vsph-auth-checkbox-form-input
         formControlIdentifier="rememberAccount"
         i18nPrefix="clientCommon.loginPage"
         [additionalInfo]="true">
         <ng-container labelContent>
           {{
-            'msph.clientCommon.loginPage.formFields.rememberAccount.value'
+            'vsph.clientCommon.loginPage.formFields.rememberAccount.value'
               | translate
           }}
         </ng-container>
-      </msph-auth-checkbox-form-input>
+      </vsph-auth-checkbox-form-input>
     </div>
-    <msph-lazy-button-spinner
+    <vsph-lazy-button-spinner
       [isLoading]="(isLoading$ | async)!"
       [buttonDisabled]="loginForm.invalid">
-      {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
-    </msph-lazy-button-spinner>
+      {{ 'vsph.clientCommon.loginPage.sendLoginForm' | translate }}
+    </vsph-lazy-button-spinner>
   </div>
 </form>

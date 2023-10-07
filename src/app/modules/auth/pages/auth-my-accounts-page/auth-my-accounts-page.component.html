@@ -1,36 +1,36 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<msph-add-my-account-modal />
-<msph-devastate-action-modal
+<vsph-add-my-account-modal />
+<vsph-devastate-action-modal
   [isActive]="(isRemoveAllModalOpen$ | async)!"
   (emitOnClose)="handleToggleRemoveAllAccountsModalVisibility(false)"
   (emitDevstateAction)="handleRemoveAllAccounts()"
-  i18nPrefix="msph.clientCommon.myAccountsPage.modals.removeAll">
+  i18nPrefix="vsph.clientCommon.myAccountsPage.modals.removeAll">
   <span
     [innerHTML]="
-      'msph.clientCommon.myAccountsPage.modals.removeAll.paragraph'
+      'vsph.clientCommon.myAccountsPage.modals.removeAll.paragraph'
         | translate: { accountsCount: (mySavedAccountsCount$ | async) }
     "></span>
-</msph-devastate-action-modal>
-<msph-auth-content-wrapper size="md">
-  <msph-auth-form-header i18nPrefix="clientCommon.myAccountsPage" />
+</vsph-devastate-action-modal>
+<vsph-auth-content-wrapper size="md">
+  <vsph-auth-form-header i18nPrefix="clientCommon.myAccountsPage" />
   <a
     routerLink="/auth/login"
-    class="msph-auth__top-nav-button px-2 flex items-center w-fit">
+    class="vsph-auth__top-nav-button px-2 flex items-center w-fit">
     <ng-icon name="arrowLeftIcon" class="me-2" />
-    {{ 'msph.clientCommon.myAccountsPage.returnToLoginPage' | translate }}
+    {{ 'vsph.clientCommon.myAccountsPage.returnToLoginPage' | translate }}
   </a>
-  <msph-my-saved-accounts />
+  <vsph-my-saved-accounts />
   <div class="flex flex-col sm:flex-row gap-y-3 sm:gap-x-4">
     <button
       [disabled]="(mySavedAccountsCount$ | async) === 0"
       (click)="handleToggleRemoveAllAccountsModalVisibility(true)"
-      class="msph-my-accounts__delete-all-button">
+      class="vsph-my-accounts__delete-all-button">
       {{
-        'msph.clientCommon.myAccountsPage.removeAllAccountsButton' | translate
+        'vsph.clientCommon.myAccountsPage.removeAllAccountsButton' | translate
       }}
     </button>
     <button
@@ -39,8 +39,8 @@
         (fetchingState$ | async) === 'error' ||
         (fetchingState$ | async) === 'pending'
       "
-      class="msph-button msph-button--primary">
-      {{ 'msph.clientCommon.myAccountsPage.addNewAccountButton' | translate }}
+      class="vsph-button vsph-button--primary">
+      {{ 'vsph.clientCommon.myAccountsPage.addNewAccountButton' | translate }}
     </button>
   </div>
-</msph-auth-content-wrapper>
+</vsph-auth-content-wrapper>

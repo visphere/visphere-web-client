@@ -1,9 +1,9 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<msph-footer-control-list *ngIf="selectedLang$ | async">
+<vsph-footer-control-list *ngIf="selectedLang$ | async">
   <ng-container buttonContent>
     <img
       src="{{ path }}/static/icon/lang/{{ (selectedLang$ | async)?.lang }}.png"
@@ -17,11 +17,11 @@
   <ng-container listContent>
     <li *ngFor="let translation of traslations">
       <button
-        [class.msph-footer__select-list-element--active]="
+        [class.vsph-footer__select-list-element--active]="
           (selectedLang$ | async) === translation
         "
         (click)="handleChangeLang(translation)"
-        class="msph-footer__select-list-element">
+        class="vsph-footer__select-list-element">
         <img
           src="{{ path }}/static/icon/lang/{{ translation.lang }}.png"
           width="23"
@@ -32,8 +32,8 @@
       </button>
     </li>
   </ng-container>
-</msph-footer-control-list>
-<msph-footer-control-list *ngIf="selectedTheme$ | async">
+</vsph-footer-control-list>
+<vsph-footer-control-list *ngIf="selectedTheme$ | async">
   <ng-container buttonContent>
     <ng-icon [name]="(selectedTheme$ | async)!.icon" class="me-2" />
     <p>{{ (selectedTheme$ | async)!.i18nKey | translate }}</p>
@@ -42,14 +42,14 @@
   <ng-container listContent>
     <li *ngFor="let theme of themes">
       <button
-        [class.msph-footer__select-list-element--active]="
+        [class.vsph-footer__select-list-element--active]="
           (selectedTheme$ | async) === theme
         "
         (click)="handleChangeTheme(theme)"
-        class="msph-footer__select-list-element">
+        class="vsph-footer__select-list-element">
         <ng-icon [name]="theme.icon" class="me-2" />
         <p>{{ theme.i18nKey | translate }}</p>
       </button>
     </li>
   </ng-container>
-</msph-footer-control-list>
+</vsph-footer-control-list>

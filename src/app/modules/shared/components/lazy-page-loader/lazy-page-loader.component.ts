@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 by MoonSphere Systems
+ * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Location } from '@angular/common';
@@ -9,7 +9,7 @@ import { lazyPageLoaderFade } from '~/shared-mod/animations/lazy-page-loader.ani
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 
 @Component({
-  selector: 'msph-lazy-page-loader',
+  selector: 'vsph-lazy-page-loader',
   templateUrl: './lazy-page-loader.component.html',
   animations: [lazyPageLoaderFade],
 })
@@ -18,9 +18,9 @@ export class LazyPageLoaderComponent {
     this._lazyPageLoaderService.lazyLoaderIsVisible$;
 
   satellites: string[] = [
-    'msph-page-loader__satellite--first',
-    'msph-page-loader__satellite--second',
-    'msph-page-loader__satellite--third',
+    'vsph-page-loader__satellite--first',
+    'vsph-page-loader__satellite--second',
+    'vsph-page-loader__satellite--third',
   ];
 
   constructor(

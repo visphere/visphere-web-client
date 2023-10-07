@@ -1,37 +1,37 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
 <div [formGroup]="formGroup" class="flex flex-col">
-  <div class="msph-auth__input-label">
-    {{ 'msph.webClient.registerPage.formFields.birthDate.value' | translate }}
-    <span class="ms-0.5 text-msph-tint-400">*</span>
+  <div class="vsph-auth__input-label">
+    {{ 'vsph.webClient.registerPage.formFields.birthDate.value' | translate }}
+    <span class="ms-0.5 text-vsph-tint-400">*</span>
   </div>
   <div class="flex gap-3">
-    <msph-auth-single-select-spinner
+    <vsph-auth-single-select-spinner
       [listElements]="formMonths"
       [initValueId]="getFormControlValue('month')"
       (persistElement)="patchValue($event, 'month')"
       multiSpinnerId="month"
       class="flex-none w-[180px]" />
-    <msph-auth-single-select-spinner
+    <vsph-auth-single-select-spinner
       [listElements]="formDays"
       [initValueId]="getFormControlValue('day')"
       (persistElement)="patchValue($event, 'day')"
       multiSpinnerId="day"
       class="flex-grow" />
-    <msph-auth-single-select-spinner
+    <vsph-auth-single-select-spinner
       [listElements]="formYears"
       [initValueId]="getFormControlValue('year')"
       (persistElement)="patchValue($event, 'year')"
       multiSpinnerId="year"
       class="flex-grow" />
   </div>
-  <div class="text-sm mt-1 mx-2 msph-auth__text--invalid">
-    <msph-field-validator />
-    <msph-field-validator type="notAll" />
-    <msph-field-validator type="invalid" />
-    <msph-field-validator type="inappropriateAge" />
+  <div class="text-sm mt-1 mx-2 vsph-auth__text--invalid">
+    <vsph-field-validator />
+    <vsph-field-validator type="notAll" />
+    <vsph-field-validator type="invalid" />
+    <vsph-field-validator type="inappropriateAge" />
   </div>
 </div>

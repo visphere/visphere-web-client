@@ -1,19 +1,19 @@
 <!--
- ~ Copyright (c) 2023 by MoonSphere Systems
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<msph-modal-wrapper
+<vsph-modal-wrapper
   [isActive]="(isOpen$ | async)!"
   (emitOnClose)="handleEmitOnClose()"
   modalSize="xs"
-  [header]="'msph.clientCommon.loginPage.formHeader' | translate">
+  [header]="'vsph.clientCommon.loginPage.formHeader' | translate">
   <div content>
     <div
       *ngIf="!loggedUser?.isVerified"
-      class="msph-my-account__modal-image-container">
+      class="vsph-my-account__modal-image-container">
       <div
-        class="msph-my-account__not-verified msph-my-account__not-verified--modal msph-my-account__content-colors--modal--viewport">
+        class="vsph-my-account__not-verified vsph-my-account__not-verified--modal vsph-my-account__content-colors--modal--viewport">
         <img
           src="{{ cdnPath }}/static/icon/user.svg"
           alt=""
@@ -21,9 +21,9 @@
           height="75"
           loading="eager" />
       </div>
-      <p class="msph-my-account__modal-image-paragraph">
+      <p class="vsph-my-account__modal-image-paragraph">
         {{
-          'msph.clientCommon.myAccountsPage.modals.login.proceedNotVerified'
+          'vsph.clientCommon.myAccountsPage.modals.login.proceedNotVerified'
             | translate
         }}:
       </p>
@@ -33,17 +33,17 @@
     </div>
     <div
       *ngIf="loggedUser?.isVerified"
-      class="msph-my-account__modal-image-container">
+      class="vsph-my-account__modal-image-container">
       <img
         src="{{ loggedUser?.thumbnailUrl }}"
         width="100px"
         height="100px"
         loading="eager"
-        class="msph-my-account__verified-image msph-my-account__verified-image--modal msph-my-account__content-colors--modal--viewport"
+        class="vsph-my-account__verified-image vsph-my-account__verified-image--modal vsph-my-account__content-colors--modal--viewport"
         alt="" />
-      <p class="msph-my-account__modal-image-paragraph">
+      <p class="vsph-my-account__modal-image-paragraph">
         {{
-          'msph.clientCommon.myAccountsPage.modals.login.proceedVerified'
+          'vsph.clientCommon.myAccountsPage.modals.login.proceedVerified'
             | translate
         }}:
       </p>
@@ -55,17 +55,17 @@
       [formGroup]="loginForm"
       (ngSubmit)="handleLoginViaSavedAccount()"
       class="grid gap-3">
-      <msph-password-input-toggler
+      <vsph-password-input-toggler
         formControlIdentifier="password"
         i18nPrefix="clientCommon.loginPage"
         inputStyle="static">
-        <msph-field-validator />
-      </msph-password-input-toggler>
-      <msph-lazy-button-spinner
+        <vsph-field-validator />
+      </vsph-password-input-toggler>
+      <vsph-lazy-button-spinner
         [isLoading]="(isLoading$ | async)!"
         [buttonDisabled]="loginForm.invalid">
-        {{ 'msph.clientCommon.loginPage.sendLoginForm' | translate }}
-      </msph-lazy-button-spinner>
+        {{ 'vsph.clientCommon.loginPage.sendLoginForm' | translate }}
+      </vsph-lazy-button-spinner>
     </form>
   </div>
-</msph-modal-wrapper>
+</vsph-modal-wrapper>

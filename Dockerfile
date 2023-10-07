@@ -2,31 +2,31 @@ FROM node:18.16.0-alpine AS build
 
 ARG BUILD_MODE
 
-WORKDIR /moonsphere
+WORKDIR /visphere
 
-COPY moonsphere-base moonsphere-base/
-COPY moonsphere-web-client moonsphere-web-client/
+COPY visphere-base visphere-base/
+COPY visphere-web-client visphere-web-client/
 
-WORKDIR /moonsphere/moonsphere-base
+WORKDIR /visphere/visphere-base
 
 RUN yarn install
 
-WORKDIR /moonsphere/moonsphere-web-client
+WORKDIR /visphere/visphere-web-client
 
 RUN mkdir dist
 
 RUN yarn install
 RUN yarn run docker:$BUILD_MODE
 
-WORKDIR /moonsphere
+WORKDIR /visphere
 
-RUN rm -rf moonsphere-base
+RUN rm -rf visphere-base
 
 FROM nginx:latest AS run
 
-LABEL maintainer="MoonSphere Systems <info@moonsphere.pl>"
+LABEL maintainer="Visphere <info@visphere.pl>"
 
-COPY --from=build /moonsphere/moonsphere-web-client/dist /usr/share/nginx/html
-COPY --from=build /moonsphere/moonsphere-web-client/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /visphere/visphere-web-client/dist /usr/share/nginx/html
+COPY --from=build /visphere/visphere-web-client/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
