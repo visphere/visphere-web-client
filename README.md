@@ -2,4 +2,4 @@
 
 # Visphere Web Client
 
-in progress
+Web client written in Angular framework with custom webpack configuration.
