@@ -27,8 +27,7 @@
     "includeGlob": ["**/*.sh"],
     "exclude": ["json", "jsonl", "jsonc", "ejs"],
     "excludeGlob": [".husky/**/*", ".vscode/**/*", "./**/*.ejs", "./.htaccess"],
-    "enforceHeader": true,
-    "replace": ["File name", "Last modified"]
+    "enforceHeader": true
   },
   "psi-header.lang-config": [
     {
