@@ -62,10 +62,10 @@ export class ChangePasswordFormComponent
   }
 
   ngOnInit(): void {
+    const token = this._activatedRoute.snapshot.paramMap.get('token') || '';
+    this._changePasswordService.setToken(token);
     this.wrapAsObservable(
-      this._changePasswordService.validateToken(
-        this._activatedRoute.snapshot.paramMap.get('token') || ''
-      )
+      this._changePasswordService.validateToken(token)
     ).subscribe();
     this._populateFormGroupService.setField(this.changePasswordForm);
     this.wrapAsObservable(this._changePasswordService.isLoading$).subscribe(

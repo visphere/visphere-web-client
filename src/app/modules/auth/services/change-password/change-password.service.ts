@@ -19,6 +19,8 @@ export class ChangePasswordService extends AbstractSimpleFormStateProvider<
   ChangePasswordFormStage,
   BaseMessageModel
 > {
+  private _token = '';
+
   constructor(
     private readonly _authHttpClientService: AuthHttpClientService,
     private readonly _router: Router,
@@ -38,24 +40,31 @@ export class ChangePasswordService extends AbstractSimpleFormStateProvider<
 
   override abstractSubmitForm(): Observable<BaseMessageModel> {
     const data = this.parseFormValues<ChangePasswordFormModel>();
-    return this._authHttpClientService.changePasswordViaEmail(data, '123').pipe(
-      delay(500),
-      tap(({ message }) => {
-        this.setLoading(false);
-        this._store.dispatch(
-          NgrxAction_SHA.__addSnackbar({
-            content: {
-              placeholder: message,
-              omitTransformation: true,
-            },
-            severity: 'success',
-          })
-        );
-        this._currentStage$.next('success');
-      }),
-      catchError(err => {
-        return throwError(() => err);
-      })
-    );
+    return this._authHttpClientService
+      .changePasswordViaEmail(data, this._token)
+      .pipe(
+        delay(500),
+        tap(({ message }) => {
+          this.setLoading(false);
+          this._store.dispatch(
+            NgrxAction_SHA.__addSnackbar({
+              content: {
+                placeholder: message,
+                omitTransformation: true,
+              },
+              severity: 'success',
+            })
+          );
+          this._currentStage$.next('success');
+        }),
+        catchError(err => {
+          this.setLoading(false);
+          return throwError(() => err);
+        })
+      );
+  }
+
+  setToken(token: string): void {
+    this._token = token;
   }
 }

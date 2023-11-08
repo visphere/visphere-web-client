@@ -24,15 +24,23 @@ export class LazyPageLoaderService {
   initLoader(): void {
     this._router.events.subscribe(event => {
       if (event instanceof RouteConfigLoadStart) {
-        disableBodyScroll(this._document.documentElement);
-        this._lazyLoaderIsVisible$.next(true);
+        this.setLoading();
       } else if (event instanceof RouteConfigLoadEnd) {
         setTimeout(() => {
-          enableBodyScroll(this._document.documentElement);
-          this._lazyLoaderIsVisible$.next(false);
+          this.disableLoading();
         }, 1500);
       }
     });
+  }
+
+  setLoading(): void {
+    disableBodyScroll(this._document.documentElement);
+    this._lazyLoaderIsVisible$.next(true);
+  }
+
+  disableLoading(): void {
+    enableBodyScroll(this._document.documentElement);
+    this._lazyLoaderIsVisible$.next(false);
   }
 
   get lazyLoaderIsVisible$(): Observable<boolean> {
