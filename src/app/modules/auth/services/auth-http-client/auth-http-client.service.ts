@@ -40,18 +40,15 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     req: RegisterReqDtoModel
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/account/new/create`,
+      `${this._infraApiPath}/api/v1/auth/account/new`,
       req
     );
   }
 
-  activateAccount(
-    req: ActivateAccountReqDtoModel,
-    token: string
-  ): Observable<ActivateAccountResDtoModel> {
+  activateAccount(token: string): Observable<ActivateAccountResDtoModel> {
     return this._httpClient.patch<ActivateAccountResDtoModel>(
-      `${this._infraApiPath}/api/v1/account/new/activate/${token}`,
-      req
+      `${this._infraApiPath}/api/v1/auth/account/activate/${token}`,
+      null
     );
   }
 
@@ -59,7 +56,7 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     req: ActivateAccountReqDtoModel
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/account/new/activate/resend`,
+      `${this._infraApiPath}/api/v1/auth/account/activate/resend`,
       req
     );
   }
@@ -103,7 +100,7 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     req: MyAccountReqDto[]
   ): Observable<MySavedAccountModel[]> {
     return this._httpClient.patch<MySavedAccountModel[]>(
-      `${this._infraApiPath}/api/v1/account/check/myaccounts/exists`,
+      `${this._infraApiPath}/api/v1/auth/check/myaccounts/exists`,
       req
     );
   }

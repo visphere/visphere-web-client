@@ -89,24 +89,22 @@ export class ActivateAccountService
   private performActivateAccountService(
     token: string
   ): Observable<ActivateAccountResDtoModel> {
-    return this._authHttpClientService
-      .activateAccount({ emailAddress: this.userEmail }, token)
-      .pipe(
-        delay(500),
-        tap(async ({ message, enabledMfa }) => {
-          this.setLoading(false);
-          this.pushSnackbar(message);
-          if (enabledMfa) {
-            await this._router.navigateByUrl('/auth/configure-mfa');
-          } else {
-            this._currentStage$.next('success');
-          }
-        }),
-        catchError(err => {
-          this.setLoading(false);
-          return throwError(() => err);
-        })
-      );
+    return this._authHttpClientService.activateAccount(token).pipe(
+      delay(500),
+      tap(async ({ message, enabledMfa }) => {
+        this.setLoading(false);
+        this.pushSnackbar(message);
+        if (enabledMfa) {
+          await this._router.navigateByUrl('/auth/configure-mfa');
+        } else {
+          this._currentStage$.next('success');
+        }
+      }),
+      catchError(err => {
+        this.setLoading(false);
+        return throwError(() => err);
+      })
+    );
   }
 
   private pushSnackbar(message: string): void {
