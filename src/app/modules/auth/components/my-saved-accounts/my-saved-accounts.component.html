@@ -46,7 +46,7 @@
         (click)="handleOpenLoginModal(account)"
         class="vsph-my-account__element-content">
         <div
-          *ngIf="!account.isVerified"
+          *ngIf="!account.verified"
           [ngxTippy]="usernameTooptip"
           [tippyContext]="{ username: account.usernameOrEmailAddress }"
           [tippyProps]="tooltipProps">
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div
-          *ngIf="account.isVerified"
+          *ngIf="account.verified"
           [ngxTippy]="usernameTooptip"
           [tippyContext]="{ username: account.usernameOrEmailAddress }"
           [tippyProps]="tooltipProps">

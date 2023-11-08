@@ -63,7 +63,7 @@ const _reducer = createReducer(
                     ...account,
                     thumbnailUrl,
                     usernameOrEmailAddress: username,
-                    isVerified: true,
+                    verified: true,
                   }
                 : account
             ),

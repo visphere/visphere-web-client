@@ -6,7 +6,7 @@
 export type MySavedAccountPayload = {
   usernameOrEmailAddress: string;
   thumbnailUrl: string;
-  isVerified: boolean;
+  verified: boolean;
 };
 
 export type MySavedAccountModel = MySavedAccountPayload & {
@@ -20,5 +20,5 @@ export type MySavedAccountAuthFormModel = {
 export type MyAccountReqDto = {
   accountId: string;
   usernameOrEmailAddress: string;
-  isVerified: boolean;
+  verified: boolean;
 };

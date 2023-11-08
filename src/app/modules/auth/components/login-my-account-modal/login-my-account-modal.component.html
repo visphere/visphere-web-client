@@ -10,7 +10,7 @@
   [header]="'vsph.clientCommon.loginPage.formHeader' | translate">
   <div content>
     <div
-      *ngIf="!loggedUser?.isVerified"
+      *ngIf="!loggedUser?.verified"
       class="vsph-my-account__modal-image-container">
       <div
         class="vsph-my-account__not-verified vsph-my-account__not-verified--modal vsph-my-account__content-colors--modal--viewport">
@@ -32,7 +32,7 @@
       </p>
     </div>
     <div
-      *ngIf="loggedUser?.isVerified"
+      *ngIf="loggedUser?.verified"
       class="vsph-my-account__modal-image-container">
       <img
         src="{{ loggedUser?.thumbnailUrl }}"

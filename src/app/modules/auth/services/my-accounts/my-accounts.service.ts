@@ -99,7 +99,7 @@ export class MyAccountsService
         account: {
           usernameOrEmailAddress,
           thumbnailUrl: '',
-          isVerified: false,
+          verified: false,
         },
       })
     );
@@ -129,13 +129,11 @@ export class MyAccountsService
     if (accounts.length === 0) {
       return [];
     }
-    return accounts.map(
-      ({ usernameOrEmailAddress, isVerified, accountId }) => ({
-        usernameOrEmailAddress,
-        isVerified,
-        accountId,
-      })
-    );
+    return accounts.map(({ usernameOrEmailAddress, verified, accountId }) => ({
+      usernameOrEmailAddress,
+      verified,
+      accountId,
+    }));
   }
 
   private generateSuccessSnackbarResponse(

@@ -118,7 +118,7 @@ export class LoginService
         accountId: uuidv4(),
         usernameOrEmailAddress: username,
         thumbnailUrl: profileUrl,
-        isVerified: true,
+        verified: true,
       });
     }
   }
