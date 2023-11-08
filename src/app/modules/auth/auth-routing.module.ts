@@ -49,7 +49,6 @@ const routes: Routes = [
         path: 'activate-account/:token',
         component: AuthActivateAccountPageComponent,
         title: 'authActivateAccountPage',
-        canActivate: [activateAccountGuard],
       },
       {
         path: 'my-accounts',
