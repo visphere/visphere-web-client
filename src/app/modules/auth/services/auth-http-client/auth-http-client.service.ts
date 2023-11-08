@@ -31,7 +31,7 @@ export class AuthHttpClientService extends AbstractHttpProvider {
 
   loginViaAppAccount(req: LoginReqDtoModel): Observable<LoginResDtoModel> {
     return this._httpClient.post<LoginResDtoModel>(
-      `${this._infraApiPath}/api/v1/auth/access/login`,
+      `${this._infraApiPath}/api/v1/auth/identity/login`,
       req
     );
   }
