@@ -48,7 +48,7 @@
     <vsph-birth-date-select-spinner />
 
     <button
-      [disabled]="firstStageForm.invalid"
+      [disabled]="firstStageForm.invalid || this.firstStageForm.pending"
       (click)="handleGotoSecondStage()"
       type="button"
       class="vsph-button vsph-button--primary">
