@@ -44,9 +44,9 @@ export class LocalStorageService {
   }
 
   push<T>(storageKey: StorageKeyType, newValue: T): void {
-    const parsed: T[] | null = this.get(storageKey);
+    let parsed: T[] | null = this.get(storageKey);
     if (!parsed) {
-      return;
+      parsed = [];
     }
     parsed.push(newValue);
     this.save(storageKey, parsed);
