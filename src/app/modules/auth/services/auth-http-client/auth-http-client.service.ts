@@ -5,10 +5,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  ActivateAccountReqDtoModel,
-  ActivateAccountResDtoModel,
-} from '~/auth-mod/models/activate-account-form.model';
+import { ActivateAccountReqDtoModel } from '~/auth-mod/models/activate-account-form.model';
 import { ChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
 import {
   LoginReqDtoModel,
@@ -45,8 +42,8 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  activateAccount(token: string): Observable<ActivateAccountResDtoModel> {
-    return this._httpClient.patch<ActivateAccountResDtoModel>(
+  activateAccount(token: string): Observable<BaseMessageModel> {
+    return this._httpClient.patch<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/auth/account/activate/${token}`,
       null
     );

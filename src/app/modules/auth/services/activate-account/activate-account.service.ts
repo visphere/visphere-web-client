@@ -13,10 +13,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import {
-  ActivateAccountFormModel,
-  ActivateAccountResDtoModel,
-} from '~/auth-mod/models/activate-account-form.model';
+import { ActivateAccountFormModel } from '~/auth-mod/models/activate-account-form.model';
 import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
@@ -31,7 +28,7 @@ import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 export class ActivateAccountService
   extends AbstractSimpleFormStateProvider<
     ActivateAccountFormStage,
-    ActivateAccountResDtoModel
+    BaseMessageModel
   >
   implements OnDestroy
 {
@@ -55,11 +52,11 @@ export class ActivateAccountService
     this.unmountAllSubscriptions();
   }
 
-  validateToken(token: string): Observable<ActivateAccountResDtoModel> {
+  validateToken(token: string): Observable<BaseMessageModel> {
     return this.performActivateAccountService(token);
   }
 
-  override abstractSubmitForm(): Observable<ActivateAccountResDtoModel> {
+  override abstractSubmitForm(): Observable<BaseMessageModel> {
     const { token } = this.parseFormValues<ActivateAccountFormModel>();
     return this.performActivateAccountService(token);
   }
@@ -88,17 +85,13 @@ export class ActivateAccountService
 
   private performActivateAccountService(
     token: string
-  ): Observable<ActivateAccountResDtoModel> {
+  ): Observable<BaseMessageModel> {
     return this._authHttpClientService.activateAccount(token).pipe(
       delay(500),
-      tap(async ({ message, enabledMfa }) => {
+      tap(async ({ message }) => {
         this.setLoading(false);
         this.pushSnackbar(message);
-        if (enabledMfa) {
-          await this._router.navigateByUrl('/auth/configure-mfa');
-        } else {
-          this._currentStage$.next('success');
-        }
+        this._currentStage$.next('success');
       }),
       catchError(err => {
         this.setLoading(false);
