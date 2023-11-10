@@ -69,7 +69,15 @@ const _reducer = createReducer(
             ),
           };
     }
-  )
+  ),
+  on(NgrxAction.__setMfaState, (state, { mfaState }) => ({
+    ...state,
+    mfaState,
+  })),
+  on(NgrxAction.__removeMfaState, state => ({
+    ...state,
+    mfaState: undefined,
+  }))
 );
 
 export const authReduxStore = {

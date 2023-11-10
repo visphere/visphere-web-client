@@ -16,6 +16,8 @@ export type LoginResDtoModel = {
   accessToken: string;
   refreshToken: string;
   isActivated: boolean;
+  isMfaEnabled: boolean;
+  isMfaSetup: boolean;
 };
 
 export type LoginFormModel = LoginReqDtoModel & {

@@ -12,3 +12,5 @@ export type ResetPasswordFormStage = 'login' | 'token';
 export type ChangePasswordFormStage = 'change' | 'success';
 
 export type ActivateAccountFormStage = 'activate' | 'success';
+
+export type MfaFirstSetupFormStage = 'qrcode' | 'confirm' | 'code';

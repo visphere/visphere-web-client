@@ -1,0 +1,148 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div
+  *ngIf="
+    (fetchingState$ | async) === 'pending' ||
+    (fetchingState$ | async) === 'error'
+  "
+  class="min-h-[150px] flex justify-center items-center">
+  <div
+    class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
+</div>
+<ol *ngIf="(fetchingState$ | async) === 'success'" class="flex flex-col">
+  <li *ngIf="(stepperStage$ | async) === 'qrcode'">
+    <div class="vsph-auth__stepper-container">
+      <span class="vsph-auth__stepper-number">1</span>
+      <span>
+        <h3 class="vsph-auth__stepper-header">
+          {{
+            'vsph.clientCommon.mfaPage.firstSetupStepper.qrcode.header'
+              | translate
+          }}
+        </h3>
+        <p class="vsph-auth__stepper-paragraph">
+          {{
+            'vsph.clientCommon.mfaPage.firstSetupStepper.qrcode.paragraph'
+              | translate
+          }}
+        </p>
+      </span>
+    </div>
+    <div class="mt-8 mb-4">
+      <img
+        src="{{ mfaData!.imageUri }}"
+        alt=""
+        width="220px"
+        height="220px"
+        class="rounded-xl shadow-lg mx-auto mb-4" />
+      <div class="flex flex-col">
+        <span class="vsph-auth__input-label">
+          {{ 'vsph.clientCommon.mfaPage.secretKeyHeader' | translate }}
+        </span>
+        <div class="vsph-auth__input">
+          {{ mfaData!.secret }}
+        </div>
+      </div>
+    </div>
+    <button
+      class="vsph-button vsph-button--primary"
+      (click)="handleMoveStepper('confirm')">
+      {{ 'vsph.common.utils.continue' | translate }}
+    </button>
+  </li>
+  <li *ngIf="(stepperStage$ | async) === 'confirm'">
+    <button
+      (click)="handleMoveStepper('qrcode')"
+      class="vsph-auth__top-nav-button px-2 mb-4 flex items-center w-fit">
+      <ng-icon name="arrowLeftIcon" class="me-2" />
+      {{ 'vsph.common.utils.stepBackward' | translate }}
+    </button>
+    <div class="vsph-auth__stepper-container">
+      <span class="vsph-auth__stepper-number">2</span>
+      <span>
+        <h3 class="vsph-auth__stepper-header">
+          {{
+            'vsph.clientCommon.mfaPage.firstSetupStepper.confirm.header'
+              | translate
+          }}
+        </h3>
+        <p class="vsph-auth__stepper-paragraph">
+          {{
+            'vsph.clientCommon.mfaPage.firstSetupStepper.confirm.paragraph'
+              | translate
+          }}
+        </p>
+      </span>
+    </div>
+    <div
+      class="my-8 bg-vsph-orange-50 dark:bg-vsph-transparent border rounded-lg border-vsph-orange-100 py-3 px-4 flex items-center">
+      <div class="flex items-center justify-center shrink-0 me-4">
+        <img
+          src="{{ cdnPath }}/static/icon/danger.svg"
+          alt=""
+          width="30px"
+          height="30px" />
+      </div>
+      <div class="text-vsph-orange-100 text-sm leading-[17px]">
+        {{
+          'vsph.clientCommon.mfaPage.firstSetupStepper.confirm.infoBlock'
+            | translate
+        }}
+      </div>
+    </div>
+    <div class="flex flex-col gap-y-3 mb-8">
+      <div>
+        <span class="vsph-auth__input-label">
+          {{ 'vsph.clientCommon.mfaPage.secretKeyHeader' | translate }}
+        </span>
+        <div class="vsph-auth__input">
+          {{ mfaData!.secret }}
+        </div>
+      </div>
+      <button
+        class="vsph-button vsph-button--secondary"
+        (click)="handleSaveToFile()">
+        {{
+          'vsph.clientCommon.mfaPage.firstSetupStepper.confirm.saveToFile'
+            | translate
+        }}
+      </button>
+    </div>
+    <button
+      class="vsph-button vsph-button--primary"
+      (click)="handleMoveStepper('code')">
+      {{ 'vsph.common.utils.continue' | translate }}
+    </button>
+  </li>
+  <li *ngIf="(stepperStage$ | async) === 'code'">
+    <button
+      (click)="handleMoveStepper('confirm')"
+      class="vsph-auth__top-nav-button px-2 mb-4 flex items-center w-fit">
+      <ng-icon name="arrowLeftIcon" class="me-2" />
+      {{ 'vsph.common.utils.stepBackward' | translate }}
+    </button>
+    <div class="vsph-auth__stepper-container">
+      <span class="vsph-auth__stepper-number">3</span>
+      <span>
+        <h3 class="vsph-auth__stepper-header">
+          {{
+            'vsph.clientCommon.mfaPage.firstSetupStepper.code.header'
+              | translate
+          }}
+        </h3>
+        <p class="vsph-auth__stepper-paragraph">
+          {{
+            'vsph.clientCommon.mfaPage.firstSetupStepper.code.paragraph'
+              | translate
+          }}
+        </p>
+      </span>
+    </div>
+    <div class="mt-8">
+      <vsph-mfa-code-form [firstSetup]="true" />
+    </div>
+  </li>
+</ol>

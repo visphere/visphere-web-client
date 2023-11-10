@@ -38,3 +38,18 @@ export const checkIfMySavedAccountAlreadyExist = (username: string) =>
         ({ usernameOrEmailAddress }) => usernameOrEmailAddress === username
       )
   );
+
+export const selectIsMfaSetted = createSelector(
+  selectAuthState,
+  ({ mfaState }) => !!mfaState
+);
+
+export const isFirstTimeMfaSetup = createSelector(
+  selectAuthState,
+  ({ mfaState }) => !mfaState?.isMfaSetup
+);
+
+export const selectMfaState = createSelector(
+  selectAuthState,
+  ({ mfaState }) => mfaState
+);
