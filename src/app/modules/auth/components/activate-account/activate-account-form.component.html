@@ -32,6 +32,7 @@
     (emitOnAction)="handleResendMessage()"
     [isDisabled]="!!(isLoading$ | async)"
     [isLoading]="(isResendLoading$ | async)!"
+    color="dark"
     styles="vsph-button vsph-button--secondary"
     innerI18nText="vsph.common.utils.resendMessageButton"
     labelI18nText="vsph.common.utils.emailMessageNotReceived" />

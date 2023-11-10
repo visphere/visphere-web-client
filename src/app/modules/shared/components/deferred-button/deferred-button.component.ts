@@ -25,6 +25,7 @@ export class DeferredButtonComponent implements OnInit, OnDestroy {
   @Input() isLoading = false;
   @Input() isDisabled = false;
   @Input() enabledOnMount = true;
+  @Input() color: 'modal' | 'dark' | '' = '';
 
   @ViewChild('timerEntry') timerEntry?: CdTimerComponent;
 

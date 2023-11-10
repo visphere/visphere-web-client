@@ -11,6 +11,7 @@
     [isLoading]="isLoading"
     [buttonDisabled]="isDeferred || isDisabled"
     (emitClick)="handleButtonClick()"
+    [color]="color"
     [buttonStyle]="styles">
     <div class="flex justify-center items-center">
       {{ innerI18nText | translate }}

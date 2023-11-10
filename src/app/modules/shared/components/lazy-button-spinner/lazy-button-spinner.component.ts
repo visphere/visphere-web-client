@@ -10,7 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class LazyButtonSpinnerComponent {
   @Input() size: 'sm' | 'lg' = 'lg';
-  @Input() color: 'modal' | '' = '';
+  @Input() color: 'modal' | 'dark' | '' = '';
   @Input() isLoading = false;
   @Input() i18nText = '';
   @Input() buttonStyle = 'vsph-button vsph-button--primary';
