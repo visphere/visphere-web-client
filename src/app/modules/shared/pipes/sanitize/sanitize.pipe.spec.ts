@@ -4,7 +4,6 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthModule } from '~/auth-mod/auth.module';
 import { AppModule } from '~/root-mod/app.module';
 import { SanitizePipe } from './sanitize.pipe';
 
@@ -13,7 +12,7 @@ describe('SanitizePipe', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, AuthModule],
+      imports: [AppModule],
     }).compileComponents();
     pipe = new SanitizePipe(TestBed.inject(DomSanitizer));
   });
