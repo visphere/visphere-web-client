@@ -8,18 +8,6 @@ export type LoginReqDtoModel = {
   password: string;
 };
 
-export type LoginResDtoModel = {
-  fullName: string;
-  username: string;
-  emailAddress: string;
-  profileUrl: string;
-  accessToken: string;
-  refreshToken: string;
-  isActivated: boolean;
-  isMfaEnabled: boolean;
-  isMfaSetup: boolean;
-};
-
 export type LoginFormModel = LoginReqDtoModel & {
   rememberAccount: boolean;
 };

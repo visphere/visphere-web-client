@@ -7,10 +7,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivateAccountReqDtoModel } from '~/auth-mod/models/activate-account-form.model';
 import { ChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
-import {
-  LoginReqDtoModel,
-  LoginResDtoModel,
-} from '~/auth-mod/models/login-form.model';
+import { LoginReqDtoModel } from '~/auth-mod/models/login-form.model';
 import {
   MyAccountReqDto,
   MySavedAccountModel,
@@ -18,6 +15,7 @@ import {
 import { RegisterReqDtoModel } from '~/auth-mod/models/register-form.model';
 import { StartResetPasswordViaEmailFormModel } from '~/auth-mod/models/reset-password-form.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
 
 @Injectable({ providedIn: 'root' })

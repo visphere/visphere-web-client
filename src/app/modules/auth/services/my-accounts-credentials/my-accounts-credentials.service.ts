@@ -5,13 +5,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { LoginResDtoModel } from '~/auth-mod/models/login-form.model';
 import {
   MySavedAccountAuthFormModel,
   MySavedAccountModel,
 } from '~/auth-mod/models/my-saved-account.model';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
+import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';

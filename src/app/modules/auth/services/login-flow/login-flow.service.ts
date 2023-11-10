@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
-import { LoggedUser } from '~/root-mod/modules/shared/models/logged-user.model';
-import { LocalStorageService } from '~/root-mod/modules/shared/services/local-storage/local-storage.service';
-import { SharedReducer } from '~/root-mod/modules/shared/types/ngrx-store.type';
+import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
+import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
+import { LoggedUser } from '~/shared-mod/models/logged-user.model';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import { LoginResDtoModel } from '../../models/login-form.model';
-import { AuthReducer } from '../../types/ngrx-store.type';
+import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AuthHttpClientService } from '../auth-http-client/auth-http-client.service';
 
 @Injectable({ providedIn: 'root' })

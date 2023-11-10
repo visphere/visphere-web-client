@@ -5,12 +5,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  LoginFormModel,
-  LoginResDtoModel,
-} from '~/auth-mod/models/login-form.model';
+import { LoginFormModel } from '~/auth-mod/models/login-form.model';
 import { MySavedAccountModel } from '~/auth-mod/models/my-saved-account.model';
 import { LoginFormStage } from '~/auth-mod/types/form-stage.type';
+import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
