@@ -34,8 +34,8 @@ export class RegisterSecondStageFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.secondStageForm);
-    this.wrapAsObservable(this._registerService.isLoading$).subscribe(
-      isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
+    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+      this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
 

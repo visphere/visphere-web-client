@@ -50,7 +50,6 @@ export class MyAccountsCredentialsService extends AbstractSimpleFormProvider<
         password,
       })
       .pipe(
-        delay(500),
         tap(async res => {
           this.setLoading(false);
           const { emailAddress, accessToken, refreshToken, isActivated } = res;

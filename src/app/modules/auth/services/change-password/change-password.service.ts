@@ -5,7 +5,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, delay, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { ChangePasswordFormModel } from '~/auth-mod/models/change-password-form.model';
 import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
@@ -43,7 +43,6 @@ export class ChangePasswordService extends AbstractSimpleFormStateProvider<
     return this._authHttpClientService
       .changePasswordViaEmail(data, this._token)
       .pipe(
-        delay(500),
         tap(({ message }) => {
           this.setLoading(false);
           this._store.dispatch(

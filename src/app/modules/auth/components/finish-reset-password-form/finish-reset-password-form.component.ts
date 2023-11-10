@@ -39,9 +39,7 @@ export class FinishResetPasswordFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.finishResetPasswordForm);
-    this.wrapAsObservable(
-      this._finishResetPasswordService.isLoading$
-    ).subscribe(isLoading =>
+    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }

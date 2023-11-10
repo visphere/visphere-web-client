@@ -5,14 +5,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  delay,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { ActivateAccountFormModel } from '~/auth-mod/models/activate-account-form.model';
 import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
@@ -71,7 +64,6 @@ export class ActivateAccountService
     return this._authHttpClientService
       .resendActivateAccountToken({ emailAddress: this.userEmail })
       .pipe(
-        delay(500),
         tap(({ message }) => {
           this._resendIsLoading$.next(false);
           this.pushSnackbar(message);
@@ -87,7 +79,6 @@ export class ActivateAccountService
     token: string
   ): Observable<BaseMessageModel> {
     return this._authHttpClientService.activateAccount(token).pipe(
-      delay(500),
       tap(async ({ message }) => {
         this.setLoading(false);
         this.pushSnackbar(message);

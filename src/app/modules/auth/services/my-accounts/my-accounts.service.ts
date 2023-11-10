@@ -8,7 +8,6 @@ import {
   BehaviorSubject,
   Observable,
   catchError,
-  delay,
   of,
   tap,
   throwError,
@@ -53,7 +52,6 @@ export class MyAccountsService
       )
     )
       .pipe(
-        delay(500),
         tap(() => this._fetchingState$.next('success')),
         catchError(err => throwError(() => err))
       )

@@ -43,7 +43,7 @@ export class LoginFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.loginForm);
-    this.wrapAsObservable(this._loginService.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }

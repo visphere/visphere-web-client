@@ -68,8 +68,8 @@ export class ChangePasswordFormComponent
       this._changePasswordService.validateToken(token)
     ).subscribe();
     this._populateFormGroupService.setField(this.changePasswordForm);
-    this.wrapAsObservable(this._changePasswordService.isLoading$).subscribe(
-      isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
+    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+      this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
 

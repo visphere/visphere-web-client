@@ -58,8 +58,8 @@ export class ActivateAccountFormComponent
       ).subscribe({ next: () => this._lazyPageLoaderService.disableLoading() });
     }
     this._populateFormGroupService.setField(this.activateAccountForm);
-    this.wrapAsObservable(this._activateAccountService.isLoading$).subscribe(
-      isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
+    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+      this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
 

@@ -5,14 +5,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  delay,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { FinishResetPasswordViaEmailFormModel } from '~/auth-mod/models/reset-password-form.model';
 import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
@@ -50,7 +43,6 @@ export class FinishResetPasswordService
     const { token } =
       this.parseFormValues<FinishResetPasswordViaEmailFormModel>();
     return this._authHttpClientService.resetPasswordValidateToken(token).pipe(
-      delay(500),
       tap(async () => {
         this.setLoading(false);
         await this._router.navigateByUrl(`/auth/change-password/${token}`);
@@ -70,7 +62,6 @@ export class FinishResetPasswordService
         usernameOrEmailAddress: this.userLoginOrEmail,
       })
       .pipe(
-        delay(500),
         tap(({ message }) => {
           this._resendIsLoading$.next(false);
           this._store.dispatch(
