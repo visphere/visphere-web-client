@@ -14,3 +14,8 @@ export const selectSnackbarsStack = createSelector(
   selectSharedState,
   ({ snackbarStack }) => snackbarStack
 );
+
+export const selectUserIsLogged = createSelector(
+  selectSharedState,
+  ({ loggedUser }) => !!loggedUser
+);

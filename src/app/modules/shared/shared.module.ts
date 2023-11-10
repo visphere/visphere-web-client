@@ -20,6 +20,7 @@ import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/mod
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
 import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-captcha-modal/verify-captcha-modal.component';
+import { LoggedRouteGuard } from '~/shared-mod/guard/logged-route/logged-route.guard';
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { sharedReduxStore } from '~/shared-mod/store/reducer';
@@ -65,6 +66,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     SnackbarsContainerComponent,
     VerifyCaptchaModalComponent,
   ],
+  providers: [LoggedRouteGuard],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}

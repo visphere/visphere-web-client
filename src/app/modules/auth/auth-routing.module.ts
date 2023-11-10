@@ -15,11 +15,13 @@ import { AuthMfaPageComponent } from '~/auth-mod/pages/auth-mfa-page/auth-mfa-pa
 import { AuthMyAccountsPageComponent } from '~/auth-mod/pages/auth-my-accounts-page/auth-my-accounts-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
+import { activateNotLoggedRouteGuard } from '../shared/guard/logged-route/logged-route.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AuthRootComponent,
+    canActivate: [activateNotLoggedRouteGuard],
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
