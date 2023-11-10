@@ -14,7 +14,6 @@ import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { MfaStateModel } from '../models/mfa-data.model';
 import { AuthReducer } from '../types/ngrx-store.type';
-import { LoginFlowService } from './login-flow/login-flow.service';
 
 export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider<LoginResDtoModel> {
   protected _mfaState!: MfaStateModel;
@@ -46,7 +45,10 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
         });
         this._absStore.dispatch(
           NgrxAction_SHA.__setLoggedUserDetails({
-            details: LoginFlowService.mapToUserDetails(res),
+            details: {
+              fullName: res.fullName,
+              profileUrl: res.profileUrl,
+            },
           })
         );
         this._absStore.dispatch(NgrxAction_ATH.__removeMfaState());

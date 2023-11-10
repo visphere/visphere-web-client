@@ -9,7 +9,6 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
-import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -67,7 +66,10 @@ export class LoginFlowService {
               });
               this._store.dispatch(
                 NgrxAction_SHA.__setLoggedUserDetails({
-                  details: LoginFlowService.mapToUserDetails(res),
+                  details: {
+                    fullName: res.fullName,
+                    profileUrl: res.profileUrl,
+                  },
                 })
               );
             }
@@ -80,19 +82,5 @@ export class LoginFlowService {
           return throwError(() => err);
         })
       );
-  }
-
-  static mapToUserDetails({
-    fullName,
-    profileUrl,
-    accessToken,
-    refreshToken,
-  }: LoginResDtoModel): LoggedUser {
-    return {
-      fullName,
-      profileUrl,
-      accessToken,
-      refreshToken,
-    };
   }
 }

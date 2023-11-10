@@ -6,6 +6,4 @@
 export type LoggedUser = {
   fullName: string;
   profileUrl: string;
-  accessToken: string;
-  refreshToken: string;
 };
