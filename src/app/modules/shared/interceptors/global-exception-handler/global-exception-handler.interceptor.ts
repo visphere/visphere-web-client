@@ -32,14 +32,15 @@ export class GlobalExceptionHandlerInterceptor implements HttpInterceptor {
     }
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        if (
-          err.error &&
-          (err.status !== 401 ||
-            requestUrl.pathname.includes('/identity/login'))
-        ) {
+        if (err.status !== 401) {
           this._store.dispatch(
             NgrxAction_SHA.__addSnackbar({
-              content: flattedErrorResponse(err.error),
+              content: err.error
+                ? flattedErrorResponse(err.error)
+                : {
+                    i18nPrefix: 'vsph.common.utils.',
+                    placeholder: 'unknowError',
+                  },
               severity: 'danger',
             })
           );
