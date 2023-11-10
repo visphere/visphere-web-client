@@ -29,6 +29,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: 'settings',
+    loadChildren: () =>
+      import('./modules/settings/settings.module').then(m => m.SettingsModule),
+  },
   { path: '**', component: NotFoundPageComponent, title: 'notFoundPage' },
 ];
 

@@ -37,6 +37,13 @@ const commonResolveConfig = isProdMode => ({
     '~/root-mod': path.resolve(__dirname, 'src', 'app'),
     '~/auth-mod': path.resolve(__dirname, 'src', 'app', 'modules', 'auth'),
     '~/client-mod': path.resolve(__dirname, 'src', 'app', 'modules', 'client'),
+    '~/settings-mod': path.resolve(
+      __dirname,
+      'src',
+      'app',
+      'modules',
+      'settings'
+    ),
     '~/shared-mod': path.resolve(__dirname, 'src', 'app', 'modules', 'shared'),
   },
 });

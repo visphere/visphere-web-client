@@ -24,6 +24,7 @@
       "~/root-mod/*": ["src/app/*"],
       "~/auth-mod/*": ["src/app/modules/auth/*"],
       "~/client-mod/*": ["src/app/modules/client/*"],
+      "~/settings-mod/*": ["src/app/modules/settings/*"],
       "~/shared-mod/*": ["src/app/modules/shared/*"]
     }
   },

@@ -14,6 +14,7 @@ import { AppRoutingModule } from '~/root-mod/app-routing.module';
 import { titleStrategyProvider } from '~/shared-mod/config/template-page-title.strategy';
 import { i18nAutoChangerInitializer } from '~/shared-mod/i18n/auto-change-lang.service';
 import { i18nConfig } from '~/shared-mod/i18n/http-translate.loader';
+import { accessRefreshInterceptorInitializer } from '~/shared-mod/interceptors/access-refresh/access-refresh.interceptor';
 import { appendLangInterceptorInitializer } from '~/shared-mod/interceptors/append-lang-header/append-lang-header.interceptor';
 import { globalExceptionHandlerInterceptorInitializer } from '~/shared-mod/interceptors/global-exception-handler/global-exception-handler.interceptor';
 import { languageSwitcherInitializer } from '~/shared-mod/services/language-switcher/language-switcher.service';
@@ -22,6 +23,7 @@ import { passwordStrengthMeterInitializer } from '~/shared-mod/services/password
 import { themeSwitcherInitializer } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import { SharedModule } from '~/shared-mod/shared.module';
 import buildSpecifics from '../environments/build-specifics';
+import { autoSessionRefreshInitializer } from './modules/shared/services/identity/identity.service';
 
 @NgModule({
   declarations: [AppRootComponent],
@@ -42,9 +44,11 @@ import buildSpecifics from '../environments/build-specifics';
     languageSwitcherInitializer,
     themeSwitcherInitializer,
     passwordStrengthMeterInitializer,
+    autoSessionRefreshInitializer,
     lazyPageLoaderInitializer,
     appendLangInterceptorInitializer,
     globalExceptionHandlerInterceptorInitializer,
+    accessRefreshInterceptorInitializer,
   ],
   bootstrap: [AppRootComponent],
 })
