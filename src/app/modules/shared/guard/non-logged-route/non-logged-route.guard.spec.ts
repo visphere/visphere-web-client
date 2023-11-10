@@ -4,12 +4,12 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
-import { canActivateLoggedRoute } from './logged-route.guard';
+import { canActivateNonLoggedRoute } from './non-logged-route.guard';
 
-describe('canActivateLoggedRoute', () => {
+describe('canActivateNonLoggedRoute', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() =>
-      canActivateLoggedRoute(...guardParameters)
+      canActivateNonLoggedRoute(...guardParameters)
     );
 
   beforeEach(() => {

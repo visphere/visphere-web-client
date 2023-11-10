@@ -6,18 +6,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientRootComponent } from '~/client-mod/client-root.component';
 import { ClientEntryPointPageComponent } from '~/client-mod/pages/client-entry-point-page/client-entry-point-page.component';
-import { activateLoggedRouteGuard } from '../shared/guard/logged-route/logged-route.guard';
+import { canActivateLoggedRoute } from '../shared/guard/logged-route/logged-route.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: ClientRootComponent,
-    canActivate: [activateLoggedRouteGuard],
     children: [
       {
         path: '',
-        component: ClientEntryPointPageComponent,
-        title: 'clientEntryPointPage',
+        canActivate: [canActivateLoggedRoute],
+        children: [
+          {
+            path: '',
+            component: ClientEntryPointPageComponent,
+            title: 'clientEntryPointPage',
+          },
+        ],
       },
     ],
   },

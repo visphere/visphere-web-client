@@ -10,25 +10,26 @@ import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable({ providedIn: 'root' })
-class LoggedRouteGuard {
+export class NonLoggedRouteGuard {
   canActivate(
     store: Store<SharedReducer>,
     router: Router
   ): Observable<boolean> {
     return store.select(NgrxSelector_SHA.selectUserIsLogged).pipe(
       map(isLogged => {
-        if (isLogged) {
+        if (!isLogged) {
           return true;
         }
-        router.navigate(['/auth/login']).then(r => r);
+        router.navigate([router.url]).then(r => r);
         return false;
       })
     );
   }
 }
 
-export const canActivateLoggedRoute: CanActivateFn = () =>
-  inject(LoggedRouteGuard).canActivate(
+export const canActivateNonLoggedRoute: CanActivateFn = () => {
+  return inject(NonLoggedRouteGuard).canActivate(
     inject(Store<SharedReducer>),
     inject(Router)
   );
+};

@@ -15,62 +15,67 @@ import { AuthMfaPageComponent } from '~/auth-mod/pages/auth-mfa-page/auth-mfa-pa
 import { AuthMyAccountsPageComponent } from '~/auth-mod/pages/auth-my-accounts-page/auth-my-accounts-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
-import { activateNotLoggedRouteGuard } from '../shared/guard/logged-route/logged-route.guard';
+import { canActivateNonLoggedRoute } from '../shared/guard/non-logged-route/non-logged-route.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AuthRootComponent,
-    canActivate: [activateNotLoggedRouteGuard],
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
-        path: 'login',
-        component: AuthLoginPageComponent,
-        title: 'authLoginPage',
-      },
-      {
-        path: 'register',
-        component: AuthRegisterPageComponent,
-        title: 'authRegisterPage',
-      },
-      {
-        path: 'reset-password',
-        component: AuthResetPasswordPageComponent,
-        title: 'authResetPasswordPage',
-      },
-      {
-        path: 'change-password/:token',
-        component: AuthChangePasswordPageComponent,
-        title: 'authChangePasswordPage',
-      },
-      {
-        path: 'activate-account',
-        component: AuthActivateAccountPageComponent,
-        title: 'authActivateAccountPage',
-        canActivate: [activateAccountGuard],
-      },
-      {
-        path: 'activate-account/:token',
-        component: AuthActivateAccountPageComponent,
-        title: 'authActivateAccountPage',
-      },
-      {
-        path: 'my-accounts',
-        component: AuthMyAccountsPageComponent,
-        title: 'authMyAccountsPage',
-      },
-      {
-        path: 'mfa',
-        component: AuthMfaPageComponent,
-        title: 'authMfaPage',
-        canActivate: [activateMfaCodeGuard],
-      },
-      {
-        path: 'mfa/email',
-        component: AuthMfaEmailPageComponent,
-        title: 'authMfaEmailPage',
-        canActivate: [activateMfaCodeGuard],
+        path: '',
+        canActivate: [canActivateNonLoggedRoute],
+        children: [
+          { path: '', redirectTo: 'login', pathMatch: 'full' },
+          {
+            path: 'login',
+            component: AuthLoginPageComponent,
+            title: 'authLoginPage',
+          },
+          {
+            path: 'register',
+            component: AuthRegisterPageComponent,
+            title: 'authRegisterPage',
+          },
+          {
+            path: 'reset-password',
+            component: AuthResetPasswordPageComponent,
+            title: 'authResetPasswordPage',
+          },
+          {
+            path: 'change-password/:token',
+            component: AuthChangePasswordPageComponent,
+            title: 'authChangePasswordPage',
+          },
+          {
+            path: 'activate-account',
+            component: AuthActivateAccountPageComponent,
+            title: 'authActivateAccountPage',
+            canActivate: [activateAccountGuard],
+          },
+          {
+            path: 'activate-account/:token',
+            component: AuthActivateAccountPageComponent,
+            title: 'authActivateAccountPage',
+          },
+          {
+            path: 'my-accounts',
+            component: AuthMyAccountsPageComponent,
+            title: 'authMyAccountsPage',
+          },
+          {
+            path: 'mfa',
+            component: AuthMfaPageComponent,
+            title: 'authMfaPage',
+            canActivate: [activateMfaCodeGuard],
+          },
+          {
+            path: 'mfa/email',
+            component: AuthMfaEmailPageComponent,
+            title: 'authMfaEmailPage',
+            canActivate: [activateMfaCodeGuard],
+          },
+        ],
       },
     ],
   },
