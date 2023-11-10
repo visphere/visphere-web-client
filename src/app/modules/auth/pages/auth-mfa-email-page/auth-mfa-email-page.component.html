@@ -1,0 +1,15 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-auth-content-wrapper size="sm">
+  <vsph-auth-form-header i18nPrefix="clientCommon.mfaEmailPage" />
+  <a
+    routerLink="/auth/mfa"
+    class="vsph-auth__top-nav-button px-2 mb-4 flex items-center w-fit">
+    <ng-icon name="arrowLeftIcon" class="me-2" />
+    {{ 'vsph.clientCommon.mfaEmailPage.verifyViaAuthenticator' | translate }}
+  </a>
+  <vsph-mfa-email-form />
+</vsph-auth-content-wrapper>
