@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 import { FinishResetPasswordService } from '~/auth-mod/services/finish-reset-password/finish-reset-password.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
-import { exactLengthValidator } from '~/shared-mod/validators/exact-length.validator';
-import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
   selector: 'vsph-finish-reset-password-form',
@@ -32,11 +30,7 @@ export class FinishResetPasswordFormComponent
   ) {
     super();
     this.finishResetPasswordForm = new FormGroup({
-      token: new FormControl('', [
-        Validators.required,
-        Validators.pattern(regex.OTA_TOKEN),
-        exactLengthValidator(10),
-      ]),
+      token: new FormControl('', [Validators.required]),
     });
     this._finishResetPasswordService.setReactiveForm(
       this.finishResetPasswordForm

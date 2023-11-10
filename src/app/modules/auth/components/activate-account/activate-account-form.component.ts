@@ -14,8 +14,6 @@ import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
-import { exactLengthValidator } from '~/shared-mod/validators/exact-length.validator';
-import { regex } from '~/shared-mod/validators/regex.constant';
 
 @Component({
   selector: 'vsph-activate-account-form',
@@ -46,11 +44,7 @@ export class ActivateAccountFormComponent
   ) {
     super();
     this.activateAccountForm = new FormGroup({
-      token: new FormControl('', [
-        Validators.required,
-        Validators.pattern(regex.OTA_TOKEN),
-        exactLengthValidator(10),
-      ]),
+      token: new FormControl('', [Validators.required]),
     });
     this._activateAccountService.setReactiveForm(this.activateAccountForm);
   }
