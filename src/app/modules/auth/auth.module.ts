@@ -24,11 +24,14 @@ import { AuthSingleSelectSpinnerComponent } from '~/auth-mod/components/auth-sin
 import { BirthDateSelectSpinnerComponent } from '~/auth-mod/components/birth-date-select-spinner/birth-date-select-spinner.component';
 import { ChangePasswordFormComponent } from '~/auth-mod/components/change-password-form/change-password-form.component';
 import { FinishResetPasswordFormComponent } from '~/auth-mod/components/finish-reset-password-form/finish-reset-password-form.component';
+import { FirstMfaSetupComponent } from '~/auth-mod/components/first-mfa-setup/first-mfa-setup.component';
 import { FooterControlListComponent } from '~/auth-mod/components/footer-control-list/footer-control-list.component';
 import { FooterControlsComponent } from '~/auth-mod/components/footer-controls/footer-controls.component';
 import { FooterComponent } from '~/auth-mod/components/footer/footer.component';
 import { LoginFormComponent } from '~/auth-mod/components/login-form/login-form.component';
 import { LoginMyAccountModalComponent } from '~/auth-mod/components/login-my-account-modal/login-my-account-modal.component';
+import { MfaCodeFormComponent } from '~/auth-mod/components/mfa-code-form/mfa-code-form.component';
+import { MfaEmailFormComponent } from '~/auth-mod/components/mfa-email-form/mfa-email-form.component';
 import { MySavedAccountsComponent } from '~/auth-mod/components/my-saved-accounts/my-saved-accounts.component';
 import { Oauth2ButtonComponent } from '~/auth-mod/components/oauth2-button/oauth2-button.component';
 import { PasswordInputTogglerComponent } from '~/auth-mod/components/password-input-toggler/password-input-toggler.component';
@@ -38,9 +41,12 @@ import { RegisterFormComponent } from '~/auth-mod/components/register-form/regis
 import { RegisterSecondStageFormComponent } from '~/auth-mod/components/register-second-stage-form/register-second-stage-form.component';
 import { StartResetPasswordFormComponent } from '~/auth-mod/components/start-reset-password-form/start-reset-password-form.component';
 import { ActivateAccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
+import { MfaCodeGuard } from '~/auth-mod/guards/mfa-code/mfa-code.guard';
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
+import { AuthMfaEmailPageComponent } from '~/auth-mod/pages/auth-mfa-email-page/auth-mfa-email-page.component';
+import { AuthMfaPageComponent } from '~/auth-mod/pages/auth-mfa-page/auth-mfa-page.component';
 import { AuthMyAccountsPageComponent } from '~/auth-mod/pages/auth-my-accounts-page/auth-my-accounts-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
@@ -59,6 +65,8 @@ import { SharedModule } from '~/shared-mod/shared.module';
     AuthContentWrapperComponent,
     AuthFormHeaderComponent,
     AuthLoginPageComponent,
+    AuthMfaEmailPageComponent,
+    AuthMfaPageComponent,
     AuthMyAccountsPageComponent,
     AuthRegisterPageComponent,
     AuthResetPasswordPageComponent,
@@ -67,11 +75,14 @@ import { SharedModule } from '~/shared-mod/shared.module';
     BirthDateSelectSpinnerComponent,
     ChangePasswordFormComponent,
     FinishResetPasswordFormComponent,
+    FirstMfaSetupComponent,
     FooterControlListComponent,
     FooterControlsComponent,
     FooterComponent,
     LoginFormComponent,
     LoginMyAccountModalComponent,
+    MfaCodeFormComponent,
+    MfaEmailFormComponent,
     MySavedAccountsComponent,
     Oauth2ButtonComponent,
     PasswordInputTogglerComponent,
@@ -109,6 +120,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     ),
     TranslateModule,
   ],
-  providers: [ActivateAccountGuard],
+  providers: [ActivateAccountGuard, MfaCodeGuard],
 })
 export class AuthModule {}

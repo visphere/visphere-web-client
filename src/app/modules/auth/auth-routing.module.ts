@@ -6,9 +6,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRootComponent } from '~/auth-mod/auth-root.component';
 import { activateAccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
+import { mfaCodeGuard } from '~/auth-mod/guards/mfa-code/mfa-code.guard';
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
+import { AuthMfaEmailPageComponent } from '~/auth-mod/pages/auth-mfa-email-page/auth-mfa-email-page.component';
+import { AuthMfaPageComponent } from '~/auth-mod/pages/auth-mfa-page/auth-mfa-page.component';
 import { AuthMyAccountsPageComponent } from '~/auth-mod/pages/auth-my-accounts-page/auth-my-accounts-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
@@ -54,6 +57,18 @@ const routes: Routes = [
         path: 'my-accounts',
         component: AuthMyAccountsPageComponent,
         title: 'authMyAccountsPage',
+      },
+      {
+        path: 'mfa',
+        component: AuthMfaPageComponent,
+        title: 'authMfaPage',
+        canActivate: [mfaCodeGuard],
+      },
+      {
+        path: 'mfa/email',
+        component: AuthMfaEmailPageComponent,
+        title: 'authMfaEmailPage',
+        canActivate: [mfaCodeGuard],
       },
     ],
   },
