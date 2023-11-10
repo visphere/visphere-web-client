@@ -1,0 +1,24 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<form
+  [formGroup]="codeForm"
+  (ngSubmit)="handleSubmitCodeForm()"
+  class="grid gap-y-3">
+  <vsph-password-input-toggler
+    [maxLength]="6"
+    placeholder="324 561"
+    formControlIdentifier="code"
+    i18nPrefix="clientCommon.mfaPage.mfaCodeForm">
+    <vsph-field-validator />
+    <vsph-field-validator type="exactLength" />
+    <vsph-field-validator type="pattern" />
+  </vsph-password-input-toggler>
+  <vsph-lazy-button-spinner
+    [isLoading]="(isLoading$ | async)!"
+    [buttonDisabled]="codeForm.invalid">
+    {{ 'vsph.clientCommon.mfaPage.proceedLogin' | translate }}
+  </vsph-lazy-button-spinner>
+</form>

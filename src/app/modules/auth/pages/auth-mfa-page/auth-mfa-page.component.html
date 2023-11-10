@@ -1,0 +1,17 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-auth-content-wrapper size="sm">
+  <vsph-auth-form-header i18nPrefix="clientCommon.mfaPage" />
+  <vsph-first-mfa-setup *ngIf="isInitialMfaSetup$ | async" />
+  <vsph-mfa-code-form *ngIf="(isInitialMfaSetup$ | async) === false" />
+  <hr class="vsph-auth__separator my-8" />
+  <div class="vsph-auth__input-label">
+    {{ 'vsph.clientCommon.mfaPage.dontHaveAccessToAuthenticator' | translate }}
+  </div>
+  <a routerLink="/auth/mfa/email" class="vsph-button vsph-button--secondary">
+    {{ 'vsph.clientCommon.mfaPage.verifyViaEmail' | translate }}
+  </a>
+</vsph-auth-content-wrapper>
