@@ -4,11 +4,13 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
-import { mfaCodeGuard } from './mfa-code.guard';
+import { activateMfaCodeGuard } from './mfa-code.guard';
 
-describe('mfaCodeGuard', () => {
+describe('activateMfaCodeGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
-    TestBed.runInInjectionContext(() => mfaCodeGuard(...guardParameters));
+    TestBed.runInInjectionContext(() =>
+      activateMfaCodeGuard(...guardParameters)
+    );
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

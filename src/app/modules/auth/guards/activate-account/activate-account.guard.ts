@@ -10,7 +10,7 @@ import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 
 @Injectable()
-export class ActivateAccountGuard {
+export class AccountGuard {
   canActivate(store: Store<AuthReducer>, router: Router): Observable<boolean> {
     return store
       .select(NgrxSelector_ATH.selectIsActivateAccountEmailExist)
@@ -27,8 +27,5 @@ export class ActivateAccountGuard {
 }
 
 export const activateAccountGuard: CanActivateFn = () => {
-  return inject(ActivateAccountGuard).canActivate(
-    inject(Store),
-    inject(Router)
-  );
+  return inject(AccountGuard).canActivate(inject(Store), inject(Router));
 };

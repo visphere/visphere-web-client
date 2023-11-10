@@ -24,6 +24,6 @@ export class MfaCodeGuard {
   }
 }
 
-export const mfaCodeGuard: CanActivateFn = () => {
+export const activateMfaCodeGuard: CanActivateFn = () => {
   return inject(MfaCodeGuard).canActivate(inject(Store), inject(Router));
 };

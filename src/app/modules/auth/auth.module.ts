@@ -40,7 +40,7 @@ import { RegisterFormConsentsComponent } from '~/auth-mod/components/register-fo
 import { RegisterFormComponent } from '~/auth-mod/components/register-form/register-form.component';
 import { RegisterSecondStageFormComponent } from '~/auth-mod/components/register-second-stage-form/register-second-stage-form.component';
 import { StartResetPasswordFormComponent } from '~/auth-mod/components/start-reset-password-form/start-reset-password-form.component';
-import { ActivateAccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
+import { AccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
 import { MfaCodeGuard } from '~/auth-mod/guards/mfa-code/mfa-code.guard';
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
@@ -120,6 +120,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     ),
     TranslateModule,
   ],
-  providers: [ActivateAccountGuard, MfaCodeGuard],
+  providers: [AccountGuard, MfaCodeGuard],
 })
 export class AuthModule {}

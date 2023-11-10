@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRootComponent } from '~/auth-mod/auth-root.component';
 import { activateAccountGuard } from '~/auth-mod/guards/activate-account/activate-account.guard';
-import { mfaCodeGuard } from '~/auth-mod/guards/mfa-code/mfa-code.guard';
+import { activateMfaCodeGuard } from '~/auth-mod/guards/mfa-code/mfa-code.guard';
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
@@ -62,13 +62,13 @@ const routes: Routes = [
         path: 'mfa',
         component: AuthMfaPageComponent,
         title: 'authMfaPage',
-        canActivate: [mfaCodeGuard],
+        canActivate: [activateMfaCodeGuard],
       },
       {
         path: 'mfa/email',
         component: AuthMfaEmailPageComponent,
         title: 'authMfaEmailPage',
-        canActivate: [mfaCodeGuard],
+        canActivate: [activateMfaCodeGuard],
       },
     ],
   },

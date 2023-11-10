@@ -11,7 +11,6 @@ import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { CdTimerModule } from 'angular-cd-timer';
 import { NgxRerenderModule } from 'ngx-rerender';
-import { SharedEffects } from '~/root-mod/modules/shared/store/side-effects/shared-effects';
 import { DeferredButtonComponent } from '~/shared-mod/components/deferred-button/deferred-button.component';
 import { DevastateActionModalComponent } from '~/shared-mod/components/devastate-action-modal/devastate-action-modal.component';
 import { FieldValidatorComponent } from '~/shared-mod/components/field-validator/field-validator.component';
@@ -24,6 +23,7 @@ import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-capt
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { sharedReduxStore } from '~/shared-mod/store/reducer';
+import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
 
 @NgModule({
   declarations: [
