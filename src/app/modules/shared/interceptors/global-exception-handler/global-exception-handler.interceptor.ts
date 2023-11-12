@@ -32,19 +32,17 @@ export class GlobalExceptionHandlerInterceptor implements HttpInterceptor {
     }
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        if (err.status !== 401) {
-          this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
-              content: err.error
-                ? flattedErrorResponse(err.error)
-                : {
-                    i18nPrefix: 'vsph.common.utils.',
-                    placeholder: 'unknowError',
-                  },
-              severity: 'danger',
-            })
-          );
-        }
+        this._store.dispatch(
+          NgrxAction_SHA.__addSnackbar({
+            content: err.error
+              ? flattedErrorResponse(err.error)
+              : {
+                  i18nPrefix: 'vsph.common.utils.',
+                  placeholder: 'unknowError',
+                },
+            severity: 'danger',
+          })
+        );
         return throwError(() => err);
       })
     );

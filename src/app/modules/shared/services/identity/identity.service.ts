@@ -5,7 +5,7 @@
 import { APP_INITIALIZER, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { Observable, catchError, delay, map, of, throwError } from 'rxjs';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -63,6 +63,7 @@ export class IdentityService {
     }
     this._lazyPageLoaderService.setLoading();
     return this._identityHttpClientService.logout(tokenData.refreshToken).pipe(
+      delay(500),
       map(({ message }) => {
         this._lazyPageLoaderService.disableLoading();
         this._store.dispatch(
@@ -74,6 +75,7 @@ export class IdentityService {
             severity: 'success',
           })
         );
+        this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
         this._localStorageService.remove('loggedUser');
         this._router.navigateByUrl('/auth/login').then(r => r);
         return true;
@@ -88,8 +90,8 @@ export class IdentityService {
 
 function autoChangeLangInitFactory(
   autoChangeLangService: IdentityService
-): () => void {
-  return () => autoChangeLangService.refreshSession$().subscribe();
+): () => Observable<boolean> {
+  return () => autoChangeLangService.refreshSession$();
 }
 
 export const autoSessionRefreshInitializer = {
