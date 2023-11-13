@@ -11,6 +11,8 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {
   BehaviorSubject,
   Observable,
@@ -26,8 +28,9 @@ import {
   StorageKeys,
 } from '~/shared-mod/models/identity.model';
 import { IdentityHttpClientService } from '~/shared-mod/services/identity-http-client/identity-http-client.service';
-import { IdentityService } from '~/shared-mod/services/identity/identity.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable()
 export class AccessRefreshInterceptor implements HttpInterceptor {
@@ -40,7 +43,8 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
   constructor(
     private readonly _identityHttpClientService: IdentityHttpClientService,
     private readonly _localStorageService: LocalStorageService,
-    private readonly _identityService: IdentityService
+    private readonly _store: Store<SharedReducer>,
+    private readonly _router: Router
   ) {}
 
   intercept(
@@ -58,10 +62,14 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
     }
     return next.handle(authReq).pipe(
       catchError(err => {
-        if (err instanceof HttpErrorResponse && err.status === 401) {
+        if (
+          err instanceof HttpErrorResponse &&
+          err.status === 401 &&
+          (!err.url?.includes('login') || err.url?.includes('login/token'))
+        ) {
           return this.handle401Error(authReq, next, tokenData);
         }
-        return throwError(() => new Error(err));
+        return throwError(() => err);
       })
     );
   }
@@ -93,7 +101,9 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
         }),
         catchError(err => {
           this._isRefreshing = false;
-          this._identityService.logout$().pipe(take(1)).subscribe();
+          this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
+          this._localStorageService.remove('loggedUser');
+          this._router.navigateByUrl('/auth/login').then(r => r);
           return throwError(() => new Error(err));
         })
       );

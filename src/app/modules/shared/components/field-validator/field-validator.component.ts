@@ -12,7 +12,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 @Component({
   selector: 'vsph-field-validator',
   template: `
-    <div *ngIf="checkError()">
+    <div *ngIf="checkError()" class="leading-[15px]">
       {{
         'vsph.' +
           i18nPrefix +

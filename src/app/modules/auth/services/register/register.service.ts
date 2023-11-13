@@ -104,7 +104,7 @@ export class RegisterService extends AbstractMultistageFormProvider<
   }
 
   private async moveToActivateAccount(): Promise<void> {
-    await this._router.navigate([`/auth/activate-account`]);
+    await this._router.navigateByUrl('/auth/activate-account');
   }
 
   getFormGroupStage(stage: RegisterFormStage): FormGroup {
