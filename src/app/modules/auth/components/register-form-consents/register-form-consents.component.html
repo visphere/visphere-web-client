@@ -32,16 +32,6 @@
         }}
       </ng-container>
     </vsph-auth-checkbox-form-input>
-    <vsph-auth-checkbox-form-input
-      formControlIdentifier="agreeTerms"
-      i18nPrefix="webClient.registerPage">
-      <ng-container labelContent>
-        <span [innerHTML]="(agreeTermsContent$ | async)! | sanitize"></span>
-        <span class="ms-0.5 text-vsph-tint-400">*</span>
-      </ng-container>
-      <ng-container errorsContent>
-        <vsph-field-validator />
-      </ng-container>
-    </vsph-auth-checkbox-form-input>
+    <vsph-agree-terms-content />
   </div>
 </div>

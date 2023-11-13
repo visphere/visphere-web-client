@@ -1,0 +1,18 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<ng-container [formGroup]="formGroup">
+  <vsph-auth-checkbox-form-input
+    formControlIdentifier="agreeTerms"
+    [i18nPrefix]="i18nPrefix">
+    <ng-container labelContent>
+      <span [innerHTML]="(agreeTermsContent$ | async)! | sanitize"></span>
+      <span class="ms-0.5 text-vsph-tint-400">*</span>
+    </ng-container>
+    <ng-container errorsContent>
+      <vsph-field-validator />
+    </ng-container>
+  </vsph-auth-checkbox-form-input>
+</ng-container>

@@ -16,6 +16,7 @@ import { AuthRootComponent } from '~/auth-mod/auth-root.component';
 import { AuthRoutingModule } from '~/auth-mod/auth-routing.module';
 import { ActivateAccountFormComponent } from '~/auth-mod/components/activate-account/activate-account-form.component';
 import { AddMyAccountModalComponent } from '~/auth-mod/components/add-my-account-modal/add-my-account-modal.component';
+import { AgreeTermsContentComponent } from '~/auth-mod/components/agree-terms-content/agree-terms-content.component';
 import { AuthCheckboxFormInputComponent } from '~/auth-mod/components/auth-checkbox-form-input/auth-checkbox-form-input.component';
 import { AuthCommonFormInputComponent } from '~/auth-mod/components/auth-common-form-input/auth-common-form-input.component';
 import { AuthContentWrapperComponent } from '~/auth-mod/components/auth-content-wrapper/auth-content-wrapper.component';
@@ -58,6 +59,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
   declarations: [
     ActivateAccountFormComponent,
     AddMyAccountModalComponent,
+    AgreeTermsContentComponent,
     AuthActivateAccountPageComponent,
     AuthChangePasswordPageComponent,
     AuthCheckboxFormInputComponent,
