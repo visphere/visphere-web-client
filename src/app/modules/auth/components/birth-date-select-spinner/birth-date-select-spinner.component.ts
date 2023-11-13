@@ -3,7 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { TitleCasePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
@@ -22,6 +22,8 @@ export class BirthDateSelectSpinnerComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
+  @Input() i18nPrefix = 'webClient.registerPage';
+
   formGroup!: FormGroup;
 
   formMonths = this.generateAndConvertMonths();
@@ -39,10 +41,7 @@ export class BirthDateSelectSpinnerComponent
   }
 
   ngOnInit(): void {
-    this._populateFormControlervice.setFields(
-      'birthDate',
-      'webClient.registerPage'
-    );
+    this._populateFormControlervice.setFields('birthDate', this.i18nPrefix);
     this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
       formGroup => (this.formGroup = formGroup)
     );
