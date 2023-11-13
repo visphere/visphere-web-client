@@ -4,6 +4,10 @@
  */
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import {
+  BoolFormValidationDataType,
+  ControlType,
+} from '~/shared-mod/types/form-helper.types';
 
 @Injectable({ providedIn: 'root' })
 export class FormHelperService {
@@ -47,5 +51,33 @@ export class FormHelperService {
     } else {
       formControl?.enable();
     }
+  }
+
+  boolFormDetails(
+    formGroup: FormGroup,
+    controls: ControlType[]
+  ): BoolFormValidationDataType {
+    return {
+      someNoSelected: controls.some(c => !formGroup.get(c.name)?.value),
+      allSelected:
+        controls.map(c => !!formGroup.get(c.name)?.value).filter(v => v)
+          .length === controls.length,
+    };
+  }
+
+  toggleAllBoolValues(
+    formGroup: FormGroup,
+    controls: ControlType[],
+    value: boolean
+  ): void {
+    controls.forEach(({ name, isRequired }) => {
+      const control = formGroup.get(name);
+      if (control) {
+        control.patchValue(value);
+        if (isRequired) {
+          control.setErrors(value ? null : { required: true });
+        }
+      }
+    });
   }
 }

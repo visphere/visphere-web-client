@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
+import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
@@ -20,12 +21,20 @@ export class RegisterFormConsentsComponent
 {
   selectAllToggle = false;
   formGroup!: FormGroup;
+  controls = [
+    { name: 'allowNotifs', isRequired: false },
+    { name: 'enabledMfa', isRequired: false },
+    { name: 'agreeTerms', isRequired: true },
+  ];
+  someNoSelected = true;
+  allSelected = false;
 
   formDisabled$: Observable<boolean> =
     this._populateFormGroupService.formDisabled$;
 
   constructor(
-    private readonly _populateFormGroupService: PopulateFormGroupService
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _formHelperService: FormHelperService
   ) {
     super();
   }
@@ -36,6 +45,12 @@ export class RegisterFormConsentsComponent
         this.formGroup = formGroup;
       }
     );
+    this.wrapAsObservable(this.formGroup.valueChanges).subscribe(() => {
+      const { someNoSelected, allSelected } =
+        this._formHelperService.boolFormDetails(this.formGroup, this.controls);
+      this.someNoSelected = someNoSelected;
+      this.allSelected = allSelected;
+    });
   }
 
   ngOnDestroy(): void {
@@ -43,18 +58,20 @@ export class RegisterFormConsentsComponent
   }
 
   handleToggleAllValues(): void {
-    const allowNotifsControl = this.formGroup.get('allowNotifs');
-    const enabledMfaControl = this.formGroup.get('enabledMfa');
-    const agreeTermsControl = this.formGroup.get('agreeTerms');
-    if (!allowNotifsControl || !agreeTermsControl || !enabledMfaControl) {
-      return;
-    }
     this.selectAllToggle = !this.selectAllToggle;
-    allowNotifsControl.patchValue(this.selectAllToggle);
-    enabledMfaControl.patchValue(this.selectAllToggle);
-    agreeTermsControl.patchValue(this.selectAllToggle);
-    agreeTermsControl.setErrors(
-      this.selectAllToggle ? null : { required: true }
+    this._formHelperService.toggleAllBoolValues(
+      this.formGroup,
+      this.controls,
+      this.selectAllToggle
     );
+  }
+
+  handleClickCheckbox(): void {
+    if (this.someNoSelected) {
+      this.selectAllToggle = false;
+    }
+    if (this.allSelected) {
+      this.selectAllToggle = true;
+    }
   }
 }

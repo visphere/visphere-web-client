@@ -18,20 +18,24 @@
     </label>
   </div>
   <div class="ms-4 grid gap-y-2">
-    <vsph-auth-checkbox-form-input formControlIdentifier="allowNotifs">
+    <vsph-auth-checkbox-form-input
+      formControlIdentifier="allowNotifs"
+      (emitOnClick)="handleClickCheckbox()">
       <ng-container labelContent>
         {{
           'vsph.webClient.registerPage.formFields.allowNotifs.value' | translate
         }}
       </ng-container>
     </vsph-auth-checkbox-form-input>
-    <vsph-auth-checkbox-form-input formControlIdentifier="enabledMfa">
+    <vsph-auth-checkbox-form-input
+      formControlIdentifier="enabledMfa"
+      (emitOnClick)="handleClickCheckbox()">
       <ng-container labelContent>
         {{
           'vsph.webClient.registerPage.formFields.enabledMfa.value' | translate
         }}
       </ng-container>
     </vsph-auth-checkbox-form-input>
-    <vsph-agree-terms-content />
+    <vsph-agree-terms-content (emitClickInCheckbox)="handleClickCheckbox()" />
   </div>
 </div>

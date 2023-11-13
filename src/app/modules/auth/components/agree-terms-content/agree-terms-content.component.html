@@ -6,7 +6,8 @@
 <ng-container [formGroup]="formGroup">
   <vsph-auth-checkbox-form-input
     formControlIdentifier="agreeTerms"
-    [i18nPrefix]="i18nPrefix">
+    [i18nPrefix]="i18nPrefix"
+    (emitOnClick)="emitClickInCheckbox.emit()">
     <ng-container labelContent>
       <span [innerHTML]="(agreeTermsContent$ | async)! | sanitize"></span>
       <span class="ms-0.5 text-vsph-tint-400">*</span>

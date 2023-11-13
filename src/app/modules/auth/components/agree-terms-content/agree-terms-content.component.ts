@@ -2,7 +2,14 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,6 +28,7 @@ export class AgreeTermsContentComponent
   implements OnInit, OnDestroy
 {
   @Input() i18nPrefix = 'webClient.registerPage';
+  @Output() emitClickInCheckbox = new EventEmitter<void>();
 
   formGroup!: FormGroup;
   agreeTermsContent$?: Observable<SafeHtml>;

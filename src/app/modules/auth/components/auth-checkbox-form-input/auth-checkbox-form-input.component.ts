@@ -2,7 +2,14 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { combineLatest } from 'rxjs';
@@ -23,6 +30,8 @@ export class AuthCheckboxFormInputComponent
   @Input() i18nPrefix!: string;
   @Input() formControlIdentifier!: string;
   @Input() additionalInfo = false;
+
+  @Output() emitOnClick = new EventEmitter<void>();
 
   formGroup!: FormGroup;
   tooltipProps: NgxTippyProps = {
@@ -68,5 +77,7 @@ export class AuthCheckboxFormInputComponent
     const control = this.formGroup.get(this.formControlIdentifier);
     control?.markAsDirty();
     control?.markAsTouched();
+    control?.patchValue(!control.value);
+    this.emitOnClick.emit();
   }
 }

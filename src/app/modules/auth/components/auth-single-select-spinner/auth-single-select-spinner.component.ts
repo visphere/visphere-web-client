@@ -89,7 +89,9 @@ export class AuthSingleSelectSpinnerComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['listElements']) return;
+    if (!changes['listElements']) {
+      return;
+    }
     this.filteredList = changes['listElements'].currentValue;
     this.setInitialValue();
   }
@@ -100,9 +102,10 @@ export class AuthSingleSelectSpinnerComponent
 
   @HostListener('document:click', ['$event'])
   onClickOnDocument(event: MouseEvent): void {
-    if (this.selectViewHolder.nativeElement.contains(event.target)) return;
+    if (this.selectViewHolder.nativeElement.contains(event.target)) {
+      return;
+    }
     this.itemsListIsOpen = false;
-
     if (
       !this.listElements.find(
         e => e.value === this.inputElement.nativeElement.value
@@ -110,7 +113,9 @@ export class AuthSingleSelectSpinnerComponent
     ) {
       this.inputElement.nativeElement.value = '';
       this.handleFilterElements('');
-      if (this.isTouched) this.persistElement.emit(null);
+      if (this.isTouched) {
+        this.persistElement.emit(null);
+      }
     }
   }
 
@@ -135,7 +140,9 @@ export class AuthSingleSelectSpinnerComponent
 
   private setInitialValue(): void {
     const initValue = this.filteredList.find(e => e.id === this.initValueId);
-    if (!initValue || !this.inputElement) return;
+    if (!initValue || !this.inputElement) {
+      return;
+    }
     this.inputElement.nativeElement.value = initValue.value;
   }
 
