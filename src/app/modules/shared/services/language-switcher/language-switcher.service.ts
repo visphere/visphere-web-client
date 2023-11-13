@@ -39,8 +39,14 @@ export class LanguageSwitcherService {
 
   async loadLang(): Promise<void> {
     this._translateService.addLangs(this.getFlattenTranslations());
+
     const searchParams = new URLSearchParams(window.location.search);
     const proxyLang = searchParams.get('lang');
+    searchParams.delete('lang');
+
+    const url = new URL(window.location.href);
+    const newUrl = `${url.pathname}?${searchParams.toString()}`;
+
     const savedLang: { lang: string } | null =
       this._localStorageService.get('selectedLang');
     let loadedLang;
@@ -53,7 +59,7 @@ export class LanguageSwitcherService {
       loadedLang = savedLang ? savedLang.lang : navigator.language;
     }
     this.updateProps(this.getTranslation(loadedLang));
-    await this._router.navigate([window.location.pathname]);
+    await this._router.navigateByUrl(newUrl);
   }
 
   private changeMetaProperties(loadedLang: string): void {
