@@ -24,6 +24,7 @@ import { AuthFormHeaderComponent } from '~/auth-mod/components/auth-form-header/
 import { AuthSingleSelectSpinnerComponent } from '~/auth-mod/components/auth-single-select-spinner/auth-single-select-spinner.component';
 import { BirthDateSelectSpinnerComponent } from '~/auth-mod/components/birth-date-select-spinner/birth-date-select-spinner.component';
 import { ChangePasswordFormComponent } from '~/auth-mod/components/change-password-form/change-password-form.component';
+import { FillDataFormComponent } from '~/auth-mod/components/fill-data-form/fill-data-form.component';
 import { FinishResetPasswordFormComponent } from '~/auth-mod/components/finish-reset-password-form/finish-reset-password-form.component';
 import { FirstMfaSetupComponent } from '~/auth-mod/components/first-mfa-setup/first-mfa-setup.component';
 import { FooterControlListComponent } from '~/auth-mod/components/footer-control-list/footer-control-list.component';
@@ -45,6 +46,7 @@ import { AccountGuard } from '~/auth-mod/guards/activate-account/activate-accoun
 import { MfaCodeGuard } from '~/auth-mod/guards/mfa-code/mfa-code.guard';
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
+import { AuthFillDataPageComponent } from '~/auth-mod/pages/auth-fill-data-page/auth-fill-data-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
 import { AuthMfaEmailPageComponent } from '~/auth-mod/pages/auth-mfa-email-page/auth-mfa-email-page.component';
 import { AuthMfaPageComponent } from '~/auth-mod/pages/auth-mfa-page/auth-mfa-page.component';
@@ -65,6 +67,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
     AuthCheckboxFormInputComponent,
     AuthCommonFormInputComponent,
     AuthContentWrapperComponent,
+    AuthFillDataPageComponent,
     AuthFormHeaderComponent,
     AuthLoginPageComponent,
     AuthMfaEmailPageComponent,
@@ -76,6 +79,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
     AuthSingleSelectSpinnerComponent,
     BirthDateSelectSpinnerComponent,
     ChangePasswordFormComponent,
+    FillDataFormComponent,
     FinishResetPasswordFormComponent,
     FirstMfaSetupComponent,
     FooterControlListComponent,

@@ -9,13 +9,14 @@ import { activateAccountGuard } from '~/auth-mod/guards/activate-account/activat
 import { activateMfaCodeGuard } from '~/auth-mod/guards/mfa-code/mfa-code.guard';
 import { AuthActivateAccountPageComponent } from '~/auth-mod/pages/auth-activate-account-page/auth-activate-account-page.component';
 import { AuthChangePasswordPageComponent } from '~/auth-mod/pages/auth-change-password-page/auth-change-password-page.component';
+import { AuthFillDataPageComponent } from '~/auth-mod/pages/auth-fill-data-page/auth-fill-data-page.component';
 import { AuthLoginPageComponent } from '~/auth-mod/pages/auth-login-page/auth-login-page.component';
 import { AuthMfaEmailPageComponent } from '~/auth-mod/pages/auth-mfa-email-page/auth-mfa-email-page.component';
 import { AuthMfaPageComponent } from '~/auth-mod/pages/auth-mfa-page/auth-mfa-page.component';
 import { AuthMyAccountsPageComponent } from '~/auth-mod/pages/auth-my-accounts-page/auth-my-accounts-page.component';
 import { AuthRegisterPageComponent } from '~/auth-mod/pages/auth-register-page/auth-register-page.component';
 import { AuthResetPasswordPageComponent } from '~/auth-mod/pages/auth-reset-password-page/auth-reset-password-page.component';
-import { canActivateNonLoggedRoute } from '../shared/guard/non-logged-route/non-logged-route.guard';
+import { canActivateNonLoggedRoute } from '~/shared-mod/guard/non-logged-route/non-logged-route.guard';
 
 const routes: Routes = [
   {
@@ -74,6 +75,11 @@ const routes: Routes = [
             component: AuthMfaEmailPageComponent,
             title: 'authMfaEmailPage',
             canActivate: [activateMfaCodeGuard],
+          },
+          {
+            path: 'fill-data',
+            component: AuthFillDataPageComponent,
+            title: 'authFillDataPage',
           },
         ],
       },

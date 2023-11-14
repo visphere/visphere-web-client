@@ -1,0 +1,82 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="grid gap-y-3">
+  <form
+    [formGroup]="fillDataForm"
+    (ngSubmit)="handleSubmitFillDataForm()"
+    class="grid gap-y-3">
+    <vsph-auth-common-form-input
+      [maxLength]="30"
+      [requiredStar]="true"
+      formControlIdentifier="username"
+      i18nPrefix="clientCommon.fillDataPage">
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+      <vsph-field-validator type="pattern" />
+      <vsph-field-validator type="exist" />
+    </vsph-auth-common-form-input>
+
+    <vsph-auth-common-form-input
+      [maxLength]="80"
+      [requiredStar]="true"
+      formControlIdentifier="firstName"
+      i18nPrefix="clientCommon.fillDataPage">
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+    </vsph-auth-common-form-input>
+
+    <vsph-auth-common-form-input
+      [maxLength]="80"
+      [requiredStar]="true"
+      formControlIdentifier="lastName"
+      i18nPrefix="clientCommon.fillDataPage">
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+    </vsph-auth-common-form-input>
+
+    <vsph-birth-date-select-spinner i18nPrefix="clientCommon.fillDataPage" />
+
+    <div class="grid gap-y-3 mb-4">
+      <div class="grid gap-y-1">
+        <label class="flex gap-x-2 items-start">
+          <input
+            [(ngModel)]="selectAllToggle"
+            (input)="handleToggleAllValues()"
+            [ngModelOptions]="{ standalone: true }"
+            [disabled]="!!(formDisabled$ | async)"
+            type="checkbox"
+            class="vsph-auth__checkbox mt-0.5" />
+          <div class="leading-5 text-vsph-tint-400 dark:text-vsph-tint-300">
+            {{ 'vsph.clientCommon.fillDataPage.selectDiselectAll' | translate }}
+          </div>
+        </label>
+      </div>
+      <div class="ms-4 grid gap-y-2">
+        <vsph-auth-checkbox-form-input
+          formControlIdentifier="allowNotifs"
+          (emitOnClick)="handleClickCheckbox()">
+          <ng-container labelContent>
+            {{
+              'vsph.clientCommon.fillDataPage.formFields.allowNotifs.value'
+                | translate
+            }}
+          </ng-container>
+        </vsph-auth-checkbox-form-input>
+        <vsph-agree-terms-content
+          i18nPrefix="clientCommon.fillDataPage"
+          (emitClickInCheckbox)="handleClickCheckbox()" />
+      </div>
+    </div>
+
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="
+        checkIfFormIsInvalid || !fillDataForm.get('birthDate')?.dirty
+      ">
+      {{ 'vsph.clientCommon.fillDataPage.proceedLogin' | translate }}
+    </vsph-lazy-button-spinner>
+  </form>
+</div>
