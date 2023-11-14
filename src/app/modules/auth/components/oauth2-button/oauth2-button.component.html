@@ -3,14 +3,27 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<img
-  ngSrc="{{ path }}/static/oauth2/{{ oauth2Type }}-logo.svg"
-  width="22"
-  height="22"
-  alt="" />
-<div class="flex-grow ms-2">
-  {{
-    'vsph.clientCommon.loginPage.oauth2Login'
-      | translate: { oauth2Provider: oauth2Type | titlecase }
-  }}
-</div>
+<button
+  [ngClass]="styles[oauth2Type].btn"
+  [disabled]="isLoading$ | async"
+  (click)="handlePerformRedirectToProvider()"
+  class="vsph-button vsph-auth__oauth-button">
+  <img
+    ngSrc="{{ path }}/static/oauth2/{{ oauth2Type }}-logo.svg"
+    width="22"
+    height="22"
+    alt=""
+    class="absolute left-[15px]" />
+  <div class="flex-grow ms-2 text-center flex justify-center">
+    <span *ngIf="(activeSupplier$ | async) !== oauth2Type">
+      {{
+        'vsph.clientCommon.loginPage.oauth2Login'
+          | translate: { oauth2Provider: oauth2Type | titlecase }
+      }}
+    </span>
+    <div
+      *ngIf="(isLoading$ | async) && (activeSupplier$ | async) === oauth2Type"
+      class="vsph-button-spinner__carousel"
+      [ngClass]="styles[oauth2Type].spn"></div>
+  </div>
+</button>
