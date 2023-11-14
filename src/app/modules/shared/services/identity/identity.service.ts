@@ -25,6 +25,7 @@ export class IdentityService {
 
   refreshSession$(): Observable<boolean> {
     this._lazyPageLoaderService.setLoading();
+    const primarUrl = this._router.url;
     const tokenData = this._localStorageService.get<StorageKeys>('loggedUser');
     if (!tokenData) {
       return of(false);
@@ -47,6 +48,7 @@ export class IdentityService {
               },
             })
           );
+          this._router.navigateByUrl(primarUrl).then(r => r);
           return true;
         }),
         catchError(err => {

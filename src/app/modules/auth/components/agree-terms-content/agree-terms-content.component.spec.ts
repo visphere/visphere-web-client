@@ -21,7 +21,7 @@ describe('AgreeTermsContentComponent', () => {
 
     const populateFormGroup = TestBed.inject(PopulateFormGroupService);
     const formGroup = new FormGroup({
-      testField: new FormControl(false),
+      agreeTerms: new FormControl(false),
     });
     populateFormGroup.setField(formGroup);
 

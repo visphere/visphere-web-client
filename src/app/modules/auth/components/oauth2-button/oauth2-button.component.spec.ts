@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthModule } from '~/auth-mod/auth.module';
+import { Oauth2LoginService } from '~/auth-mod/services/oauth2-login/oauth2-login.service';
 import { AppModule } from '~/root-mod/app.module';
 import { Oauth2ButtonComponent } from './oauth2-button.component';
 
@@ -14,9 +15,14 @@ describe('Oauth2ButtonComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
+      providers: [Oauth2LoginService],
     }).compileComponents();
+
     fixture = TestBed.createComponent(Oauth2ButtonComponent);
     component = fixture.componentInstance;
+
+    component.oauth2Type = 'facebook';
+
     fixture.detectChanges();
   });
 
