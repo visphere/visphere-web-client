@@ -90,7 +90,7 @@ export class IdentityService {
   }
 }
 
-function autoChangeLangInitFactory(
+function autoSessionRefreshInitFactory(
   autoChangeLangService: IdentityService
 ): () => Observable<boolean> {
   return () => autoChangeLangService.refreshSession$();
@@ -98,7 +98,7 @@ function autoChangeLangInitFactory(
 
 export const autoSessionRefreshInitializer = {
   provide: APP_INITIALIZER,
-  useFactory: autoChangeLangInitFactory,
+  useFactory: autoSessionRefreshInitFactory,
   deps: [IdentityService],
   multi: true,
 };
