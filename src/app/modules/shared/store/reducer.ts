@@ -32,6 +32,10 @@ const _reducer = createReducer(
   on(NgrxAction.__removeUserDetails, state => ({
     ...state,
     loggedUser: null,
+  })),
+  on(NgrxAction.__unsetInitialLoading, state => ({
+    ...state,
+    initialLoading: false,
   }))
 );
 

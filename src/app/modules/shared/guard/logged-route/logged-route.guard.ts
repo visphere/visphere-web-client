@@ -16,11 +16,11 @@ class LoggedRouteGuard {
     router: Router
   ): Observable<boolean> {
     return store.select(NgrxSelector_SHA.selectUserIsLogged).pipe(
-      map(isLogged => {
-        if (isLogged) {
+      map(({ isUserLogged, isInitialLoading }) => {
+        if (isUserLogged || isInitialLoading) {
           return true;
         }
-        router.navigate(['/auth/login']).then(r => r);
+        router.navigateByUrl('/auth/login').then(r => r);
         return false;
       })
     );

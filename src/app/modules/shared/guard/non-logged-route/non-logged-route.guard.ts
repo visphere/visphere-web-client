@@ -16,11 +16,11 @@ export class NonLoggedRouteGuard {
     router: Router
   ): Observable<boolean> {
     return store.select(NgrxSelector_SHA.selectUserIsLogged).pipe(
-      map(isLogged => {
-        if (!isLogged) {
+      map(({ isUserLogged, isInitialLoading }) => {
+        if (!isUserLogged || isInitialLoading) {
           return true;
         }
-        router.navigate([router.url]).then(r => r);
+        router.navigateByUrl(router.url).then(r => r);
         return false;
       })
     );

@@ -26,6 +26,7 @@ const routes: Routes = [
       {
         path: '',
         canActivate: [canActivateNonLoggedRoute],
+        runGuardsAndResolvers: 'always',
         children: [
           { path: '', redirectTo: 'login', pathMatch: 'full' },
           {

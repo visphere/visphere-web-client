@@ -17,5 +17,8 @@ export const selectSnackbarsStack = createSelector(
 
 export const selectUserIsLogged = createSelector(
   selectSharedState,
-  ({ loggedUser }) => !!loggedUser
+  ({ loggedUser, initialLoading }) => ({
+    isUserLogged: !!loggedUser,
+    isInitialLoading: initialLoading,
+  })
 );

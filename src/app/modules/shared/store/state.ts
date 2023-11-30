@@ -8,9 +8,11 @@ import { LoggedUser } from '../models/logged-user.model';
 export interface SharedStoreState {
   snackbarStack: Snackbar[];
   loggedUser: LoggedUser | null;
+  initialLoading: boolean;
 }
 
 export const sharedStoreState: SharedStoreState = {
   snackbarStack: [],
   loggedUser: null,
+  initialLoading: true,
 };

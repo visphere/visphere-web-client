@@ -2,10 +2,9 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { APP_INITIALIZER, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, delay, map, of, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -19,16 +18,14 @@ export class IdentityService {
     private readonly _identityHttpClientService: IdentityHttpClientService,
     private readonly _store: Store<SharedReducer>,
     private readonly _lazyPageLoaderService: LazyPageLoaderService,
-    private readonly _localStorageService: LocalStorageService,
-    private readonly _router: Router
+    private readonly _localStorageService: LocalStorageService
   ) {}
 
-  refreshSession$(): Observable<boolean> {
-    this._lazyPageLoaderService.setLoading();
-    const primarUrl = this._router.url;
+  refreshSession$(redirectUrl: string): Observable<string> {
     const tokenData = this._localStorageService.get<StorageKeys>('loggedUser');
     if (!tokenData) {
-      return of(false);
+      this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
+      return of(redirectUrl.includes('auth') ? redirectUrl : 'auth/login');
     }
     return this._identityHttpClientService
       .loginViaAccessToken(tokenData.refreshToken)
@@ -48,12 +45,13 @@ export class IdentityService {
               },
             })
           );
-          this._router.navigateByUrl(primarUrl).then(r => r);
-          return true;
+          this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
+          return redirectUrl;
         }),
-        catchError(err => {
+        catchError(() => {
+          this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
           this._lazyPageLoaderService.disableLoading();
-          return throwError(() => err);
+          return throwError(() => 'auth/login');
         })
       );
   }
@@ -65,7 +63,6 @@ export class IdentityService {
     }
     this._lazyPageLoaderService.setLoading();
     return this._identityHttpClientService.logout(tokenData.refreshToken).pipe(
-      delay(500),
       map(({ message }) => {
         this._lazyPageLoaderService.disableLoading();
         this._store.dispatch(
@@ -79,7 +76,6 @@ export class IdentityService {
         );
         this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
         this._localStorageService.remove('loggedUser');
-        this._router.navigateByUrl('/auth/login').then(r => r);
         return true;
       }),
       catchError(err => {
@@ -89,16 +85,3 @@ export class IdentityService {
     );
   }
 }
-
-function autoSessionRefreshInitFactory(
-  autoChangeLangService: IdentityService
-): () => Observable<boolean> {
-  return () => autoChangeLangService.refreshSession$();
-}
-
-export const autoSessionRefreshInitializer = {
-  provide: APP_INITIALIZER,
-  useFactory: autoSessionRefreshInitFactory,
-  deps: [IdentityService],
-  multi: true,
-};

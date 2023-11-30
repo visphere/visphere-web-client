@@ -23,7 +23,6 @@ import { passwordStrengthMeterInitializer } from '~/shared-mod/services/password
 import { themeSwitcherInitializer } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import { SharedModule } from '~/shared-mod/shared.module';
 import buildSpecifics from '../environments/build-specifics';
-import { autoSessionRefreshInitializer } from './modules/shared/services/identity/identity.service';
 
 @NgModule({
   declarations: [AppRootComponent],
@@ -44,7 +43,6 @@ import { autoSessionRefreshInitializer } from './modules/shared/services/identit
     languageSwitcherInitializer,
     themeSwitcherInitializer,
     passwordStrengthMeterInitializer,
-    autoSessionRefreshInitializer,
     lazyPageLoaderInitializer,
     appendLangInterceptorInitializer,
     globalExceptionHandlerInterceptorInitializer,

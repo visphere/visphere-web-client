@@ -16,6 +16,7 @@ const routes: Routes = [
       {
         path: '',
         canActivate: [canActivateLoggedRoute],
+        runGuardsAndResolvers: 'always',
         children: [
           {
             path: '',
