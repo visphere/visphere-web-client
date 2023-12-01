@@ -8,8 +8,10 @@
 <a routerLink="/auth/reset-password">reset password</a><br />
 <a routerLink="/auth/activate-account">activate-account</a><br />
 <a routerLink="/auth/my-accounts">my-accounts</a><br />
-<a routerLink="/settings">settings</a><br />
+<button (click)="handleGotoSettings()">settings</button><br />
 <br />
 <button (click)="handleShowNotif()">show notif</button><br />
 <button (click)="handleHideNotif()">hide notif</button><br />
 <button (click)="handleLogout()">logout</button><br />
+<button (click)="handleChangeThemeDark()">dark</button><br />
+<button (click)="handleChangeThemeLight()">light</button><br />
