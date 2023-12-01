@@ -19,6 +19,7 @@ import { LazyPageLoaderComponent } from '~/shared-mod/components/lazy-page-loade
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
+import { SocialsHorizontalComponent } from '~/shared-mod/components/socials-horizontal/socials-horizontal.component';
 import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-captcha-modal/verify-captcha-modal.component';
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
@@ -36,6 +37,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     NotFoundPageComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
+    SocialsHorizontalComponent,
     SnackbarsContainerComponent,
     VerifyCaptchaModalComponent,
   ],
@@ -62,6 +64,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     ModalWrapperComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
+    SocialsHorizontalComponent,
     SnackbarsContainerComponent,
     VerifyCaptchaModalComponent,
   ],
