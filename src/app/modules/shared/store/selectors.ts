@@ -22,3 +22,8 @@ export const selectUserIsLogged = createSelector(
     isInitialLoading: initialLoading,
   })
 );
+
+export const selectSettingsReturnUrl = createSelector(
+  selectSharedState,
+  ({ settingsReturnUrl }) => settingsReturnUrl
+);

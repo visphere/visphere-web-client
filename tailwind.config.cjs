@@ -18,6 +18,7 @@ module.exports = {
         'myAccounts',
         'buttonSpinner',
         'tooltip',
+        'settings',
       ],
     }),
   ],

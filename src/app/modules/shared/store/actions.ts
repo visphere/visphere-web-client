@@ -11,6 +11,7 @@ const REMOVE_SNACKBAR = '[SHARED] REMOVE SNACKBAR' as const;
 const SET_LOGGED_USER_DETAILS = '[SHARED] SET LOGGED USER DETAILS' as const;
 const REMOVE_USER_DETAILS = '[SHARED] REMOVE USER DETAILS' as const;
 const UNSET_INITIAL_LOADING = '[SHARED] UNSET INITIAL LOADING' as const;
+const SET_SETTINGS_RETURN_URL = '[SHARED] SET SETTINGS RETURN URL' as const;
 
 export const __addSnackbar = createAction(
   ADD_SNACKBAR,
@@ -30,3 +31,8 @@ export const __setLoggedUserDetails = createAction(
 export const __removeUserDetails = createAction(REMOVE_USER_DETAILS);
 
 export const __unsetInitialLoading = createAction(UNSET_INITIAL_LOADING);
+
+export const __setSettingsReturnUrl = createAction(
+  SET_SETTINGS_RETURN_URL,
+  props<{ url: string }>()
+);

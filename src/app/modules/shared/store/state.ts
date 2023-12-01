@@ -9,10 +9,12 @@ export interface SharedStoreState {
   snackbarStack: Snackbar[];
   loggedUser: LoggedUser | null;
   initialLoading: boolean;
+  settingsReturnUrl: string;
 }
 
 export const sharedStoreState: SharedStoreState = {
   snackbarStack: [],
   loggedUser: null,
   initialLoading: true,
+  settingsReturnUrl: '',
 };

@@ -3,4 +3,13 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<p>settings-entry-point-page works!</p>
+<div class="fixed flex w-full">
+  <div class="vsph-settings__container vsph-settings__navbar-container">
+    <vsph-navigation-bar />
+  </div>
+  <div class="vsph-settings__container vsph-settings__content-container">
+    <div class="vsph-settings__content-wrapper">
+      <router-outlet />
+    </div>
+  </div>
+</div>

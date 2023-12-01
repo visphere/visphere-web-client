@@ -1,0 +1,22 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div>
+  <h1 class="text-2xl flex items-center">
+    {{
+      'vsph.clientCommon.settingsPage.category.' + category + '.name'
+        | translate
+    }}
+    <ng-icon name="arrowRightIcon" class="mx-2 text-xl" />
+    {{
+      'vsph.clientCommon.settingsPage.category.' +
+        category +
+        '.subpage.' +
+        subpage +
+        '.header' | translate
+    }}
+  </h1>
+  <ng-content />
+</div>

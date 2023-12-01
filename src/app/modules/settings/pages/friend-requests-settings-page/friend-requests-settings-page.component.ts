@@ -5,8 +5,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'vsph-settings-root',
-  template: ` <router-outlet></router-outlet> `,
-  host: { class: 'flex flex-col flex-grow min-h-screen' },
+  selector: 'vsph-friend-requests-settings-page',
+  templateUrl: './friend-requests-settings-page.component.html',
 })
-export class SettingsRootComponent {}
+export class FriendRequestsSettingsPageComponent {}

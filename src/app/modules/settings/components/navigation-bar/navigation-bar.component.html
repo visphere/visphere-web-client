@@ -1,0 +1,121 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="mb-6 pt-12">
+  <a
+    [routerLink]="settingsReturnUrl$ | async"
+    class="vsph-settings__nav-button">
+    {{ 'vsph.clientCommon.settingsPage.closeButton' | translate }}
+    <ng-icon name="closeIcon" />
+  </a>
+</div>
+<div class="mb-3">
+  <p class="vsph-settings__nav-paragraph">
+    {{
+      'vsph.clientCommon.settingsPage.category.userSettings.name' | translate
+    }}
+  </p>
+  <ul>
+    <li class="w-full">
+      <a
+        routerLinkActive="vsph-settings__nav-button--active"
+        routerLink="my-account"
+        class="vsph-settings__nav-button">
+        {{
+          'vsph.clientCommon.settingsPage.category.userSettings.subpage.myAccount.header'
+            | translate
+        }}
+        <ng-icon name="myAccountIcon" />
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        routerLinkActive="vsph-settings__nav-button--active"
+        routerLink="profile"
+        class="vsph-settings__nav-button">
+        {{
+          'vsph.clientCommon.settingsPage.category.userSettings.subpage.profileSettings.header'
+            | translate
+        }}
+        <ng-icon name="profileIcon" />
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        routerLinkActive="vsph-settings__nav-button--active"
+        routerLink="friend-requests"
+        class="vsph-settings__nav-button">
+        {{
+          'vsph.clientCommon.settingsPage.category.userSettings.subpage.friendRequests.header'
+            | translate
+        }}
+        <ng-icon name="friendRequestsIcon" />
+      </a>
+    </li>
+  </ul>
+</div>
+<hr class="vsph-settings__separator" />
+<div class="mb-3">
+  <p class="vsph-settings__nav-paragraph">
+    {{ 'vsph.clientCommon.settingsPage.category.appSettings.name' | translate }}
+  </p>
+  <ul>
+    <li class="w-full">
+      <a
+        routerLinkActive="vsph-settings__nav-button--active"
+        routerLink="appearance"
+        class="vsph-settings__nav-button">
+        {{
+          'vsph.clientCommon.settingsPage.category.appSettings.subpage.appearance.header'
+            | translate
+        }}
+        <ng-icon name="appearanceIcon" />
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        routerLinkActive="vsph-settings__nav-button--active"
+        routerLink="notifications"
+        class="vsph-settings__nav-button">
+        {{
+          'vsph.clientCommon.settingsPage.category.appSettings.subpage.notifications.header'
+            | translate
+        }}
+        <ng-icon name="notificationsIcon" />
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        routerLinkActive="vsph-settings__nav-button--active"
+        routerLink="language"
+        class="vsph-settings__nav-button">
+        {{
+          'vsph.clientCommon.settingsPage.category.appSettings.subpage.language.header'
+            | translate
+        }}
+        <ng-icon name="languageIcon" />
+      </a>
+    </li>
+  </ul>
+</div>
+<hr class="vsph-settings__separator" />
+<div class="mb-3">
+  <button
+    (click)="handleOpenLogoutModal()"
+    class="vsph-settings__nav-button vsph-settings__nav-button--logout">
+    {{ 'vsph.clientCommon.settingsPage.logoutButton' | translate }}
+    <ng-icon name="logoutIcon" />
+  </button>
+  <a
+    href="{{ landingPagePath }}/download"
+    target="_blank"
+    class="vsph-settings__nav-button">
+    {{ 'vsph.clientCommon.settingsPage.downloadButton' | translate }}
+    <ng-icon name="downloadIcon" />
+  </a>
+</div>
+<hr class="vsph-settings__separator" />
+<vsph-socials-horizontal size="sm" class="gap-x-1" />
+<div class="pb-12"></div>

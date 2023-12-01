@@ -36,6 +36,10 @@ const _reducer = createReducer(
   on(NgrxAction.__unsetInitialLoading, state => ({
     ...state,
     initialLoading: false,
+  })),
+  on(NgrxAction.__setSettingsReturnUrl, (state, action) => ({
+    ...state,
+    settingsReturnUrl: action.url,
   }))
 );
 
