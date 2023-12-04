@@ -10,6 +10,7 @@ import * as BtsIcon from '@ng-icons/bootstrap-icons';
 import { NgIconsModule } from '@ng-icons/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { NavigationBarComponent } from '~/settings-mod/components/navigation-bar/navigation-bar.component';
+import { RadioButtonsGroupComponent } from '~/settings-mod/components/radio-buttons-group/radio-buttons-group.component';
 import { SettingPanelWrapperComponent } from '~/settings-mod/components/setting-panel-wrapper/setting-panel-wrapper.component';
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
 import { BlankInitSettingsPageComponent } from '~/settings-mod/pages/blank-init-settings-page/blank-init-settings-page.component';
@@ -20,6 +21,7 @@ import { NotificationsSettingsPageComponent } from '~/settings-mod/pages/notific
 import { ProfileSettingsPageComponent } from '~/settings-mod/pages/profile-settings-page/profile-settings-page.component';
 import { SettingsEntryPointPageComponent } from '~/settings-mod/pages/settings-entry-point-page/settings-entry-point-page.component';
 import { SharedModule } from '~/shared-mod/shared.module';
+import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { SettingsRootComponent } from './settings-root.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 
@@ -33,9 +35,11 @@ import { SettingsRoutingModule } from './settings-routing.module';
     NavigationBarComponent,
     NotificationsSettingsPageComponent,
     ProfileSettingsPageComponent,
+    RadioButtonsGroupComponent,
     SettingPanelWrapperComponent,
     SettingsEntryPointPageComponent,
     SettingsRootComponent,
+    ToggleButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +55,8 @@ import { SettingsRoutingModule } from './settings-routing.module';
       myAccountIcon: BtsIcon.bootstrapPerson,
       notificationsIcon: BtsIcon.bootstrapBell,
       profileIcon: BtsIcon.bootstrapPersonGear,
+      togglerNoIcon: BtsIcon.bootstrapX,
+      togglerYesIcon: BtsIcon.bootstrapCheck,
     }),
     RouterModule,
     SettingsRoutingModule,

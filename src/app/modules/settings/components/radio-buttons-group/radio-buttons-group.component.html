@@ -1,0 +1,51 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<p class="vsph-settings__radio-label">
+  {{
+    'vsph.clientCommon.settingsPage.category.' + i18nLabel + '.radioForm.label'
+      | translate
+  }}
+</p>
+<ul class="flex flex-col gap-y-2 mb-4">
+  <li *ngFor="let element of elements; let i = index">
+    <label>
+      <input
+        type="radio"
+        [value]="element.leftLabel"
+        [name]="i18nLabel"
+        class="sr-only peer"
+        hidden />
+      <button
+        class="vsph-settings__radio-button"
+        [class.vsph-settings__radio-button--active]="element.isSelected"
+        [disabled]="isDisabled"
+        (click)="handleClickElement(i)">
+        <div class="flex items-center">
+          <div
+            class="vsph-settings__radio-dot"
+            [class.vsph-settings__radio-dot--active]="element.isSelected"></div>
+          <p>{{ element.leftLabel | translate }}</p>
+        </div>
+        <ng-container *ngIf="element.rightContent">
+          <ng-container [ngSwitch]="element.rightContent.type">
+            <div *ngSwitchCase="'image'">
+              <img
+                src="{{ path }}/static/icon/{{
+                  element.rightContent.referenceValue
+                }}"
+                width="23"
+                height="23"
+                alt="" />
+            </div>
+            <div *ngSwitchCase="'icon'" class="flex items-center">
+              <ng-icon [name]="element.rightContent.referenceValue" />
+            </div>
+          </ng-container>
+        </ng-container>
+      </button>
+    </label>
+  </li>
+</ul>
