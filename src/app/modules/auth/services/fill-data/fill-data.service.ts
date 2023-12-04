@@ -21,11 +21,14 @@ import {
 } from '~/auth-mod/models/oauth2-data.model';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
+import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { oAuth2Suppliers } from '~/shared-mod/types/oauth2-supplier.type';
+import { ThemeType } from '~/shared-mod/types/theme-mode.type';
 import { Oauth2HttpClientService } from '../oauth2-http-client/oauth2-http-client.service';
 
 @Injectable()
@@ -38,7 +41,9 @@ export class FillDataService extends AbstractSimpleFormProvider<LoginResDtoModel
     private readonly _router: Router,
     private readonly _lazyPageLoaderService: LazyPageLoaderService,
     private readonly _localStorageService: LocalStorageService,
-    private readonly _store: Store<SharedReducer>
+    private readonly _store: Store<SharedReducer>,
+    private readonly _themeSwitcherService: ThemeSwitcherService,
+    private readonly _languageSwitcherService: LanguageSwitcherService
   ) {
     super();
   }
@@ -94,16 +99,31 @@ export class FillDataService extends AbstractSimpleFormProvider<LoginResDtoModel
       )
       .pipe(
         tap(async res => {
-          const { accessToken, refreshToken, fullName, profileUrl } = res;
+          const {
+            accessToken,
+            refreshToken,
+            fullName,
+            profileUrl,
+            lang,
+            theme,
+          } = res;
           this._localStorageService.save('loggedUser', {
             accessToken,
             refreshToken,
           });
+          if (lang) {
+            this._languageSwitcherService.changeLangByName(lang);
+          }
+          if (theme) {
+            this._themeSwitcherService.changeTheme(theme as ThemeType);
+          }
           this._store.dispatch(
             NgrxAction_SHA.__setLoggedUserDetails({
               details: {
                 fullName,
                 profileUrl,
+                lang,
+                theme,
               },
             })
           );

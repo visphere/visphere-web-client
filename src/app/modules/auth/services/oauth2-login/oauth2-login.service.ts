@@ -14,11 +14,14 @@ import {
   of,
   throwError,
 } from 'rxjs';
+import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { OAuth2Supplier } from '~/shared-mod/types/oauth2-supplier.type';
 import { Severity } from '~/shared-mod/types/snackbar.type';
+import { ThemeType } from '~/shared-mod/types/theme-mode.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { Oauth2HttpClientService } from '../oauth2-http-client/oauth2-http-client.service';
 
@@ -35,7 +38,9 @@ export class Oauth2LoginService
   constructor(
     private readonly _oauth2HttpClientService: Oauth2HttpClientService,
     private readonly _store: Store<SharedReducer>,
-    private readonly _localStorageService: LocalStorageService
+    private readonly _localStorageService: LocalStorageService,
+    private readonly _themeSwitcherService: ThemeSwitcherService,
+    private readonly _languageSwitcherService: LanguageSwitcherService
   ) {
     super();
   }
@@ -73,16 +78,25 @@ export class Oauth2LoginService
     return this._oauth2HttpClientService.loginViaProvider$(this._token).pipe(
       delay(2000),
       map(res => {
-        const { accessToken, refreshToken, fullName, profileUrl } = res;
+        const { accessToken, refreshToken, fullName, profileUrl, lang, theme } =
+          res;
         this._localStorageService.save('loggedUser', {
           accessToken,
           refreshToken,
         });
+        if (lang) {
+          this._languageSwitcherService.changeLangByName(lang);
+        }
+        if (theme) {
+          this._themeSwitcherService.changeTheme(theme as ThemeType);
+        }
         this._store.dispatch(
           NgrxAction_SHA.__setLoggedUserDetails({
             details: {
               fullName,
               profileUrl,
+              lang,
+              theme,
             },
           })
         );

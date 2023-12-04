@@ -10,7 +10,9 @@ import { MfaTokenForm } from '~/auth-mod/models/mfa-data.model';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
+import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractMfaFormProvider } from '../abstract-mfa-form-provider';
@@ -27,9 +29,17 @@ export class MfaEmailService
     private readonly _mfaHttpClientService: MfaHttpClientService,
     private readonly _store: Store<AuthReducer | SharedReducer>,
     router: Router,
-    localStorageService: LocalStorageService
+    localStorageService: LocalStorageService,
+    themeSwitcherService: ThemeSwitcherService,
+    languageSwitcherService: LanguageSwitcherService
   ) {
-    super(_store, localStorageService, router);
+    super(
+      _store,
+      localStorageService,
+      router,
+      themeSwitcherService,
+      languageSwitcherService
+    );
   }
 
   ngOnDestroy(): void {
