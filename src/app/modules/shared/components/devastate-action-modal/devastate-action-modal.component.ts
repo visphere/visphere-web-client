@@ -15,6 +15,7 @@ export class DevastateActionModalComponent {
   @Input() i18nPrefix = '';
   @Input() isActive = false;
   @Input() isLoading = false;
+  @Input() size: 'sm' | 'xl' = 'xl';
 
   @Output() emitOnClose = new EventEmitter<void>();
   @Output() emitDevstateAction = new EventEmitter<void>();
