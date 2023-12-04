@@ -10,6 +10,14 @@
     {{ 'vsph.clientCommon.settingsPage.closeButton' | translate }}
     <ng-icon name="closeIcon" />
   </a>
+  <a
+    routerLinkActive="vsph-settings__nav-button--active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLink="/settings"
+    class="vsph-settings__nav-button">
+    {{ 'vsph.clientCommon.settingsPage.init.header' | translate }}
+    <ng-icon name="settingsIcon" />
+  </a>
 </div>
 <div class="mb-3">
   <p class="vsph-settings__nav-paragraph">
