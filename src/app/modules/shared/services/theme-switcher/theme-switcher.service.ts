@@ -44,7 +44,9 @@ export class ThemeSwitcherService {
 
   changeTheme(selectedTheme: ThemeType): void {
     const theme = this.getThemeBasedId(selectedTheme);
-    if (!theme) return;
+    if (!theme) {
+      return;
+    }
     this._selectedTheme$.next(theme);
     this._localStorageService.save('selectedTheme', {
       theme: selectedTheme,
