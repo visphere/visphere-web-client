@@ -27,3 +27,8 @@ export const selectSettingsReturnUrl = createSelector(
   selectSharedState,
   ({ settingsReturnUrl }) => settingsReturnUrl
 );
+
+export const selectLoggedUser = createSelector(
+  selectSharedState,
+  ({ loggedUser }) => loggedUser
+);

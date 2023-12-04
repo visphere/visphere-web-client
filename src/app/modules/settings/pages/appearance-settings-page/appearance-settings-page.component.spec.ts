@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { AppearanceSettingsService } from '~/settings-mod/services/appearance-settings/appearance-settings.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { AppearanceSettingsPageComponent } from './appearance-settings-page.component';
 
@@ -14,6 +15,7 @@ describe('AppearanceSettingsPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [AppearanceSettingsService],
     }).compileComponents();
     fixture = TestBed.createComponent(AppearanceSettingsPageComponent);
     component = fixture.componentInstance;

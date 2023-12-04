@@ -3,4 +3,18 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<vsph-setting-panel-wrapper category="appSettings" subpage="language" />
+<vsph-setting-panel-wrapper category="appSettings" subpage="language">
+  <vsph-radio-buttons-group
+    i18nLabel="appSettings.subpage.language"
+    [elements]="languageData"
+    [isDisabled]="!!(isLoading$ | async)"
+    (emitRadioChange)="handleChangeLanguage($event)" />
+  <hr class="vsph-settings__separator my-5" />
+  <vsph-toggle-button
+    i18nPrefix="appSettings.subpage.language"
+    i18nToggler="relateSettings"
+    [isSelected]="isSelected"
+    [hasDescription]="true"
+    [isDisabled]="!!(isLoading$ | async)"
+    (emitValueChanged)="handleChangeRelateSetting($event)" />
+</vsph-setting-panel-wrapper>

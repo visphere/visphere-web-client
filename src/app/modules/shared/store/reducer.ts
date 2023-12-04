@@ -40,7 +40,31 @@ const _reducer = createReducer(
   on(NgrxAction.__setSettingsReturnUrl, (state, action) => ({
     ...state,
     settingsReturnUrl: action.url,
-  }))
+  })),
+  on(NgrxAction.__updateLoggedUserLang, (state, action) => {
+    if (!state.loggedUser) {
+      return state;
+    }
+    return {
+      ...state,
+      loggedUser: {
+        ...state.loggedUser,
+        lang: action.lang,
+      },
+    };
+  }),
+  on(NgrxAction.__updateLoggedUserTheme, (state, action) => {
+    if (!state.loggedUser) {
+      return state;
+    }
+    return {
+      ...state,
+      loggedUser: {
+        ...state.loggedUser,
+        theme: action.theme,
+      },
+    };
+  })
 );
 
 export const sharedReduxStore = {

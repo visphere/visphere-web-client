@@ -30,11 +30,22 @@ export class LanguageSwitcherService {
   ) {}
 
   changeLang(translation: TranslationRow): void {
-    if (!this.getFlattenTranslations().includes(translation.lang)) return;
+    if (!this.getFlattenTranslations().includes(translation.lang)) {
+      return;
+    }
     this.updateProps(translation);
     this._localStorageService.save('selectedLang', {
       lang: translation.lang,
     });
+  }
+
+  changeLangByName(selectedLang: string) {
+    const changedLang = this.availableLangs.find(
+      ({ lang }) => lang === selectedLang
+    );
+    if (changedLang) {
+      this.changeLang(changedLang);
+    }
   }
 
   async loadLang(): Promise<void> {

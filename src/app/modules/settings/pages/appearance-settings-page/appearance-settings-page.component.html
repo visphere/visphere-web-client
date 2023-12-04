@@ -3,4 +3,18 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<vsph-setting-panel-wrapper category="appSettings" subpage="appearance" />
+<vsph-setting-panel-wrapper category="appSettings" subpage="appearance">
+  <vsph-radio-buttons-group
+    i18nLabel="appSettings.subpage.appearance"
+    [elements]="appearanceData"
+    [isDisabled]="!!(isLoading$ | async)"
+    (emitRadioChange)="handleChangeAppearance($event)" />
+  <hr class="vsph-settings__separator my-5" />
+  <vsph-toggle-button
+    i18nPrefix="appSettings.subpage.appearance"
+    i18nToggler="relateSettings"
+    [isSelected]="isSelected"
+    [hasDescription]="true"
+    [isDisabled]="!!(isLoading$ | async)"
+    (emitValueChanged)="handleChangeRelateSetting($event)" />
+</vsph-setting-panel-wrapper>

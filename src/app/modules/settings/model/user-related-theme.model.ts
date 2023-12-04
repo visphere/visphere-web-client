@@ -3,9 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type LoggedUser = {
-  fullName: string;
-  profileUrl: string;
-  lang: string | null;
-  theme: string | null;
+export type UserRelatedThemeResModel = {
+  theme?: string;
 };

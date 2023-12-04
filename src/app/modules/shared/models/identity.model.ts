@@ -10,6 +10,8 @@ export type LoginResDtoModel = {
   profileUrl: string;
   accessToken: string;
   refreshToken: string;
+  lang: string;
+  theme: string;
   isActivated: boolean;
   isMfaEnabled: boolean;
   isMfaSetup: boolean;
