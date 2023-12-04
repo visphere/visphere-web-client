@@ -2,7 +2,6 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -30,7 +29,6 @@ export class NavigationBarComponent
 
   constructor(
     private readonly _languageSwitcherService: LanguageSwitcherService,
-    private readonly _location: Location,
     private readonly _store: Store<SharedReducer>
   ) {
     super();
