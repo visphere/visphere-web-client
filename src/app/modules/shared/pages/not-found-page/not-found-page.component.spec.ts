@@ -3,6 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from '~/root-mod/app.module';
 import { NotFoundPageComponent } from './not-found-page.component';
 
 describe('NotFoundPageComponent', () => {
@@ -11,8 +12,8 @@ describe('NotFoundPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundPageComponent],
-    });
+      imports: [AppModule],
+    }).compileComponents();
     fixture = TestBed.createComponent(NotFoundPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

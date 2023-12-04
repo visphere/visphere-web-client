@@ -4,6 +4,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import * as BtsIcon from '@ng-icons/bootstrap-icons';
 import { NgIconsModule } from '@ng-icons/core';
 import { EffectsModule } from '@ngrx/effects';
@@ -55,6 +56,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
       xIcon: BtsIcon.bootstrapXLg,
     }),
     NgxRerenderModule,
+    RouterModule,
     StoreModule.forFeature(
       sharedReduxStore.reducerName,
       sharedReduxStore.reducerFunction
