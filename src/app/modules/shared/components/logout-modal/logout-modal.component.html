@@ -1,0 +1,14 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-action-modal
+  size="sm"
+  [isActive]="!!(isModalOpen$ | async)"
+  [isLoading]="isLoading"
+  (emitOnClose)="handleCloseModal()"
+  (emitDevstateAction)="handleLogout()"
+  i18nPrefix="vsph.clientCommon.forAll.modals.logout">
+  {{ 'vsph.clientCommon.forAll.modals.logout.paragraph' | translate }}
+</vsph-devastate-action-modal>

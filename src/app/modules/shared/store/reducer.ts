@@ -64,7 +64,11 @@ const _reducer = createReducer(
         theme: action.theme,
       },
     };
-  })
+  }),
+  on(NgrxAction.__updateLogoutModalState, (state, action) => ({
+    ...state,
+    logoutModalIsOpen: action.isOpen,
+  }))
 );
 
 export const sharedReduxStore = {

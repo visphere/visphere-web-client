@@ -74,10 +74,8 @@ export class IdentityService {
     if (!tokenData) {
       return of(false);
     }
-    this._lazyPageLoaderService.setLoading();
     return this._identityHttpClientService.logout(tokenData.refreshToken).pipe(
       map(({ message }) => {
-        this._lazyPageLoaderService.disableLoading();
         this._store.dispatch(
           NgrxAction_SHA.__addSnackbar({
             content: {
@@ -92,7 +90,6 @@ export class IdentityService {
         return true;
       }),
       catchError(err => {
-        this._lazyPageLoaderService.disableLoading();
         return throwError(() => err);
       })
     );

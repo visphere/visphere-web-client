@@ -32,3 +32,8 @@ export const selectLoggedUser = createSelector(
   selectSharedState,
   ({ loggedUser }) => loggedUser
 );
+
+export const selectLogoutModalIsOpen = createSelector(
+  selectSharedState,
+  ({ logoutModalIsOpen }) => logoutModalIsOpen
+);

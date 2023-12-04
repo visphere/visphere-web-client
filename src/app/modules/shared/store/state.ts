@@ -10,6 +10,7 @@ export interface SharedStoreState {
   loggedUser: LoggedUser | null;
   initialLoading: boolean;
   settingsReturnUrl: string;
+  logoutModalIsOpen: boolean;
 }
 
 export const sharedStoreState: SharedStoreState = {
@@ -17,4 +18,5 @@ export const sharedStoreState: SharedStoreState = {
   loggedUser: null,
   initialLoading: true,
   settingsReturnUrl: '',
+  logoutModalIsOpen: false,
 };

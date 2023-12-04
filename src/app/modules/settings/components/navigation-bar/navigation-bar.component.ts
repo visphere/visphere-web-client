@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
+import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -48,6 +49,8 @@ export class NavigationBarComponent
   }
 
   handleOpenLogoutModal(): void {
-    console.log('open logout modal');
+    this._store.dispatch(
+      NgrxAction_SHA.__updateLogoutModalState({ isOpen: true })
+    );
   }
 }

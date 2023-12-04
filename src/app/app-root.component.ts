@@ -12,6 +12,7 @@ import { AbstractReactiveProvider } from './modules/shared/utils/abstract-reacti
   template: `
     <vsph-lazy-page-loader />
     <vsph-snackbars-container />
+    <vsph-logout-modal />
     <div class="flex flex-col flex-grow">
       <router-outlet></router-outlet>
     </div>

@@ -14,6 +14,7 @@ const UNSET_INITIAL_LOADING = '[SHARED] UNSET INITIAL LOADING' as const;
 const SET_SETTINGS_RETURN_URL = '[SHARED] SET SETTINGS RETURN URL' as const;
 const UPDATE_LOGGED_USER_LANG = '[SHARED] UPDATE LOGGED USER LANG' as const;
 const UPDATE_LOGGED_USER_THEME = '[SHARED] UPDATE LOGGED USER THEME' as const;
+const UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE' as const;
 
 export const __addSnackbar = createAction(
   ADD_SNACKBAR,
@@ -47,4 +48,9 @@ export const __updateLoggedUserLang = createAction(
 export const __updateLoggedUserTheme = createAction(
   UPDATE_LOGGED_USER_THEME,
   props<{ theme: string | null }>()
+);
+
+export const __updateLogoutModalState = createAction(
+  UPDATE_LOGOUT_MODAL_STATE,
+  props<{ isOpen: boolean }>()
 );

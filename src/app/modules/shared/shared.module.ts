@@ -16,6 +16,7 @@ import { DevastateActionModalComponent } from '~/shared-mod/components/devastate
 import { FieldValidatorComponent } from '~/shared-mod/components/field-validator/field-validator.component';
 import { LazyButtonSpinnerComponent } from '~/shared-mod/components/lazy-button-spinner/lazy-button-spinner.component';
 import { LazyPageLoaderComponent } from '~/shared-mod/components/lazy-page-loader/lazy-page-loader.component';
+import { LogoutModalComponent } from '~/shared-mod/components/logout-modal/logout-modal.component';
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
@@ -33,6 +34,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     FieldValidatorComponent,
     LazyButtonSpinnerComponent,
     LazyPageLoaderComponent,
+    LogoutModalComponent,
     ModalWrapperComponent,
     NotFoundPageComponent,
     PasswordStrengthMeterComponent,
@@ -64,6 +66,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     FieldValidatorComponent,
     LazyPageLoaderComponent,
     LazyButtonSpinnerComponent,
+    LogoutModalComponent,
     ModalWrapperComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
