@@ -107,13 +107,10 @@ import { SharedModule } from '~/shared-mod/shared.module';
     NgxTippyModule,
     NgIconsModule.withIcons({
       arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
-      darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
       eyeIcon: BtsIcon.bootstrapEye,
       eyeSlashIcon: BtsIcon.bootstrapEyeSlash,
-      lightModeIcon: BtsIcon.bootstrapSunFill,
       outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
       selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
-      systemModeIcon: BtsIcon.bootstrapCircleHalf,
       plusCircleIcon: BtsIcon.bootstrapPlusCircle,
       questionCircleIcon: BtsIcon.bootstrapQuestionCircle,
     }),

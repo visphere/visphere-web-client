@@ -47,6 +47,9 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     EffectsModule.forFeature([SharedEffects]),
     TranslateModule,
     NgIconsModule.withIcons({
+      darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
+      lightModeIcon: BtsIcon.bootstrapSunFill,
+      systemModeIcon: BtsIcon.bootstrapCircleHalf,
       xIcon: BtsIcon.bootstrapXLg,
     }),
     NgxRerenderModule,
