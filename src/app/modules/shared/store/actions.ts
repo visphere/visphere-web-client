@@ -18,6 +18,8 @@ enum Action {
   UPDATE_LOGGED_USER_LANG = '[SHARED] UPDATE LOGGED USER LANG',
   UPDATE_LOGGED_USER_THEME = '[SHARED] UPDATE LOGGED USER THEME',
   UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE',
+  UPDATE_LOGGED_USER_NOTIFS_STATE = '[SHARED] UPDATE LOGGED USER NOTIFS STATE',
+  UPDATE_LOGGED_USER_NOTIFS_SOUND_STATE = '[SHARED] UPDATE LOGGED USER NOTIFS SOUND STATE',
 }
 
 export const __addSnackbar = createAction(
@@ -62,4 +64,14 @@ export const __updateLoggedUserTheme = createAction(
 export const __updateLogoutModalState = createAction(
   Action.UPDATE_LOGOUT_MODAL_STATE,
   props<{ isOpen: boolean }>()
+);
+
+export const __updateLoggedUserNotifsState = createAction(
+  Action.UPDATE_LOGGED_USER_NOTIFS_STATE,
+  props<{ isEnabled: boolean }>()
+);
+
+export const __updateLoggedUserNotifsSoundState = createAction(
+  Action.UPDATE_LOGGED_USER_NOTIFS_SOUND_STATE,
+  props<{ isEnabled: boolean }>()
 );

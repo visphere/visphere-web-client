@@ -74,7 +74,43 @@ const _reducer = createReducer(
   on(NgrxAction.__updateLogoutModalState, (state, action) => ({
     ...state,
     logoutModalIsOpen: action.isOpen,
-  }))
+  })),
+  on(NgrxAction.__updateLoggedUserNotifsState, (state, action) => {
+    if (!state.loggedUser) {
+      return state;
+    }
+    return {
+      ...state,
+      loggedUser: {
+        ...state.loggedUser,
+        settings: {
+          ...state.loggedUser.settings,
+          pushNotifsEnabled: action.isEnabled,
+          pushNotifsSoundEnabled: action.isEnabled
+            ? state.loggedUser.settings.pushNotifsSoundEnabled
+            : false,
+        },
+      },
+    };
+  }),
+  on(NgrxAction.__updateLoggedUserNotifsSoundState, (state, action) => {
+    if (!state.loggedUser) {
+      return state;
+    }
+    return {
+      ...state,
+      loggedUser: {
+        ...state.loggedUser,
+        settings: {
+          ...state.loggedUser.settings,
+          pushNotifsEnabled: action.isEnabled
+            ? true
+            : state.loggedUser.settings.pushNotifsEnabled,
+          pushNotifsSoundEnabled: action.isEnabled,
+        },
+      },
+    };
+  })
 );
 
 export const sharedReduxStore = {

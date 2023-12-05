@@ -30,4 +30,20 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
       reqDto
     );
   }
+
+  updateNotifsState(enabled: boolean): Observable<BaseMessageModel> {
+    return this._httpClient.patch<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/settings/user/push/notifications`,
+      null,
+      { params: { enabled } }
+    );
+  }
+
+  updateNotifsSoundState(enabled: boolean): Observable<BaseMessageModel> {
+    return this._httpClient.patch<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/settings/user/push/notifications/sound`,
+      null,
+      { params: { enabled } }
+    );
+  }
 }
