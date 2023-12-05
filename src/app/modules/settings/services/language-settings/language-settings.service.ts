@@ -15,27 +15,21 @@ import {
 import { RelatedWithElements } from '~/settings-mod/model/related-value.model';
 import { RadioElement } from '~/settings-mod/types/radio-element.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
-import { LoggedUser } from '~/shared-mod/models/logged-user.model';
-import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AVAILABLE_TRANSLATIONS } from '~/shared-mod/types/translation.type';
+import { AbstractUserSettingsProvider } from '../abstract-user-settings.provider';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
 
 @Injectable()
-export class LanguageSettingsService extends AbstractLoadableProvider {
-  private _loggedUser$: Observable<LoggedUser | null> = this._store.select(
-    NgrxSelector_SHA.selectLoggedUser
-  );
-
+export class LanguageSettingsService extends AbstractUserSettingsProvider {
   constructor(
     private readonly _settingsHttpClientService: SettingsHttpClientService,
     private readonly _store: Store<SharedReducer>,
     private readonly _languageSwitcherService: LanguageSwitcherService
   ) {
-    super();
+    super(_store);
   }
 
   loadAvailableLanguages(): Observable<RelatedWithElements> {
@@ -84,15 +78,7 @@ export class LanguageSettingsService extends AbstractLoadableProvider {
           this._store.dispatch(
             NgrxAction_SHA.__updateLoggedUserLang({ lang: selectedLang })
           );
-          this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
-              content: {
-                placeholder: message,
-                omitTransformation: true,
-              },
-              severity: 'success',
-            })
-          );
+          this.showSuccessSnackbar(message);
         }),
         catchError(err => {
           this.setLoading(false);

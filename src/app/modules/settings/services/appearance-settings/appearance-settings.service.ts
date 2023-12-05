@@ -15,27 +15,21 @@ import {
 import { RelatedWithElements } from '~/settings-mod/model/related-value.model';
 import { RadioElement } from '~/settings-mod/types/radio-element.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
-import { LoggedUser } from '~/shared-mod/models/logged-user.model';
-import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { ThemeType, themeModes } from '~/shared-mod/types/theme-mode.type';
+import { AbstractUserSettingsProvider } from '../abstract-user-settings.provider';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
 
 @Injectable()
-export class AppearanceSettingsService extends AbstractLoadableProvider {
-  private _loggedUser$: Observable<LoggedUser | null> = this._store.select(
-    NgrxSelector_SHA.selectLoggedUser
-  );
-
+export class AppearanceSettingsService extends AbstractUserSettingsProvider {
   constructor(
     private readonly _settingsHttpClientService: SettingsHttpClientService,
     private readonly _store: Store<SharedReducer>,
     private readonly _themeSwitcherService: ThemeSwitcherService
   ) {
-    super();
+    super(_store);
   }
 
   loadAvailableThemes(): Observable<RelatedWithElements> {
@@ -84,15 +78,7 @@ export class AppearanceSettingsService extends AbstractLoadableProvider {
           this._store.dispatch(
             NgrxAction_SHA.__updateLoggedUserTheme({ theme: selectedTheme })
           );
-          this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
-              content: {
-                placeholder: message,
-                omitTransformation: true,
-              },
-              severity: 'success',
-            })
-          );
+          this.showSuccessSnackbar(message);
         }),
         catchError(err => {
           this.setLoading(false);
