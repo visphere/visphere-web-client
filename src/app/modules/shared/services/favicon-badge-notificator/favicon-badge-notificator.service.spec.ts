@@ -3,13 +3,17 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { TestBed } from '@angular/core/testing';
+import { AppModule } from '~/root-mod/app.module';
 import { FaviconBadgeNotificatorService } from './favicon-badge-notificator.service';
 
 describe('FaviconBadgeNotificatorService', () => {
   let service: FaviconBadgeNotificatorService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [AppModule],
+      providers: [FaviconBadgeNotificatorService],
+    });
     service = TestBed.inject(FaviconBadgeNotificatorService);
   });
 
