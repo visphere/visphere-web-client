@@ -9,9 +9,6 @@ import { Observable } from 'rxjs';
 import { MfaCodeForm } from '~/auth-mod/models/mfa-data.model';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
-import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
-import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractMfaFormProvider } from '../abstract-mfa-form-provider';
 import { MfaHttpClientService } from '../mfa-http-client/mfa-http-client.service';
@@ -26,18 +23,9 @@ export class MfaCodeService
   constructor(
     private readonly _mfaHttpClientService: MfaHttpClientService,
     store: Store<AuthReducer | SharedReducer>,
-    router: Router,
-    localStorageService: LocalStorageService,
-    themeSwitcherService: ThemeSwitcherService,
-    languageSwitcherService: LanguageSwitcherService
+    router: Router
   ) {
-    super(
-      store,
-      localStorageService,
-      router,
-      themeSwitcherService,
-      languageSwitcherService
-    );
+    super(store, router);
   }
 
   override abstractSubmitForm(): Observable<LoginResDtoModel> {

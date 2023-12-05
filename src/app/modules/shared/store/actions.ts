@@ -4,53 +4,62 @@
  */
 import { createAction, props } from '@ngrx/store';
 import { Severity, SnackbarI18n } from '~/shared-mod/types/snackbar.type';
+import { LoginResDtoModel } from '../models/identity.model';
 import { LoggedUser } from '../models/logged-user.model';
 
-const ADD_SNACKBAR = '[SHARED] ADD SNACKBAR' as const;
-const REMOVE_SNACKBAR = '[SHARED] REMOVE SNACKBAR' as const;
-const SET_LOGGED_USER_DETAILS = '[SHARED] SET LOGGED USER DETAILS' as const;
-const REMOVE_USER_DETAILS = '[SHARED] REMOVE USER DETAILS' as const;
-const UNSET_INITIAL_LOADING = '[SHARED] UNSET INITIAL LOADING' as const;
-const SET_SETTINGS_RETURN_URL = '[SHARED] SET SETTINGS RETURN URL' as const;
-const UPDATE_LOGGED_USER_LANG = '[SHARED] UPDATE LOGGED USER LANG' as const;
-const UPDATE_LOGGED_USER_THEME = '[SHARED] UPDATE LOGGED USER THEME' as const;
-const UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE' as const;
+enum Action {
+  ADD_SNACKBAR = '[SHARED] ADD SNACKBAR',
+  REMOVE_SNACKBAR = '[SHARED] REMOVE SNACKBAR',
+  SET_LOGGED_USER_DETAILS = '[SHARED] SET LOGGED USER DETAILS',
+  PERSIST_LOGGED_USER_DETAILS = '[SHARED] PERSIST LOGGED USER DETAILS',
+  REMOVE_USER_DETAILS = '[SHARED] REMOVE USER DETAILS',
+  UNSET_INITIAL_LOADING = '[SHARED] UNSET INITIAL LOADING',
+  SET_SETTINGS_RETURN_URL = '[SHARED] SET SETTINGS RETURN URL',
+  UPDATE_LOGGED_USER_LANG = '[SHARED] UPDATE LOGGED USER LANG',
+  UPDATE_LOGGED_USER_THEME = '[SHARED] UPDATE LOGGED USER THEME',
+  UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE',
+}
 
 export const __addSnackbar = createAction(
-  ADD_SNACKBAR,
+  Action.ADD_SNACKBAR,
   props<{ header?: SnackbarI18n; content: SnackbarI18n; severity?: Severity }>()
 );
 
 export const __removeSnackbar = createAction(
-  REMOVE_SNACKBAR,
+  Action.REMOVE_SNACKBAR,
   props<{ id?: string }>()
 );
 
 export const __setLoggedUserDetails = createAction(
-  SET_LOGGED_USER_DETAILS,
+  Action.SET_LOGGED_USER_DETAILS,
+  props<{ details: LoginResDtoModel }>()
+);
+
+export const __persistLoggedUserDetails = createAction(
+  Action.PERSIST_LOGGED_USER_DETAILS,
   props<{ details: LoggedUser }>()
 );
 
-export const __removeUserDetails = createAction(REMOVE_USER_DETAILS);
+export const __removeUserDetails = createAction(Action.REMOVE_USER_DETAILS);
 
-export const __unsetInitialLoading = createAction(UNSET_INITIAL_LOADING);
+export const __unsetInitialLoading = createAction(Action.UNSET_INITIAL_LOADING);
 
 export const __setSettingsReturnUrl = createAction(
-  SET_SETTINGS_RETURN_URL,
+  Action.SET_SETTINGS_RETURN_URL,
   props<{ url: string }>()
 );
 
 export const __updateLoggedUserLang = createAction(
-  UPDATE_LOGGED_USER_LANG,
+  Action.UPDATE_LOGGED_USER_LANG,
   props<{ lang: string | null }>()
 );
 
 export const __updateLoggedUserTheme = createAction(
-  UPDATE_LOGGED_USER_THEME,
+  Action.UPDATE_LOGGED_USER_THEME,
   props<{ theme: string | null }>()
 );
 
 export const __updateLogoutModalState = createAction(
-  UPDATE_LOGOUT_MODAL_STATE,
+  Action.UPDATE_LOGOUT_MODAL_STATE,
   props<{ isOpen: boolean }>()
 );

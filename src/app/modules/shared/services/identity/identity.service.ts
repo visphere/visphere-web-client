@@ -8,12 +8,9 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
-import { ThemeType } from '~/shared-mod/types/theme-mode.type';
 import { IdentityHttpClientService } from '../identity-http-client/identity-http-client.service';
-import { LanguageSwitcherService } from '../language-switcher/language-switcher.service';
 import { LazyPageLoaderService } from '../lazy-page-loader/lazy-page-loader.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
-import { ThemeSwitcherService } from '../theme-switcher/theme-switcher.service';
 
 @Injectable({ providedIn: 'root' })
 export class IdentityService {
@@ -21,9 +18,7 @@ export class IdentityService {
     private readonly _identityHttpClientService: IdentityHttpClientService,
     private readonly _store: Store<SharedReducer>,
     private readonly _lazyPageLoaderService: LazyPageLoaderService,
-    private readonly _localStorageService: LocalStorageService,
-    private readonly _themeSwitcherService: ThemeSwitcherService,
-    private readonly _languageSwitcherService: LanguageSwitcherService
+    private readonly _localStorageService: LocalStorageService
   ) {}
 
   refreshSession$(redirectUrl: string): Observable<string> {
@@ -37,25 +32,9 @@ export class IdentityService {
       .pipe(
         map(res => {
           this._lazyPageLoaderService.disableLoading();
-          const { accessToken, refreshToken } = res;
-          this._localStorageService.save<StorageKeys>('loggedUser', {
-            accessToken,
-            refreshToken,
-          });
-          if (res.lang) {
-            this._languageSwitcherService.changeLangByName(res.lang);
-          }
-          if (res.theme) {
-            this._themeSwitcherService.changeTheme(res.theme as ThemeType);
-          }
           this._store.dispatch(
             NgrxAction_SHA.__setLoggedUserDetails({
-              details: {
-                fullName: res.fullName,
-                profileUrl: res.profileUrl,
-                lang: res.lang,
-                theme: res.theme,
-              },
+              details: res,
             })
           );
           this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());

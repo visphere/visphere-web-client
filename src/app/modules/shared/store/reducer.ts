@@ -25,7 +25,7 @@ const _reducer = createReducer(
       ? state.snackbarStack.filter(({ id }) => id !== action.id)
       : state.snackbarStack.slice(0, -1),
   })),
-  on(NgrxAction.__setLoggedUserDetails, (state, action) => ({
+  on(NgrxAction.__persistLoggedUserDetails, (state, action) => ({
     ...state,
     loggedUser: action.details,
   })),
@@ -49,7 +49,10 @@ const _reducer = createReducer(
       ...state,
       loggedUser: {
         ...state.loggedUser,
-        lang: action.lang,
+        settings: {
+          ...state.loggedUser.settings,
+          lang: action.lang,
+        },
       },
     };
   }),
@@ -61,7 +64,10 @@ const _reducer = createReducer(
       ...state,
       loggedUser: {
         ...state.loggedUser,
-        theme: action.theme,
+        settings: {
+          ...state.loggedUser.settings,
+          theme: action.theme,
+        },
       },
     };
   }),

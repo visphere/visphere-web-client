@@ -10,11 +10,10 @@ export type LoginResDtoModel = {
   profileUrl: string;
   accessToken: string;
   refreshToken: string;
-  lang: string;
-  theme: string;
   isActivated: boolean;
   isMfaEnabled: boolean;
   isMfaSetup: boolean;
+  settings: UserSettings;
 };
 
 export type RefreshTokenReqDto = {
@@ -30,4 +29,11 @@ export type RefreshTokenResDto = {
 export type StorageKeys = {
   accessToken: string;
   refreshToken: string;
+};
+
+export type UserSettings = {
+  lang: string | null;
+  theme: string | null;
+  pushNotifsEnabled: boolean;
+  pushNotifsSoundEnabled: boolean;
 };

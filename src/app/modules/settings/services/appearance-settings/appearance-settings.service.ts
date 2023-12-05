@@ -44,7 +44,7 @@ export class AppearanceSettingsService extends AbstractLoadableProvider {
       this._loggedUser$,
     ]).pipe(
       map(([currentTheme, loggedUser]) => {
-        let selectedTheme = loggedUser?.theme;
+        let selectedTheme = loggedUser?.settings.theme;
         if (!loggedUser) {
           return {
             elements: [],
@@ -66,7 +66,7 @@ export class AppearanceSettingsService extends AbstractLoadableProvider {
             },
           })),
           definedValue: currentTheme.id,
-          isSelected: !!loggedUser?.theme,
+          isSelected: !!loggedUser?.settings.theme,
         };
       })
     );

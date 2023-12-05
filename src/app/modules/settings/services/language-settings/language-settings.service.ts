@@ -44,7 +44,7 @@ export class LanguageSettingsService extends AbstractLoadableProvider {
       this._loggedUser$,
     ]).pipe(
       map(([currentLang, loggedUser]) => {
-        let selectedLang = loggedUser?.lang;
+        let selectedLang = loggedUser?.settings.lang;
         if (!loggedUser) {
           return {
             elements: [],
@@ -66,7 +66,7 @@ export class LanguageSettingsService extends AbstractLoadableProvider {
             },
           })),
           definedValue: currentLang.lang,
-          isSelected: !!loggedUser?.lang,
+          isSelected: !!loggedUser?.settings.lang,
         };
       })
     );
