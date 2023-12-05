@@ -55,7 +55,9 @@ export class AppearanceSettingsPageComponent
         this._appearanceSettingsService.persistRelatedTheme(
           element.id as string
         )
-      ).subscribe();
+      ).subscribe({
+        next: () => this._appearanceSettingsService.updateWsSignalValue(),
+      });
     }
   }
 
@@ -65,6 +67,9 @@ export class AppearanceSettingsPageComponent
       this._appearanceSettingsService.persistRelatedTheme(
         this.isSelected ? this.definedValue : null
       )
-    ).subscribe({ error: () => (this.isSelected = !isRelated) });
+    ).subscribe({
+      next: () => this._appearanceSettingsService.updateWsSignalValue(),
+      error: () => (this.isSelected = !isRelated),
+    });
   }
 }

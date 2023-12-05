@@ -4,14 +4,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  Observable,
-  catchError,
-  combineLatest,
-  map,
-  tap,
-  throwError,
-} from 'rxjs';
+import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
 import { RelatedWithElements } from '~/settings-mod/model/related-value.model';
 import { RadioElement } from '~/settings-mod/types/radio-element.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
@@ -33,22 +26,26 @@ export class LanguageSettingsService extends AbstractUserSettingsProvider {
   }
 
   loadAvailableLanguages(): Observable<RelatedWithElements> {
-    return combineLatest([
-      this._languageSwitcherService.selectedLang$,
-      this._loggedUser$,
-    ]).pipe(
-      map(([currentLang, loggedUser]) => {
-        let selectedLang = loggedUser?.settings.lang;
-        if (!loggedUser) {
-          return {
-            elements: [],
-            definedValue: currentLang.lang,
-            isSelected: false,
-          };
-        }
+    return this._onChangeObserver$.pipe(
+      switchMap(() =>
+        this._settingsHttpClientService
+          .getUserSettings()
+          .pipe(
+            switchMap(userSettings =>
+              this._languageSwitcherService.selectedLang$.pipe(
+                map(currentLang => ({ userSettings, currentLang }))
+              )
+            )
+          )
+      ),
+      map(({ userSettings, currentLang }) => {
+        let selectedLang = userSettings.lang;
         if (!selectedLang) {
           selectedLang = currentLang.lang;
         }
+        this._store.dispatch(
+          NgrxAction_SHA.__updateLoggedUserSettings({ userSettings })
+        );
         this._isFetching$.next(false);
         return {
           elements: AVAILABLE_TRANSLATIONS.map(({ lang, name }) => ({
@@ -61,7 +58,7 @@ export class LanguageSettingsService extends AbstractUserSettingsProvider {
             },
           })),
           definedValue: currentLang.lang,
-          isSelected: !!loggedUser?.settings.lang,
+          isSelected: !!userSettings.lang,
         };
       })
     );
@@ -76,9 +73,6 @@ export class LanguageSettingsService extends AbstractUserSettingsProvider {
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);
-          this._store.dispatch(
-            NgrxAction_SHA.__updateLoggedUserLang({ lang: selectedLang })
-          );
           this.showSuccessSnackbar(message);
         }),
         catchError(err => {

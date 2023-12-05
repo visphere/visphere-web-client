@@ -54,7 +54,11 @@ export class LanguageSettingsPageComponent
         this._languageSettingsService.persistRelatedLanguage(
           element.id as string
         )
-      ).subscribe();
+      ).subscribe({
+        next: () => this._languageSettingsService.updateWsSignalValue(),
+      });
+    } else {
+      this._languageSettingsService.updateWsSignalValue();
     }
   }
 
@@ -64,6 +68,9 @@ export class LanguageSettingsPageComponent
       this._languageSettingsService.persistRelatedLanguage(
         this.isSelected ? this.definedValue : null
       )
-    ).subscribe({ error: () => (this.isSelected = !isRelated) });
+    ).subscribe({
+      next: () => this._languageSettingsService.updateWsSignalValue(),
+      error: () => (this.isSelected = !isRelated),
+    });
   }
 }

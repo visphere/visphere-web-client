@@ -7,12 +7,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RelatedValueReqDto } from '~/settings-mod/model/related-value.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { UserSettings } from '~/shared-mod/models/identity.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsHttpClientService extends AbstractHttpProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();
+  }
+
+  getUserSettings(): Observable<UserSettings> {
+    return this._httpClient.get<UserSettings>(
+      `${this._infraApiPath}/api/v1/settings/user/settings`
+    );
   }
 
   relateLangWithUser(reqDto: RelatedValueReqDto): Observable<BaseMessageModel> {

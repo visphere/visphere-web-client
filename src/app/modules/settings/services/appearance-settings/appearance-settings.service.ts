@@ -4,14 +4,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  Observable,
-  catchError,
-  combineLatest,
-  map,
-  tap,
-  throwError,
-} from 'rxjs';
+import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
 import { RelatedWithElements } from '~/settings-mod/model/related-value.model';
 import { RadioElement } from '~/settings-mod/types/radio-element.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
@@ -33,22 +26,26 @@ export class AppearanceSettingsService extends AbstractUserSettingsProvider {
   }
 
   loadAvailableThemes(): Observable<RelatedWithElements> {
-    return combineLatest([
-      this._themeSwitcherService.selectedTheme$,
-      this._loggedUser$,
-    ]).pipe(
-      map(([currentTheme, loggedUser]) => {
-        let selectedTheme = loggedUser?.settings.theme;
-        if (!loggedUser) {
-          return {
-            elements: [],
-            definedValue: currentTheme.id,
-            isSelected: false,
-          };
-        }
+    return this._onChangeObserver$.pipe(
+      switchMap(() =>
+        this._settingsHttpClientService
+          .getUserSettings()
+          .pipe(
+            switchMap(userSettings =>
+              this._themeSwitcherService.selectedTheme$.pipe(
+                map(currentTheme => ({ userSettings, currentTheme }))
+              )
+            )
+          )
+      ),
+      map(({ userSettings, currentTheme }) => {
+        let selectedTheme = userSettings.theme;
         if (!selectedTheme) {
           selectedTheme = currentTheme.id;
         }
+        this._store.dispatch(
+          NgrxAction_SHA.__updateLoggedUserSettings({ userSettings })
+        );
         this._isFetching$.next(false);
         return {
           elements: themeModes.map(({ id, i18nKey, icon }) => ({
@@ -61,7 +58,7 @@ export class AppearanceSettingsService extends AbstractUserSettingsProvider {
             },
           })),
           definedValue: currentTheme.id,
-          isSelected: !!loggedUser?.settings.theme,
+          isSelected: !!userSettings.theme,
         };
       })
     );
@@ -76,9 +73,6 @@ export class AppearanceSettingsService extends AbstractUserSettingsProvider {
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);
-          this._store.dispatch(
-            NgrxAction_SHA.__updateLoggedUserTheme({ theme: selectedTheme })
-          );
           this.showSuccessSnackbar(message);
         }),
         catchError(err => {

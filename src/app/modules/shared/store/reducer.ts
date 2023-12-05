@@ -41,76 +41,21 @@ const _reducer = createReducer(
     ...state,
     settingsReturnUrl: action.url,
   })),
-  on(NgrxAction.__updateLoggedUserLang, (state, action) => {
-    if (!state.loggedUser) {
-      return state;
-    }
-    return {
-      ...state,
-      loggedUser: {
-        ...state.loggedUser,
-        settings: {
-          ...state.loggedUser.settings,
-          lang: action.lang,
-        },
-      },
-    };
-  }),
-  on(NgrxAction.__updateLoggedUserTheme, (state, action) => {
-    if (!state.loggedUser) {
-      return state;
-    }
-    return {
-      ...state,
-      loggedUser: {
-        ...state.loggedUser,
-        settings: {
-          ...state.loggedUser.settings,
-          theme: action.theme,
-        },
-      },
-    };
+  on(NgrxAction.__updateLoggedUserSettings, (state, action) => {
+    return state.loggedUser
+      ? {
+          ...state,
+          loggedUser: {
+            ...state.loggedUser,
+            settings: action.userSettings,
+          },
+        }
+      : state;
   }),
   on(NgrxAction.__updateLogoutModalState, (state, action) => ({
     ...state,
     logoutModalIsOpen: action.isOpen,
-  })),
-  on(NgrxAction.__updateLoggedUserNotifsState, (state, action) => {
-    if (!state.loggedUser) {
-      return state;
-    }
-    return {
-      ...state,
-      loggedUser: {
-        ...state.loggedUser,
-        settings: {
-          ...state.loggedUser.settings,
-          pushNotifsEnabled: action.isEnabled,
-          pushNotifsSoundEnabled: action.isEnabled
-            ? state.loggedUser.settings.pushNotifsSoundEnabled
-            : false,
-        },
-      },
-    };
-  }),
-  on(NgrxAction.__updateLoggedUserNotifsSoundState, (state, action) => {
-    if (!state.loggedUser) {
-      return state;
-    }
-    return {
-      ...state,
-      loggedUser: {
-        ...state.loggedUser,
-        settings: {
-          ...state.loggedUser.settings,
-          pushNotifsEnabled: action.isEnabled
-            ? true
-            : state.loggedUser.settings.pushNotifsEnabled,
-          pushNotifsSoundEnabled: action.isEnabled,
-        },
-      },
-    };
-  })
+  }))
 );
 
 export const sharedReduxStore = {

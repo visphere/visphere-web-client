@@ -52,14 +52,20 @@ export class NotificationsSettingsPageComponent
     this.isPushNotifsSelected = isEnabled;
     this.wrapAsObservable(
       this._notificationsSettingsService.persistPushNotifsState(isEnabled)
-    ).subscribe({ error: () => (this.isPushNotifsSelected = !isEnabled) });
+    ).subscribe({
+      next: () => this._notificationsSettingsService.updateWsSignalValue(),
+      error: () => (this.isPushNotifsSelected = !isEnabled),
+    });
   }
 
   handleChangePushNotifsSoundSetting(isEnabled: boolean): void {
     this.isPushNotifsSoundSelected = isEnabled;
     this.wrapAsObservable(
       this._notificationsSettingsService.persistPushNotifsSoundState(isEnabled)
-    ).subscribe({ error: () => (this.isPushNotifsSelected = !isEnabled) });
+    ).subscribe({
+      next: () => this._notificationsSettingsService.updateWsSignalValue(),
+      error: () => (this.isPushNotifsSelected = !isEnabled),
+    });
   }
 
   handlePlayNotifsSound(): void {

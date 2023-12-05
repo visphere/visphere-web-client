@@ -4,11 +4,11 @@
  */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
-import { BaseMessageModel } from '~/root-mod/modules/shared/models/base-message.model';
+import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
+import { UserPersistedNofisSettings } from '~/settings-mod/model/notifs.model';
+import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
-import { UserPersistedNofisSettings } from '../../model/notifs.model';
 import { AbstractUserSettingsProvider } from '../abstract-user-settings.provider';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
 
@@ -22,12 +22,18 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
   }
 
   loadPersistedNotifSettings(): Observable<UserPersistedNofisSettings> {
-    return this._loggedUser$.pipe(
-      map(loggedUser => ({
-        isPushNotifsSelected: !!loggedUser?.settings.pushNotifsEnabled,
-        isPushNotifsSoundSelected:
-          !!loggedUser?.settings.pushNotifsSoundEnabled,
-      }))
+    return this._onChangeObserver$.pipe(
+      switchMap(() => this._settingsHttpClientService.getUserSettings()),
+      map(userSettings => {
+        this._store.dispatch(
+          NgrxAction_SHA.__updateLoggedUserSettings({ userSettings })
+        );
+        this._isFetching$.next(false);
+        return {
+          isPushNotifsSelected: userSettings.pushNotifsEnabled,
+          isPushNotifsSoundSelected: userSettings.pushNotifsSoundEnabled,
+        };
+      })
     );
   }
 
@@ -36,9 +42,6 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
     return this._settingsHttpClientService.updateNotifsState(isEnabled).pipe(
       tap(({ message }) => {
         this.setLoading(false);
-        this._store.dispatch(
-          NgrxAction_SHA.__updateLoggedUserNotifsState({ isEnabled })
-        );
         this.showSuccessSnackbar(message);
       }),
       catchError(err => {
@@ -57,9 +60,6 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);
-          this._store.dispatch(
-            NgrxAction_SHA.__updateLoggedUserNotifsSoundState({ isEnabled })
-          );
           this.showSuccessSnackbar(message);
         }),
         catchError(err => {

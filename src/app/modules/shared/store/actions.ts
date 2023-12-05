@@ -4,7 +4,7 @@
  */
 import { createAction, props } from '@ngrx/store';
 import { Severity, SnackbarI18n } from '~/shared-mod/types/snackbar.type';
-import { LoginResDtoModel } from '../models/identity.model';
+import { LoginResDtoModel, UserSettings } from '../models/identity.model';
 import { LoggedUser } from '../models/logged-user.model';
 
 enum Action {
@@ -15,11 +15,8 @@ enum Action {
   REMOVE_USER_DETAILS = '[SHARED] REMOVE USER DETAILS',
   UNSET_INITIAL_LOADING = '[SHARED] UNSET INITIAL LOADING',
   SET_SETTINGS_RETURN_URL = '[SHARED] SET SETTINGS RETURN URL',
-  UPDATE_LOGGED_USER_LANG = '[SHARED] UPDATE LOGGED USER LANG',
-  UPDATE_LOGGED_USER_THEME = '[SHARED] UPDATE LOGGED USER THEME',
+  UPDATE_LOGGED_USER_SETTINGS = '[SHARED] UPDATE LOGGED USER SETTINGS',
   UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE',
-  UPDATE_LOGGED_USER_NOTIFS_STATE = '[SHARED] UPDATE LOGGED USER NOTIFS STATE',
-  UPDATE_LOGGED_USER_NOTIFS_SOUND_STATE = '[SHARED] UPDATE LOGGED USER NOTIFS SOUND STATE',
 }
 
 export const __addSnackbar = createAction(
@@ -51,27 +48,12 @@ export const __setSettingsReturnUrl = createAction(
   props<{ url: string }>()
 );
 
-export const __updateLoggedUserLang = createAction(
-  Action.UPDATE_LOGGED_USER_LANG,
-  props<{ lang: string | null }>()
-);
-
-export const __updateLoggedUserTheme = createAction(
-  Action.UPDATE_LOGGED_USER_THEME,
-  props<{ theme: string | null }>()
+export const __updateLoggedUserSettings = createAction(
+  Action.UPDATE_LOGGED_USER_SETTINGS,
+  props<{ userSettings: UserSettings }>()
 );
 
 export const __updateLogoutModalState = createAction(
   Action.UPDATE_LOGOUT_MODAL_STATE,
   props<{ isOpen: boolean }>()
-);
-
-export const __updateLoggedUserNotifsState = createAction(
-  Action.UPDATE_LOGGED_USER_NOTIFS_STATE,
-  props<{ isEnabled: boolean }>()
-);
-
-export const __updateLoggedUserNotifsSoundState = createAction(
-  Action.UPDATE_LOGGED_USER_NOTIFS_SOUND_STATE,
-  props<{ isEnabled: boolean }>()
 );
