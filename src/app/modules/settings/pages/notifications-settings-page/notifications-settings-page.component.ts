@@ -19,6 +19,8 @@ export class NotificationsSettingsPageComponent
 {
   isLoading$: Observable<boolean> =
     this._notificationsSettingsService.isLoading$;
+  isFetching$: Observable<boolean> =
+    this._notificationsSettingsService.isFetching$;
 
   isPushNotifsSelected = false;
   isPushNotifsSoundSelected = false;

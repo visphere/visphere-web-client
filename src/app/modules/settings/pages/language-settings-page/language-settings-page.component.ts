@@ -18,6 +18,7 @@ export class LanguageSettingsPageComponent
   implements OnInit, OnDestroy
 {
   isLoading$: Observable<boolean> = this._languageSettingsService.isLoading$;
+  isFetching$: Observable<boolean> = this._languageSettingsService.isFetching$;
 
   languageData: RadioElement[] = [];
   definedValue = '';

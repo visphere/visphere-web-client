@@ -49,6 +49,7 @@ export class AppearanceSettingsService extends AbstractUserSettingsProvider {
         if (!selectedTheme) {
           selectedTheme = currentTheme.id;
         }
+        this._isFetching$.next(false);
         return {
           elements: themeModes.map(({ id, i18nKey, icon }) => ({
             id,

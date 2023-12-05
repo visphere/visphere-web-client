@@ -49,6 +49,7 @@ export class LanguageSettingsService extends AbstractUserSettingsProvider {
         if (!selectedLang) {
           selectedLang = currentLang.lang;
         }
+        this._isFetching$.next(false);
         return {
           elements: AVAILABLE_TRANSLATIONS.map(({ lang, name }) => ({
             id: lang,

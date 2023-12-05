@@ -12,4 +12,5 @@ import { SettingsCategory } from '~/settings-mod/types/settings-category.type';
 export class SettingPanelWrapperComponent {
   @Input() category: SettingsCategory = 'appSettings';
   @Input() subpage = '';
+  @Input() isFetching = false;
 }

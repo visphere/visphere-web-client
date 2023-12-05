@@ -3,7 +3,10 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<vsph-setting-panel-wrapper category="appSettings" subpage="appearance">
+<vsph-setting-panel-wrapper
+  category="appSettings"
+  subpage="appearance"
+  [isFetching]="!!(isFetching$ | async)">
   <h2 class="vsph-settings__section-header">
     {{ defaultPrefix + '.appearance.section.theme.header' | translate }}
   </h2>

@@ -16,4 +16,8 @@
       '.header' | translate
   }}
 </h1>
-<ng-content />
+<div class="flex justify-center items-center h-[250px]" *ngIf="isFetching">
+  <div
+    class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
+</div>
+<ng-content *ngIf="!isFetching" />

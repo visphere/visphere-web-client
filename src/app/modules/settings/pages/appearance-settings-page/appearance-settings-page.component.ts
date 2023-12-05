@@ -18,6 +18,8 @@ export class AppearanceSettingsPageComponent
   implements OnInit, OnDestroy
 {
   isLoading$: Observable<boolean> = this._appearanceSettingsService.isLoading$;
+  isFetching$: Observable<boolean> =
+    this._appearanceSettingsService.isFetching$;
 
   appearanceData: RadioElement[] = [];
   definedValue = '';

@@ -3,7 +3,10 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<vsph-setting-panel-wrapper category="appSettings" subpage="notifications">
+<vsph-setting-panel-wrapper
+  category="appSettings"
+  subpage="notifications"
+  [isFetching]="!!(isFetching$ | async)">
   <h2 class="vsph-settings__section-header">
     {{ defaultPrefix + '.notifications.section.notifs.header' | translate }}
   </h2>
