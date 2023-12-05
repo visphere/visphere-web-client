@@ -23,6 +23,9 @@ export class NotificationsSettingsPageComponent
   isPushNotifsSelected = false;
   isPushNotifsSoundSelected = false;
 
+  readonly defaultPrefix =
+    'vsph.clientCommon.settingsPage.category.appSettings.subpage';
+
   constructor(
     private readonly _notificationsSettingsService: NotificationsSettingsService,
     private readonly _faviconBadgeNotificatorService: FaviconBadgeNotificatorService

@@ -4,14 +4,17 @@
  -->
 
 <vsph-setting-panel-wrapper category="appSettings" subpage="appearance">
+  <h2 class="vsph-settings__section-header">
+    {{ defaultPrefix + '.appearance.section.theme.header' | translate }}
+  </h2>
   <vsph-radio-buttons-group
-    i18nLabel="appSettings.subpage.appearance"
+    i18nLabel="appSettings.subpage.appearance.section.theme"
     [elements]="appearanceData"
     [isDisabled]="!!(isLoading$ | async)"
     (emitRadioChange)="handleChangeAppearance($event)" />
   <hr class="vsph-settings__separator my-5" />
   <vsph-toggle-button
-    i18nPrefix="appSettings.subpage.appearance"
+    i18nPrefix="appSettings.subpage.appearance.section.theme"
     i18nToggler="relateSettings"
     [isSelected]="isSelected"
     [hasDescription]="true"

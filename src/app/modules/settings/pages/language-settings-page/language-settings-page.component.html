@@ -4,14 +4,17 @@
  -->
 
 <vsph-setting-panel-wrapper category="appSettings" subpage="language">
+  <h2 class="vsph-settings__section-header">
+    {{ defaultPrefix + '.language.section.lang.header' | translate }}
+  </h2>
   <vsph-radio-buttons-group
-    i18nLabel="appSettings.subpage.language"
+    i18nLabel="appSettings.subpage.language.section.lang"
     [elements]="languageData"
     [isDisabled]="!!(isLoading$ | async)"
     (emitRadioChange)="handleChangeLanguage($event)" />
   <hr class="vsph-settings__separator my-5" />
   <vsph-toggle-button
-    i18nPrefix="appSettings.subpage.language"
+    i18nPrefix="appSettings.subpage.language.section.lang"
     i18nToggler="relateSettings"
     [isSelected]="isSelected"
     [hasDescription]="true"

@@ -23,6 +23,9 @@ export class AppearanceSettingsPageComponent
   definedValue = '';
   isSelected = false;
 
+  readonly defaultPrefix =
+    'vsph.clientCommon.settingsPage.category.appSettings.subpage';
+
   constructor(
     private readonly _appearanceSettingsService: AppearanceSettingsService
   ) {

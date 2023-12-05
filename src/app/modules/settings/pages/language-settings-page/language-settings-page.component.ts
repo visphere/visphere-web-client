@@ -23,6 +23,9 @@ export class LanguageSettingsPageComponent
   definedValue = '';
   isSelected = false;
 
+  readonly defaultPrefix =
+    'vsph.clientCommon.settingsPage.category.appSettings.subpage';
+
   constructor(
     private readonly _languageSettingsService: LanguageSettingsService
   ) {

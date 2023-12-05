@@ -4,9 +4,11 @@
  -->
 
 <vsph-setting-panel-wrapper category="appSettings" subpage="notifications">
-  <h2 class="vsph-settings__section-header">Push notifications settings</h2>
+  <h2 class="vsph-settings__section-header">
+    {{ defaultPrefix + '.notifications.section.notifs.header' | translate }}
+  </h2>
   <vsph-toggle-button
-    i18nPrefix="appSettings.subpage.notifications"
+    i18nPrefix="appSettings.subpage.notifications.section.notifs"
     i18nToggler="pushNotifications"
     [isSelected]="isPushNotifsSelected"
     [hasDescription]="true"
@@ -14,7 +16,7 @@
     (emitValueChanged)="handleChangePushNotifsSetting($event)" />
   <hr class="vsph-settings__separator my-5" />
   <vsph-toggle-button
-    i18nPrefix="appSettings.subpage.notifications"
+    i18nPrefix="appSettings.subpage.notifications.section.notifs"
     i18nToggler="pushNotificationsSound"
     [isSelected]="isPushNotifsSoundSelected"
     [hasDescription]="true"
@@ -24,7 +26,7 @@
     (click)="handlePlayNotifsSound()"
     class="vsph-button vsph-button--primary mt-5 w-fit">
     {{
-      'vsph.clientCommon.settingsPage.category.appSettings.subpage.notifications.soundSampleButton'
+      defaultPrefix + '.notifications.section.notifs.soundSampleButton'
         | translate
     }}
   </button>
