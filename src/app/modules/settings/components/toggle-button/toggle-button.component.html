@@ -9,7 +9,7 @@
     [disabled]="isDisabled"
     class="flex justify-between items-center w-full">
     <input type="checkbox" [value]="i18nToggler" hidden class="sr-only peer" />
-    <div class="flex flex-col gap-y-1 me-10">
+    <div class="flex flex-col gap-y-1">
       <p class="text-left">
         {{
           prefix + i18nPrefix + '.toggler.' + i18nToggler + '.label' | translate
