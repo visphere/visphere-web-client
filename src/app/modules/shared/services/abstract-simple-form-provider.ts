@@ -15,7 +15,7 @@ export abstract class AbstractSimpleFormProvider<
   }
 
   listenChanges<T>(onChange: (event: T) => void): void {
-    this.wrapAsObservable(this._rootForm.valueChanges).subscribe(value => {
+    this.wrapAsObservable$(this._rootForm.valueChanges).subscribe(value => {
       onChange(value as T);
     });
   }

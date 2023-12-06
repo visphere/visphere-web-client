@@ -5,7 +5,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { IdentityService } from '~/shared-mod/services/identity/identity.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
@@ -20,9 +19,7 @@ export class LogoutModalComponent
   extends AbstractReactiveProvider
   implements OnDestroy
 {
-  isModalOpen$: Observable<boolean> = this._store.select(
-    NgrxSelector_SHA.selectLogoutModalIsOpen
-  );
+  isModalOpen$ = this._store.select(NgrxSelector_SHA.selectLogoutModalIsOpen);
 
   isLoading = false;
 
@@ -40,7 +37,7 @@ export class LogoutModalComponent
 
   handleLogout(): void {
     this.isLoading = true;
-    this.wrapAsObservable(this._identityService.logout$()).subscribe({
+    this.wrapAsObservable$(this._identityService.logout$()).subscribe({
       next: async () => {
         this.handleCloseModal();
         await this._router.navigateByUrl('/auth/login');

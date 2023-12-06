@@ -30,7 +30,7 @@ export class FinishResetPasswordService
     private readonly _store: Store<SharedReducer>
   ) {
     super();
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._resetPasswordService.userLoginOrEmail$
     ).subscribe(userLoginOrEmail => (this.userLoginOrEmail = userLoginOrEmail));
   }
@@ -39,10 +39,10 @@ export class FinishResetPasswordService
     this.unmountAllSubscriptions();
   }
 
-  override abstractSubmitForm(): Observable<BaseMessageModel> {
+  override abstractSubmitForm$(): Observable<BaseMessageModel> {
     const { token } =
       this.parseFormValues<FinishResetPasswordViaEmailFormModel>();
-    return this._authHttpClientService.resetPasswordValidateToken(token).pipe(
+    return this._authHttpClientService.resetPasswordValidateToken$(token).pipe(
       tap(async () => {
         this.setLoading(false);
         await this._router.navigateByUrl(`/auth/change-password/${token}`);
@@ -55,10 +55,10 @@ export class FinishResetPasswordService
     );
   }
 
-  resendEmailMessage(): Observable<BaseMessageModel> {
+  resendEmailMessage$(): Observable<BaseMessageModel> {
     this._resendIsLoading$.next(true);
     return this._authHttpClientService
-      .resendResetPasswordToken({
+      .resendResetPasswordToken$({
         usernameOrEmailAddress: this.userLoginOrEmail,
       })
       .pipe(

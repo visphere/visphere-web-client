@@ -30,7 +30,7 @@ export class AccountValueAlreadyExistValidator {
         debounceTime(300),
         distinctUntilChanged(),
         switchMap(value =>
-          this._sharedHttpClientService.checkIfAccountValueAlreadyExist(
+          this._sharedHttpClientService.checkIfAccountValueAlreadyExist$(
             by,
             value
           )

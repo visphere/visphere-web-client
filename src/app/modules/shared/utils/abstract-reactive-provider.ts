@@ -12,7 +12,7 @@ export abstract class AbstractReactiveProvider {
     this._subscriptionHook.complete();
   }
 
-  protected wrapAsObservable<T>(input: Observable<T>): Observable<T> {
+  protected wrapAsObservable$<T>(input: Observable<T>): Observable<T> {
     return input.pipe(takeUntil(this._subscriptionHook));
   }
 }

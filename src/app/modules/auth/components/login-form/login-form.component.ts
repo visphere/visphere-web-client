@@ -4,9 +4,7 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { LoginService } from '~/auth-mod/services/login/login.service';
-import { LoginFormStage } from '~/auth-mod/types/form-stage.type';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -22,10 +20,9 @@ export class LoginFormComponent
   loginForm: FormGroup;
   nextButtonEnabled = false;
 
-  activeStage$: Observable<LoginFormStage> = this._loginService.currentStage$;
-  isNextButtonEnabled$: Observable<boolean> =
-    this._loginService.isNextButtonEnabled$;
-  isLoading$: Observable<boolean> = this._loginService.isLoading$;
+  activeStage$ = this._loginService.currentStage$;
+  isNextButtonEnabled$ = this._loginService.isNextButtonEnabled$;
+  isLoading$ = this._loginService.isLoading$;
 
   constructor(
     private readonly _loginService: LoginService,
@@ -43,7 +40,7 @@ export class LoginFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.loginForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
@@ -61,7 +58,7 @@ export class LoginFormComponent
   }
 
   handleSubmitLoginForm(): void {
-    this.wrapAsObservable(this._loginService.submitForm()).subscribe({
+    this.wrapAsObservable$(this._loginService.submitForm$()).subscribe({
       error: () => this.loginForm.get('password')?.reset(),
     });
   }

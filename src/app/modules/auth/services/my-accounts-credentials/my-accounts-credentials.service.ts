@@ -34,12 +34,12 @@ export class MyAccountsCredentialsService extends AbstractSimpleFormProvider<
     this._loggedUser = userAccount;
   }
 
-  override abstractSubmitForm(): Observable<LoginResDtoModel> {
+  override abstractSubmitForm$(): Observable<LoginResDtoModel> {
     const { password } = this.parseFormValues<MySavedAccountAuthFormModel>();
     if (!this._loggedUser) {
       return of();
     }
-    return this._loginFlowService.performLoginFlow(
+    return this._loginFlowService.performLoginFlow$(
       this._loggedUser?.usernameOrEmailAddress || '',
       password,
       () => this.setLoading(false),

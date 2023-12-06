@@ -4,7 +4,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
@@ -29,8 +28,7 @@ export class RegisterFormConsentsComponent
   someNoSelected = true;
   allSelected = false;
 
-  formDisabled$: Observable<boolean> =
-    this._populateFormGroupService.formDisabled$;
+  formDisabled$ = this._populateFormGroupService.formDisabled$;
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,
@@ -40,12 +38,12 @@ export class RegisterFormConsentsComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+    this.wrapAsObservable$(this._populateFormGroupService.field$).subscribe(
       formGroup => {
         this.formGroup = formGroup;
       }
     );
-    this.wrapAsObservable(this.formGroup.valueChanges).subscribe(() => {
+    this.wrapAsObservable$(this.formGroup.valueChanges).subscribe(() => {
       const { someNoSelected, allSelected } =
         this._formHelperService.boolFormDetails(this.formGroup, this.controls);
       this.someNoSelected = someNoSelected;

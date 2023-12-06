@@ -3,7 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
 import { lazyPageLoaderFade } from '~/shared-mod/animations/lazy-page-loader.animation';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
@@ -14,8 +13,7 @@ import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/la
   animations: [lazyPageLoaderFade],
 })
 export class LazyPageLoaderComponent {
-  isVisible$: Observable<boolean> =
-    this._lazyPageLoaderService.lazyLoaderIsVisible$;
+  isVisible$ = this._lazyPageLoaderService.lazyLoaderIsVisible$;
 
   cdnPath = environment.contentDistributorBaseUrl;
 

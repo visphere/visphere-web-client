@@ -17,7 +17,7 @@ export class MfaHttpClientService extends AbstractHttpProvider {
     super();
   }
 
-  getAuthenticatorData(
+  getAuthenticatorData$(
     req: LoginReqDtoModel
   ): Observable<MfaAuthenticatorDataResDto> {
     return this._httpClient.post<MfaAuthenticatorDataResDto>(
@@ -26,7 +26,7 @@ export class MfaHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  verifyCode(
+  verifyCode$(
     code: string,
     firstSetup: boolean,
     req: LoginReqDtoModel
@@ -38,14 +38,14 @@ export class MfaHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  alternativeEmailSend(req: LoginReqDtoModel): Observable<BaseMessageModel> {
+  alternativeEmailSend$(req: LoginReqDtoModel): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/auth/mfa/alternative/email`,
       req
     );
   }
 
-  alternativeEmailValidateToken(
+  alternativeEmailValidateToken$(
     token: string,
     req: LoginReqDtoModel
   ): Observable<LoginResDtoModel> {

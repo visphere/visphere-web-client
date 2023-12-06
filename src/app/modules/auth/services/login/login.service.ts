@@ -49,10 +49,10 @@ export class LoginService
     this._rootForm.get('password')?.reset();
   }
 
-  override abstractSubmitForm(): Observable<LoggedUser> {
+  override abstractSubmitForm$(): Observable<LoggedUser> {
     const { usernameOrEmailAddress, password, rememberAccount } =
       this.parseFormValues<LoginFormModel>();
-    return this._loginFlowService.performLoginFlow(
+    return this._loginFlowService.performLoginFlow$(
       usernameOrEmailAddress,
       password,
       () => this.setLoading(false),

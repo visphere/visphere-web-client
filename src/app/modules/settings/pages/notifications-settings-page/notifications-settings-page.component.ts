@@ -3,7 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { NotificationsSettingsService } from '~/settings-mod/services/notifications-settings/notifications-settings.service';
 import { FaviconBadgeNotificatorService } from '~/shared-mod/services/favicon-badge-notificator/favicon-badge-notificator.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -17,10 +16,8 @@ export class NotificationsSettingsPageComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  isLoading$: Observable<boolean> =
-    this._notificationsSettingsService.isLoading$;
-  isFetching$: Observable<boolean> =
-    this._notificationsSettingsService.isFetching$;
+  isLoading$ = this._notificationsSettingsService.isLoading$;
+  isFetching$ = this._notificationsSettingsService.isFetching$;
 
   isPushNotifsSelected = false;
   isPushNotifsSoundSelected = false;
@@ -36,8 +33,8 @@ export class NotificationsSettingsPageComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
-      this._notificationsSettingsService.loadPersistedNotifSettings()
+    this.wrapAsObservable$(
+      this._notificationsSettingsService.loadPersistedNotifSettings$()
     ).subscribe(({ isPushNotifsSelected, isPushNotifsSoundSelected }) => {
       this.isPushNotifsSelected = isPushNotifsSelected;
       this.isPushNotifsSoundSelected = isPushNotifsSoundSelected;
@@ -50,8 +47,8 @@ export class NotificationsSettingsPageComponent
 
   handleChangePushNotifsSetting(isEnabled: boolean): void {
     this.isPushNotifsSelected = isEnabled;
-    this.wrapAsObservable(
-      this._notificationsSettingsService.persistPushNotifsState(isEnabled)
+    this.wrapAsObservable$(
+      this._notificationsSettingsService.persistPushNotifsState$(isEnabled)
     ).subscribe({
       next: () => this._notificationsSettingsService.updateWsSignalValue(),
       error: () => (this.isPushNotifsSelected = !isEnabled),
@@ -60,8 +57,8 @@ export class NotificationsSettingsPageComponent
 
   handleChangePushNotifsSoundSetting(isEnabled: boolean): void {
     this.isPushNotifsSoundSelected = isEnabled;
-    this.wrapAsObservable(
-      this._notificationsSettingsService.persistPushNotifsSoundState(isEnabled)
+    this.wrapAsObservable$(
+      this._notificationsSettingsService.persistPushNotifsSoundState$(isEnabled)
     ).subscribe({
       next: () => this._notificationsSettingsService.updateWsSignalValue(),
       error: () => (this.isPushNotifsSelected = !isEnabled),

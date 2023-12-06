@@ -4,7 +4,6 @@
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { MfaCodeService } from '~/auth-mod/services/mfa-code/mfa-code.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -23,7 +22,7 @@ export class MfaCodeFormComponent
   @Input() firstSetup = false;
 
   codeForm: FormGroup;
-  isLoading$: Observable<boolean> = this._mfaCodeService.isLoading$;
+  isLoading$ = this._mfaCodeService.isLoading$;
 
   constructor(
     private readonly _mfaCodeService: MfaCodeService,
@@ -43,7 +42,7 @@ export class MfaCodeFormComponent
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.codeForm);
     this._mfaCodeService.setFirstSetup(this.firstSetup);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
@@ -53,7 +52,7 @@ export class MfaCodeFormComponent
   }
 
   handleSubmitCodeForm(): void {
-    this.wrapAsObservable(this._mfaCodeService.submitForm()).subscribe({
+    this.wrapAsObservable$(this._mfaCodeService.submitForm$()).subscribe({
       next: () => this.codeForm.reset(),
       error: () => this.codeForm.reset(),
     });

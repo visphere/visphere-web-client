@@ -42,10 +42,10 @@ export class BirthDateSelectSpinnerComponent
 
   ngOnInit(): void {
     this._populateFormControlervice.setFields('birthDate', this.i18nPrefix);
-    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+    this.wrapAsObservable$(this._populateFormGroupService.field$).subscribe(
       formGroup => (this.formGroup = formGroup)
     );
-    this.wrapAsObservable(this._translateService.onLangChange).subscribe(
+    this.wrapAsObservable$(this._translateService.onLangChange).subscribe(
       ({ lang }) => (this.formMonths = this.generateAndConvertMonths(lang))
     );
   }

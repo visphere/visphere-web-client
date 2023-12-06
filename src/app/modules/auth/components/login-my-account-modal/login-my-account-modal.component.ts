@@ -11,7 +11,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { MyAccountsCredentialsService } from '~/auth-mod/services/my-accounts-credentials/my-accounts-credentials.service';
 import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.service';
 import { environment } from '~/env/environment';
@@ -33,10 +32,8 @@ export class LoginMyAccountModalComponent
   loginForm: FormGroup;
   cdnPath = environment.contentDistributorBaseUrl;
 
-  isLoading$: Observable<boolean> =
-    this._myAccountsCredentialsService.isLoading$;
-  isOpen$: Observable<boolean> =
-    this._myAccountsService.loginOnAccountModalIsOpen$;
+  isLoading$ = this._myAccountsCredentialsService.isLoading$;
+  isOpen$ = this._myAccountsService.loginOnAccountModalIsOpen$;
 
   constructor(
     private readonly _myAccountsService: MyAccountsService,
@@ -70,8 +67,8 @@ export class LoginMyAccountModalComponent
   }
 
   handleLoginViaSavedAccount(): void {
-    this.wrapAsObservable(
-      this._myAccountsCredentialsService.submitForm()
+    this.wrapAsObservable$(
+      this._myAccountsCredentialsService.submitForm$()
     ).subscribe({ next: () => this.handleEmitOnClose() });
   }
 }

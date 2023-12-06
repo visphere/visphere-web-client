@@ -5,7 +5,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
-import { Observable, combineLatest } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
@@ -37,8 +37,7 @@ export class AuthCommonFormInputComponent
   };
   i18nInfo = '';
 
-  formDisabled$: Observable<boolean> =
-    this._populateFormGroupService.formDisabled$;
+  formDisabled$ = this._populateFormGroupService.formDisabled$;
 
   constructor(
     private readonly _formHelperService: FormHelperService,
@@ -56,7 +55,7 @@ export class AuthCommonFormInputComponent
       this.formControlIdentifier,
       this.i18nPrefix
     );
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       combineLatest([
         this._populateFormGroupService.field$,
         this._populateFormGroupService.formDisabled$,

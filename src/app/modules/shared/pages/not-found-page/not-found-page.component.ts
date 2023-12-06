@@ -26,7 +26,7 @@ export class NotFoundPageComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._languageSwitcherService.selectedLang$
     ).subscribe(lang => {
       this.landingPagePath = `${environment.baseLandingUrl}${lang.landingPrefix}`;

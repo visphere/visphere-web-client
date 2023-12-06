@@ -51,7 +51,7 @@ export class FillDataFormComponent
     private readonly _formHelperService: FormHelperService
   ) {
     super();
-    this.wrapAsObservable(this.userData$).subscribe(data => {
+    this.wrapAsObservable$(this.userData$).subscribe(data => {
       this.fillDataForm = new FormGroup({
         username: new FormControl(
           data?.username,
@@ -83,10 +83,10 @@ export class FillDataFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.fillDataForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
-    this.wrapAsObservable(this.fillDataForm.valueChanges).subscribe(() => {
+    this.wrapAsObservable$(this.fillDataForm.valueChanges).subscribe(() => {
       const { someNoSelected, allSelected } =
         this._formHelperService.boolFormDetails(
           this.fillDataForm,
@@ -102,7 +102,7 @@ export class FillDataFormComponent
   }
 
   handleSubmitFillDataForm(): void {
-    this.wrapAsObservable(this._fillDataService.submitForm()).subscribe();
+    this.wrapAsObservable$(this._fillDataService.submitForm$()).subscribe();
   }
 
   handleToggleAllValues(): void {

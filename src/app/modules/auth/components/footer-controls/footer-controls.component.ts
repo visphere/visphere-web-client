@@ -3,7 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
@@ -21,13 +20,11 @@ import { TranslationRow } from '~/shared-mod/types/translation.type';
 export class FooterControlsComponent {
   path = environment.contentDistributorBaseUrl;
 
-  traslations: TranslationRow[] = this._languageSwitcherService.availableLangs;
-  selectedLang$: Observable<TranslationRow> =
-    this._languageSwitcherService.selectedLang$;
+  traslations = this._languageSwitcherService.availableLangs;
+  selectedLang$ = this._languageSwitcherService.selectedLang$;
 
-  themes: ThemeModeType[] = this._themeSwitcherService.availableThemes;
-  selectedTheme$: Observable<ThemeModeType> =
-    this._themeSwitcherService.selectedTheme$;
+  themes = this._themeSwitcherService.availableThemes;
+  selectedTheme$ = this._themeSwitcherService.selectedTheme$;
 
   constructor(
     private readonly _themeSwitcherService: ThemeSwitcherService,

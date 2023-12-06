@@ -33,7 +33,7 @@ export class PasswordStrengthMeterComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+    this.wrapAsObservable$(this._populateFormGroupService.field$).subscribe(
       formGroup => {
         this.formGroup = formGroup;
         const passwordFormControl = formGroup.get(this.formControlIdentifier);

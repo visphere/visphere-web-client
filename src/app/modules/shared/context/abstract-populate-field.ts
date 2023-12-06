@@ -5,7 +5,7 @@
 import { Observable, ReplaySubject } from 'rxjs';
 
 export abstract class AbstractPopulateField<T> {
-  private _field$: ReplaySubject<T> = new ReplaySubject<T>(1);
+  private _field$ = new ReplaySubject<T>(1);
 
   setField(field: T): void {
     this._field$.next(field);

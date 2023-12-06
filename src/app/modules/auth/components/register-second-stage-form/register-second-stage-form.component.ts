@@ -4,7 +4,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -21,7 +20,7 @@ export class RegisterSecondStageFormComponent
   rootForm: FormGroup;
   secondStageForm: FormGroup;
 
-  isLoading$: Observable<boolean> = this._registerService.isLoading$;
+  isLoading$ = this._registerService.isLoading$;
 
   constructor(
     private readonly _registerService: RegisterService,
@@ -34,7 +33,7 @@ export class RegisterSecondStageFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.secondStageForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }

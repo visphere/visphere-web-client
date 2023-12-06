@@ -32,7 +32,7 @@ export class AuthLoginPageComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._oauthLoginService.performLoginViaProvider$()
     ).subscribe({
       next: async () => this._router.navigateByUrl('/'),

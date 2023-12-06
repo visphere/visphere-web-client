@@ -36,7 +36,7 @@ export class MfaEmailFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.tokenForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
@@ -46,11 +46,13 @@ export class MfaEmailFormComponent
   }
 
   handleSendEmailMessage(): void {
-    this.wrapAsObservable(this._mfaEmailService.sendEmailMessage()).subscribe();
+    this.wrapAsObservable$(
+      this._mfaEmailService.sendEmailMessage$()
+    ).subscribe();
   }
 
   handleSubmitTokenForm(): void {
-    this.wrapAsObservable(this._mfaEmailService.submitForm()).subscribe({
+    this.wrapAsObservable$(this._mfaEmailService.submitForm$()).subscribe({
       next: () => this.tokenForm.reset(),
       error: () => this.tokenForm.reset(),
     });

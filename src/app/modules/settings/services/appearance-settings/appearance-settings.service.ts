@@ -25,11 +25,11 @@ export class AppearanceSettingsService extends AbstractUserSettingsProvider {
     super(_store);
   }
 
-  loadAvailableThemes(): Observable<RelatedWithElements> {
+  loadAvailableThemes$(): Observable<RelatedWithElements> {
     return this._onChangeObserver$.pipe(
       switchMap(() =>
         this._settingsHttpClientService
-          .getUserSettings()
+          .getUserSettings$()
           .pipe(
             switchMap(userSettings =>
               this._themeSwitcherService.selectedTheme$.pipe(
@@ -64,12 +64,12 @@ export class AppearanceSettingsService extends AbstractUserSettingsProvider {
     );
   }
 
-  persistRelatedTheme(
+  persistRelatedTheme$(
     selectedTheme: string | null
   ): Observable<BaseMessageModel | null> {
     this.setLoading(true);
     return this._settingsHttpClientService
-      .relateThemeWithUser({ relatedValue: selectedTheme })
+      .relateThemeWithUser$({ relatedValue: selectedTheme })
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);

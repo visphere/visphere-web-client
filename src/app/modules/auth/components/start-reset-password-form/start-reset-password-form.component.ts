@@ -4,7 +4,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { StartResetPasswordService } from '~/auth-mod/services/start-reset-password/start-reset-password.service';
 import { CaptchaVerificationService } from '~/root-mod/modules/shared/services/captcha-verification/captcha-verification.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
@@ -26,7 +25,7 @@ export class StartResetPasswordFormComponent
 {
   startResetPasswordForm: FormGroup;
 
-  isLoading$: Observable<boolean> = this._startResetPasswordService.isLoading$;
+  isLoading$ = this._startResetPasswordService.isLoading$;
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,
@@ -47,7 +46,7 @@ export class StartResetPasswordFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.startResetPasswordForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
@@ -57,8 +56,8 @@ export class StartResetPasswordFormComponent
   }
 
   handleEmitOnAcceptCaptcha(): void {
-    this.wrapAsObservable(
-      this._startResetPasswordService.submitForm()
+    this.wrapAsObservable$(
+      this._startResetPasswordService.submitForm$()
     ).subscribe();
   }
 

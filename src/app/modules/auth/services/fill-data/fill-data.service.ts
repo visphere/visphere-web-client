@@ -83,7 +83,7 @@ export class FillDataService extends AbstractSimpleFormProvider<LoginResDtoModel
       );
   }
 
-  override abstractSubmitForm(): Observable<LoginResDtoModel> {
+  override abstractSubmitForm$(): Observable<LoginResDtoModel> {
     const data = this.parseFormValues<UpdateUserAccountDataReqFormModel>();
     return this._oauth2HttpClientService
       .updateUserAccountData$(

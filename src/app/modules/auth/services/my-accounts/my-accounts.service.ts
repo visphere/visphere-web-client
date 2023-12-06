@@ -46,8 +46,8 @@ export class MyAccountsService
     private readonly _authHttpClientService: AuthHttpClientService
   ) {
     super();
-    this.wrapAsObservable(
-      this._authHttpClientService.checkIfMyAccountsExists(
+    this.wrapAsObservable$(
+      this._authHttpClientService.checkIfMyAccountsExists$(
         this.mapAccountsToReqDtos()
       )
     )
@@ -88,7 +88,7 @@ export class MyAccountsService
     this._loginOnAccountModalIsOpen$.next(isOpen);
   }
 
-  override abstractSubmitForm(): Observable<AddNewMyAccountFormModel> {
+  override abstractSubmitForm$(): Observable<AddNewMyAccountFormModel> {
     const { usernameOrEmailAddress } =
       this.parseFormValues<AddNewMyAccountFormModel>();
 

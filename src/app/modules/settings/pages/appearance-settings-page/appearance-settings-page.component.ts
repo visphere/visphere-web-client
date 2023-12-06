@@ -3,7 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AppearanceSettingsService } from '~/settings-mod/services/appearance-settings/appearance-settings.service';
 import { RadioElement } from '~/settings-mod/types/radio-element.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -17,9 +16,8 @@ export class AppearanceSettingsPageComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  isLoading$: Observable<boolean> = this._appearanceSettingsService.isLoading$;
-  isFetching$: Observable<boolean> =
-    this._appearanceSettingsService.isFetching$;
+  isLoading$ = this._appearanceSettingsService.isLoading$;
+  isFetching$ = this._appearanceSettingsService.isFetching$;
 
   appearanceData: RadioElement[] = [];
   definedValue = '';
@@ -35,8 +33,8 @@ export class AppearanceSettingsPageComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
-      this._appearanceSettingsService.loadAvailableThemes()
+    this.wrapAsObservable$(
+      this._appearanceSettingsService.loadAvailableThemes$()
     ).subscribe(({ elements, definedValue, isSelected }) => {
       this.appearanceData = elements;
       this.definedValue = definedValue;
@@ -51,8 +49,8 @@ export class AppearanceSettingsPageComponent
   handleChangeAppearance(element: RadioElement): void {
     this._appearanceSettingsService.saveSelectedTheme(element);
     if (this.isSelected) {
-      this.wrapAsObservable(
-        this._appearanceSettingsService.persistRelatedTheme(
+      this.wrapAsObservable$(
+        this._appearanceSettingsService.persistRelatedTheme$(
           element.id as string
         )
       ).subscribe({
@@ -63,8 +61,8 @@ export class AppearanceSettingsPageComponent
 
   handleChangeRelateSetting(isRelated: boolean): void {
     this.isSelected = isRelated;
-    this.wrapAsObservable(
-      this._appearanceSettingsService.persistRelatedTheme(
+    this.wrapAsObservable$(
+      this._appearanceSettingsService.persistRelatedTheme$(
         this.isSelected ? this.definedValue : null
       )
     ).subscribe({

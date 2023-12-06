@@ -53,10 +53,10 @@ export class RegisterService extends AbstractMultistageFormProvider<
     );
   }
 
-  override abstractSubmitForm(): Observable<BaseMessageModel> {
+  override abstractSubmitForm$(): Observable<BaseMessageModel> {
     const data = this.parseFormValues<RegisterFormModel>();
     return this._authHttpClientService
-      .registerViaAppAccount(this.mapToRegiterReqDto(data))
+      .registerViaAppAccount$(this.mapToRegiterReqDto(data))
       .pipe(
         tap(({ message }) => {
           this._store.dispatch(

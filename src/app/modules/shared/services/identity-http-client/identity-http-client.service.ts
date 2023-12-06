@@ -19,7 +19,7 @@ export class IdentityHttpClientService extends AbstractHttpProvider {
     super();
   }
 
-  loginViaAccessToken(refreshToken: string): Observable<LoginResDtoModel> {
+  loginViaAccessToken$(refreshToken: string): Observable<LoginResDtoModel> {
     const headers = new HttpHeaders({
       'X-RefreshToken': refreshToken,
     });
@@ -30,14 +30,14 @@ export class IdentityHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  refrehToken(req: RefreshTokenReqDto): Observable<RefreshTokenResDto> {
+  refrehToken$(req: RefreshTokenReqDto): Observable<RefreshTokenResDto> {
     return this._httpClient.patch<RefreshTokenResDto>(
       `${this._infraApiPath}/api/v1/auth/identity/refresh`,
       req
     );
   }
 
-  logout(refreshToken: string): Observable<BaseMessageModel> {
+  logout$(refreshToken: string): Observable<BaseMessageModel> {
     const headers = new HttpHeaders({
       'X-RefreshToken': refreshToken,
     });

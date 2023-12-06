@@ -28,11 +28,11 @@ export class MfaCodeService
     super(store, router);
   }
 
-  override abstractSubmitForm(): Observable<LoginResDtoModel> {
+  override abstractSubmitForm$(): Observable<LoginResDtoModel> {
     const { code } = this.parseFormValues<MfaCodeForm>();
     const { usernameOrEmailAddress, password } = this._mfaState;
-    return this.verifyCodeAndPerformLogin(
-      this._mfaHttpClientService.verifyCode(code, this._firstSetup, {
+    return this.verifyCodeAndPerformLogin$(
+      this._mfaHttpClientService.verifyCode$(code, this._firstSetup, {
         usernameOrEmailAddress,
         password,
       })

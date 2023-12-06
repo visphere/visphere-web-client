@@ -29,8 +29,8 @@ export class ChangePasswordService extends AbstractSimpleFormStateProvider<
     super('change');
   }
 
-  validateToken(token: string): Observable<BaseMessageModel> {
-    return this._authHttpClientService.resetPasswordValidateToken(token).pipe(
+  validateToken$(token: string): Observable<BaseMessageModel> {
+    return this._authHttpClientService.resetPasswordValidateToken$(token).pipe(
       catchError(async err => {
         await this._router.navigateByUrl('/auth/reset-password');
         return err;
@@ -38,10 +38,10 @@ export class ChangePasswordService extends AbstractSimpleFormStateProvider<
     );
   }
 
-  override abstractSubmitForm(): Observable<BaseMessageModel> {
+  override abstractSubmitForm$(): Observable<BaseMessageModel> {
     const data = this.parseFormValues<ChangePasswordFormModel>();
     return this._authHttpClientService
-      .changePasswordViaEmail(data, this._token)
+      .changePasswordViaEmail$(data, this._token)
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);

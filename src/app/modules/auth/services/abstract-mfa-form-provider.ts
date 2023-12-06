@@ -22,7 +22,7 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
     private readonly _absRouter: Router
   ) {
     super();
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._absStore.select(NgrxSelector_ATH.selectMfaState)
     ).subscribe(state => {
       if (state) {
@@ -31,10 +31,10 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
     });
   }
 
-  protected verifyCodeAndPerformLogin(
-    pipingObject: Observable<LoginResDtoModel>
+  protected verifyCodeAndPerformLogin$(
+    pipingObject$: Observable<LoginResDtoModel>
   ): Observable<LoginResDtoModel> {
-    return pipingObject.pipe(
+    return pipingObject$.pipe(
       tap(async res => {
         this.setLoading(false);
         this._absStore.dispatch(

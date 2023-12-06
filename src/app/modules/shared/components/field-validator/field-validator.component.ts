@@ -43,10 +43,10 @@ export class FieldValidatorComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(this._populateFormGroupService.field$).subscribe(
+    this.wrapAsObservable$(this._populateFormGroupService.field$).subscribe(
       formGroup => (this.formGroup = formGroup)
     );
-    this.wrapAsObservable(this._populateFormControlService.fields$).subscribe(
+    this.wrapAsObservable$(this._populateFormControlService.fields$).subscribe(
       ([formControlName, i18nPrefix]) => {
         this.formControlName = formControlName;
         this.i18nPrefix = i18nPrefix;

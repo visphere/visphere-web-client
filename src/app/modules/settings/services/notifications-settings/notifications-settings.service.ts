@@ -21,9 +21,9 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
     super(_store);
   }
 
-  loadPersistedNotifSettings(): Observable<UserPersistedNofisSettings> {
+  loadPersistedNotifSettings$(): Observable<UserPersistedNofisSettings> {
     return this._onChangeObserver$.pipe(
-      switchMap(() => this._settingsHttpClientService.getUserSettings()),
+      switchMap(() => this._settingsHttpClientService.getUserSettings$()),
       map(userSettings => {
         this._store.dispatch(
           NgrxAction_SHA.__updateLoggedUserSettings({ userSettings })
@@ -37,9 +37,9 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
     );
   }
 
-  persistPushNotifsState(isEnabled: boolean): Observable<BaseMessageModel> {
+  persistPushNotifsState$(isEnabled: boolean): Observable<BaseMessageModel> {
     this.setLoading(true);
-    return this._settingsHttpClientService.updateNotifsState(isEnabled).pipe(
+    return this._settingsHttpClientService.updateNotifsState$(isEnabled).pipe(
       tap(({ message }) => {
         this.setLoading(false);
         this.showSuccessSnackbar(message);
@@ -51,12 +51,12 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
     );
   }
 
-  persistPushNotifsSoundState(
+  persistPushNotifsSoundState$(
     isEnabled: boolean
   ): Observable<BaseMessageModel> {
     this.setLoading(true);
     return this._settingsHttpClientService
-      .updateNotifsSoundState(isEnabled)
+      .updateNotifsSoundState$(isEnabled)
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);

@@ -4,7 +4,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.service';
 import { MyAcccountUserAlreadyExistValidator } from '~/auth-mod/validators/my-account-user-already-exist.validator';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
@@ -19,8 +18,8 @@ export class AddMyAccountModalComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  isLoading$: Observable<boolean> = this._myAccountsService.isLoading$;
-  isOpen$: Observable<boolean> = this._myAccountsService.addNewModalIsOpen$;
+  isLoading$ = this._myAccountsService.isLoading$;
+  isOpen$ = this._myAccountsService.addNewModalIsOpen$;
 
   addMyAccountForm: FormGroup;
 
@@ -54,7 +53,7 @@ export class AddMyAccountModalComponent
   }
 
   handleAddNewAccount(): void {
-    this.wrapAsObservable(this._myAccountsService.submitForm()).subscribe({
+    this.wrapAsObservable$(this._myAccountsService.submitForm$()).subscribe({
       next: () => this.handleEmitOnClose(),
     });
   }

@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
 import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
@@ -34,9 +33,8 @@ export class VerifyCaptchaModalComponent
 
   @Output() emitOnAccept = new EventEmitter();
 
-  isActive$: Observable<boolean> =
-    this._captchaVerificationService.isModalOpen$;
-  isLoading$: Observable<boolean> = this._captchaVerificationService.isLoading$;
+  isActive$ = this._captchaVerificationService.isModalOpen$;
+  isLoading$ = this._captchaVerificationService.isLoading$;
 
   isActive = false;
   errorMessage = '';
@@ -56,10 +54,10 @@ export class VerifyCaptchaModalComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._languageSwitcherService.selectedLang$
     ).subscribe(({ lang }) => (this.selectedLang = lang));
-    this.wrapAsObservable(this.isActive$).subscribe(isActive => {
+    this.wrapAsObservable$(this.isActive$).subscribe(isActive => {
       this.isActive = isActive;
       if (!isActive) {
         this.errorMessage = '';
@@ -91,15 +89,15 @@ export class VerifyCaptchaModalComponent
   }
 
   handleOnVerified(): void {
-    this.wrapAsObservable(
-      this._captchaVerificationService.submitForm()
+    this.wrapAsObservable$(
+      this._captchaVerificationService.submitForm$()
     ).subscribe({
       next: () => this.emitOnAccept.emit(),
     });
   }
 
   handleOnError(event: HcaptchaErrorEvent): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._translateService.get('vsph.common.utils.unknowError')
     ).subscribe(message => (this.errorMessage = event.error || message));
   }

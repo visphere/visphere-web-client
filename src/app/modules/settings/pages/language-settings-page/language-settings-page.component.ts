@@ -3,7 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { LanguageSettingsService } from '~/settings-mod/services/language-settings/language-settings.service';
 import { RadioElement } from '~/settings-mod/types/radio-element.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -17,8 +16,8 @@ export class LanguageSettingsPageComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  isLoading$: Observable<boolean> = this._languageSettingsService.isLoading$;
-  isFetching$: Observable<boolean> = this._languageSettingsService.isFetching$;
+  isLoading$ = this._languageSettingsService.isLoading$;
+  isFetching$ = this._languageSettingsService.isFetching$;
 
   languageData: RadioElement[] = [];
   definedValue = '';
@@ -34,8 +33,8 @@ export class LanguageSettingsPageComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
-      this._languageSettingsService.loadAvailableLanguages()
+    this.wrapAsObservable$(
+      this._languageSettingsService.loadAvailableLanguages$()
     ).subscribe(({ elements, definedValue, isSelected }) => {
       this.languageData = elements;
       this.definedValue = definedValue;
@@ -50,8 +49,8 @@ export class LanguageSettingsPageComponent
   handleChangeLanguage(element: RadioElement): void {
     this._languageSettingsService.saveSelectedLang(element);
     if (this.isSelected) {
-      this.wrapAsObservable(
-        this._languageSettingsService.persistRelatedLanguage(
+      this.wrapAsObservable$(
+        this._languageSettingsService.persistRelatedLanguage$(
           element.id as string
         )
       ).subscribe({
@@ -64,8 +63,8 @@ export class LanguageSettingsPageComponent
 
   handleChangeRelateSetting(isRelated: boolean): void {
     this.isSelected = isRelated;
-    this.wrapAsObservable(
-      this._languageSettingsService.persistRelatedLanguage(
+    this.wrapAsObservable$(
+      this._languageSettingsService.persistRelatedLanguage$(
         this.isSelected ? this.definedValue : null
       )
     ).subscribe({

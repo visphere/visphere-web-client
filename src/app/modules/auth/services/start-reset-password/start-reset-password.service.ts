@@ -23,11 +23,11 @@ export class StartResetPasswordService extends AbstractSimpleFormProvider<BaseMe
     super();
   }
 
-  override abstractSubmitForm(): Observable<BaseMessageModel> {
+  override abstractSubmitForm$(): Observable<BaseMessageModel> {
     const { usernameOrEmailAddress } =
       this.parseFormValues<StartResetPasswordViaEmailFormModel>();
     return this._authHttpClientService
-      .startResetPasswordViaEmail({ usernameOrEmailAddress })
+      .startResetPasswordViaEmail$({ usernameOrEmailAddress })
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);

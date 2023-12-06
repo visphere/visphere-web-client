@@ -44,7 +44,7 @@ export class AgreeTermsContentComponent
 
   ngOnInit(): void {
     this.agreeTermsContent$ = this.generateTermsContent();
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       combineLatest([
         this._languageSwitcherService.selectedLang$,
         this._populateFormGroupService.field$,

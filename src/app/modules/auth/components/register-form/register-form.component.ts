@@ -102,7 +102,7 @@ export class RegisterFormComponent
   }
 
   handleEmitOnAcceptCaptcha(): void {
-    this.wrapAsObservable(this._registerService.submitForm()).subscribe();
+    this.wrapAsObservable$(this._registerService.submitForm$()).subscribe();
   }
 
   handleSubmitRegisterForm(): void {

@@ -89,7 +89,7 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
         expiredAccessToken: accessToken,
         refreshToken,
       };
-      return this._identityHttpClientService.refrehToken(reqDto).pipe(
+      return this._identityHttpClientService.refrehToken$(reqDto).pipe(
         switchMap(res => {
           this._isRefreshing = false;
           this._localStorageService.save<StorageKeys>('loggedUser', {

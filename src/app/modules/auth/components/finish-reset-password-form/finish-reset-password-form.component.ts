@@ -39,7 +39,7 @@ export class FinishResetPasswordFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.finishResetPasswordForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
@@ -49,14 +49,14 @@ export class FinishResetPasswordFormComponent
   }
 
   handleSubmitFinishResetPasswordForm(): void {
-    this.wrapAsObservable(
-      this._finishResetPasswordService.submitForm()
+    this.wrapAsObservable$(
+      this._finishResetPasswordService.submitForm$()
     ).subscribe();
   }
 
   handleResendMessage(): void {
-    this.wrapAsObservable(
-      this._finishResetPasswordService.resendEmailMessage()
+    this.wrapAsObservable$(
+      this._finishResetPasswordService.resendEmailMessage$()
     ).subscribe();
   }
 }

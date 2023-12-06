@@ -6,10 +6,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { ActivateAccountService } from '~/auth-mod/services/activate-account/activate-account.service';
 import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
-import { ActivateAccountFormStage } from '~/auth-mod/types/form-stage.type';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
@@ -26,14 +24,10 @@ export class ActivateAccountFormComponent
 {
   activateAccountForm: FormGroup;
 
-  userEmail$: Observable<string> = this._store.select(
-    NgrxSelector_ATH.selectActivateAccountEmail
-  );
-  isLoading$: Observable<boolean> = this._activateAccountService.isLoading$;
-  isResendLoading$: Observable<boolean> =
-    this._activateAccountService.resendIsLoading$;
-  currentStage$: Observable<ActivateAccountFormStage> =
-    this._activateAccountService.currentStage$;
+  userEmail$ = this._store.select(NgrxSelector_ATH.selectActivateAccountEmail);
+  isLoading$ = this._activateAccountService.isLoading$;
+  isResendLoading$ = this._activateAccountService.resendIsLoading$;
+  currentStage$ = this._activateAccountService.currentStage$;
 
   constructor(
     private readonly _store: Store<AuthReducer>,
@@ -53,12 +47,12 @@ export class ActivateAccountFormComponent
     const token = this._activatedRoute.snapshot.paramMap.get('token');
     if (token) {
       this._lazyPageLoaderService.setLoading();
-      this.wrapAsObservable(
-        this._activateAccountService.validateToken(token)
+      this.wrapAsObservable$(
+        this._activateAccountService.validateToken$(token)
       ).subscribe({ next: () => this._lazyPageLoaderService.disableLoading() });
     }
     this._populateFormGroupService.setField(this.activateAccountForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
@@ -68,14 +62,14 @@ export class ActivateAccountFormComponent
   }
 
   handleSubmitactivateAccountForm(): void {
-    this.wrapAsObservable(
-      this._activateAccountService.submitForm()
+    this.wrapAsObservable$(
+      this._activateAccountService.submitForm$()
     ).subscribe();
   }
 
   handleResendMessage(): void {
-    this.wrapAsObservable(
-      this._activateAccountService.resendEmailMessage()
+    this.wrapAsObservable$(
+      this._activateAccountService.resendEmailMessage$()
     ).subscribe();
   }
 

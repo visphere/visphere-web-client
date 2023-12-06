@@ -38,8 +38,8 @@ export class CaptchaVerificationService
     @Inject(DOCUMENT) private readonly _document: Document
   ) {
     super();
-    this.wrapAsObservable(
-      this._sharedHttpClientService.getClientIpAddress()
+    this.wrapAsObservable$(
+      this._sharedHttpClientService.getClientIpAddress$()
     ).subscribe(res => (this._clientIpAddress = res.ip));
   }
 
@@ -56,7 +56,7 @@ export class CaptchaVerificationService
     this._isModalOpen$.next(isOpen);
   }
 
-  override abstractSubmitForm(): Observable<BaseMessageModel> {
+  override abstractSubmitForm$(): Observable<BaseMessageModel> {
     const { value } = this._document.querySelector(
       '[name=h-captcha-response]'
     ) as HTMLTextAreaElement;

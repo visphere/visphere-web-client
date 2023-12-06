@@ -34,22 +34,22 @@ export class MfaEmailService
     this.unmountAllSubscriptions();
   }
 
-  override abstractSubmitForm(): Observable<LoginResDtoModel> {
+  override abstractSubmitForm$(): Observable<LoginResDtoModel> {
     const { token } = this.parseFormValues<MfaTokenForm>();
     const { usernameOrEmailAddress, password } = this._mfaState;
-    return this.verifyCodeAndPerformLogin(
-      this._mfaHttpClientService.alternativeEmailValidateToken(token, {
+    return this.verifyCodeAndPerformLogin$(
+      this._mfaHttpClientService.alternativeEmailValidateToken$(token, {
         usernameOrEmailAddress,
         password,
       })
     );
   }
 
-  sendEmailMessage(): Observable<BaseMessageModel> {
+  sendEmailMessage$(): Observable<BaseMessageModel> {
     const { usernameOrEmailAddress, password } = this._mfaState;
     this._isSending$.next(true);
     return this._mfaHttpClientService
-      .alternativeEmailSend({
+      .alternativeEmailSend$({
         usernameOrEmailAddress,
         password,
       })

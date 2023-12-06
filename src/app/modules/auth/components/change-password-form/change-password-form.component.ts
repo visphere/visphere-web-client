@@ -11,9 +11,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ChangePasswordService } from '~/auth-mod/services/change-password/change-password.service';
-import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -33,9 +31,8 @@ export class ChangePasswordFormComponent
 
   changePasswordForm: FormGroup;
 
-  isLoading$: Observable<boolean> = this._changePasswordService.isLoading$;
-  currentStage$: Observable<ChangePasswordFormStage> =
-    this._changePasswordService.currentStage$;
+  isLoading$ = this._changePasswordService.isLoading$;
+  currentStage$ = this._changePasswordService.currentStage$;
 
   constructor(
     private readonly _changePasswordService: ChangePasswordService,
@@ -64,11 +61,11 @@ export class ChangePasswordFormComponent
   ngOnInit(): void {
     const token = this._activatedRoute.snapshot.paramMap.get('token') || '';
     this._changePasswordService.setToken(token);
-    this.wrapAsObservable(
-      this._changePasswordService.validateToken(token)
+    this.wrapAsObservable$(
+      this._changePasswordService.validateToken$(token)
     ).subscribe();
     this._populateFormGroupService.setField(this.changePasswordForm);
-    this.wrapAsObservable(this.isLoading$).subscribe(isLoading =>
+    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }
@@ -78,7 +75,9 @@ export class ChangePasswordFormComponent
   }
 
   handleSubmitChangePasswordForm(): void {
-    this.wrapAsObservable(this._changePasswordService.submitForm()).subscribe();
+    this.wrapAsObservable$(
+      this._changePasswordService.submitForm$()
+    ).subscribe();
   }
 
   ngAfterViewInit(): void {

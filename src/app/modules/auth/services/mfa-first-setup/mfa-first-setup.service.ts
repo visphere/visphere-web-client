@@ -40,7 +40,7 @@ export class MfaFirstSetupService
     private readonly _store: Store<AuthReducer>
   ) {
     super();
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._store.select(NgrxSelector_ATH.selectMfaState)
     ).subscribe(state => {
       if (state) {
@@ -53,13 +53,13 @@ export class MfaFirstSetupService
     this.unmountAllSubscriptions();
   }
 
-  loadMfaData(): Observable<MfaAuthenticatorDataResDto | undefined> {
+  loadMfaData$(): Observable<MfaAuthenticatorDataResDto | undefined> {
     if (!this._mfaState) {
       return of(undefined);
     }
     const { usernameOrEmailAddress, password } = this._mfaState;
     return this._mfaHttpClientService
-      .getAuthenticatorData({ usernameOrEmailAddress, password })
+      .getAuthenticatorData$({ usernameOrEmailAddress, password })
       .pipe(
         map(data => {
           this._fetchingState$.next('success');

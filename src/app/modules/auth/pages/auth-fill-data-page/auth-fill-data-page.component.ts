@@ -32,7 +32,7 @@ export class AuthFillDataPageComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(this._fillDataService.loadUserData$()).subscribe({
+    this.wrapAsObservable$(this._fillDataService.loadUserData$()).subscribe({
       next: res => (this.userData = res),
       error: async () => await this._router.navigateByUrl('/auth/login'),
     });

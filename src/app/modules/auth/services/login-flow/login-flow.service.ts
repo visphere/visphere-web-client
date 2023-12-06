@@ -21,14 +21,14 @@ export class LoginFlowService {
     private readonly _router: Router
   ) {}
 
-  performLoginFlow(
+  performLoginFlow$(
     usernameOrEmailAddress: string,
     password: string,
     onSubmitCallback: () => void,
     onSaveCallback: (res: LoginResDtoModel) => void
   ): Observable<LoginResDtoModel> {
     return this._authHttpClientService
-      .loginViaAppAccount({
+      .loginViaAppAccount$({
         usernameOrEmailAddress,
         password,
       })

@@ -16,20 +16,22 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
     super();
   }
 
-  getUserSettings(): Observable<UserSettings> {
+  getUserSettings$(): Observable<UserSettings> {
     return this._httpClient.get<UserSettings>(
       `${this._infraApiPath}/api/v1/settings/user/settings`
     );
   }
 
-  relateLangWithUser(reqDto: RelatedValueReqDto): Observable<BaseMessageModel> {
+  relateLangWithUser$(
+    reqDto: RelatedValueReqDto
+  ): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/settings/user/relate/lang`,
       reqDto
     );
   }
 
-  relateThemeWithUser(
+  relateThemeWithUser$(
     reqDto: RelatedValueReqDto
   ): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
@@ -38,7 +40,7 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  updateNotifsState(enabled: boolean): Observable<BaseMessageModel> {
+  updateNotifsState$(enabled: boolean): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/settings/user/push/notifications`,
       null,
@@ -46,7 +48,7 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  updateNotifsSoundState(enabled: boolean): Observable<BaseMessageModel> {
+  updateNotifsSoundState$(enabled: boolean): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/settings/user/push/notifications/sound`,
       null,

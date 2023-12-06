@@ -3,9 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
-import { ResetPasswordFormStage } from '~/auth-mod/types/form-stage.type';
 
 @Component({
   selector: 'vsph-auth-reset-password-page',
@@ -14,8 +12,7 @@ import { ResetPasswordFormStage } from '~/auth-mod/types/form-stage.type';
   providers: [ResetPasswordService],
 })
 export class AuthResetPasswordPageComponent {
-  activeStage$: Observable<ResetPasswordFormStage> =
-    this._resetPasswordService.currentStage$;
+  activeStage$ = this._resetPasswordService.currentStage$;
 
   constructor(private readonly _resetPasswordService: ResetPasswordService) {}
 }

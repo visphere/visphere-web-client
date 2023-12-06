@@ -12,7 +12,7 @@ export class MultiTranslateLoader implements TranslateLoader {
     private readonly _translations: string[]
   ) {}
 
-  getTranslation(lang: string): Observable<object> {
+  getTranslation$(lang: string): Observable<object> {
     const requests = this._translations.map(translation =>
       this._httpClient.get(`${translation}${lang}.json`)
     );

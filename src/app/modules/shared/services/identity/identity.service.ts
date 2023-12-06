@@ -28,7 +28,7 @@ export class IdentityService {
       return of(redirectUrl.includes('auth') ? redirectUrl : 'auth/login');
     }
     return this._identityHttpClientService
-      .loginViaAccessToken(tokenData.refreshToken)
+      .loginViaAccessToken$(tokenData.refreshToken)
       .pipe(
         map(res => {
           this._lazyPageLoaderService.disableLoading();
@@ -53,7 +53,7 @@ export class IdentityService {
     if (!tokenData) {
       return of(false);
     }
-    return this._identityHttpClientService.logout(tokenData.refreshToken).pipe(
+    return this._identityHttpClientService.logout$(tokenData.refreshToken).pipe(
       map(({ message }) => {
         this._store.dispatch(
           NgrxAction_SHA.__addSnackbar({

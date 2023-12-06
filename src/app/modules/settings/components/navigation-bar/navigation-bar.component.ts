@@ -4,7 +4,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { environment } from '~/env/environment';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
@@ -23,7 +22,7 @@ export class NavigationBarComponent
 {
   landingPagePath = environment.baseLandingUrl;
 
-  settingsReturnUrl$: Observable<string> = this._store.select(
+  settingsReturnUrl$ = this._store.select(
     NgrxSelector_SHA.selectSettingsReturnUrl
   );
 
@@ -35,7 +34,7 @@ export class NavigationBarComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._languageSwitcherService.selectedLang$
     ).subscribe(lang => {
       this.landingPagePath = `${environment.baseLandingUrl}${lang.landingPrefix}`;

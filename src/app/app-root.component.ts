@@ -34,7 +34,7 @@ export class AppRootComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._identityService.refreshSession$(this.redirectUrl)
     ).subscribe({
       next: async (url: string) => await this._router.navigateByUrl(url),

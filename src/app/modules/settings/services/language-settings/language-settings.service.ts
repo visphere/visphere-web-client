@@ -25,11 +25,11 @@ export class LanguageSettingsService extends AbstractUserSettingsProvider {
     super(_store);
   }
 
-  loadAvailableLanguages(): Observable<RelatedWithElements> {
+  loadAvailableLanguages$(): Observable<RelatedWithElements> {
     return this._onChangeObserver$.pipe(
       switchMap(() =>
         this._settingsHttpClientService
-          .getUserSettings()
+          .getUserSettings$()
           .pipe(
             switchMap(userSettings =>
               this._languageSwitcherService.selectedLang$.pipe(
@@ -64,12 +64,12 @@ export class LanguageSettingsService extends AbstractUserSettingsProvider {
     );
   }
 
-  persistRelatedLanguage(
+  persistRelatedLanguage$(
     selectedLang: string | null
   ): Observable<BaseMessageModel | null> {
     this.setLoading(true);
     return this._settingsHttpClientService
-      .relateLangWithUser({ relatedValue: selectedLang })
+      .relateLangWithUser$({ relatedValue: selectedLang })
       .pipe(
         tap(({ message }) => {
           this.setLoading(false);

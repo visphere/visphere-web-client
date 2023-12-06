@@ -12,12 +12,12 @@ export abstract class AbstractLazyProvider<T> extends AbstractReactiveProvider {
     this._isLoading$.next(isLoading);
   }
 
-  submitForm(): Observable<T> {
+  submitForm$(): Observable<T> {
     this._isLoading$.next(true);
-    return this.abstractSubmitForm();
+    return this.abstractSubmitForm$();
   }
 
-  abstract abstractSubmitForm(): Observable<T>;
+  abstract abstractSubmitForm$(): Observable<T>;
 
   get isLoading$(): Observable<boolean> {
     return this._isLoading$.asObservable();

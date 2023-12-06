@@ -56,7 +56,7 @@ export class PasswordInputTogglerComponent
       this.formControlIdentifier,
       this.i18nPrefix
     );
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       combineLatest([
         this._populateFormGroupService.field$,
         this._populateFormGroupService.formDisabled$,

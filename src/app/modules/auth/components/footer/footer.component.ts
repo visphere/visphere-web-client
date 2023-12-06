@@ -31,7 +31,7 @@ export class FooterComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       combineLatest([
         this._themeSwitcherService.selectedTheme$,
         this._languageSwitcherService.selectedLang$,

@@ -34,7 +34,7 @@ export class FirstMfaSetupComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(this._mfaFirstSetupService.loadMfaData()).subscribe(
+    this.wrapAsObservable$(this._mfaFirstSetupService.loadMfaData$()).subscribe(
       mfaData => {
         if (mfaData) {
           this.mfaData = mfaData;

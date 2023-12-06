@@ -20,7 +20,7 @@ export class SharedHttpClientService extends AbstractHttpProvider {
     super();
   }
 
-  getClientIpAddress(): Observable<IpAddressModel> {
+  getClientIpAddress$(): Observable<IpAddressModel> {
     return this._httpClient.get<IpAddressModel>(
       `http://api.ipify.org/?format=json`
     );
@@ -33,7 +33,7 @@ export class SharedHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  checkIfAccountValueAlreadyExist(
+  checkIfAccountValueAlreadyExist$(
     by: QueryParamKey,
     value: string
   ): Observable<CheckExistResDtoModel> {

@@ -35,7 +35,7 @@ export class ActivateAccountService
     private readonly _store: Store<AuthReducer | SharedReducer>
   ) {
     super('activate');
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._store.select(NgrxSelector_ATH.selectActivateAccountEmail)
     ).subscribe(userEmail => (this.userEmail = userEmail));
   }
@@ -45,13 +45,13 @@ export class ActivateAccountService
     this.unmountAllSubscriptions();
   }
 
-  validateToken(token: string): Observable<BaseMessageModel> {
-    return this.performActivateAccountService(token);
+  validateToken$(token: string): Observable<BaseMessageModel> {
+    return this.performActivateAccountService$(token);
   }
 
-  override abstractSubmitForm(): Observable<BaseMessageModel> {
+  override abstractSubmitForm$(): Observable<BaseMessageModel> {
     const { token } = this.parseFormValues<ActivateAccountFormModel>();
-    return this.performActivateAccountService(token);
+    return this.performActivateAccountService$(token);
   }
 
   async returnToLoginAndClearState(): Promise<void> {
@@ -59,10 +59,10 @@ export class ActivateAccountService
     await this._router.navigate(['/auth/login']);
   }
 
-  resendEmailMessage(): Observable<BaseMessageModel> {
+  resendEmailMessage$(): Observable<BaseMessageModel> {
     this._resendIsLoading$.next(true);
     return this._authHttpClientService
-      .resendActivateAccountToken({ emailAddress: this.userEmail })
+      .resendActivateAccountToken$({ emailAddress: this.userEmail })
       .pipe(
         tap(({ message }) => {
           this._resendIsLoading$.next(false);
@@ -75,10 +75,10 @@ export class ActivateAccountService
       );
   }
 
-  private performActivateAccountService(
+  private performActivateAccountService$(
     token: string
   ): Observable<BaseMessageModel> {
-    return this._authHttpClientService.activateAccount(token).pipe(
+    return this._authHttpClientService.activateAccount$(token).pipe(
       tap(async ({ message }) => {
         this.setLoading(false);
         this.pushSnackbar(message);

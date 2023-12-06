@@ -4,12 +4,10 @@
  */
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Oauth2LoginService } from '~/auth-mod/services/oauth2-login/oauth2-login.service';
 import { Oauth2Type, oauth2Style } from '~/auth-mod/types/oauth2.type';
 import { environment } from '~/env/environment';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
-import { OAuth2Supplier } from '~/shared-mod/types/oauth2-supplier.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
@@ -26,9 +24,8 @@ export class Oauth2ButtonComponent
   styles = oauth2Style;
   lang = '';
 
-  isLoading$: Observable<boolean> = this._oauthLoginService.isLoading$;
-  activeSupplier$: Observable<OAuth2Supplier | null> =
-    this._oauthLoginService.activeSupplier$;
+  isLoading$ = this._oauthLoginService.isLoading$;
+  activeSupplier$ = this._oauthLoginService.activeSupplier$;
 
   constructor(
     private readonly _oauthLoginService: Oauth2LoginService,
@@ -39,7 +36,7 @@ export class Oauth2ButtonComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       this._languageSwitcherService.selectedLang$
     ).subscribe(({ lang }) => {
       this.lang = lang;

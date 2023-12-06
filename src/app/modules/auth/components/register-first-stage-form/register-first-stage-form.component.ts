@@ -40,7 +40,7 @@ export class RegisterFirstStageFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.firstStageForm);
-    this.wrapAsObservable(this._registerService.isLoading$).subscribe(
+    this.wrapAsObservable$(this._registerService.isLoading$).subscribe(
       isLoading => this._populateFormGroupService.setFormDisabled(isLoading)
     );
   }

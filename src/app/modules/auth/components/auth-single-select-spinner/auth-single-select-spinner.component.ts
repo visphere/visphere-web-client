@@ -61,7 +61,7 @@ export class AuthSingleSelectSpinnerComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable(
+    this.wrapAsObservable$(
       combineLatest([
         this._populateFormGroupService.field$,
         this._populateFormControlService.fields$,

@@ -24,14 +24,14 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     super();
   }
 
-  loginViaAppAccount(req: LoginReqDtoModel): Observable<LoginResDtoModel> {
+  loginViaAppAccount$(req: LoginReqDtoModel): Observable<LoginResDtoModel> {
     return this._httpClient.post<LoginResDtoModel>(
       `${this._infraApiPath}/api/v1/auth/identity/login`,
       req
     );
   }
 
-  registerViaAppAccount(
+  registerViaAppAccount$(
     req: RegisterReqDtoModel
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
@@ -40,14 +40,14 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  activateAccount(token: string): Observable<BaseMessageModel> {
+  activateAccount$(token: string): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/auth/account/activate/${token}`,
       null
     );
   }
 
-  resendActivateAccountToken(
+  resendActivateAccountToken$(
     req: ActivateAccountReqDtoModel
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
@@ -56,7 +56,7 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  startResetPasswordViaEmail(
+  startResetPasswordViaEmail$(
     req: StartResetPasswordViaEmailFormModel
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
@@ -65,14 +65,14 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  resetPasswordValidateToken(token: string): Observable<BaseMessageModel> {
+  resetPasswordValidateToken$(token: string): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/auth/password/renew/${token}/verify`,
       null
     );
   }
 
-  resendResetPasswordToken(
+  resendResetPasswordToken$(
     req: StartResetPasswordViaEmailFormModel
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
@@ -81,7 +81,7 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  changePasswordViaEmail(
+  changePasswordViaEmail$(
     req: ChangePasswordFormModel,
     token: string
   ): Observable<BaseMessageModel> {
@@ -91,7 +91,7 @@ export class AuthHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  checkIfMyAccountsExists(
+  checkIfMyAccountsExists$(
     req: MyAccountReqDto[]
   ): Observable<MySavedAccountModel[]> {
     return this._httpClient.patch<MySavedAccountModel[]>(
