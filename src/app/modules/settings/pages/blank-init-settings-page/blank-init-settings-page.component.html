@@ -6,3 +6,32 @@
 <h1 class="text-2xl mb-5">
   {{ 'vsph.clientCommon.settingsPage.init.header' | translate }}
 </h1>
+<div class="flex flex-col items-center gap-y-4">
+  <img
+    src="{{ path }}/static/icon/settings.svg"
+    alt=""
+    width="70"
+    height="70"
+    loading="eager" />
+  <h2 class="text-2xl">
+    {{ 'vsph.clientCommon.settingsPage.init.title' | translate }}
+  </h2>
+  <p class="vsph-settings__init-paragraph">
+    {{ 'vsph.clientCommon.settingsPage.init.paragraph1' | translate }}
+  </p>
+  <a
+    href="{{ landingPagePath }}/about"
+    target="_blank"
+    class="vsph-button vsph-button--secondary vsph-button--fit mx-auto mb-4">
+    {{ 'vsph.clientCommon.settingsPage.init.aboutInfoButton' | translate }}
+  </a>
+  <p class="vsph-settings__init-paragraph">
+    {{ 'vsph.clientCommon.settingsPage.init.paragraph2' | translate }}
+  </p>
+  <a
+    href="{{ landingPagePath }}/download"
+    target="_blank"
+    class="vsph-button vsph-button--primary vsph-button--fit mx-auto">
+    {{ 'vsph.clientCommon.settingsPage.init.downloadButton' | translate }}
+  </a>
+</div>
