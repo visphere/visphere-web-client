@@ -1,0 +1,16 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<ng-container *ngIf="condition; else withoutTippy">
+  <div [ngxTippy]="tooltipWindow" [tippyProps]="tooltipProps">
+    <ng-container *ngTemplateOutlet="contentTemplate" />
+  </div>
+</ng-container>
+<ng-template #withoutTippy>
+  <ng-container *ngTemplateOutlet="contentTemplate" />
+</ng-template>
+<ng-template #tooltipWindow>
+  {{ i18nTooltipInfo | translate }}
+</ng-template>
