@@ -3,45 +3,30 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest } from 'rxjs';
-import { environment } from '~/env/environment';
+import { AbstractLandingUrlProvider } from '~/root-mod/modules/shared/components/abstract-landing-url-provider';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
-import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'vsph-footer',
   templateUrl: './footer.component.html',
 })
 export class FooterComponent
-  extends AbstractReactiveProvider
+  extends AbstractLandingUrlProvider
   implements OnInit, OnDestroy
 {
-  path = environment.contentDistributorBaseUrl;
-  landingPagePath = environment.baseLandingUrl;
-
   currYear = Date.now();
-  copyLogoImagePath = '';
 
   constructor(
-    private readonly _themeSwitcherService: ThemeSwitcherService,
-    private readonly _languageSwitcherService: LanguageSwitcherService
+    _themeSwitcherService: ThemeSwitcherService,
+    _languageSwitcherService: LanguageSwitcherService
   ) {
-    super();
+    super(_themeSwitcherService, _languageSwitcherService);
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable$(
-      combineLatest([
-        this._themeSwitcherService.selectedTheme$,
-        this._languageSwitcherService.selectedLang$,
-      ])
-    ).subscribe(([theme, lang]) => {
-      this.copyLogoImagePath = this._themeSwitcherService.isDarkMode(theme)
-        ? 'vsph-small-light.svg'
-        : 'vsph-small-dark.svg';
-      this.landingPagePath = `${environment.baseLandingUrl}${lang.landingPrefix}`;
-    });
+    this.loadBrandThemedIcon();
+    this.loadLandingUrl();
   }
 
   ngOnDestroy(): void {
