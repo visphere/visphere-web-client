@@ -7,6 +7,8 @@
   <button
     (click)="handleToggleValue()"
     [disabled]="isDisabled"
+    [class.cursor-not-allowed]="isDisabled"
+    [class.opacity-50]="isFadded && isDisabled"
     class="flex justify-between items-center w-full">
     <input type="checkbox" [value]="i18nToggler" hidden class="sr-only peer" />
     <div class="flex flex-col gap-y-1">
@@ -17,7 +19,7 @@
       </p>
       <p
         *ngIf="hasDescription"
-        class="text-left text-sm leading-[15px] text-vsph-tint-300 dark:text-vsph-tint-400">
+        class="text-left text-sm leading-[17px] text-vsph-tint-300 dark:text-vsph-tint-400">
         {{
           prefix + i18nPrefix + '.toggler.' + i18nToggler + '.description'
             | translate

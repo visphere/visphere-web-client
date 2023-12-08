@@ -4,7 +4,6 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
-import { SharedModule } from '~/shared-mod/shared.module';
 import { DeferredButtonComponent } from './deferred-button.component';
 
 describe('DeferredButtonComponent', () => {
@@ -13,7 +12,7 @@ describe('DeferredButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, SharedModule],
+      imports: [AppModule],
     }).compileComponents();
     fixture = TestBed.createComponent(DeferredButtonComponent);
     component = fixture.componentInstance;

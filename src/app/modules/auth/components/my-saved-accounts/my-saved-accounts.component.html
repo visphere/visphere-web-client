@@ -47,7 +47,7 @@
         class="vsph-my-account__element-content">
         <div
           *ngIf="!account.verified"
-          [ngxTippy]="usernameTooptip"
+          [ngxTippy]="usernameTooltip"
           [tippyContext]="{ username: account.usernameOrEmailAddress }"
           [tippyProps]="tooltipProps">
           <div
@@ -62,7 +62,7 @@
         </div>
         <div
           *ngIf="account.verified"
-          [ngxTippy]="usernameTooptip"
+          [ngxTippy]="usernameTooltip"
           [tippyContext]="{ username: account.usernameOrEmailAddress }"
           [tippyProps]="tooltipProps">
           <img
@@ -90,6 +90,6 @@
     </li>
   </ul>
 </div>
-<ng-template #usernameTooptip let-username="username">
+<ng-template #usernameTooltip let-username="username">
   {{ username }}
 </ng-template>

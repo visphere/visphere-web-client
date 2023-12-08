@@ -41,8 +41,8 @@ const _reducer = createReducer(
     ...state,
     settingsReturnUrl: action.url,
   })),
-  on(NgrxAction.__updateLoggedUserSettings, (state, action) => {
-    return state.loggedUser
+  on(NgrxAction.__updateLoggedUserSettings, (state, action) =>
+    state.loggedUser
       ? {
           ...state,
           loggedUser: {
@@ -50,8 +50,8 @@ const _reducer = createReducer(
             settings: action.userSettings,
           },
         }
-      : state;
-  }),
+      : state
+  ),
   on(NgrxAction.__updateLogoutModalState, (state, action) => ({
     ...state,
     logoutModalIsOpen: action.isOpen,

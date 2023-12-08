@@ -14,6 +14,7 @@ export class ToggleButtonComponent {
   @Input() hasDescription = false;
   @Input() isSelected = false;
   @Input() isDisabled = false;
+  @Input() isFadded = false;
 
   @Output() emitValueChanged = new EventEmitter<boolean>();
 
