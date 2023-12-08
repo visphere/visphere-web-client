@@ -8,6 +8,7 @@ type RegexValidators = {
   USERNAME_OR_EMAIL: RegExp;
   PASSWORD: RegExp;
   MFA_CODE: RegExp;
+  DATE_VALID: RegExp;
 };
 
 export const regex: RegexValidators = {
@@ -16,4 +17,5 @@ export const regex: RegexValidators = {
     /^(?![_.-])\b(?![.-])[\w.-]*(_\w*)?\b(@[a-z0-9]+([-_.][a-z0-9]+)*\.[a-z]{2,100})?$/,
   PASSWORD: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,80}$/,
   MFA_CODE: /^[\d]+$/,
+  DATE_VALID: /^\d{4}-\d{2}-\d{2}$/,
 };
