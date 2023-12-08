@@ -55,7 +55,18 @@ const _reducer = createReducer(
   on(NgrxAction.__updateLogoutModalState, (state, action) => ({
     ...state,
     logoutModalIsOpen: action.isOpen,
-  }))
+  })),
+  on(NgrxAction.__updateLoggedUserFullName, (state, action) =>
+    state.loggedUser
+      ? {
+          ...state,
+          loggedUser: {
+            ...state.loggedUser,
+            fullName: action.fullName,
+          },
+        }
+      : state
+  )
 );
 
 export const sharedReduxStore = {

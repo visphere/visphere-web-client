@@ -17,6 +17,7 @@ enum Action {
   SET_SETTINGS_RETURN_URL = '[SHARED] SET SETTINGS RETURN URL',
   UPDATE_LOGGED_USER_SETTINGS = '[SHARED] UPDATE LOGGED USER SETTINGS',
   UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE',
+  UPDATE_LOGGED_USER_FULL_NAME = '[SHARED] UPDATE LOGGED USER FULL NAME',
 }
 
 export const __addSnackbar = createAction(
@@ -56,4 +57,9 @@ export const __updateLoggedUserSettings = createAction(
 export const __updateLogoutModalState = createAction(
   Action.UPDATE_LOGOUT_MODAL_STATE,
   props<{ isOpen: boolean }>()
+);
+
+export const __updateLoggedUserFullName = createAction(
+  Action.UPDATE_LOGGED_USER_FULL_NAME,
+  props<{ fullName: string }>()
 );
