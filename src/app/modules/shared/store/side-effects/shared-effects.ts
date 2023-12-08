@@ -43,6 +43,7 @@ export class SharedEffects {
         const {
           fullName,
           profileUrl,
+          profileColor,
           accessToken,
           refreshToken,
           settings,
@@ -63,6 +64,7 @@ export class SharedEffects {
             details: {
               fullName,
               profileUrl,
+              profileColor,
               settings,
             },
           })

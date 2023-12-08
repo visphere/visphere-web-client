@@ -8,6 +8,7 @@ export type LoginResDtoModel = {
   username: string;
   emailAddress: string;
   profileUrl: string;
+  profileColor: string;
   accessToken: string;
   refreshToken: string;
   isActivated: boolean;
