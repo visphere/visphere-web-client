@@ -42,4 +42,14 @@ export class SharedHttpClientService extends AbstractHttpProvider {
       { params: { by: by.toUpperCase(), value } }
     );
   }
+
+  checkIfLoggedAccountValueAlreadyExist$(
+    by: QueryParamKey,
+    value: string
+  ): Observable<CheckExistResDtoModel> {
+    return this._httpClient.get<CheckExistResDtoModel>(
+      `${this._infraApiPath}/api/v1/auth/check/logged/prop/exist`,
+      { params: { by: by.toUpperCase(), value } }
+    );
+  }
 }
