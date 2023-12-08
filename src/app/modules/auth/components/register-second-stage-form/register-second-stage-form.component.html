@@ -13,32 +13,32 @@
       {{ 'vsph.common.utils.backwardMove' | translate }}
     </button>
 
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="firstName"
       i18nPrefix="webClient.registerPage">
       <vsph-field-validator />
       <vsph-field-validator type="minlength" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="lastName"
       i18nPrefix="webClient.registerPage">
       <vsph-field-validator />
       <vsph-field-validator type="minlength" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="100"
       formControlIdentifier="secondEmailAddress"
       i18nPrefix="webClient.registerPage"
       [additionalInfo]="true">
       <vsph-field-validator type="email" />
       <vsph-field-validator type="exact" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
     <vsph-register-form-consents />
 

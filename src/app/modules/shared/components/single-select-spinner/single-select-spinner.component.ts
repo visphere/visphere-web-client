@@ -26,11 +26,11 @@ import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'vsph-auth-single-select-spinner',
-  templateUrl: './auth-single-select-spinner.component.html',
+  selector: 'vsph-single-select-spinner',
+  templateUrl: './single-select-spinner.component.html',
   animations: [dropboxFadeAndMove],
 })
-export class AuthSingleSelectSpinnerComponent
+export class SingleSelectSpinnerComponent
   extends AbstractReactiveProvider
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {

@@ -2,14 +2,7 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { combineLatest } from 'rxjs';
@@ -19,27 +12,32 @@ import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
-  selector: 'vsph-auth-checkbox-form-input',
-  templateUrl: './auth-checkbox-form-input.component.html',
+  selector: 'vsph-common-form-input',
+  templateUrl: './common-form-input.component.html',
   providers: [PopulateFormControlService],
 })
-export class AuthCheckboxFormInputComponent
+export class CommonFormInputComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  @Input() i18nPrefix!: string;
   @Input() formControlIdentifier!: string;
+  @Input() i18nPrefix!: string;
+  @Input() maxLength!: number;
+  @Input() type = 'text';
+  @Input() placeholder = '';
+  @Input() requiredStar = false;
   @Input() additionalInfo = false;
 
-  @Output() emitOnClick = new EventEmitter<void>();
-
   formGroup!: FormGroup;
+  i18nLabel = '';
   tooltipProps: NgxTippyProps = {
     placement: 'top',
     theme: 'vsph-auth',
     animation: 'scale-subtle',
   };
   i18nInfo = '';
+
+  formDisabled$ = this._populateFormGroupService.formDisabled$;
 
   constructor(
     private readonly _formHelperService: FormHelperService,
@@ -50,7 +48,9 @@ export class AuthCheckboxFormInputComponent
   }
 
   ngOnInit(): void {
-    this.i18nInfo = `vsph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}.info`;
+    const baseI18nFormControlName = `vsph.${this.i18nPrefix}.formFields.${this.formControlIdentifier}`;
+    this.i18nLabel = `${baseI18nFormControlName}.value`;
+    this.i18nInfo = `${baseI18nFormControlName}.info`;
     this._populateFormControlService.setFields(
       this.formControlIdentifier,
       this.i18nPrefix
@@ -69,15 +69,15 @@ export class AuthCheckboxFormInputComponent
       );
     });
   }
+
   ngOnDestroy(): void {
     this.unmountAllSubscriptions();
   }
 
-  handleSetDirtyAndTouched(): void {
-    const control = this.formGroup.get(this.formControlIdentifier);
-    control?.markAsDirty();
-    control?.markAsTouched();
-    control?.patchValue(!control.value);
-    this.emitOnClick.emit();
+  isFieldInvalid(): boolean {
+    return this._formHelperService.validateField(
+      this.formGroup,
+      this.formControlIdentifier
+    );
   }
 }

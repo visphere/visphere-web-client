@@ -5,7 +5,7 @@
 
 <ng-container [formGroup]="rootForm">
   <div formGroupName="firstStage" class="grid gap-y-4">
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="30"
       [requiredStar]="true"
       formControlIdentifier="username"
@@ -14,9 +14,9 @@
       <vsph-field-validator type="minlength" />
       <vsph-field-validator type="pattern" />
       <vsph-field-validator type="exist" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="100"
       [requiredStar]="true"
       formControlIdentifier="emailAddress"
@@ -24,7 +24,7 @@
       <vsph-field-validator />
       <vsph-field-validator type="email" />
       <vsph-field-validator type="exist" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
     <vsph-password-input-toggler
       [requiredStar]="true"

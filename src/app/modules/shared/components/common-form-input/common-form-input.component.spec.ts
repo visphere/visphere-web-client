@@ -4,32 +4,34 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthModule } from '~/auth-mod/auth.module';
 import { AppModule } from '~/root-mod/app.module';
+import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
-import { AuthCheckboxFormInputComponent } from './auth-checkbox-form-input.component';
+import { CommonFormInputComponent } from './common-form-input.component';
 
-describe('AuthCheckboxFormInputComponent', () => {
-  let component: AuthCheckboxFormInputComponent;
-  let fixture: ComponentFixture<AuthCheckboxFormInputComponent>;
+describe('CommonFormInputComponent', () => {
+  let component: CommonFormInputComponent;
+  let fixture: ComponentFixture<CommonFormInputComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, AuthModule],
-      providers: [PopulateFormGroupService],
+      imports: [AppModule],
+      providers: [PopulateFormGroupService, PopulateFormControlService],
     }).compileComponents();
 
     const populateFormGroup = TestBed.inject(PopulateFormGroupService);
     const formGroup = new FormGroup({
-      testField: new FormControl(false),
+      testField: new FormControl(''),
     });
     populateFormGroup.setField(formGroup);
 
-    fixture = TestBed.createComponent(AuthCheckboxFormInputComponent);
-    component = fixture.componentInstance;
+    const populateFormControl = TestBed.inject(PopulateFormControlService);
+    populateFormControl.setFields('testField', 'I18N_PREFIX');
 
-    component.i18nPrefix = 'I18N_PREFIX';
+    fixture = TestBed.createComponent(CommonFormInputComponent);
+    component = fixture.componentInstance;
     component.formControlIdentifier = 'testField';
+    component.maxLength = 80;
 
     fixture.detectChanges();
   });

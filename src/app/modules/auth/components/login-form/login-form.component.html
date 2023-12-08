@@ -8,12 +8,12 @@
   (ngSubmit)="handleSubmitLoginForm()"
   class="grid gap-3">
   <div class="grid gap-3" *ngIf="(activeStage$ | async) === 'login'">
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="100"
       formControlIdentifier="usernameOrEmailAddress"
       i18nPrefix="clientCommon.loginPage">
       <vsph-field-validator />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
     <button
       type="button"
       class="vsph-button vsph-button--primary"
@@ -51,7 +51,7 @@
         i18nPrefix="clientCommon.loginPage">
         <vsph-field-validator />
       </vsph-password-input-toggler>
-      <vsph-auth-checkbox-form-input
+      <vsph-checkbox-form-input
         formControlIdentifier="rememberAccount"
         i18nPrefix="clientCommon.loginPage"
         [additionalInfo]="true">
@@ -61,7 +61,7 @@
               | translate
           }}
         </ng-container>
-      </vsph-auth-checkbox-form-input>
+      </vsph-checkbox-form-input>
     </div>
     <vsph-lazy-button-spinner
       [isLoading]="(isLoading$ | async)!"

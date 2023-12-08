@@ -9,19 +9,19 @@
     <span class="ms-0.5 text-vsph-tint-400">*</span>
   </div>
   <div class="flex gap-3">
-    <vsph-auth-single-select-spinner
+    <vsph-single-select-spinner
       [listElements]="formMonths"
       [initValueId]="getFormControlValue('month')"
       (persistElement)="patchValue($event, 'month')"
       multiSpinnerId="month"
       class="flex-none w-[180px]" />
-    <vsph-auth-single-select-spinner
+    <vsph-single-select-spinner
       [listElements]="formDays"
       [initValueId]="getFormControlValue('day')"
       (persistElement)="patchValue($event, 'day')"
       multiSpinnerId="day"
       class="flex-grow" />
-    <vsph-auth-single-select-spinner
+    <vsph-single-select-spinner
       [listElements]="formYears"
       [initValueId]="getFormControlValue('year')"
       (persistElement)="patchValue($event, 'year')"

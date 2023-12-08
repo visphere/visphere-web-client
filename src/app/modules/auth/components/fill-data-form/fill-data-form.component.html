@@ -8,7 +8,7 @@
     [formGroup]="fillDataForm"
     (ngSubmit)="handleSubmitFillDataForm()"
     class="grid gap-y-3">
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="30"
       [requiredStar]="true"
       formControlIdentifier="username"
@@ -17,25 +17,25 @@
       <vsph-field-validator type="minlength" />
       <vsph-field-validator type="pattern" />
       <vsph-field-validator type="exist" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="firstName"
       i18nPrefix="clientCommon.fillDataPage">
       <vsph-field-validator />
       <vsph-field-validator type="minlength" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="80"
       [requiredStar]="true"
       formControlIdentifier="lastName"
       i18nPrefix="clientCommon.fillDataPage">
       <vsph-field-validator />
       <vsph-field-validator type="minlength" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
 
     <vsph-birth-date-select-spinner i18nPrefix="clientCommon.fillDataPage" />
 
@@ -55,7 +55,7 @@
         </label>
       </div>
       <div class="ms-4 grid gap-y-2">
-        <vsph-auth-checkbox-form-input
+        <vsph-checkbox-form-input
           formControlIdentifier="allowNotifs"
           (emitOnClick)="handleClickCheckbox()">
           <ng-container labelContent>
@@ -64,7 +64,7 @@
                 | translate
             }}
           </ng-container>
-        </vsph-auth-checkbox-form-input>
+        </vsph-checkbox-form-input>
         <vsph-agree-terms-content
           i18nPrefix="clientCommon.fillDataPage"
           (emitClickInCheckbox)="handleClickCheckbox()" />

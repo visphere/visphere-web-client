@@ -4,7 +4,7 @@
  -->
 
 <ng-container [formGroup]="formGroup">
-  <vsph-auth-checkbox-form-input
+  <vsph-checkbox-form-input
     formControlIdentifier="agreeTerms"
     [i18nPrefix]="i18nPrefix"
     (emitOnClick)="emitClickInCheckbox.emit()">
@@ -15,5 +15,5 @@
     <ng-container errorsContent>
       <vsph-field-validator />
     </ng-container>
-  </vsph-auth-checkbox-form-input>
+  </vsph-checkbox-form-input>
 </ng-container>

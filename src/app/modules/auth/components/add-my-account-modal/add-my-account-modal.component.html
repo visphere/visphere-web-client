@@ -13,7 +13,7 @@
     [formGroup]="addMyAccountForm"
     (ngSubmit)="handleAddNewAccount()"
     class="grid gap-3">
-    <vsph-auth-common-form-input
+    <vsph-common-form-input
       [maxLength]="100"
       [requiredStar]="true"
       inputStyle="static"
@@ -21,7 +21,7 @@
       i18nPrefix="clientCommon.myAccountsPage.modals.add">
       <vsph-field-validator />
       <vsph-field-validator type="exist" />
-    </vsph-auth-common-form-input>
+    </vsph-common-form-input>
     <button
       [disabled]="addMyAccountForm.invalid"
       class="vsph-button vsph-button--primary">
