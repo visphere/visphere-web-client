@@ -6,21 +6,9 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { DateComponentsType } from '~/shared-mod/types/date-components.type';
 import { SpinnerListElementType } from '~/shared-mod/types/spinner-list-element.type';
-import { regex } from '~/shared-mod/validators/regex.constant';
-import { LanguageSwitcherService } from '../language-switcher/language-switcher.service';
 
 @Injectable({ providedIn: 'root' })
 export class TimeUtilsService {
-  private _currentLang = '';
-
-  constructor(
-    private readonly _languageSwitcherService: LanguageSwitcherService
-  ) {
-    this._languageSwitcherService.selectedLang$.subscribe(
-      ({ lang }) => (this._currentLang = lang)
-    );
-  }
-
   generateMonthsForDifferentLocale(lang: string): SpinnerListElementType[] {
     moment.locale(lang);
     return moment.months().map((value, idx) => ({ id: idx + 1, value }));
@@ -54,38 +42,31 @@ export class TimeUtilsService {
     );
   }
 
-  formatDateToLocaleShortForm(dateStr: string): string {
-    if (!regex.DATE_VALID.test(dateStr)) {
-      return '';
-    }
-    const splittedDate = dateStr.split('-');
-    if (splittedDate.length !== 3 || !this._currentLang) {
-      return '';
-    }
-    const [year, month, day] = splittedDate;
-    const date = new Date(Number(year), Number(month) - 1, Number(day));
-    return date.toLocaleDateString(this._currentLang, {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-    });
-  }
-
-  revertStandardDateToSlash(dateStr: string): string {
-    const date = moment(new Date(dateStr));
+  composeSlashDate({ day, month, year }: DateComponentsType): string {
+    const date = moment(`${year}-${month}-${day}`, 'YYYY-M-D');
     return date.format('DD/MM/YYYY');
   }
 
-  decomposeDate(dateStr?: string): number[] {
+  decomposeDate(dateStr?: string): DateComponentsType {
     if (dateStr) {
-      const date = moment(new Date(dateStr));
-      return [date.daysInMonth(), date.month(), date.year()];
+      const [year, month, day] = dateStr.split('-').map(Number);
+      return { day, month, year };
     }
-    return [1, 1, 1970];
+    return { day: 1, month: 1, year: 1970 };
   }
 
-  composeToDate({ day, month, year }: DateComponentsType): string {
-    const date = moment(new Date(year, month - 1, day));
-    return date.format('DD/MM/YYYY');
+  compareTwoDates(
+    dateF: DateComponentsType,
+    dateS: DateComponentsType
+  ): boolean {
+    const first = moment(
+      `${dateF.year}-${dateF.month}-${dateF.day}`,
+      'YYYY-M-D'
+    );
+    const second = moment(
+      `${dateS.year}-${dateS.month}-${dateS.day}`,
+      'YYYY-M-D'
+    );
+    return first.isSame(second);
   }
 }

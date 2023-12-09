@@ -34,12 +34,12 @@
     type="text"
     [disabled]="formDisabled"
     (focus)="handleShowItemsList()"
-    class="vsph-auth__input w-full"
-    [class.vsph-auth__input--invalid]="hasErrors" />
-  <div class="vsph-auth__input-icon-container">
+    class="vsph-input w-full"
+    [class.vsph-input--invalid]="hasErrors" />
+  <div class="vsph-input__icon-container">
     <ng-icon
       name="selectArrowDownIcon"
-      [class.vsph-auth__text--invalid]="hasErrors"
+      [class.vsph-input__text--invalid]="hasErrors"
       class="text-sm" />
   </div>
 </button>
