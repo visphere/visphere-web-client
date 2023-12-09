@@ -1,0 +1,25 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-modal-wrapper
+  modalSize="xs"
+  header="vsph.clientCommon.settingsPage.modal.birthDate.header"
+  *ngIf="formGroup"
+  [isActive]="(activeModal$ | async) === 'birth-date'"
+  (emitOnClose)="closeModal()">
+  <form
+    content
+    [formGroup]="formGroup"
+    (ngSubmit)="handleSubmitBirthDateForm()"
+    class="grid gap-y-3 mt-4">
+    <vsph-birth-date-select-spinner
+      i18nPrefix="clientCommon.settingsPage.modal.birthDate" />
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="formGroup.invalid || contentsAreIdentical">
+      {{ 'vsph.clientCommon.settingsPage.modal.updateButton' | translate }}
+    </vsph-lazy-button-spinner>
+  </form>
+</vsph-modal-wrapper>

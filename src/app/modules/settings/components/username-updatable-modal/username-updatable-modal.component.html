@@ -1,0 +1,34 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-modal-wrapper
+  modalSize="xs"
+  header="vsph.clientCommon.settingsPage.modal.username.header"
+  [isActive]="(activeModal$ | async) === 'username'"
+  (emitOnClose)="closeModal()">
+  <form
+    content
+    [formGroup]="formGroup!"
+    (ngSubmit)="handleSubmitUsernameForm()"
+    class="grid gap-y-3 mt-4">
+    <vsph-common-form-input
+      [maxLength]="30"
+      [requiredStar]="true"
+      formControlIdentifier="username"
+      i18nPrefix="webClient.registerPage">
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+      <vsph-field-validator type="pattern" />
+      <vsph-field-validator type="exist" />
+    </vsph-common-form-input>
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="
+        !!formGroup?.invalid || checkIfContentsAreIdentical('username')
+      ">
+      {{ 'vsph.clientCommon.settingsPage.modal.updateButton' | translate }}
+    </vsph-lazy-button-spinner>
+  </form>
+</vsph-modal-wrapper>

@@ -1,0 +1,38 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-modal-wrapper
+  modalSize="xs"
+  header="vsph.clientCommon.settingsPage.modal.fullName.header"
+  [isActive]="(activeModal$ | async) === 'full-name'"
+  (emitOnClose)="closeModal()">
+  <form
+    content
+    [formGroup]="formGroup!"
+    (ngSubmit)="handleSubmitFullNameForm()"
+    class="grid gap-y-3 mt-4">
+    <vsph-common-form-input
+      [maxLength]="80"
+      [requiredStar]="true"
+      formControlIdentifier="firstName"
+      i18nPrefix="clientCommon.settingsPage.modal.fullName">
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+    </vsph-common-form-input>
+    <vsph-common-form-input
+      [maxLength]="80"
+      [requiredStar]="true"
+      formControlIdentifier="lastName"
+      i18nPrefix="clientCommon.settingsPage.modal.fullName">
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+    </vsph-common-form-input>
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="!!formGroup?.invalid || contentsAreIdentical">
+      {{ 'vsph.clientCommon.settingsPage.modal.updateButton' | translate }}
+    </vsph-lazy-button-spinner>
+  </form>
+</vsph-modal-wrapper>
