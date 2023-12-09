@@ -1,0 +1,25 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div
+  class="vsph-settings__editable-value-container"
+  [class.opacity-50]="isDisabled"
+  [class.my-6]="isSpaceBetween">
+  <div>
+    <p class="vsph-settings__editable-value-description">
+      {{ i18nDescription | translate }}
+    </p>
+    <p class="text-lg">{{ value }}</p>
+  </div>
+  <div class="flex gap-x-2">
+    <ng-content />
+    <button
+      (click)="emitOnEdit.emit()"
+      [disabled]="isDisabled || isButtonDisabled"
+      class="vsph-button vsph-button--small vsph-button--fit vsph-settings__setting-edit-button">
+      {{ 'vsph.clientCommon.forAll.editButton' | translate }}
+    </button>
+  </div>
+</div>

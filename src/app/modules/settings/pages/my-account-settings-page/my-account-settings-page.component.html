@@ -3,4 +3,27 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<vsph-setting-panel-wrapper category="userSettings" subpage="myAccount" />
+<vsph-devastate-action-modal
+  [isActive]="enabledModal('delete-second-email')"
+  (emitOnClose)="handleCloseRemoveSecondEmailAddressModal()"
+  (emitDevstateAction)="handleRemoveSecondEmailAddressModal()"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.deleteSecondEmailAddress">
+  {{
+    'vsph.clientCommon.settingsPage.modal.deleteSecondEmailAddress.description'
+      | translate
+  }}
+</vsph-devastate-action-modal>
+<vsph-full-name-updatable-modal *ngIf="enabledModal('full-name')" />
+<vsph-username-updatable-modal *ngIf="enabledModal('username')" />
+<vsph-email-address-updatable-modal *ngIf="enabledModal('email')" />
+<vsph-second-email-address-updatable-modal
+  *ngIf="enabledModal('second-email')" />
+<vsph-birth-date-updatable-modal *ngIf="enabledModal('birth-date')" />
+<vsph-password-updatable-modal *ngIf="enabledModal('password')" />
+<vsph-setting-panel-wrapper
+  category="userSettings"
+  subpage="myAccount"
+  [isFetching]="!!(isFetching$ | async)">
+  <vsph-account-panel-settings />
+  <vsph-account-auth-settings />
+</vsph-setting-panel-wrapper>

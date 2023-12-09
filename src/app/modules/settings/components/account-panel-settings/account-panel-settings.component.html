@@ -1,0 +1,113 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="vsph-settings__vis-container">
+  <div
+    [style.background-color]="accountDetails?.profileColor"
+    class="vsph-settings__vis-profile-banner-container"></div>
+  <div class="vsph-settings__vis-profile-image-container">
+    <img
+      src="{{ accountDetails?.profileUrl }}"
+      alt=""
+      loading="eager"
+      class="rounded-xl w-[85%] h-[85%]" />
+  </div>
+  <div class="flex justify-between items-center ps-[130px] mb-4">
+    <div class="flex flex-col gap-y-1">
+      <p class="text-2xl font-bold">
+        {{ accountDetails?.firstName }} {{ accountDetails?.lastName }}
+      </p>
+      <div [ngxTippy]="joinedDateTippyTooltip" [tippyProps]="tooltipProps">
+        <div class="inline-flex">
+          <img
+            src="{{ themedBrandIconUrl }}"
+            alt=""
+            width="16"
+            height="16"
+            class="object-contain -mt-1 me-2" />
+          <p class="text-sm">
+            {{
+              accountDetails?.joinDate
+                | vsphDateFormatter: selectedLang$
+                | async
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <a
+        routerLink="/settings/profile"
+        class="vsph-button vsph-button--primary vsph-button--fit">
+        {{ defaultPrefix + '.section.vis.editProfileButton' | translate }}
+      </a>
+    </div>
+  </div>
+  <div class="vsph-settings__vis-wrapper">
+    <div class="vsph-settings__editable-value-container">
+      <div class="flex flex-col gap-y-2 justify-center">
+        <div>
+          <p class="vsph-settings__editable-value-description">
+            {{ defaultPrefix + '.section.vis.firstName' | translate }}
+          </p>
+          <p class="text-lg">{{ accountDetails?.firstName }}</p>
+        </div>
+        <div>
+          <p class="vsph-settings__editable-value-description">
+            {{ defaultPrefix + '.section.vis.lastName' | translate }}
+          </p>
+          <p class="text-lg">{{ accountDetails?.lastName }}</p>
+        </div>
+      </div>
+      <button
+        (click)="handleOpenUpdateFullNameModal()"
+        class="vsph-button vsph-button--small vsph-button--fit vsph-settings__setting-edit-button">
+        {{ 'vsph.clientCommon.forAll.editButton' | translate }}
+      </button>
+    </div>
+    <vsph-editable-primitive-value
+      [i18nDescription]="defaultPrefix + '.section.vis.username'"
+      [value]="accountDetails?.username"
+      (emitOnEdit)="handleOpenUpdateUsernameModal()" />
+    <vsph-conditional-tooltip-wrapper
+      [condition]="!!accountDetails?.isExternalOAuth2Supplier"
+      [contentTemplate]="changeEmailAddressContentTemplate"
+      i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
+    <ng-template #changeEmailAddressContentTemplate>
+      <vsph-editable-primitive-value
+        [i18nDescription]="defaultPrefix + '.section.vis.emailAddress'"
+        [isDisabled]="!!accountDetails?.isExternalOAuth2Supplier"
+        [value]="accountDetails?.emailAddress"
+        (emitOnEdit)="handleOpenUpdateEmailAddressModal()" />
+    </ng-template>
+    <vsph-conditional-tooltip-wrapper
+      [condition]="!!accountDetails?.isExternalOAuth2Supplier"
+      [contentTemplate]="sendEmailAddressContentTemplate"
+      i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
+    <ng-template #sendEmailAddressContentTemplate>
+      <vsph-editable-primitive-value
+        [i18nDescription]="defaultPrefix + '.section.vis.secondEmailAddress'"
+        [value]="accountDetails?.secondEmailAddress"
+        [isDisabled]="!!accountDetails?.isExternalOAuth2Supplier"
+        (emitOnEdit)="handleOpenUpdateSecondEmailAddressModal()">
+        <button
+          (click)="handleOpenRemoveSecondEmailAddressModal()"
+          [disabled]="accountDetails?.secondEmailAddress === '-'"
+          class="vsph-button vsph-button--primary vsph-button--fit px-3 vsph-button--danger">
+          <ng-icon name="removeTrashIcon" />
+        </button>
+      </vsph-editable-primitive-value>
+    </ng-template>
+    <vsph-editable-primitive-value
+      [i18nDescription]="defaultPrefix + '.section.vis.birthDate'"
+      [value]="
+        (accountDetails?.birthDate | vsphDateFormatter: selectedLang$ | async)!
+      "
+      (emitOnEdit)="handleOpenUpdateBirthDateModal()" />
+  </div>
+</div>
+<ng-template #joinedDateTippyTooltip>
+  {{ defaultPrefix + '.section.vis.joinedDate' | translate }}
+</ng-template>

@@ -1,0 +1,59 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<hr class="vsph-settings__separator my-5" />
+<h2 class="vsph-settings__section-header">
+  {{ defaultPrefix + '.section.authentication.header' | translate }}
+</h2>
+<p class="vsph-settings__init-small-paragraph">
+  {{ defaultPrefix + '.section.authentication.description' | translate }}
+</p>
+<vsph-conditional-tooltip-wrapper
+  [condition]="!!accountDetails?.isExternalOAuth2Supplier"
+  [contentTemplate]="changePasswordButtonContentTemplate"
+  i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
+<ng-template #changePasswordButtonContentTemplate>
+  <button
+    [disabled]="!!accountDetails?.isExternalOAuth2Supplier"
+    (click)="handleOpenChangePasswordModal()"
+    class="vsph-button vsph-button--primary vsph-button--fit my-4">
+    {{
+      defaultPrefix + '.section.authentication.changePasswordButton' | translate
+    }}
+  </button>
+</ng-template>
+<vsph-conditional-tooltip-wrapper
+  [condition]="!!accountDetails?.isExternalOAuth2Supplier"
+  [contentTemplate]="mfaSetupContentTemplate"
+  i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
+<ng-template #mfaSetupContentTemplate>
+  <vsph-toggle-button
+    i18nPrefix="userSettings.subpage.myAccount.section.authentication"
+    i18nToggler="mfaSettings"
+    [isSelected]="!!accountDetails?.isMfaEnabled"
+    [hasDescription]="true"
+    [isDisabled]="!!accountDetails?.isExternalOAuth2Supplier"
+    [isFadded]="true"
+    (emitValueChanged)="handleToggleMfaEnabled($event)" />
+</ng-template>
+<hr class="vsph-settings__separator my-5" />
+<h2 class="vsph-settings__section-header">
+  {{ defaultPrefix + '.section.removal.header' | translate }}
+</h2>
+<p class="vsph-settings__init-small-paragraph">
+  {{ defaultPrefix + '.section.removal.description' | translate }}
+</p>
+<div class="flex mt-4 gap-x-4">
+  <button
+    class="vsph-button vsph-button--primary vsph-button--fit vsph-button--danger"
+    (click)="handleOpenDisableAccountModal()">
+    {{ defaultPrefix + '.section.removal.disableAccountButton' | translate }}
+  </button>
+  <button
+    class="vsph-button vsph-button--primary vsph-button--fit vsph-button--danger--outline"
+    (click)="handleOpenDeleteAccountModal()">
+    {{ defaultPrefix + '.section.removal.removeAccountButton' | translate }}
+  </button>
+</div>
