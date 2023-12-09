@@ -21,8 +21,8 @@ export class PasswordStrengthMeterComponent
   currentStrength = 0;
   formGroup!: FormGroup;
 
-  @Input() tailwindClass = 'vsph-auth__password-strenght-meter__colors';
-  @Input() tailwindBgClass = 'vsph-auth__password-strenght-meter__bg';
+  @Input() tailwindClass = 'vsph-password-strenght-meter__colors';
+  @Input() tailwindBgClass = 'vsph-password-strenght-meter__bg';
   @Input() formControlIdentifier = 'password';
 
   constructor(

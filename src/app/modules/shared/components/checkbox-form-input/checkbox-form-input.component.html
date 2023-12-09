@@ -7,7 +7,7 @@
   <label class="flex gap-x-2 items-start">
     <input
       type="checkbox"
-      class="vsph-auth__checkbox"
+      class="vsph-checkbox"
       [formControlName]="formControlIdentifier"
       (input)="handleSetDirtyAndTouched()" />
     <div>
@@ -25,7 +25,7 @@
           </ng-template>
         </div>
       </div>
-      <div class="text-sm vsph-auth__text--invalid">
+      <div class="text-sm vsph-input__text--invalid">
         <ng-content select="[errorsContent]" />
       </div>
     </div>

@@ -4,7 +4,7 @@
  -->
 
 <div [formGroup]="formGroup" class="flex flex-col">
-  <label [for]="formControlIdentifier" class="vsph-auth__input-label">
+  <label [for]="formControlIdentifier" class="vsph-input__label">
     {{ i18nLabel | translate }}
     <span *ngIf="requiredStar" class="ms-0.5 text-vsph-tint-400">*</span>
     <div
@@ -24,11 +24,11 @@
     [maxlength]="maxLength"
     [formControlName]="formControlIdentifier"
     [placeholder]="placeholder"
-    class="vsph-auth__input"
-    [class.vsph-auth__input--invalid]="isFieldInvalid()" />
+    class="vsph-input"
+    [class.vsph-input--invalid]="isFieldInvalid()" />
   <div
     *ngIf="isFieldInvalid()"
-    class="text-sm mt-1 mx-2 vsph-auth__text--invalid">
+    class="text-sm mt-1 mx-2 vsph-input__text--invalid">
     <ng-content />
   </div>
 </div>

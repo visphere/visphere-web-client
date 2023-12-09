@@ -13,7 +13,7 @@
       'vsph.webClient.resetPasswordPage.successfullSendEmailMessage'
         | translate: { emailAddress: (userEmail$ | async) }
     "
-    class="vsph-auth__info-card-container"></div>
+    class="vsph-info-card__container"></div>
   <vsph-password-input-toggler
     [maxLength]="50"
     formControlIdentifier="token"
@@ -35,7 +35,7 @@
     labelI18nText="vsph.common.utils.emailMessageNotReceived" />
 </form>
 <div class="grid gap-y-3" *ngIf="(currentStage$ | async) === 'success'">
-  <div class="vsph-auth__info-card-container mb-4">
+  <div class="vsph-info-card__container mb-4">
     {{
       'vsph.webClient.activateAccountPage.successfullyActivatedMessage'
         | translate

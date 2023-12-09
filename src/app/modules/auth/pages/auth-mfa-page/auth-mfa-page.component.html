@@ -8,7 +8,7 @@
   <vsph-first-mfa-setup *ngIf="isInitialMfaSetup$ | async" />
   <vsph-mfa-code-form *ngIf="(isInitialMfaSetup$ | async) === false" />
   <hr class="vsph-auth__separator my-8" />
-  <div class="vsph-auth__input-label">
+  <div class="vsph-input__label">
     {{ 'vsph.clientCommon.mfaPage.dontHaveAccessToAuthenticator' | translate }}
   </div>
   <a routerLink="/auth/mfa/email" class="vsph-button vsph-button--secondary">

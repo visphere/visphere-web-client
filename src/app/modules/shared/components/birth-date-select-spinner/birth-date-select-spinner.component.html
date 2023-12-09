@@ -4,7 +4,7 @@
  -->
 
 <div [formGroup]="formGroup" class="flex flex-col">
-  <div class="vsph-auth__input-label">
+  <div class="vsph-input__label">
     {{ 'vsph.' + i18nPrefix + '.formFields.birthDate.value' | translate }}
     <span class="ms-0.5 text-vsph-tint-400">*</span>
   </div>
@@ -28,7 +28,7 @@
       multiSpinnerId="year"
       class="flex-grow" />
   </div>
-  <div class="text-sm mt-1 mx-2 vsph-auth__text--invalid">
+  <div class="text-sm mt-1 mx-2 vsph-input__text--invalid">
     <vsph-field-validator />
     <vsph-field-validator type="notAll" />
     <vsph-field-validator type="invalid" />
