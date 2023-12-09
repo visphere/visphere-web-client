@@ -6,9 +6,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RelatedValueReqDto } from '~/settings-mod/model/related-value.model';
+import {
+  UpdateAccountDetailsReqDto,
+  UpdateAccountDetailsResDto,
+} from '~/settings-mod/model/update-account-details.model';
+import { UserAccountDetailsResDto } from '~/settings-mod/model/user-account-details.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { UserSettings } from '~/shared-mod/models/identity.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
+import { UpdateAccountPasswordReqDto } from '../../model/update-account-password.model';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsHttpClientService extends AbstractHttpProvider {
@@ -19,6 +25,38 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
   getUserSettings$(): Observable<UserSettings> {
     return this._httpClient.get<UserSettings>(
       `${this._infraApiPath}/api/v1/settings/user/settings`
+    );
+  }
+
+  updateMfaStateSettings$(enabled: boolean): Observable<BaseMessageModel> {
+    return this._httpClient.patch<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/auth/mfa/settings/toggle`,
+      null,
+      { params: { enabled } }
+    );
+  }
+
+  getAccountDetails$(): Observable<UserAccountDetailsResDto> {
+    return this._httpClient.get<UserAccountDetailsResDto>(
+      `${this._infraApiPath}/api/v1/auth/account/details`
+    );
+  }
+
+  updateAccountDetails$(
+    reqDto: UpdateAccountDetailsReqDto
+  ): Observable<UpdateAccountDetailsResDto> {
+    return this._httpClient.patch<UpdateAccountDetailsResDto>(
+      `${this._infraApiPath}/api/v1/auth/account/details`,
+      reqDto
+    );
+  }
+
+  updateAccountPassword$(
+    reqDto: UpdateAccountPasswordReqDto
+  ): Observable<BaseMessageModel> {
+    return this._httpClient.patch<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/auth/password/renew/logged/change`,
+      reqDto
     );
   }
 
