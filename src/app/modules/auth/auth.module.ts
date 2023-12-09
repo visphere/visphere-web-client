@@ -32,7 +32,6 @@ import { MfaCodeFormComponent } from '~/auth-mod/components/mfa-code-form/mfa-co
 import { MfaEmailFormComponent } from '~/auth-mod/components/mfa-email-form/mfa-email-form.component';
 import { MySavedAccountsComponent } from '~/auth-mod/components/my-saved-accounts/my-saved-accounts.component';
 import { Oauth2ButtonComponent } from '~/auth-mod/components/oauth2-button/oauth2-button.component';
-import { PasswordInputTogglerComponent } from '~/auth-mod/components/password-input-toggler/password-input-toggler.component';
 import { RegisterFirstStageFormComponent } from '~/auth-mod/components/register-first-stage-form/register-first-stage-form.component';
 import { RegisterFormConsentsComponent } from '~/auth-mod/components/register-form-consents/register-form-consents.component';
 import { RegisterFormComponent } from '~/auth-mod/components/register-form/register-form.component';
@@ -83,7 +82,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     MfaEmailFormComponent,
     MySavedAccountsComponent,
     Oauth2ButtonComponent,
-    PasswordInputTogglerComponent,
     RegisterFirstStageFormComponent,
     RegisterFormConsentsComponent,
     RegisterFormComponent,
@@ -99,10 +97,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
     NgxTippyModule,
     NgIconsModule.withIcons({
       arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
-      eyeIcon: BtsIcon.bootstrapEye,
-      eyeSlashIcon: BtsIcon.bootstrapEyeSlash,
       outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
-      selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
       plusCircleIcon: BtsIcon.bootstrapPlusCircle,
       questionCircleIcon: BtsIcon.bootstrapQuestionCircle,
     }),

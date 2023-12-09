@@ -22,7 +22,7 @@ export class BirthDateSelectSpinnerComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  @Input() i18nPrefix = 'webClient.registerPage';
+  @Input() i18nPrefix = '';
 
   formGroup!: FormGroup;
 
@@ -65,7 +65,7 @@ export class BirthDateSelectSpinnerComponent
 
   getFormControlValue(key: keyof DateComponentsType): number | null {
     const control = this.formGroup.get('birthDate');
-    if (control && control.value[key]) {
+    if (control && control.value && control.value[key]) {
       return control.value[key];
     }
     return null;
