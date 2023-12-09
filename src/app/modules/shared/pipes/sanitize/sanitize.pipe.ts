@@ -6,7 +6,7 @@ import { Pipe, PipeTransform, SecurityContext } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as DOMPurify from 'dompurify';
 
-@Pipe({ name: 'sanitize' })
+@Pipe({ name: 'vsphSanitize' })
 export class SanitizePipe implements PipeTransform {
   constructor(private readonly _domSanitizer: DomSanitizer) {}
 

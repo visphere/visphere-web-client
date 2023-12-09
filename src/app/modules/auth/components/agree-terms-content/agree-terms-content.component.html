@@ -9,7 +9,7 @@
     [i18nPrefix]="i18nPrefix"
     (emitOnClick)="emitClickInCheckbox.emit()">
     <ng-container labelContent>
-      <span [innerHTML]="(agreeTermsContent$ | async)! | sanitize"></span>
+      <span [innerHTML]="(agreeTermsContent$ | async)! | vsphSanitize"></span>
       <span class="ms-0.5 text-vsph-tint-400">*</span>
     </ng-container>
     <ng-container errorsContent>

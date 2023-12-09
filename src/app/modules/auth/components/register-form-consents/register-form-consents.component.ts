@@ -5,14 +5,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
-import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'vsph-register-form-consents',
   templateUrl: './register-form-consents.component.html',
-  providers: [SanitizePipe],
 })
 export class RegisterFormConsentsComponent
   extends AbstractReactiveProvider

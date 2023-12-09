@@ -8,14 +8,13 @@ import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { combineLatest } from 'rxjs';
 import { PopulateFormControlService } from '~/shared-mod/context/populate-form-control/populate-form-control.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
-import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'vsph-password-input-toggler',
   templateUrl: './password-input-toggler.component.html',
-  providers: [SanitizePipe, PopulateFormControlService],
+  providers: [PopulateFormControlService],
 })
 export class PasswordInputTogglerComponent
   extends AbstractReactiveProvider
