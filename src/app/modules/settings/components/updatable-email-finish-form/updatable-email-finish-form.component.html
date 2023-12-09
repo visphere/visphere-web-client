@@ -1,0 +1,37 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="grid gap-y-3">
+  <div class="vsph-info-card__container">
+    {{
+      'vsph.clientCommon.settingsPage.modal.successfullSendEmailMessage'
+        | translate
+    }}
+  </div>
+  <form
+    [formGroup]="tokenForm"
+    (ngSubmit)="handleSubmitTokenForm()"
+    class="grid gap-y-3">
+    <vsph-password-input-toggler
+      [maxLength]="50"
+      formControlIdentifier="token"
+      [i18nPrefix]="(i18nPrefix$ | async)!">
+      <vsph-field-validator />
+    </vsph-password-input-toggler>
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="tokenForm.invalid">
+      {{ 'vsph.clientCommon.settingsPage.modal.updateButton' | translate }}
+    </vsph-lazy-button-spinner>
+    <vsph-deferred-button
+      (emitOnAction)="handleResendMessage()"
+      [isDisabled]="!!(isLoading$ | async)"
+      [isLoading]="(isResendLoading$ | async)!"
+      color="dark"
+      styles="vsph-button vsph-button--secondary"
+      innerI18nText="vsph.common.utils.resendMessageButton"
+      labelI18nText="vsph.common.utils.emailMessageNotReceived" />
+  </form>
+</div>

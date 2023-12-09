@@ -1,0 +1,23 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<form
+  [formGroup]="emailAddressForm!"
+  (ngSubmit)="handleSubmitStartChangeEmailForm()"
+  class="grid gap-y-3">
+  <vsph-common-form-input
+    [maxLength]="100"
+    formControlIdentifier="emailAddress"
+    [i18nPrefix]="(i18nPrefix$ | async)!">
+    <vsph-field-validator />
+    <vsph-field-validator type="email" />
+    <vsph-field-validator *ngIf="isUnique" type="exist" />
+  </vsph-common-form-input>
+  <vsph-lazy-button-spinner
+    [isLoading]="(isLoading$ | async)!"
+    [buttonDisabled]="!!emailAddressForm?.invalid || contentsAreIdentical">
+    {{ 'vsph.common.utils.continue' | translate }}
+  </vsph-lazy-button-spinner>
+</form>

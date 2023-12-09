@@ -1,0 +1,18 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-modal-wrapper
+  modalSize="xs"
+  header="vsph.clientCommon.settingsPage.modal.secondEmailAddress.header"
+  [isActive]="(activeModal$ | async) === 'second-email'"
+  (emitOnClose)="closeModal()">
+  <ng-container content>
+    <vsph-updatable-email-start-form
+      *ngIf="(currentStage$ | async) === 'start'"
+      [initValue]="secondEmailAddress" />
+    <vsph-updatable-email-finish-form
+      *ngIf="(currentStage$ | async) === 'validate'" />
+  </ng-container>
+</vsph-modal-wrapper>
