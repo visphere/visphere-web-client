@@ -69,7 +69,6 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
         ]).pipe(
           map(([accountDetails, loggedUser]) => {
             this._isFetching$.next(false);
-            console.log(accountDetails.birthDate);
             return {
               ...accountDetails,
               fullName: loggedUser?.fullName || '',

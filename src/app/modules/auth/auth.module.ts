@@ -96,7 +96,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     NgOptimizedImage,
     NgxTippyModule,
     NgIconsModule.withIcons({
-      arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
       outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
       plusCircleIcon: BtsIcon.bootstrapPlusCircle,
       questionCircleIcon: BtsIcon.bootstrapQuestionCircle,

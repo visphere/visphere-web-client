@@ -66,6 +66,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     EffectsModule.forFeature([SharedEffects]),
     TranslateModule,
     NgIconsModule.withIcons({
+      arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
       darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
       eyeIcon: BtsIcon.bootstrapEye,
       eyeSlashIcon: BtsIcon.bootstrapEyeSlash,

@@ -5,7 +5,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
-import { UpdatableEmailFormStages } from '~/settings-mod/types/form-stages.type';
+import { UpdatableEmailFormStage } from '~/settings-mod/types/form-stages.type';
 import { EmailVariant } from '~/settings-mod/types/updatable-modal.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
@@ -16,7 +16,7 @@ import { UpdatableEmailHttpClientService } from '../updatable-email-http-client/
 @Injectable()
 export class UpdatableEmailService
   extends AbstractMultistageFormProvider<
-    UpdatableEmailFormStages,
+    UpdatableEmailFormStage,
     BaseMessageModel
   >
   implements OnDestroy

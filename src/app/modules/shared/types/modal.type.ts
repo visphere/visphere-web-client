@@ -4,3 +4,5 @@
  */
 
 export type ModalSize = 'xs' | 'sm' | 'xl';
+
+export type ModalDevastatePrecedence = 'normal' | 'higher';
