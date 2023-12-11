@@ -37,13 +37,18 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
     return pipingObject$.pipe(
       tap(async res => {
         this.setLoading(false);
+        const { isDisabled, accessToken } = res;
         this._absStore.dispatch(
-          NgrxAction_SHA.__setLoggedUserDetails({
-            details: res,
-          })
+          isDisabled
+            ? NgrxAction_SHA.__openDisabledAccountModal({ accessToken })
+            : NgrxAction_SHA.__setLoggedUserDetails({
+                details: res,
+              })
         );
         this._absStore.dispatch(NgrxAction_ATH.__removeMfaState());
-        await this._absRouter.navigateByUrl('/');
+        if (!isDisabled) {
+          await this._absRouter.navigateByUrl('/');
+        }
       }),
       catchError(err => {
         this.setLoading(false);

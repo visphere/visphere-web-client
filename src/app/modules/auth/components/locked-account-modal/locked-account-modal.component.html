@@ -1,0 +1,20 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+<vsph-modal-wrapper
+  [isActive]="(isModalActive$ | async)!"
+  (emitOnClose)="handleCloseModalAndExit()"
+  modalSize="xs"
+  header="vsph.clientCommon.forAll.modals.enableAccount.header"
+  paragraph="vsph.clientCommon.forAll.modals.enableAccount.paragraph">
+  <ng-container content>
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      (emitClick)="handleUnlockAccount()">
+      {{
+        'vsph.clientCommon.forAll.modals.enableAccount.submitButton' | translate
+      }}
+    </vsph-lazy-button-spinner>
+  </ng-container>
+</vsph-modal-wrapper>

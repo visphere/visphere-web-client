@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'vsph-auth-root',
   template: `
+    <vsph-locked-account-modal />
     <div class="flex-grow flex flex-col h-full">
       <router-outlet />
     </div>

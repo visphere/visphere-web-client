@@ -18,6 +18,8 @@ enum Action {
   UPDATE_LOGGED_USER_SETTINGS = '[SHARED] UPDATE LOGGED USER SETTINGS',
   UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE',
   UPDATE_LOGGED_USER_FULL_NAME = '[SHARED] UPDATE LOGGED USER FULL NAME',
+  OPEN_DISABLED_ACCOUNT_MODAL = '[SHARED] OPEN ACCOUNT DISABLED MODAL',
+  CLOSE_DISABLED_ACCOUNT_MODAL = '[SHARED] CLOSE ACCOUNT DISABLED MODAL',
 }
 
 export const __addSnackbar = createAction(
@@ -62,4 +64,13 @@ export const __updateLogoutModalState = createAction(
 export const __updateLoggedUserFullName = createAction(
   Action.UPDATE_LOGGED_USER_FULL_NAME,
   props<{ fullName: string }>()
+);
+
+export const __openDisabledAccountModal = createAction(
+  Action.OPEN_DISABLED_ACCOUNT_MODAL,
+  props<{ accessToken: string }>()
+);
+
+export const __closeDisabledAccountModal = createAction(
+  Action.CLOSE_DISABLED_ACCOUNT_MODAL
 );

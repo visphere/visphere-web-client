@@ -71,10 +71,13 @@ export class Oauth2LoginService
     return this._oauth2HttpClientService.loginViaProvider$(this._token).pipe(
       delay(2000),
       map(res => {
+        const { isDisabled, accessToken } = res;
         this._store.dispatch(
-          NgrxAction_SHA.__setLoggedUserDetails({
-            details: res,
-          })
+          isDisabled
+            ? NgrxAction_SHA.__openDisabledAccountModal({ accessToken })
+            : NgrxAction_SHA.__setLoggedUserDetails({
+                details: res,
+              })
         );
         this._isLoading$.next(false);
         this._activeSupplier$.next(null);

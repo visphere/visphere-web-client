@@ -10,3 +10,8 @@ export type LoggedUser = {
   profileColor: string;
   settings: UserSettings;
 };
+
+export type DisabledAccount = {
+  accessToken: string;
+  modalIsOpen: boolean;
+};

@@ -66,7 +66,21 @@ const _reducer = createReducer(
           },
         }
       : state
-  )
+  ),
+  on(NgrxAction.__openDisabledAccountModal, (state, action) => ({
+    ...state,
+    disabledAccount: {
+      accessToken: action.accessToken,
+      modalIsOpen: true,
+    },
+  })),
+  on(NgrxAction.__closeDisabledAccountModal, state => ({
+    ...state,
+    disabledAccount: {
+      accessToken: '',
+      modalIsOpen: false,
+    },
+  }))
 );
 
 export const sharedReduxStore = {

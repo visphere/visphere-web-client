@@ -3,7 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Snackbar } from '~/shared-mod/types/snackbar.type';
-import { LoggedUser } from '../models/logged-user.model';
+import { DisabledAccount, LoggedUser } from '../models/logged-user.model';
 
 export interface SharedStoreState {
   snackbarStack: Snackbar[];
@@ -11,6 +11,7 @@ export interface SharedStoreState {
   initialLoading: boolean;
   settingsReturnUrl: string;
   logoutModalIsOpen: boolean;
+  disabledAccount: DisabledAccount;
 }
 
 export const sharedStoreState: SharedStoreState = {
@@ -19,4 +20,8 @@ export const sharedStoreState: SharedStoreState = {
   initialLoading: true,
   settingsReturnUrl: '',
   logoutModalIsOpen: false,
+  disabledAccount: {
+    accessToken: '',
+    modalIsOpen: false,
+  },
 };

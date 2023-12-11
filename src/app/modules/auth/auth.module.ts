@@ -26,6 +26,7 @@ import { FirstMfaSetupComponent } from '~/auth-mod/components/first-mfa-setup/fi
 import { FooterControlListComponent } from '~/auth-mod/components/footer-control-list/footer-control-list.component';
 import { FooterControlsComponent } from '~/auth-mod/components/footer-controls/footer-controls.component';
 import { FooterComponent } from '~/auth-mod/components/footer/footer.component';
+import { LockedAccountModalComponent } from '~/auth-mod/components/locked-account-modal/locked-account-modal.component';
 import { LoginFormComponent } from '~/auth-mod/components/login-form/login-form.component';
 import { LoginMyAccountModalComponent } from '~/auth-mod/components/login-my-account-modal/login-my-account-modal.component';
 import { MfaCodeFormComponent } from '~/auth-mod/components/mfa-code-form/mfa-code-form.component';
@@ -76,6 +77,7 @@ import { SharedModule } from '~/shared-mod/shared.module';
     FooterControlListComponent,
     FooterControlsComponent,
     FooterComponent,
+    LockedAccountModalComponent,
     LoginFormComponent,
     LoginMyAccountModalComponent,
     MfaCodeFormComponent,

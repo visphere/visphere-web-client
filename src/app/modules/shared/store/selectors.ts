@@ -37,3 +37,13 @@ export const selectLogoutModalIsOpen = createSelector(
   selectSharedState,
   ({ logoutModalIsOpen }) => logoutModalIsOpen
 );
+
+export const selectDisabledAccountModalIsOpen = createSelector(
+  selectSharedState,
+  ({ disabledAccount }) => disabledAccount.modalIsOpen
+);
+
+export const selectDisabledAccountAccessToken = createSelector(
+  selectSharedState,
+  ({ disabledAccount }) => disabledAccount.accessToken
+);

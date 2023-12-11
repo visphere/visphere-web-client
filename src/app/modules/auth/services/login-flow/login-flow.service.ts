@@ -35,7 +35,14 @@ export class LoginFlowService {
       .pipe(
         tap(async res => {
           onSubmitCallback();
-          const { emailAddress, isActivated, isMfaEnabled, isMfaSetup } = res;
+          const {
+            emailAddress,
+            isActivated,
+            isMfaEnabled,
+            isMfaSetup,
+            isDisabled,
+            accessToken,
+          } = res;
           let navigateUrl = '/';
           if (!isActivated) {
             this._store.dispatch(
@@ -52,14 +59,18 @@ export class LoginFlowService {
               navigateUrl = '/auth/mfa';
             } else {
               this._store.dispatch(
-                NgrxAction_SHA.__setLoggedUserDetails({
-                  details: res,
-                })
+                isDisabled
+                  ? NgrxAction_SHA.__openDisabledAccountModal({ accessToken })
+                  : NgrxAction_SHA.__setLoggedUserDetails({
+                      details: res,
+                    })
               );
             }
           }
-          onSaveCallback(res);
-          await this._router.navigateByUrl(navigateUrl);
+          if (!isDisabled || isMfaEnabled) {
+            onSaveCallback(res);
+            await this._router.navigateByUrl(navigateUrl);
+          }
         }),
         catchError(err => {
           onSubmitCallback();
