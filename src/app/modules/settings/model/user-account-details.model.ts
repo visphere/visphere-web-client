@@ -11,7 +11,7 @@ export type UserAccountDetailsResDto = {
   emailAddress: string;
   secondEmailAddress: string;
   externalOAuth2Supplier: boolean;
-  crendetialsSupplier: ExtendedOAuth2Supplier;
+  credentialsSupplier: ExtendedOAuth2Supplier;
   birthDate: string;
   joinDate: string;
   mfaEnabled: boolean;

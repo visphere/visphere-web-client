@@ -13,6 +13,27 @@
       alt=""
       loading="eager"
       class="rounded-xl w-[85%] h-[85%]" />
+    <div
+      *ngIf="accountDetails?.externalOAuth2Supplier"
+      [class.bg-vsph-google-bg]="
+        accountDetails?.credentialsSupplier === 'google'
+      "
+      [class.bg-vsph-facebook-bg]="
+        accountDetails?.credentialsSupplier === 'facebook'
+      "
+      [ngClass]="{
+        'border-4 border-vsph-light-200 dark:border-vsph-dark-850':
+          accountDetails?.credentialsSupplier === 'google'
+      }"
+      class="absolute -bottom-[5px] -right-[5px] w-[30px] h-[30px] rounded-full flex justify-center items-center">
+      <img
+        src="{{ path }}/static/oauth2/{{
+          accountDetails?.credentialsSupplier
+        }}-logo.svg"
+        width="20"
+        height="20"
+        alt="" />
+    </div>
   </div>
   <div class="flex justify-between items-center ps-[130px] mb-4">
     <div class="flex flex-col gap-y-1">
