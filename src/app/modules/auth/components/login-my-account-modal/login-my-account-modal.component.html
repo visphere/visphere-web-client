@@ -7,7 +7,7 @@
   [isActive]="(isOpen$ | async)!"
   (emitOnClose)="handleEmitOnClose()"
   modalSize="xs"
-  [header]="'vsph.clientCommon.loginPage.formHeader' | translate">
+  header="vsph.clientCommon.loginPage.formHeader">
   <div content>
     <div
       *ngIf="!loggedUser?.verified"

@@ -37,8 +37,8 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
   private _isRefreshing = false;
   private _refreshTokenSubject$ = new BehaviorSubject<string | null>(null);
 
-  private readonly TOKEN_PREFIX = 'Bearer';
-  private readonly TOKEN_HEADER_KEY = 'Authorization';
+  public static readonly TOKEN_PREFIX = 'Bearer';
+  public static readonly TOKEN_HEADER_KEY = 'Authorization';
 
   constructor(
     private readonly _identityHttpClientService: IdentityHttpClientService,
@@ -121,8 +121,8 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
   ): HttpRequest<any> {
     return req.clone({
       headers: req.headers.set(
-        this.TOKEN_HEADER_KEY,
-        `${this.TOKEN_PREFIX} ${token}`
+        AccessRefreshInterceptor.TOKEN_HEADER_KEY,
+        `${AccessRefreshInterceptor.TOKEN_PREFIX} ${token}`
       ),
     });
   }

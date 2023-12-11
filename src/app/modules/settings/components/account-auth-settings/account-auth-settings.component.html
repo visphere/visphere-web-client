@@ -11,12 +11,12 @@
   {{ defaultPrefix + '.section.authentication.description' | translate }}
 </p>
 <vsph-conditional-tooltip-wrapper
-  [condition]="!!accountDetails?.isExternalOAuth2Supplier"
+  [condition]="!!accountDetails?.externalOAuth2Supplier"
   [contentTemplate]="changePasswordButtonContentTemplate"
   i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
 <ng-template #changePasswordButtonContentTemplate>
   <button
-    [disabled]="!!accountDetails?.isExternalOAuth2Supplier"
+    [disabled]="!!accountDetails?.externalOAuth2Supplier"
     (click)="handleOpenChangePasswordModal()"
     class="vsph-button vsph-button--primary vsph-button--fit my-4">
     {{
@@ -25,16 +25,16 @@
   </button>
 </ng-template>
 <vsph-conditional-tooltip-wrapper
-  [condition]="!!accountDetails?.isExternalOAuth2Supplier"
+  [condition]="!!accountDetails?.externalOAuth2Supplier"
   [contentTemplate]="mfaSetupContentTemplate"
   i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
 <ng-template #mfaSetupContentTemplate>
   <vsph-toggle-button
     i18nPrefix="userSettings.subpage.myAccount.section.authentication"
     i18nToggler="mfaSettings"
-    [isSelected]="!!accountDetails?.isMfaEnabled"
+    [isSelected]="!!accountDetails?.mfaEnabled"
     [hasDescription]="true"
-    [isDisabled]="!!accountDetails?.isExternalOAuth2Supplier"
+    [isDisabled]="!!accountDetails?.externalOAuth2Supplier"
     [isFadded]="true"
     (emitValueChanged)="handleToggleMfaEnabled($event)" />
 </ng-template>
@@ -48,12 +48,12 @@
 <div class="flex mt-4 gap-x-4">
   <button
     class="vsph-button vsph-button--primary vsph-button--fit vsph-button--danger"
-    (click)="handleOpenDisableAccountModal()">
+    (click)="handleOpenModal('disable-account')">
     {{ defaultPrefix + '.section.removal.disableAccountButton' | translate }}
   </button>
   <button
     class="vsph-button vsph-button--primary vsph-button--fit vsph-button--danger--outline"
-    (click)="handleOpenDeleteAccountModal()">
-    {{ defaultPrefix + '.section.removal.removeAccountButton' | translate }}
+    (click)="handleOpenModal('delete-account')">
+    {{ defaultPrefix + '.section.removal.deleteAccountButton' | translate }}
   </button>
 </div>

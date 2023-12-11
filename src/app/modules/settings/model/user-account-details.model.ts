@@ -10,11 +10,12 @@ export type UserAccountDetailsResDto = {
   username: string;
   emailAddress: string;
   secondEmailAddress: string;
-  isExternalOAuth2Supplier: boolean;
+  externalOAuth2Supplier: boolean;
   crendetialsSupplier: ExtendedOAuth2Supplier;
-  isMfaEnabled: boolean;
   birthDate: string;
   joinDate: string;
+  mfaEnabled: boolean;
+  mfaSetup: boolean;
 };
 
 export type UserAccountDetailsModel = UserAccountDetailsResDto & {

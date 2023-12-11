@@ -27,7 +27,6 @@ import { UpdatableEmailStartFormComponent } from '~/settings-mod/components/upda
 import { UsernameUpdatableModalComponent } from '~/settings-mod/components/username-updatable-modal/username-updatable-modal.component';
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
 import { BlankInitSettingsPageComponent } from '~/settings-mod/pages/blank-init-settings-page/blank-init-settings-page.component';
-import { FriendRequestsSettingsPageComponent } from '~/settings-mod/pages/friend-requests-settings-page/friend-requests-settings-page.component';
 import { LanguageSettingsPageComponent } from '~/settings-mod/pages/language-settings-page/language-settings-page.component';
 import { MyAccountSettingsPageComponent } from '~/settings-mod/pages/my-account-settings-page/my-account-settings-page.component';
 import { NotificationsSettingsPageComponent } from '~/settings-mod/pages/notifications-settings-page/notifications-settings-page.component';
@@ -46,7 +45,6 @@ import { SettingsRoutingModule } from './settings-routing.module';
     BlankInitSettingsPageComponent,
     EditablePrimitiveValueComponent,
     EmailAddressUpdatableModalComponent,
-    FriendRequestsSettingsPageComponent,
     FullNameUpdatableModalComponent,
     LanguageSettingsPageComponent,
     MyAccountSettingsPageComponent,
@@ -72,7 +70,6 @@ import { SettingsRoutingModule } from './settings-routing.module';
       arrowRightIcon: BtsIcon.bootstrapArrowRight,
       closeIcon: BtsIcon.bootstrapXLg,
       downloadIcon: BtsIcon.bootstrapDownload,
-      friendRequestsIcon: BtsIcon.bootstrapPersonPlus,
       languageIcon: BtsIcon.bootstrapTranslate,
       logoutIcon: BtsIcon.bootstrapBoxArrowRight,
       myAccountIcon: BtsIcon.bootstrapPerson,

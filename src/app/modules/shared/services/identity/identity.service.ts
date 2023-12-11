@@ -41,6 +41,7 @@ export class IdentityService {
           return redirectUrl;
         }),
         catchError(() => {
+          this._localStorageService.remove('loggedUser');
           this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
           this._lazyPageLoaderService.disableLoading();
           return throwError(() => 'auth/login');

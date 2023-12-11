@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
 import { BlankInitSettingsPageComponent } from '~/settings-mod/pages/blank-init-settings-page/blank-init-settings-page.component';
-import { FriendRequestsSettingsPageComponent } from '~/settings-mod/pages/friend-requests-settings-page/friend-requests-settings-page.component';
 import { LanguageSettingsPageComponent } from '~/settings-mod/pages/language-settings-page/language-settings-page.component';
 import { MyAccountSettingsPageComponent } from '~/settings-mod/pages/my-account-settings-page/my-account-settings-page.component';
 import { NotificationsSettingsPageComponent } from '~/settings-mod/pages/notifications-settings-page/notifications-settings-page.component';
@@ -44,11 +43,6 @@ const routes: Routes = [
                 path: 'profile',
                 component: ProfileSettingsPageComponent,
                 title: 'settingsPage.profile',
-              },
-              {
-                path: 'friend-requests',
-                component: FriendRequestsSettingsPageComponent,
-                title: 'settingsPage.friendReuqests',
               },
               {
                 path: 'appearance',
