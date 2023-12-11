@@ -4,7 +4,9 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
+import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
 import { AccountAuthSettingsComponent } from './account-auth-settings.component';
 
 describe('AccountAuthSettingsComponent', () => {
@@ -14,6 +16,7 @@ describe('AccountAuthSettingsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [MyAccountSettingsService, PopulateTooltipService],
     }).compileComponents();
     fixture = TestBed.createComponent(AccountAuthSettingsComponent);
     component = fixture.componentInstance;

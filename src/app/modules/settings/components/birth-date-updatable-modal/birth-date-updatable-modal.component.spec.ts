@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { BirthDateUpdatableModalComponent } from './birth-date-updatable-modal.component';
 
@@ -14,6 +15,7 @@ describe('BirthDateUpdatableModalComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [MyAccountSettingsService],
     }).compileComponents();
     fixture = TestBed.createComponent(BirthDateUpdatableModalComponent);
     component = fixture.componentInstance;

@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
 import { ConditionalTooltipWrapperComponent } from './conditional-tooltip-wrapper.component';
 
 describe('ConditionalTooltipWrapperComponent', () => {
@@ -13,6 +14,7 @@ describe('ConditionalTooltipWrapperComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule],
+      providers: [PopulateTooltipService],
     }).compileComponents();
     fixture = TestBed.createComponent(ConditionalTooltipWrapperComponent);
     component = fixture.componentInstance;

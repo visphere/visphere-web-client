@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { UpdatableEmailService } from '~/settings-mod/services/updatable-email/updatable-email.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { UpdatableEmailStartFormComponent } from './updatable-email-start-form.component';
 
@@ -14,6 +15,7 @@ describe('UpdatableEmailStartFormComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [UpdatableEmailService],
     }).compileComponents();
     fixture = TestBed.createComponent(UpdatableEmailStartFormComponent);
     component = fixture.componentInstance;

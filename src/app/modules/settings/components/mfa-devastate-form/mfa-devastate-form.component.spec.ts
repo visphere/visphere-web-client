@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { DevastateAccountService } from '~/settings-mod/services/devastate-account/devastate-account.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { MfaDevastateFormComponent } from './mfa-devastate-form.component';
 
@@ -14,6 +15,7 @@ describe('MfaDevastateFormComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [DevastateAccountService],
     }).compileComponents();
     fixture = TestBed.createComponent(MfaDevastateFormComponent);
     component = fixture.componentInstance;
