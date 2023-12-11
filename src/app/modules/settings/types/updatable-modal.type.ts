@@ -13,6 +13,7 @@ export type UpdatableModalType =
   | 'delete-second-email'
   | 'disable-account'
   | 'delete-account'
+  | 'reset-mfa'
   | 'none';
 
 export type EmailVariant = 'first' | 'second';

@@ -42,6 +42,7 @@ export class PasswordUpdatableModalComponent
           Validators.pattern(regex.PASSWORD),
         ]),
         confirmedNewPassword: new FormControl('', [Validators.required]),
+        logoutFromAll: new FormControl(false),
       },
       {
         validators: passwordMatchValidator(

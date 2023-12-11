@@ -52,11 +52,16 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
   }
 
   updateAccountPassword$(
-    reqDto: UpdateAccountPasswordReqDto
+    reqDto: UpdateAccountPasswordReqDto,
+    refreshToken: string
   ): Observable<BaseMessageModel> {
+    const headers = new HttpHeaders({
+      'X-RefreshToken': refreshToken,
+    });
     return this._httpClient.patch<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/auth/password/renew/logged/change`,
-      reqDto
+      reqDto,
+      { headers }
     );
   }
 
@@ -91,6 +96,19 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
       `${this._infraApiPath}/api/v1/settings/user/push/notifications/sound`,
       null,
       { params: { enabled } }
+    );
+  }
+
+  resetMfaSettings$(
+    refreshToken: string,
+    logoutFromAll: boolean
+  ): Observable<BaseMessageModel> {
+    const headers = new HttpHeaders({
+      'X-RefreshToken': refreshToken,
+    });
+    return this._httpClient.delete<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/auth/mfa/reset`,
+      { headers, params: { logoutFromAll } }
     );
   }
 }

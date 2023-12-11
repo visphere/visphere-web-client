@@ -3,4 +3,6 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
-export type UpdatableEmailFormStages = 'start' | 'validate';
+export type UpdatableEmailFormStage = 'start' | 'validate';
+
+export type DevastateModalFormStage = 'password' | 'mfa';

@@ -22,6 +22,7 @@ import { UpdateAccountPasswordReqDto } from '~/settings-mod/model/update-account
 import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-details.model';
 import { UpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { StorageKeys } from '~/shared-mod/models/identity.model';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -125,17 +126,19 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
     reqDto: UpdateAccountPasswordReqDto
   ): Observable<BaseMessageModel> {
     this.setLoading(true);
-    return this._settingsHttpClientService.updateAccountPassword$(reqDto).pipe(
-      tap(({ message }) => {
-        this.showSuccessSnackbar(message);
-        this._activeModal$.next('none');
-        this.setLoading(false);
-      }),
-      catchError(err => {
-        this.setLoading(false);
-        return throwError(() => err);
-      })
-    );
+    return this._settingsHttpClientService
+      .updateAccountPassword$(reqDto, this.getRefreshToken())
+      .pipe(
+        tap(({ message }) => {
+          this.showSuccessSnackbar(message);
+          this._activeModal$.next('none');
+          this.setLoading(false);
+        }),
+        catchError(err => {
+          this.setLoading(false);
+          return throwError(() => err);
+        })
+      );
   }
 
   deleteSecondEmailAddress$(): Observable<BaseMessageModel> {
@@ -156,6 +159,23 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
       );
   }
 
+  resetMfaSettings$(logoutFromAll: boolean): Observable<BaseMessageModel> {
+    this.setLoading(true);
+    return this._settingsHttpClientService
+      .resetMfaSettings$(this.getRefreshToken(), logoutFromAll)
+      .pipe(
+        tap(({ message }) => {
+          this.showSuccessSnackbar(message);
+          this._activeModal$.next('none');
+          this.setLoading(false);
+        }),
+        catchError(err => {
+          this.setLoading(false);
+          return throwError(() => err);
+        })
+      );
+  }
+
   generateBaseReqObj(
     details: UserAccountDetailsModel
   ): UpdateAccountDetailsReqDto {
@@ -165,6 +185,13 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
       username: details.username,
       birthDate: details.birthDate,
     };
+  }
+
+  private getRefreshToken(): string {
+    return (
+      this._localStorageService.get<StorageKeys>('loggedUser')?.refreshToken ||
+      ''
+    );
   }
 
   get accountDetails$(): Observable<UserAccountDetailsModel | undefined> {

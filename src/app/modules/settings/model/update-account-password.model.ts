@@ -7,4 +7,5 @@ export type UpdateAccountPasswordReqDto = {
   oldPassword: string;
   newPassword: string;
   confirmedNewPassword: string;
+  logoutFromAll: boolean;
 };
