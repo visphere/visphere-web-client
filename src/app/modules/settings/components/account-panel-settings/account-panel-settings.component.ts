@@ -4,11 +4,11 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
-import { LanguageSwitcherService } from '~/root-mod/modules/shared/services/language-switcher/language-switcher.service';
 import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-details.model';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme-provider';
 import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
+import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 
 @Component({
@@ -57,21 +57,17 @@ export class AccountPanelSettingsComponent
   }
 
   handleOpenUpdateEmailAddressModal(): void {
-    if (!this.accountDetails?.isExternalOAuth2Supplier) {
+    if (!this.accountDetails?.externalOAuth2Supplier) {
       this._myAccountSettingsService.activateModal('email');
     }
   }
 
   handleOpenUpdateSecondEmailAddressModal(): void {
-    if (!this.accountDetails?.isExternalOAuth2Supplier) {
-      this._myAccountSettingsService.activateModal('second-email');
-    }
+    this._myAccountSettingsService.activateModal('second-email');
   }
 
   handleOpenRemoveSecondEmailAddressModal(): void {
-    if (!this.accountDetails?.isExternalOAuth2Supplier) {
-      this._myAccountSettingsService.activateModal('delete-second-email');
-    }
+    this._myAccountSettingsService.activateModal('delete-second-email');
   }
 
   handleOpenUpdateBirthDateModal(): void {

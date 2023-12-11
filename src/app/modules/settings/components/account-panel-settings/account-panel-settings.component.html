@@ -72,34 +72,27 @@
       [value]="accountDetails?.username"
       (emitOnEdit)="handleOpenUpdateUsernameModal()" />
     <vsph-conditional-tooltip-wrapper
-      [condition]="!!accountDetails?.isExternalOAuth2Supplier"
+      [condition]="!!accountDetails?.externalOAuth2Supplier"
       [contentTemplate]="changeEmailAddressContentTemplate"
       i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
     <ng-template #changeEmailAddressContentTemplate>
       <vsph-editable-primitive-value
         [i18nDescription]="defaultPrefix + '.section.vis.emailAddress'"
-        [isDisabled]="!!accountDetails?.isExternalOAuth2Supplier"
+        [isDisabled]="!!accountDetails?.externalOAuth2Supplier"
         [value]="accountDetails?.emailAddress"
         (emitOnEdit)="handleOpenUpdateEmailAddressModal()" />
     </ng-template>
-    <vsph-conditional-tooltip-wrapper
-      [condition]="!!accountDetails?.isExternalOAuth2Supplier"
-      [contentTemplate]="sendEmailAddressContentTemplate"
-      i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
-    <ng-template #sendEmailAddressContentTemplate>
-      <vsph-editable-primitive-value
-        [i18nDescription]="defaultPrefix + '.section.vis.secondEmailAddress'"
-        [value]="accountDetails?.secondEmailAddress"
-        [isDisabled]="!!accountDetails?.isExternalOAuth2Supplier"
-        (emitOnEdit)="handleOpenUpdateSecondEmailAddressModal()">
-        <button
-          (click)="handleOpenRemoveSecondEmailAddressModal()"
-          [disabled]="accountDetails?.secondEmailAddress === '-'"
-          class="vsph-button vsph-button--primary vsph-button--fit px-3 vsph-button--danger">
-          <ng-icon name="removeTrashIcon" />
-        </button>
-      </vsph-editable-primitive-value>
-    </ng-template>
+    <vsph-editable-primitive-value
+      [i18nDescription]="defaultPrefix + '.section.vis.secondEmailAddress'"
+      [value]="accountDetails?.secondEmailAddress"
+      (emitOnEdit)="handleOpenUpdateSecondEmailAddressModal()">
+      <button
+        (click)="handleOpenRemoveSecondEmailAddressModal()"
+        [disabled]="accountDetails?.secondEmailAddress === '-'"
+        class="vsph-button vsph-button--primary vsph-button--fit px-3 vsph-button--danger">
+        <ng-icon name="removeTrashIcon" />
+      </button>
+    </vsph-editable-primitive-value>
     <vsph-editable-primitive-value
       [i18nDescription]="defaultPrefix + '.section.vis.birthDate'"
       [value]="
