@@ -1,0 +1,63 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-action-modal
+  size="sm"
+  precedence="higher"
+  [showProceedButton]="false"
+  [i18nPrefix]="specifiedI18nPrefix"
+  [isActive]="(activeModal$ | async) === modalType"
+  (emitOnClose)="handleCloseModal()"
+  (emitDevstateAction)="handleEmitDevastateAction()">
+  <div *ngIf="accountDetails?.externalOAuth2Supplier">
+    {{ specifiedI18nPrefix + '.description' | translate }}
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      (emitClick)="handleEmitMfaDevastateAction('')"
+      buttonStyle="vsph-button vsph-button--primary vsph-button--danger mt-4">
+      {{ specifiedI18nPrefix + '.submitButton' | translate }}
+    </vsph-lazy-button-spinner>
+  </div>
+  <div
+    *ngIf="!accountDetails?.externalOAuth2Supplier"
+    class="flex flex-col gap-y-5">
+    {{ specifiedI18nPrefix + '.description' | translate }}
+    <div class="vsph-info-card__container">
+      {{
+        commonI18nPrefix +
+          ((currentStage$ | async) === 'password'
+            ? '.confirmPassword'
+            : '.nextInsertMfaCode') | translate
+      }}
+    </div>
+    <form
+      *ngIf="(currentStage$ | async) === 'password'"
+      [formGroup]="passwordForm"
+      (ngSubmit)="handleEmitDevastateAction()"
+      class="grid gap-y-3">
+      <vsph-password-input-toggler
+        [maxLength]="50"
+        formControlIdentifier="password"
+        [i18nPrefix]="'clientCommon.settingsPage.modal.devastate'">
+        <vsph-field-validator />
+      </vsph-password-input-toggler>
+      <vsph-lazy-button-spinner
+        [isLoading]="(isLoading$ | async)!"
+        [buttonDisabled]="passwordForm.invalid"
+        buttonStyle="vsph-button vsph-button--primary vsph-button--danger">
+        {{
+          (accountDetails?.mfaSetup
+            ? 'vsph.common.utils.continue'
+            : specifiedI18nPrefix + '.submitButton'
+          ) | translate
+        }}
+      </vsph-lazy-button-spinner>
+    </form>
+    <vsph-mfa-devastate-form
+      *ngIf="(currentStage$ | async) === 'mfa'"
+      [i18nButtonText]="specifiedI18nPrefix + '.submitButton'"
+      (emitMfa)="handleEmitMfaDevastateAction($event)" />
+  </div>
+</vsph-devastate-action-modal>

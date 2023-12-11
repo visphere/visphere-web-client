@@ -1,0 +1,32 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<button
+  (click)="handleGotoPreviousStage()"
+  [disabled]="isLoading$ | async"
+  class="vsph-top-nav-button px-2 flex items-center w-fit mb-4">
+  <ng-icon name="arrowLeftIcon" class="me-2" />
+  {{ 'vsph.common.utils.backwardMove' | translate }}
+</button>
+<form
+  [formGroup]="mfaCodeForm"
+  (ngSubmit)="handleSubmitMfaCodeForm()"
+  class="grid gap-y-3">
+  <vsph-password-input-toggler
+    [maxLength]="6"
+    placeholder="324 561"
+    formControlIdentifier="mfaCode"
+    i18nPrefix="clientCommon.settingsPage.modal.devastate">
+    <vsph-field-validator />
+    <vsph-field-validator type="exactLength" />
+    <vsph-field-validator type="pattern" />
+  </vsph-password-input-toggler>
+  <vsph-lazy-button-spinner
+    [isLoading]="(isLoading$ | async)!"
+    [buttonDisabled]="mfaCodeForm.invalid"
+    buttonStyle="vsph-button vsph-button--primary vsph-button--danger">
+    {{ i18nButtonText | translate }}
+  </vsph-lazy-button-spinner>
+</form>

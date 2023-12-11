@@ -3,6 +3,45 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
+<vsph-devastate-action-modal
+  [isActive]="(activeModal$ | async) === 'reset-mfa'"
+  (emitOnClose)="handleCloseActiveModal()"
+  (emitDevstateAction)="handleResetMfaSettings()"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.devastate.resetMfa">
+  <p class="mb-4">
+    {{
+      'vsph.clientCommon.settingsPage.modal.devastate.resetMfa.description'
+        | translate
+    }}
+  </p>
+  <div class="flex justify-center gap-y-1">
+    <label class="flex gap-x-2 items-start">
+      <input
+        [(ngModel)]="logoutFromAll"
+        type="checkbox"
+        class="vsph-checkbox vsph-checkbox--danger" />
+      <div
+        class="leading-5 text-vsph-tint-400 dark:text-vsph-tint-300 cursor-pointer">
+        {{ 'vsph.clientCommon.settingsPage.modal.logoutFromAll' | translate }}
+      </div>
+    </label>
+  </div>
+</vsph-devastate-action-modal>
+<vsph-devastate-action-modal
+  *ngIf="(activeModal$ | async) === 'reset-mfa'"
+  i18nPrefix="resetMfa"
+  modalType="reset-mfa"
+  (emitDevastateAction)="handleResetMfaSettings()" />
+<vsph-devastate-account-modal
+  *ngIf="(activeModal$ | async) === 'disable-account'"
+  i18nPrefix="disableAccount"
+  modalType="disable-account"
+  (emitDevastateAction)="handleDisableAccount($event)" />
+<vsph-devastate-account-modal
+  *ngIf="(activeModal$ | async) === 'delete-account'"
+  i18nPrefix="deleteAccount"
+  modalType="delete-account"
+  (emitDevastateAction)="handleDeleteAccount($event)" />
 <hr class="vsph-settings__separator my-5" />
 <h2 class="vsph-settings__section-header">
   {{ defaultPrefix + '.section.authentication.header' | translate }}
@@ -37,6 +76,25 @@
     [isDisabled]="!!accountDetails?.externalOAuth2Supplier"
     [isFadded]="true"
     (emitValueChanged)="handleToggleMfaEnabled($event)" />
+</ng-template>
+<p class="vsph-settings__init-small-paragraph mt-6">
+  {{
+    defaultPrefix + '.section.authentication.resetMfaDescription' | translate
+  }}
+</p>
+<vsph-conditional-tooltip-wrapper
+  [condition]="!!accountDetails?.externalOAuth2Supplier"
+  [contentTemplate]="resetMfaButtonContentTemplate"
+  i18nTooltipInfo="vsph.clientCommon.forAll.functionEnabledOnLocal" />
+<ng-template #resetMfaButtonContentTemplate>
+  <button
+    [disabled]="
+      !!accountDetails?.externalOAuth2Supplier || !accountDetails?.mfaSetup
+    "
+    (click)="handleOpenModal('reset-mfa')"
+    class="vsph-button vsph-button--primary vsph-button--fit vsph-button--danger--outline my-4">
+    {{ defaultPrefix + '.section.authentication.resetMfaButton' | translate }}
+  </button>
 </ng-template>
 <hr class="vsph-settings__separator my-5" />
 <h2 class="vsph-settings__section-header">

@@ -13,9 +13,11 @@ import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { AccountAuthSettingsComponent } from '~/settings-mod/components/account-auth-settings/account-auth-settings.component';
 import { AccountPanelSettingsComponent } from '~/settings-mod/components/account-panel-settings/account-panel-settings.component';
 import { BirthDateUpdatableModalComponent } from '~/settings-mod/components/birth-date-updatable-modal/birth-date-updatable-modal.component';
+import { DevastateAccountModalComponent } from '~/settings-mod/components/devastate-account-modal/devastate-account-modal.component';
 import { EditablePrimitiveValueComponent } from '~/settings-mod/components/editable-primitive-value/editable-primitive-value.component';
 import { EmailAddressUpdatableModalComponent } from '~/settings-mod/components/email-address-updatable-modal/email-address-updatable-modal.component';
 import { FullNameUpdatableModalComponent } from '~/settings-mod/components/full-name-updatable-modal/full-name-updatable-modal.component';
+import { MfaDevastateFormComponent } from '~/settings-mod/components/mfa-devastate-form/mfa-devastate-form.component';
 import { NavigationBarComponent } from '~/settings-mod/components/navigation-bar/navigation-bar.component';
 import { PasswordUpdatableModalComponent } from '~/settings-mod/components/password-updatable-modal/password-updatable-modal.component';
 import { RadioButtonsGroupComponent } from '~/settings-mod/components/radio-buttons-group/radio-buttons-group.component';
@@ -43,10 +45,12 @@ import { SettingsRoutingModule } from './settings-routing.module';
     AppearanceSettingsPageComponent,
     BirthDateUpdatableModalComponent,
     BlankInitSettingsPageComponent,
+    DevastateAccountModalComponent,
     EditablePrimitiveValueComponent,
     EmailAddressUpdatableModalComponent,
     FullNameUpdatableModalComponent,
     LanguageSettingsPageComponent,
+    MfaDevastateFormComponent,
     MyAccountSettingsPageComponent,
     NavigationBarComponent,
     NotificationsSettingsPageComponent,
