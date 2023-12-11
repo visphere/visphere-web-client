@@ -2,19 +2,20 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserNotifSettingsResDto } from '~/settings-mod/model/notifs.model';
 import { RelatedValueReqDto } from '~/settings-mod/model/related-value.model';
 import {
   UpdateAccountDetailsReqDto,
   UpdateAccountDetailsResDto,
 } from '~/settings-mod/model/update-account-details.model';
+import { UpdateAccountPasswordReqDto } from '~/settings-mod/model/update-account-password.model';
 import { UserAccountDetailsResDto } from '~/settings-mod/model/user-account-details.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { UserSettings } from '~/shared-mod/models/identity.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
-import { UpdateAccountPasswordReqDto } from '../../model/update-account-password.model';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsHttpClientService extends AbstractHttpProvider {
@@ -25,6 +26,12 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
   getUserSettings$(): Observable<UserSettings> {
     return this._httpClient.get<UserSettings>(
       `${this._infraApiPath}/api/v1/settings/user/settings`
+    );
+  }
+
+  getUserNotifSettings$(): Observable<UserNotifSettingsResDto> {
+    return this._httpClient.get<UserNotifSettingsResDto>(
+      `${this._infraApiPath}/api/v1/notification/user/settings/email`
     );
   }
 
@@ -94,6 +101,14 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
   updateNotifsSoundState$(enabled: boolean): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
       `${this._infraApiPath}/api/v1/settings/user/push/notifications/sound`,
+      null,
+      { params: { enabled } }
+    );
+  }
+
+  updateEmailNotifsState$(enabled: boolean): Observable<BaseMessageModel> {
+    return this._httpClient.patch<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/notification/user/settings/email`,
       null,
       { params: { enabled } }
     );

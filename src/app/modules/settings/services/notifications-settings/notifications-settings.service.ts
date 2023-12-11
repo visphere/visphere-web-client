@@ -4,8 +4,19 @@
  */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
-import { UserPersistedNofisSettings } from '~/settings-mod/model/notifs.model';
+import {
+  Observable,
+  catchError,
+  combineLatest,
+  map,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
+import {
+  UserNotifSettings,
+  UserPersistedNofisSettings,
+} from '~/settings-mod/model/notifs.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -21,10 +32,17 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
     super(_store);
   }
 
-  loadPersistedNotifSettings$(): Observable<UserPersistedNofisSettings> {
+  loadPersistedNotifSettings$(): Observable<
+    UserPersistedNofisSettings & UserNotifSettings
+  > {
     return this._onChangeObserver$.pipe(
-      switchMap(() => this._settingsHttpClientService.getUserSettings$()),
-      map(userSettings => {
+      switchMap(() =>
+        combineLatest([
+          this._settingsHttpClientService.getUserSettings$(),
+          this._settingsHttpClientService.getUserNotifSettings$(),
+        ])
+      ),
+      map(([userSettings, notifSettings]) => {
         this._store.dispatch(
           NgrxAction_SHA.__updateLoggedUserSettings({ userSettings })
         );
@@ -32,6 +50,7 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
         return {
           isPushNotifsSelected: userSettings.pushNotifsEnabled,
           isPushNotifsSoundSelected: userSettings.pushNotifsSoundEnabled,
+          isEmailNotifsSelected: notifSettings.isEmailNotifsEnabled,
         };
       })
     );
@@ -39,15 +58,8 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
 
   persistPushNotifsState$(isEnabled: boolean): Observable<BaseMessageModel> {
     this.setLoading(true);
-    return this._settingsHttpClientService.updateNotifsState$(isEnabled).pipe(
-      tap(({ message }) => {
-        this.setLoading(false);
-        this.showSuccessSnackbar(message);
-      }),
-      catchError(err => {
-        this.setLoading(false);
-        return throwError(() => err);
-      })
+    return this.performTogglerAction$(
+      this._settingsHttpClientService.updateNotifsState$(isEnabled)
     );
   }
 
@@ -55,17 +67,31 @@ export class NotificationsSettingsService extends AbstractUserSettingsProvider {
     isEnabled: boolean
   ): Observable<BaseMessageModel> {
     this.setLoading(true);
-    return this._settingsHttpClientService
-      .updateNotifsSoundState$(isEnabled)
-      .pipe(
-        tap(({ message }) => {
-          this.setLoading(false);
-          this.showSuccessSnackbar(message);
-        }),
-        catchError(err => {
-          this.setLoading(false);
-          return throwError(() => err);
-        })
-      );
+    return this.performTogglerAction$(
+      this._settingsHttpClientService.updateNotifsSoundState$(isEnabled)
+    );
+  }
+
+  persistEmailNotifsState$(isEnabled: boolean): Observable<BaseMessageModel> {
+    this.setLoading(true);
+    return this.performTogglerAction$(
+      this._settingsHttpClientService.updateEmailNotifsState$(isEnabled)
+    );
+  }
+
+  private performTogglerAction$(
+    inputObservable$: Observable<BaseMessageModel>
+  ): Observable<BaseMessageModel> {
+    return inputObservable$.pipe(
+      tap(({ message }) => {
+        this.setLoading(false);
+        this.showSuccessSnackbar(message);
+        this._onChangeObserver$.next(null);
+      }),
+      catchError(err => {
+        this.setLoading(false);
+        return throwError(() => err);
+      })
+    );
   }
 }

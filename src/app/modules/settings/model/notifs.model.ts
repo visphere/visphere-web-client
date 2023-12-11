@@ -7,3 +7,11 @@ export type UserPersistedNofisSettings = {
   isPushNotifsSelected: boolean;
   isPushNotifsSoundSelected: boolean;
 };
+
+export type UserNotifSettingsResDto = {
+  isEmailNotifsEnabled: boolean;
+};
+
+export type UserNotifSettings = {
+  isEmailNotifsSelected: boolean;
+};

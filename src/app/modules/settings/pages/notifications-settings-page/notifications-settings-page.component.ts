@@ -21,6 +21,7 @@ export class NotificationsSettingsPageComponent
 
   isPushNotifsSelected = false;
   isPushNotifsSoundSelected = false;
+  isEmailNotifsSelected = false;
 
   readonly defaultPrefix =
     'vsph.clientCommon.settingsPage.category.appSettings.subpage';
@@ -35,10 +36,17 @@ export class NotificationsSettingsPageComponent
   ngOnInit(): void {
     this.wrapAsObservable$(
       this._notificationsSettingsService.loadPersistedNotifSettings$()
-    ).subscribe(({ isPushNotifsSelected, isPushNotifsSoundSelected }) => {
-      this.isPushNotifsSelected = isPushNotifsSelected;
-      this.isPushNotifsSoundSelected = isPushNotifsSoundSelected;
-    });
+    ).subscribe(
+      ({
+        isPushNotifsSelected,
+        isPushNotifsSoundSelected,
+        isEmailNotifsSelected,
+      }) => {
+        this.isPushNotifsSelected = isPushNotifsSelected;
+        this.isPushNotifsSoundSelected = isPushNotifsSoundSelected;
+        this.isEmailNotifsSelected = isEmailNotifsSelected;
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -50,7 +58,6 @@ export class NotificationsSettingsPageComponent
     this.wrapAsObservable$(
       this._notificationsSettingsService.persistPushNotifsState$(isEnabled)
     ).subscribe({
-      next: () => this._notificationsSettingsService.updateWsSignalValue(),
       error: () => (this.isPushNotifsSelected = !isEnabled),
     });
   }
@@ -60,8 +67,16 @@ export class NotificationsSettingsPageComponent
     this.wrapAsObservable$(
       this._notificationsSettingsService.persistPushNotifsSoundState$(isEnabled)
     ).subscribe({
-      next: () => this._notificationsSettingsService.updateWsSignalValue(),
-      error: () => (this.isPushNotifsSelected = !isEnabled),
+      error: () => (this.isPushNotifsSoundSelected = !isEnabled),
+    });
+  }
+
+  handleChangeEmailNotifsSettings(isEnabled: boolean): void {
+    this.isEmailNotifsSelected = isEnabled;
+    this.wrapAsObservable$(
+      this._notificationsSettingsService.persistEmailNotifsState$(isEnabled)
+    ).subscribe({
+      error: () => (this.isEmailNotifsSelected = !isEnabled),
     });
   }
 

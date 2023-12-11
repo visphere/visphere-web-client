@@ -8,29 +8,43 @@
   subpage="notifications"
   [isFetching]="!!(isFetching$ | async)">
   <h2 class="vsph-settings__section-header">
-    {{ defaultPrefix + '.notifications.section.notifs.header' | translate }}
+    {{ defaultPrefix + '.notifications.section.notifs.app.header' | translate }}
   </h2>
-  <vsph-toggle-button
-    i18nPrefix="appSettings.subpage.notifications.section.notifs"
-    i18nToggler="pushNotifications"
-    [isSelected]="isPushNotifsSelected"
-    [hasDescription]="true"
-    [isDisabled]="!!(isLoading$ | async)"
-    (emitValueChanged)="handleChangePushNotifsSetting($event)" />
-  <hr class="vsph-settings__separator my-5" />
-  <vsph-toggle-button
-    i18nPrefix="appSettings.subpage.notifications.section.notifs"
-    i18nToggler="pushNotificationsSound"
-    [isSelected]="isPushNotifsSoundSelected"
-    [hasDescription]="true"
-    [isDisabled]="!!(isLoading$ | async)"
-    (emitValueChanged)="handleChangePushNotifsSoundSetting($event)" />
+  <div class="flex flex-col gap-y-5">
+    <vsph-toggle-button
+      i18nPrefix="appSettings.subpage.notifications.section.notifs.app"
+      i18nToggler="pushNotifications"
+      [isSelected]="isPushNotifsSelected"
+      [hasDescription]="true"
+      [isDisabled]="!!(isLoading$ | async)"
+      (emitValueChanged)="handleChangePushNotifsSetting($event)" />
+    <vsph-toggle-button
+      i18nPrefix="appSettings.subpage.notifications.section.notifs.app"
+      i18nToggler="pushNotificationsSound"
+      [isSelected]="isPushNotifsSoundSelected"
+      [hasDescription]="true"
+      [isDisabled]="!!(isLoading$ | async)"
+      (emitValueChanged)="handleChangePushNotifsSoundSetting($event)" />
+  </div>
   <button
     (click)="handlePlayNotifsSound()"
     class="vsph-button vsph-button--primary vsph-button--fit mt-5">
     {{
-      defaultPrefix + '.notifications.section.notifs.soundSampleButton'
+      defaultPrefix + '.notifications.section.notifs.app.soundSampleButton'
         | translate
     }}
   </button>
+  <hr class="vsph-settings__separator my-5" />
+  <h2 class="vsph-settings__section-header">
+    {{
+      defaultPrefix + '.notifications.section.notifs.email.header' | translate
+    }}
+  </h2>
+  <vsph-toggle-button
+    i18nPrefix="appSettings.subpage.notifications.section.notifs.email"
+    i18nToggler="emailNotifications"
+    [isSelected]="isEmailNotifsSelected"
+    [hasDescription]="true"
+    [isDisabled]="!!(isLoading$ | async)"
+    (emitValueChanged)="handleChangeEmailNotifsSettings($event)" />
 </vsph-setting-panel-wrapper>
