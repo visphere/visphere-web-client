@@ -17,3 +17,8 @@ export type UpdatableModalType =
   | 'none';
 
 export type EmailVariant = 'first' | 'second';
+
+export type ProfileImageUpdatableModalType =
+  | 'upload-image'
+  | 'delete-image'
+  | 'none';

@@ -4,7 +4,9 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { ProfileSettingsService } from '~/settings-mod/services/profile-settings/profile-settings.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
+import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
 import { ProfileSettingsPageComponent } from './profile-settings-page.component';
 
 describe('ProfileSettingsPageComponent', () => {
@@ -14,6 +16,7 @@ describe('ProfileSettingsPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [PopulateTooltipService, ProfileSettingsService],
     }).compileComponents();
     fixture = TestBed.createComponent(ProfileSettingsPageComponent);
     component = fixture.componentInstance;

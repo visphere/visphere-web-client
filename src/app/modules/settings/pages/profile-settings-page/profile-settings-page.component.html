@@ -3,4 +3,77 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<vsph-setting-panel-wrapper category="userSettings" subpage="profileSettings" />
+<vsph-devastate-action-modal
+  [isActive]="(activeModal$ | async) === 'delete-image'"
+  [isLoading]="(activeLoading$ | async)! === 'deleting-image'"
+  (emitOnClose)="handleCloseModal()"
+  (emitDevstateAction)="handleDeleteCustomProfileImage()"
+  size="sm"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.devastate.deleteProfileImage">
+  {{
+    'vsph.clientCommon.settingsPage.modal.devastate.deleteProfileImage.description'
+      | translate
+  }}
+</vsph-devastate-action-modal>
+<vsph-image-loader-modal
+  [isActive]="(activeModal$ | async) === 'upload-image'"
+  [isLoading]="(activeLoading$ | async)! === 'generating-image'"
+  (handleEmitOnClose)="handleCloseModal()"
+  (handleEmitOnUpload)="handleUpdateProfileImageToCustom()"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.uploadProfileImage" />
+<vsph-setting-panel-wrapper
+  category="userSettings"
+  subpage="profileSettings"
+  [isFetching]="!!(isFetching$ | async)">
+  <vsph-user-account-banner [showEditProfileButton]="false" />
+  <hr class="vsph-settings__separator my-5" />
+  <h2 class="vsph-settings__section-header">
+    {{ defaultPrefix + '.section.color.header' | translate }}
+  </h2>
+  <ul class="flex gap-x-3">
+    <li *ngFor="let color of availableColors">
+      <button
+        [style.background-color]="color"
+        [class.vsph-settings__profile-color-element--loading]="
+          (activeLoading$ | async)! === 'changing-color'
+        "
+        [class.vsph-settings__profile-color-element--active]=""
+        (click)="handleUpdateProfileColor(color)"
+        class="flex justify-center items-center w-[30px] h-[30px] rounded-full">
+        <ng-icon
+          *ngIf="color === selectedColor"
+          name="togglerYesIcon"
+          class="text-vsph-light-100 text-xl" />
+      </button>
+    </li>
+  </ul>
+  <hr class="vsph-settings__separator my-5" />
+  <h2 class="vsph-settings__section-header">
+    {{ defaultPrefix + '.section.image.header' | translate }}
+  </h2>
+  <div class="grid grid-cols-12 gap-x-3">
+    <button
+      [disabled]="loadedImageType === 'custom'"
+      (click)="handleOpenSelectedModal('upload-image')"
+      class="vsph-button vsph-button--primary col-span-4">
+      {{ defaultPrefix + '.section.image.uploadImageButton' | translate }}
+    </button>
+    <div class="col-span-4">
+      <vsph-lazy-button-spinner
+        [isLoading]="(activeLoading$ | async)! === 'generating-identicon'"
+        [buttonDisabled]="loadedImageType === 'identicon'"
+        (emitClick)="handleUpdateProfileImageToIdenticon()"
+        buttonStyle="vsph-button vsph-button--primary">
+        {{
+          defaultPrefix + '.section.image.generateIdenticonButton' | translate
+        }}
+      </vsph-lazy-button-spinner>
+    </div>
+    <button
+      (click)="handleOpenSelectedModal('delete-image')"
+      [disabled]="loadedImageType === 'default'"
+      class="vsph-button vsph-button--primary vsph-button--danger--outline col-span-4">
+      {{ defaultPrefix + '.section.image.deleteImage' | translate }}
+    </button>
+  </div>
+</vsph-setting-panel-wrapper>

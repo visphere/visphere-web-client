@@ -20,6 +20,8 @@ enum Action {
   UPDATE_LOGGED_USER_FULL_NAME = '[SHARED] UPDATE LOGGED USER FULL NAME',
   OPEN_DISABLED_ACCOUNT_MODAL = '[SHARED] OPEN ACCOUNT DISABLED MODAL',
   CLOSE_DISABLED_ACCOUNT_MODAL = '[SHARED] CLOSE ACCOUNT DISABLED MODAL',
+  UPDATE_PROFILE_IMAGE_URL = '[SHARED] UPDATE PROFILE IMAGE URL',
+  UPDATE_PROFILE_COLOR = '[SHARED] UPDATE PROFILE COLOR',
 }
 
 export const __addSnackbar = createAction(
@@ -73,4 +75,14 @@ export const __openDisabledAccountModal = createAction(
 
 export const __closeDisabledAccountModal = createAction(
   Action.CLOSE_DISABLED_ACCOUNT_MODAL
+);
+
+export const __updateProfileImageUrl = createAction(
+  Action.UPDATE_PROFILE_IMAGE_URL,
+  props<{ imageUrl: string }>()
+);
+
+export const __updateProfileColor = createAction(
+  Action.UPDATE_PROFILE_COLOR,
+  props<{ color: string }>()
 );

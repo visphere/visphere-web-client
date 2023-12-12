@@ -13,4 +13,5 @@ export type UpdateAccountDetailsReqDto = {
 export type UpdateAccountDetailsResDto = {
   message: string;
   accessToken: string;
+  profileImagePath: string;
 };

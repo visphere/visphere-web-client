@@ -80,7 +80,29 @@ const _reducer = createReducer(
       accessToken: '',
       modalIsOpen: false,
     },
-  }))
+  })),
+  on(NgrxAction.__updateProfileImageUrl, (state, action) =>
+    state.loggedUser
+      ? {
+          ...state,
+          loggedUser: {
+            ...state.loggedUser,
+            profileUrl: action.imageUrl,
+          },
+        }
+      : state
+  ),
+  on(NgrxAction.__updateProfileColor, (state, action) =>
+    state.loggedUser
+      ? {
+          ...state,
+          loggedUser: {
+            ...state.loggedUser,
+            profileColor: action.color,
+          },
+        }
+      : state
+  )
 );
 
 export const sharedReduxStore = {

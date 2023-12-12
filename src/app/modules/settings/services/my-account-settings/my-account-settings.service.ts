@@ -91,11 +91,14 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
   ): Observable<UpdateAccountDetailsResDto | null> {
     this.setLoading(true);
     return this._settingsHttpClientService.updateAccountDetails$(reqDto).pipe(
-      tap(({ message, accessToken }) => {
+      tap(({ message, accessToken, profileImagePath }) => {
         this._localStorageService.update(
           'loggedUser',
           'accessToken',
           accessToken
+        );
+        this._store.dispatch(
+          NgrxAction_SHA.__updateProfileImageUrl({ imageUrl: profileImagePath })
         );
         this.showSuccessSnackbar(message);
         this._activeModal$.next('none');
