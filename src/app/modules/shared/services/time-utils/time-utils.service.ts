@@ -47,6 +47,12 @@ export class TimeUtilsService {
     return date.format('DD/MM/YYYY');
   }
 
+  composeSlashDateStr(dateStr?: string): string {
+    const { year, month, day } = this.decomposeDate(dateStr);
+    const date = moment(`${year}-${month}-${day}`, 'YYYY-M-D');
+    return date.format('DD/MM/YYYY');
+  }
+
   decomposeDate(dateStr?: string): DateComponentsType {
     if (dateStr) {
       const [year, month, day] = dateStr.split('-').map(Number);

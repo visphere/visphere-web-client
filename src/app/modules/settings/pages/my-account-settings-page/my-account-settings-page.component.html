@@ -7,9 +7,10 @@
   [isActive]="enabledModal('delete-second-email')"
   (emitOnClose)="handleCloseRemoveSecondEmailAddressModal()"
   (emitDevstateAction)="handleRemoveSecondEmailAddressModal()"
-  i18nPrefix="vsph.clientCommon.settingsPage.modal.deleteSecondEmailAddress">
+  [isLoading]="!!(isLoading$ | async)"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.devastate.deleteSecondEmailAddress">
   {{
-    'vsph.clientCommon.settingsPage.modal.deleteSecondEmailAddress.description'
+    'vsph.clientCommon.settingsPage.modal.devastate.deleteSecondEmailAddress.description'
       | translate
   }}
 </vsph-devastate-action-modal>

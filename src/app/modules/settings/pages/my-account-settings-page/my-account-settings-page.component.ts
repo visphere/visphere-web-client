@@ -19,6 +19,7 @@ export class MyAccountSettingsPageComponent
   implements OnInit, OnDestroy
 {
   isFetching$ = this._myAccountSettingsService.isFetching$;
+  isLoading$ = this._myAccountSettingsService.isLoading$;
   activeModal = 'none';
 
   constructor(

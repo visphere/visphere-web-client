@@ -77,22 +77,8 @@
         </p>
       </span>
     </div>
-    <div
-      class="my-8 bg-vsph-orange-50 dark:bg-vsph-transparent border rounded-lg border-vsph-orange-100 py-3 px-4 flex items-center">
-      <div class="flex items-center justify-center shrink-0 me-4">
-        <img
-          src="{{ cdnPath }}/static/icon/danger-normal.svg"
-          alt=""
-          width="30px"
-          height="30px" />
-      </div>
-      <div class="text-vsph-orange-100 text-sm leading-[17px]">
-        {{
-          'vsph.clientCommon.mfaPage.firstSetupStepper.confirm.infoBlock'
-            | translate
-        }}
-      </div>
-    </div>
+    <vsph-icon-info-block
+      i18nText="vsph.clientCommon.mfaPage.firstSetupStepper.confirm.infoBlock" />
     <div class="flex flex-col gap-y-3 mb-8">
       <div>
         <span class="vsph-input__label">

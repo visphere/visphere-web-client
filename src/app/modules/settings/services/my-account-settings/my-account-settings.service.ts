@@ -183,7 +183,7 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
       firstName: details.firstName,
       lastName: details.lastName,
       username: details.username,
-      birthDate: details.birthDate,
+      birthDate: this._timeUtilsService.composeSlashDateStr(details.birthDate),
     };
   }
 
