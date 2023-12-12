@@ -26,6 +26,7 @@ import { SettingPanelWrapperComponent } from '~/settings-mod/components/setting-
 import { ToggleButtonComponent } from '~/settings-mod/components/toggle-button/toggle-button.component';
 import { UpdatableEmailFinishFormComponent } from '~/settings-mod/components/updatable-email-finish-form/updatable-email-finish-form.component';
 import { UpdatableEmailStartFormComponent } from '~/settings-mod/components/updatable-email-start-form/updatable-email-start-form.component';
+import { UserAccountBannerComponent } from '~/settings-mod/components/user-account-banner/user-account-banner.component';
 import { UsernameUpdatableModalComponent } from '~/settings-mod/components/username-updatable-modal/username-updatable-modal.component';
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
 import { BlankInitSettingsPageComponent } from '~/settings-mod/pages/blank-init-settings-page/blank-init-settings-page.component';
@@ -62,6 +63,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     SettingsEntryPointPageComponent,
     SettingsRootComponent,
     ToggleButtonComponent,
+    UserAccountBannerComponent,
     UsernameUpdatableModalComponent,
     UpdatableEmailFinishFormComponent,
     UpdatableEmailStartFormComponent,

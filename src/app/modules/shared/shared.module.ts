@@ -21,6 +21,9 @@ import { ConditionalTooltipWrapperComponent } from '~/shared-mod/components/cond
 import { DeferredButtonComponent } from '~/shared-mod/components/deferred-button/deferred-button.component';
 import { DevastateActionModalComponent } from '~/shared-mod/components/devastate-action-modal/devastate-action-modal.component';
 import { FieldValidatorComponent } from '~/shared-mod/components/field-validator/field-validator.component';
+import { IconInfoBlockComponent } from '~/shared-mod/components/icon-info-block/icon-info-block.component';
+import { ImageLoaderModalComponent } from '~/shared-mod/components/image-loader-modal/image-loader-modal.component';
+import { JoinedDateComponent } from '~/shared-mod/components/joined-date/joined-date.component';
 import { LazyButtonSpinnerComponent } from '~/shared-mod/components/lazy-button-spinner/lazy-button-spinner.component';
 import { LazyPageLoaderComponent } from '~/shared-mod/components/lazy-page-loader/lazy-page-loader.component';
 import { LogoutModalComponent } from '~/shared-mod/components/logout-modal/logout-modal.component';
@@ -47,6 +50,9 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     DeferredButtonComponent,
     DevastateActionModalComponent,
     FieldValidatorComponent,
+    IconInfoBlockComponent,
+    ImageLoaderModalComponent,
+    JoinedDateComponent,
     LazyButtonSpinnerComponent,
     LazyPageLoaderComponent,
     LogoutModalComponent,
@@ -93,6 +99,9 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     DeferredButtonComponent,
     DevastateActionModalComponent,
     FieldValidatorComponent,
+    IconInfoBlockComponent,
+    ImageLoaderModalComponent,
+    JoinedDateComponent,
     LazyPageLoaderComponent,
     LazyButtonSpinnerComponent,
     LogoutModalComponent,
