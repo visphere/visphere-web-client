@@ -44,8 +44,10 @@ export class SharedEffects {
           fullName,
           profileUrl,
           profileColor,
+          joinDate,
           accessToken,
           refreshToken,
+          credentialsSupplier,
           settings,
           settings: { lang, theme },
         } = details;
@@ -65,6 +67,8 @@ export class SharedEffects {
               fullName,
               profileUrl,
               profileColor,
+              joinDate,
+              credentialsSupplier,
               settings,
             },
           })

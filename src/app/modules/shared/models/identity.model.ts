@@ -11,10 +11,12 @@ export type LoginResDtoModel = {
   profileColor: string;
   accessToken: string;
   refreshToken: string;
+  credentialsSupplier: string;
   isActivated: boolean;
   isDisabled: boolean;
   isMfaEnabled: boolean;
   isMfaSetup: boolean;
+  joinDate: string;
   settings: UserSettings;
 };
 

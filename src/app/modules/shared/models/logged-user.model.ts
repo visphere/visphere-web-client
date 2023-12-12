@@ -8,6 +8,8 @@ export type LoggedUser = {
   fullName: string;
   profileUrl: string;
   profileColor: string;
+  joinDate: string;
+  credentialsSupplier: string;
   settings: UserSettings;
 };
 

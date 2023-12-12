@@ -24,6 +24,8 @@ import { UpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
+import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractUserSettingsProvider } from '../abstract-user-settings.provider';
@@ -44,7 +46,8 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
     private readonly _store: Store<SharedReducer>,
     private readonly _settingsHttpClientService: SettingsHttpClientService,
     private readonly _updatableEmailHttpClientService: UpdatableEmailHttpClientService,
-    private readonly _localStorageService: LocalStorageService
+    private readonly _localStorageService: LocalStorageService,
+    private readonly _timeUtilsService: TimeUtilsService
   ) {
     super(_store);
   }
@@ -75,6 +78,7 @@ export class MyAccountSettingsService extends AbstractUserSettingsProvider {
               fullName: loggedUser?.fullName || '',
               profileUrl: loggedUser?.profileUrl || '',
               profileColor: loggedUser?.profileColor || '',
+              joinDate: loggedUser?.joinDate || '',
             };
           })
         )
