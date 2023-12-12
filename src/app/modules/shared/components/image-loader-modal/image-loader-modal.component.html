@@ -1,0 +1,20 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-modal-wrapper
+  [isActive]="isActive"
+  (emitOnClose)="handleEmitOnClose.emit()"
+  modalSize="xs"
+  [header]="i18nPrefix + '.header'">
+  <ng-container content>
+    <vsph-icon-info-block [i18nText]="i18nPrefix + '.infoBlock'" />
+    <div>container</div>
+    <vsph-lazy-button-spinner
+      [isLoading]="isLoading"
+      [buttonDisabled]="submitDisabled">
+      {{ i18nPrefix + '.submitButton' | translate }}
+    </vsph-lazy-button-spinner>
+  </ng-container>
+</vsph-modal-wrapper>
