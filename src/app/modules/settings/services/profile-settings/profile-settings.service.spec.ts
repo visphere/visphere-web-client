@@ -13,6 +13,7 @@ describe('ProfileSettingsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [ProfileSettingsService],
     });
     service = TestBed.inject(ProfileSettingsService);
   });
