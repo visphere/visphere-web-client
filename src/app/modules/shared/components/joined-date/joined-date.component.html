@@ -1,0 +1,23 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div
+  [ngxTippy]="joinedDateTippyTooltip"
+  [tippyProps]="(tooltipProps$ | async)!">
+  <div class="inline-flex items-center">
+    <img
+      src="{{ themedBrandIconUrl }}"
+      alt=""
+      width="16"
+      height="16"
+      class="object-contain -mt-1 me-2" />
+    <p class="text-sm">
+      {{ joinDateStr | vsphDateFormatter: selectedLang$ | async }}
+    </p>
+  </div>
+</div>
+<ng-template #joinedDateTippyTooltip>
+  {{ 'vsph.clientCommon.forAll.joinedDate' | translate }}
+</ng-template>

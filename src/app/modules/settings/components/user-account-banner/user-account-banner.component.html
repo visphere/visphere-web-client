@@ -1,0 +1,52 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="vsph-settings__vis-container">
+  <div
+    [style.background-color]="loggedUser?.profileColor"
+    class="vsph-settings__vis-profile-banner-container"></div>
+  <div class="vsph-settings__vis-profile-image-container">
+    <img
+      src="{{ loggedUser?.profileUrl }}"
+      alt=""
+      loading="eager"
+      class="rounded-xl w-[85%] h-[85%]" />
+    <div
+      *ngIf="loggedUser?.credentialsSupplier !== 'local'"
+      [class.bg-vsph-google-bg]="loggedUser?.credentialsSupplier === 'google'"
+      [class.bg-vsph-facebook-bg]="
+        loggedUser?.credentialsSupplier === 'facebook'
+      "
+      [ngClass]="{
+        'border-4 border-vsph-light-200 dark:border-vsph-dark-850':
+          loggedUser?.credentialsSupplier === 'google'
+      }"
+      class="absolute -bottom-[5px] -right-[5px] w-[30px] h-[30px] rounded-full flex justify-center items-center">
+      <img
+        src="{{ path }}/static/oauth2/{{
+          loggedUser?.credentialsSupplier
+        }}-logo.svg"
+        width="20"
+        height="20"
+        alt="" />
+    </div>
+  </div>
+  <div class="flex justify-between items-center ps-[130px]">
+    <div class="flex flex-col gap-y-1">
+      <p class="text-2xl font-bold">
+        {{ loggedUser?.fullName }}
+      </p>
+      <vsph-joined-date [joinDateStr]="loggedUser?.joinDate!" />
+    </div>
+    <div *ngIf="showEditProfileButton">
+      <a
+        routerLink="/settings/profile"
+        class="vsph-button vsph-button--primary vsph-button--fit">
+        {{ 'vsph.clientCommon.settingsPage.editProfileButton' | translate }}
+      </a>
+    </div>
+  </div>
+  <ng-content />
+</div>
