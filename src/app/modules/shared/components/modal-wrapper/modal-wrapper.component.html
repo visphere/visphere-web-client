@@ -4,7 +4,6 @@
  -->
 
 <div *ngIf="isActive" class="vsph-modal__container">
-  <div class="vsph-modal__background"></div>
   <div
     [@authWindowFadeAndMove]
     (@authWindowFadeAndMove.done)="emitOnAnimationDone.emit()"

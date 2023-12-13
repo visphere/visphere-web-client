@@ -14,7 +14,10 @@
       loading="eager"
       class="rounded-xl w-[85%] h-[85%]" />
     <div
-      *ngIf="loggedUser?.credentialsSupplier !== 'local'"
+      *ngIf="
+        loggedUser?.credentialsSupplier !== 'local' &&
+        loggedUser?.credentialsSupplier
+      "
       [class.bg-vsph-google-bg]="loggedUser?.credentialsSupplier === 'google'"
       [class.bg-vsph-facebook-bg]="
         loggedUser?.credentialsSupplier === 'facebook'

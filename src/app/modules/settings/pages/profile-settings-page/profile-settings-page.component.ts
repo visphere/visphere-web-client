@@ -52,7 +52,7 @@ export class ProfileSettingsPageComponent
         this._profileSettingsService.loadProfileDetails$(),
       ])
     ).subscribe(([loggedUser, profileDetails]) => {
-      this.selectedColor = loggedUser!.profileColor;
+      this.selectedColor = loggedUser?.profileColor || '';
       this.availableColors = profileDetails.availableColors;
       this.loadedImageType = profileDetails.imageType;
     });

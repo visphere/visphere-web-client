@@ -43,10 +43,10 @@ export class ProfileSettingsHttpClientService extends AbstractHttpProvider {
     customImage: File
   ): Observable<MessageWithResourcePathResDto> {
     const formData = new FormData();
-    formData.append('image', customImage, customImage.name);
+    formData.append('image', customImage);
     return this._httpClient.post<MessageWithResourcePathResDto>(
       `${this._infraApiPath}/api/v1/multimedia/profile/image/custom`,
-      { formData }
+      formData
     );
   }
 
