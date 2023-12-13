@@ -4,6 +4,8 @@
  */
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import { FileValidatorResponse } from '~/shared-mod/models/file-validator.model';
+import { FileExtensionType } from '~/shared-mod/types/file-extensions.type';
 import {
   BoolFormValidationDataType,
   ControlType,
@@ -78,6 +80,66 @@ export class FormHelperService {
           control.setErrors(value ? null : { required: true });
         }
       }
+    });
+  }
+
+  validateFileInput(
+    file: File | null,
+    allowedExt: FileExtensionType[],
+    maxFileSizeMb: number
+  ): FileValidatorResponse | null {
+    if (!file) {
+      return {
+        i18nError: `noFileChoose`,
+      };
+    }
+    const fileExt = file.name.slice(
+      ((file.name.lastIndexOf('.') - 1) >>> 0) + 2
+    );
+    if (!(allowedExt as string[]).includes(fileExt)) {
+      return {
+        i18nError: `notSupportedExt`,
+        params: {
+          extensions: allowedExt.join(', '),
+        },
+      };
+    }
+    const maxSizeInBytes = maxFileSizeMb * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+      return {
+        i18nError: `tooLargeFileSize`,
+        params: {
+          size: maxFileSizeMb,
+        },
+      };
+    }
+    return null;
+  }
+
+  scaleImageWithKeepAr(
+    image: HTMLImageElement,
+    width: number
+  ): Promise<File | undefined> {
+    return new Promise((res, rej) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        rej();
+      }
+      canvas.width = width;
+      canvas.height = image.height * (width / image.width);
+      ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(blob => {
+        if (blob) {
+          res(
+            new File([blob], blob.name, {
+              type: blob.type,
+            })
+          );
+        } else {
+          rej();
+        }
+      }, 'image/png');
     });
   }
 }

@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { CdTimerModule } from 'angular-cd-timer';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxRerenderModule } from 'ngx-rerender';
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { BirthDateSelectSpinnerComponent } from '~/shared-mod/components/birth-date-select-spinner/birth-date-select-spinner.component';
@@ -34,6 +35,7 @@ import { SingleSelectSpinnerComponent } from '~/shared-mod/components/single-sel
 import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
 import { SocialsHorizontalComponent } from '~/shared-mod/components/socials-horizontal/socials-horizontal.component';
 import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-captcha-modal/verify-captcha-modal.component';
+import { DragAndDropDirective } from '~/shared-mod/directives/drag-and-drop/drag-and-drop.directive';
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { DateFormatterPipe } from '~/shared-mod/pipes/date-formatter/date-formatter.pipe';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
@@ -49,6 +51,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     DateFormatterPipe,
     DeferredButtonComponent,
     DevastateActionModalComponent,
+    DragAndDropDirective,
     FieldValidatorComponent,
     IconInfoBlockComponent,
     ImageLoaderModalComponent,
@@ -70,6 +73,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     CdTimerModule,
     CommonModule,
     EffectsModule.forFeature([SharedEffects]),
+    ImageCropperModule,
     TranslateModule,
     NgIconsModule.withIcons({
       arrowLeftIcon: BtsIcon.bootstrapArrowLeft,

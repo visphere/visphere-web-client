@@ -16,10 +16,11 @@
   }}
 </vsph-devastate-action-modal>
 <vsph-image-loader-modal
+  *ngIf="(activeModal$ | async) === 'upload-image'"
   [isActive]="(activeModal$ | async) === 'upload-image'"
   [isLoading]="(activeLoading$ | async)! === 'generating-image'"
   (handleEmitOnClose)="handleCloseModal()"
-  (handleEmitOnUpload)="handleUpdateProfileImageToCustom()"
+  (handleEmitOnUpload)="handleUpdateProfileImageToCustom($event)"
   i18nPrefix="vsph.clientCommon.settingsPage.modal.uploadProfileImage" />
 <vsph-setting-panel-wrapper
   category="userSettings"

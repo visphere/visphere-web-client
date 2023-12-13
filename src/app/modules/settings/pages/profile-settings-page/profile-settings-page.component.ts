@@ -22,7 +22,6 @@ export class ProfileSettingsPageComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  selectedImage!: File;
   selectedColor = '';
   availableColors: string[] = [];
   loadedImageType: ImageType = 'default';
@@ -78,11 +77,9 @@ export class ProfileSettingsPageComponent
     ).subscribe();
   }
 
-  handleUpdateProfileImageToCustom(): void {
+  handleUpdateProfileImageToCustom(uploadedImage: File): void {
     this.wrapAsObservable$(
-      this._profileSettingsService.updateProfileImageToCustom$(
-        this.selectedImage
-      )
+      this._profileSettingsService.updateProfileImageToCustom$(uploadedImage)
     ).subscribe({ next: () => this._profileSettingsService.closeModal() });
   }
 
