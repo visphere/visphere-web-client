@@ -42,6 +42,7 @@ export class SharedEffects {
       mergeMap(({ details }) => {
         const {
           fullName,
+          username,
           profileUrl,
           profileColor,
           joinDate,
@@ -65,6 +66,7 @@ export class SharedEffects {
           NgrxAction.__persistLoggedUserDetails({
             details: {
               fullName,
+              username,
               profileUrl,
               profileColor,
               joinDate,

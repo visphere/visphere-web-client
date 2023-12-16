@@ -67,6 +67,17 @@ const _reducer = createReducer(
         }
       : state
   ),
+  on(NgrxAction.__updateLoggedUserUsername, (state, action) =>
+    state.loggedUser
+      ? {
+          ...state,
+          loggedUser: {
+            ...state.loggedUser,
+            username: action.username,
+          },
+        }
+      : state
+  ),
   on(NgrxAction.__openDisabledAccountModal, (state, action) => ({
     ...state,
     disabledAccount: {

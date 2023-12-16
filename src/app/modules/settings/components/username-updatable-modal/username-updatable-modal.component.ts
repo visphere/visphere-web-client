@@ -4,10 +4,13 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { UpdateAccountDetailsReqDto } from '~/settings-mod/model/update-account-details.model';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { AccountValueForAnotherExistValidator } from '~/settings-mod/validators/account-value-for-another-exist.validator';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { regex } from '~/shared-mod/validators/regex.constant';
 import { AbstractUpdatableModalProvider } from '../abstract-updatable-modal-provider';
 
@@ -23,7 +26,8 @@ export class UsernameUpdatableModalComponent
   constructor(
     private readonly _myAccountSettingsService: MyAccountSettingsService,
     private readonly _populateFormGroupService: PopulateFormGroupService,
-    private readonly _accountValueForAnotherExistValidator: AccountValueForAnotherExistValidator
+    private readonly _accountValueForAnotherExistValidator: AccountValueForAnotherExistValidator,
+    private readonly _store: Store<SharedReducer>
   ) {
     super(_myAccountSettingsService);
   }
@@ -63,7 +67,14 @@ export class UsernameUpdatableModalComponent
       };
       this.wrapAsObservable$(
         this._myAccountSettingsService.updateAccountDetails$(reqDto)
-      ).subscribe();
+      ).subscribe({
+        next: () =>
+          this._store.dispatch(
+            NgrxAction_SHA.__updateLoggedUserUsername({
+              username: reqDto.username,
+            })
+          ),
+      });
     }
   }
 }

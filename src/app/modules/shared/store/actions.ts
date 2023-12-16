@@ -18,6 +18,7 @@ enum Action {
   UPDATE_LOGGED_USER_SETTINGS = '[SHARED] UPDATE LOGGED USER SETTINGS',
   UPDATE_LOGOUT_MODAL_STATE = '[SHARED] UPDATE LOGOUT MODAL STATE',
   UPDATE_LOGGED_USER_FULL_NAME = '[SHARED] UPDATE LOGGED USER FULL NAME',
+  UPDATE_LOGGED_USER_USERNAME = '[SHARED] UPDATE LOGGED USER USERNAME',
   OPEN_DISABLED_ACCOUNT_MODAL = '[SHARED] OPEN ACCOUNT DISABLED MODAL',
   CLOSE_DISABLED_ACCOUNT_MODAL = '[SHARED] CLOSE ACCOUNT DISABLED MODAL',
   UPDATE_PROFILE_IMAGE_URL = '[SHARED] UPDATE PROFILE IMAGE URL',
@@ -66,6 +67,11 @@ export const __updateLogoutModalState = createAction(
 export const __updateLoggedUserFullName = createAction(
   Action.UPDATE_LOGGED_USER_FULL_NAME,
   props<{ fullName: string }>()
+);
+
+export const __updateLoggedUserUsername = createAction(
+  Action.UPDATE_LOGGED_USER_USERNAME,
+  props<{ username: string }>()
 );
 
 export const __openDisabledAccountModal = createAction(
