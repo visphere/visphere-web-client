@@ -7,7 +7,7 @@
   <vsph-auth-form-header i18nPrefix="clientCommon.mfaPage" />
   <vsph-first-mfa-setup *ngIf="isInitialMfaSetup$ | async" />
   <vsph-mfa-code-form *ngIf="(isInitialMfaSetup$ | async) === false" />
-  <hr class="vsph-auth__separator my-8" />
+  <hr class="vsph-separator my-8" />
   <div class="vsph-input__label">
     {{ 'vsph.clientCommon.mfaPage.dontHaveAccessToAuthenticator' | translate }}
   </div>

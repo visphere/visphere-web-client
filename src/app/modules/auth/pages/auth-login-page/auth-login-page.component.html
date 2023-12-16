@@ -10,11 +10,11 @@
         <vsph-auth-form-header i18nPrefix="clientCommon.loginPage" />
         <vsph-login-form />
         <div class="flex items-center my-5">
-          <hr class="vsph-auth__separator flex-grow" />
-          <div class="vsph-auth__separator-text">
+          <hr class="vsph-separator flex-grow" />
+          <div class="vsph-separator__text">
             {{ 'vsph.common.utils.or' | translate }}
           </div>
-          <hr class="vsph-auth__separator flex-grow" />
+          <hr class="vsph-separator flex-grow" />
         </div>
         <a
           routerLink="/auth/my-accounts"
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="col-span-12 md:col-span-6 flex">
-      <hr class="border-l me-10 h-full vsph-auth__separator hidden md:block" />
+      <hr class="border-l me-10 h-full vsph-separator hidden md:block" />
       <div class="flex-grow flex flex-col">
         <div class="bg-vsph-light-100 shadow-md mx-auto rounded-lg p-1">
           <img ngSrc="{{ qrCode }}" width="150" height="150" alt="" />
@@ -50,11 +50,11 @@
           {{ 'vsph.clientCommon.loginPage.qrDescription' | translate }}
         </p>
         <div class="flex items-center my-5">
-          <hr class="vsph-auth__separator flex-grow" />
-          <div class="vsph-auth__separator-text">
+          <hr class="vsph-separator flex-grow" />
+          <div class="vsph-separator__text">
             {{ 'vsph.common.utils.or' | translate }}
           </div>
-          <hr class="vsph-auth__separator flex-grow" />
+          <hr class="vsph-separator flex-grow" />
         </div>
         <div class="grid gap-3">
           <vsph-oauth2-button oauth2Type="google" />

@@ -100,7 +100,6 @@ import { SharedModule } from '~/shared-mod/shared.module';
     NgIconsModule.withIcons({
       outsideLinkIcon: BtsIcon.bootstrapArrowReturnLeft,
       plusCircleIcon: BtsIcon.bootstrapPlusCircle,
-      questionCircleIcon: BtsIcon.bootstrapQuestionCircle,
     }),
     ReactiveFormsModule,
     RouterModule,

@@ -81,7 +81,6 @@ import { SettingsRoutingModule } from './settings-routing.module';
       myAccountIcon: BtsIcon.bootstrapPerson,
       notificationsIcon: BtsIcon.bootstrapBell,
       profileIcon: BtsIcon.bootstrapPersonGear,
-      settingsIcon: BtsIcon.bootstrapGear,
       togglerNoIcon: BtsIcon.bootstrapX,
       removeTrashIcon: BtsIcon.bootstrapTrashFill,
       togglerYesIcon: BtsIcon.bootstrapCheck,
