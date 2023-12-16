@@ -35,6 +35,7 @@ import { SingleSelectSpinnerComponent } from '~/shared-mod/components/single-sel
 import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
 import { SocialsHorizontalComponent } from '~/shared-mod/components/socials-horizontal/socials-horizontal.component';
 import { VerifyCaptchaModalComponent } from '~/shared-mod/components/verify-captcha-modal/verify-captcha-modal.component';
+import { AutoResizableTextAreaDirective } from '~/shared-mod/directives/auto-resizable-text-area/auto-resizable-text-area.directive';
 import { DragAndDropDirective } from '~/shared-mod/directives/drag-and-drop/drag-and-drop.directive';
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { DateFormatterPipe } from '~/shared-mod/pipes/date-formatter/date-formatter.pipe';
@@ -44,6 +45,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
 
 @NgModule({
   declarations: [
+    AutoResizableTextAreaDirective,
     BirthDateSelectSpinnerComponent,
     CheckboxFormInputComponent,
     CommonFormInputComponent,
@@ -97,6 +99,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     ),
   ],
   exports: [
+    AutoResizableTextAreaDirective,
     BirthDateSelectSpinnerComponent,
     CheckboxFormInputComponent,
     CommonFormInputComponent,

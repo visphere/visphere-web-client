@@ -9,6 +9,8 @@ type RegexValidators = {
   PASSWORD: RegExp;
   MFA_CODE: RegExp;
   DATE_VALID: RegExp;
+  SPHERE_CODE: RegExp;
+  TEXT_CHANNEL_NAME: RegExp;
 };
 
 export const regex: RegexValidators = {
@@ -18,4 +20,6 @@ export const regex: RegexValidators = {
   PASSWORD: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,80}$/,
   MFA_CODE: /^[\d]+$/,
   DATE_VALID: /^\d{4}-\d{2}-\d{2}$/,
+  SPHERE_CODE: /^[a-z\d]+$/,
+  TEXT_CHANNEL_NAME: /^[a-z\d-ąćęńóśźż]+$/,
 };

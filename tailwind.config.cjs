@@ -19,6 +19,7 @@ module.exports = {
         'buttonSpinner',
         'tooltip',
         'settings',
+        'client',
       ],
     }),
   ],
