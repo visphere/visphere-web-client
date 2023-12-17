@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-details.model';
 import { DevastateAccountService } from '~/settings-mod/services/devastate-account/devastate-account.service';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
+import { PasswordConfirmationService } from '~/settings-mod/services/password-confirmation/password-confirmation.service';
 import { UpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'vsph-account-auth-settings',
   templateUrl: './account-auth-settings.component.html',
-  providers: [DevastateAccountService],
+  providers: [DevastateAccountService, PasswordConfirmationService],
 })
 export class AccountAuthSettingsComponent
   extends AbstractReactiveProvider

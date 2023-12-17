@@ -47,3 +47,14 @@ export const selectDisabledAccountAccessToken = createSelector(
   selectSharedState,
   ({ disabledAccount }) => disabledAccount.accessToken
 );
+
+export const selectIsMfaSetup = createSelector(
+  selectSharedState,
+  ({ loggedUser }) => !!(loggedUser && loggedUser.isMfaSetup)
+);
+
+export const selectIsLocalSupplier = createSelector(
+  selectSharedState,
+  ({ loggedUser }) =>
+    !!(loggedUser && loggedUser.credentialsSupplier === 'local')
+);

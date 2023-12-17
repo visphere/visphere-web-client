@@ -8,10 +8,10 @@
   precedence="higher"
   [showProceedButton]="false"
   [i18nPrefix]="specifiedI18nPrefix"
-  [isActive]="(activeModal$ | async) === modalType"
+  [isActive]="isActiveModal"
   (emitOnClose)="handleCloseModal()"
   (emitDevstateAction)="handleEmitDevastateAction()">
-  <div *ngIf="accountDetails?.externalOAuth2Supplier">
+  <div *ngIf="(isLocalSupplier$ | async) === false">
     {{ specifiedI18nPrefix + '.description' | translate }}
     <vsph-lazy-button-spinner
       [isLoading]="(isLoading$ | async)!"
@@ -20,10 +20,8 @@
       {{ specifiedI18nPrefix + '.submitButton' | translate }}
     </vsph-lazy-button-spinner>
   </div>
-  <div
-    *ngIf="!accountDetails?.externalOAuth2Supplier"
-    class="flex flex-col gap-y-5">
-    {{ specifiedI18nPrefix + '.description' | translate }}
+  <div *ngIf="isLocalSupplier$ | async" class="flex flex-col gap-y-5">
+    {{ specifiedI18nPrefix + '.description' | translate: i18nParams }}
     <div class="vsph-info-card__container">
       {{
         commonI18nPrefix +
@@ -48,7 +46,7 @@
         [buttonDisabled]="passwordForm.invalid"
         buttonStyle="vsph-button vsph-button--primary vsph-button--danger">
         {{
-          (accountDetails?.mfaSetup
+          (isMfaSetup
             ? 'vsph.common.utils.continue'
             : specifiedI18nPrefix + '.submitButton'
           ) | translate

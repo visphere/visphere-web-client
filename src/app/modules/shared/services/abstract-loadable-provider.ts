@@ -8,7 +8,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 export abstract class AbstractLoadableProvider extends AbstractReactiveProvider {
   private _isLoading$ = new BehaviorSubject<boolean>(false);
 
-  protected setLoading(isLoading: boolean): void {
+  setLoading(isLoading: boolean): void {
     this._isLoading$.next(isLoading);
   }
 

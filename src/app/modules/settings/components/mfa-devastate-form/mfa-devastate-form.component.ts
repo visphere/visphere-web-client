@@ -11,7 +11,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DevastateAccountService } from '~/settings-mod/services/devastate-account/devastate-account.service';
+import { PasswordConfirmationService } from '~/settings-mod/services/password-confirmation/password-confirmation.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -28,11 +28,11 @@ export class MfaDevastateFormComponent
   @Output() emitMfa = new EventEmitter<string>();
 
   mfaCodeForm: FormGroup;
-  isLoading$ = this._devastateAccountService.isLoading$;
+  isLoading$ = this._passwordConfirmationService.isLoading$;
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,
-    private readonly _devastateAccountService: DevastateAccountService
+    private readonly _passwordConfirmationService: PasswordConfirmationService
   ) {
     super();
     this.mfaCodeForm = new FormGroup({
@@ -52,7 +52,7 @@ export class MfaDevastateFormComponent
   }
 
   handleGotoPreviousStage(): void {
-    this._devastateAccountService.returnToPassword();
+    this._passwordConfirmationService.returnToPassword();
   }
 
   handleSubmitMfaCodeForm(): void {

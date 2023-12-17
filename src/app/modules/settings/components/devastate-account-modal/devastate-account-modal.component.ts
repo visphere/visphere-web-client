@@ -11,11 +11,11 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-details.model';
-import { DevastateAccountService } from '~/settings-mod/services/devastate-account/devastate-account.service';
-import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
-import { UpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
+import { Store } from '@ngrx/store';
+import { PasswordConfirmationService } from '~/settings-mod/services/password-confirmation/password-confirmation.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
@@ -28,23 +28,25 @@ export class DevastateAccountModalComponent
   implements OnInit, OnDestroy
 {
   @Input() i18nPrefix = '';
-  @Input() modalType: UpdatableModalType = 'disable-account';
+  @Input() isActiveModal = false;
+  @Input() i18nParams = {};
 
   @Output() emitDevastateAction = new EventEmitter<string>();
+  @Output() emitCloseModal = new EventEmitter<void>();
 
   passwordForm: FormGroup;
-  accountDetails?: UserAccountDetailsModel;
   commonI18nPrefix = '';
   specifiedI18nPrefix = '';
+  isMfaSetup = false;
 
-  isLoading$ = this._devastateAccountService.isLoading$;
-  activeModal$ = this._myAccountSettingsService.activeModal$;
-  currentStage$ = this._devastateAccountService.currentStage$;
+  isLoading$ = this._passwordConfirmationService.isLoading$;
+  currentStage$ = this._passwordConfirmationService.currentStage$;
+  isLocalSupplier$ = this._store.select(NgrxSelector_SHA.selectIsLocalSupplier);
 
   constructor(
-    private readonly _myAccountSettingsService: MyAccountSettingsService,
     private readonly _populateFormGroupService: PopulateFormGroupService,
-    private readonly _devastateAccountService: DevastateAccountService
+    private readonly _passwordConfirmationService: PasswordConfirmationService,
+    private readonly _store: Store<SharedReducer>
   ) {
     super();
     this.passwordForm = new FormGroup({
@@ -54,12 +56,12 @@ export class DevastateAccountModalComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.passwordForm);
+    this.wrapAsObservable$(
+      this._store.select(NgrxSelector_SHA.selectIsMfaSetup)
+    ).subscribe(isMfaSetup => (this.isMfaSetup = isMfaSetup));
     this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );
-    this.wrapAsObservable$(
-      this._myAccountSettingsService.accountDetails$
-    ).subscribe(accountDetails => (this.accountDetails = accountDetails));
     this.commonI18nPrefix = `vsph.clientCommon.settingsPage.modal.devastate`;
     this.specifiedI18nPrefix = `${this.commonI18nPrefix}.${this.i18nPrefix}`;
   }
@@ -70,8 +72,8 @@ export class DevastateAccountModalComponent
 
   handleEmitDevastateAction(): void {
     const { password } = this.passwordForm.getRawValue();
-    if (this.accountDetails?.mfaSetup) {
-      this._devastateAccountService.persistPasswordAndUpdateStage(password);
+    if (this.isMfaSetup) {
+      this._passwordConfirmationService.persistPasswordAndUpdateStage(password);
       return;
     }
     this.emitDevastateAction.emit(password);
@@ -82,7 +84,7 @@ export class DevastateAccountModalComponent
   }
 
   handleCloseModal(): void {
-    this._devastateAccountService.onCloseModal();
-    this._myAccountSettingsService.closeModal();
+    this._passwordConfirmationService.onCloseModal();
+    this.emitCloseModal.emit();
   }
 }

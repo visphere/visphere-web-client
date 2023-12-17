@@ -49,6 +49,7 @@ export class SharedEffects {
           accessToken,
           refreshToken,
           credentialsSupplier,
+          isMfaSetup,
           settings,
           settings: { lang, theme },
         } = details;
@@ -71,6 +72,7 @@ export class SharedEffects {
               profileColor,
               joinDate,
               credentialsSupplier,
+              isMfaSetup,
               settings,
             },
           })
