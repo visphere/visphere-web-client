@@ -4,6 +4,7 @@
  */
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { FileValidatorResponse } from '~/shared-mod/models/file-validator.model';
 import { FileExtensionType } from '~/shared-mod/types/file-extensions.type';
 import {
@@ -141,5 +142,12 @@ export class FormHelperService {
         }
       }, 'image/png');
     });
+  }
+
+  extractNumberValueParam(
+    route: ActivatedRoute,
+    name: string
+  ): number | undefined {
+    return Number(route.snapshot.paramMap.get(name)) ?? undefined;
   }
 }

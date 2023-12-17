@@ -35,11 +35,11 @@
       <h2 class="vsph-modal__window-header">
         {{ i18nPrefix + '.header' | translate }}
       </h2>
-      <p
+      <div
         class="vsph-modal__window-paragraph"
         [class.vsph-modal__window-paragraph--large]="size === 'xl'">
         <ng-content />
-      </p>
+      </div>
       <div class="flex justify-end gap-x-3 mt-5">
         <vsph-lazy-button-spinner
           *ngIf="showProceedButton"
