@@ -23,8 +23,8 @@ export class TextChannelSettingsEntryPointPageComponent
   textChannelName = '{{Text channel name}}';
   isModalOpen = false;
 
-  guildId?: number = undefined;
-  textChannelId?: number = undefined;
+  guildId?: number;
+  textChannelId?: number;
 
   isRemoveLoading$ = this._textChannelService.isLoading$;
   settingsReturnUrl$ = this._store.select(

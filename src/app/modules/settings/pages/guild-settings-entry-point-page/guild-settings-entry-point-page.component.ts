@@ -23,7 +23,7 @@ export class GuildSettingsEntryPointPageComponent
 {
   guildName = '{{Sphere guild name}}';
   isModalActive = false;
-  guildId?: number = undefined;
+  guildId?: number;
 
   readonly defaultPrefix =
     'vsph.clientCommon.settingsPage.category.guildSettings';
