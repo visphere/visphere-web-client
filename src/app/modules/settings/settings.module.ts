@@ -30,11 +30,17 @@ import { UserAccountBannerComponent } from '~/settings-mod/components/user-accou
 import { UsernameUpdatableModalComponent } from '~/settings-mod/components/username-updatable-modal/username-updatable-modal.component';
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
 import { BlankInitSettingsPageComponent } from '~/settings-mod/pages/blank-init-settings-page/blank-init-settings-page.component';
+import { GuildAppearanceSettingsPageComponent } from '~/settings-mod/pages/guild-appearance-settings-page/guild-appearance-settings-page.component';
+import { GuildJoinLinksSettingsPageComponent } from '~/settings-mod/pages/guild-join-links-settings-page/guild-join-links-settings-page.component';
+import { GuildOverviewSettingsPageComponent } from '~/settings-mod/pages/guild-overview-settings-page/guild-overview-settings-page.component';
+import { GuildSettingsEntryPointPageComponent } from '~/settings-mod/pages/guild-settings-entry-point-page/guild-settings-entry-point-page.component';
 import { LanguageSettingsPageComponent } from '~/settings-mod/pages/language-settings-page/language-settings-page.component';
 import { MyAccountSettingsPageComponent } from '~/settings-mod/pages/my-account-settings-page/my-account-settings-page.component';
 import { NotificationsSettingsPageComponent } from '~/settings-mod/pages/notifications-settings-page/notifications-settings-page.component';
 import { ProfileSettingsPageComponent } from '~/settings-mod/pages/profile-settings-page/profile-settings-page.component';
 import { SettingsEntryPointPageComponent } from '~/settings-mod/pages/settings-entry-point-page/settings-entry-point-page.component';
+import { TextChannelOverviewSettingsPageComponent } from '~/settings-mod/pages/text-channel-overview-settings-page/text-channel-overview-settings-page.component';
+import { TextChannelSettingsEntryPointPageComponent } from '~/settings-mod/pages/text-channel-settings-entry-point-page/text-channel-settings-entry-point-page.component';
 import { SharedModule } from '~/shared-mod/shared.module';
 import { SettingsRootComponent } from './settings-root.component';
 import { SettingsRoutingModule } from './settings-routing.module';
@@ -50,6 +56,10 @@ import { SettingsRoutingModule } from './settings-routing.module';
     EditablePrimitiveValueComponent,
     EmailAddressUpdatableModalComponent,
     FullNameUpdatableModalComponent,
+    GuildAppearanceSettingsPageComponent,
+    GuildJoinLinksSettingsPageComponent,
+    GuildOverviewSettingsPageComponent,
+    GuildSettingsEntryPointPageComponent,
     LanguageSettingsPageComponent,
     MfaDevastateFormComponent,
     MyAccountSettingsPageComponent,
@@ -62,6 +72,8 @@ import { SettingsRoutingModule } from './settings-routing.module';
     SettingPanelWrapperComponent,
     SettingsEntryPointPageComponent,
     SettingsRootComponent,
+    TextChannelOverviewSettingsPageComponent,
+    TextChannelSettingsEntryPointPageComponent,
     ToggleButtonComponent,
     UserAccountBannerComponent,
     UsernameUpdatableModalComponent,
@@ -76,13 +88,15 @@ import { SettingsRoutingModule } from './settings-routing.module';
       arrowRightIcon: BtsIcon.bootstrapArrowRight,
       closeIcon: BtsIcon.bootstrapXLg,
       downloadIcon: BtsIcon.bootstrapDownload,
+      joinLinksIcon: BtsIcon.bootstrapPersonPlus,
       languageIcon: BtsIcon.bootstrapTranslate,
       logoutIcon: BtsIcon.bootstrapBoxArrowRight,
       myAccountIcon: BtsIcon.bootstrapPerson,
       notificationsIcon: BtsIcon.bootstrapBell,
       profileIcon: BtsIcon.bootstrapPersonGear,
-      togglerNoIcon: BtsIcon.bootstrapX,
       removeTrashIcon: BtsIcon.bootstrapTrashFill,
+      settingsIcon: BtsIcon.bootstrapGear,
+      togglerNoIcon: BtsIcon.bootstrapX,
       togglerYesIcon: BtsIcon.bootstrapCheck,
     }),
     NgxTippyModule,

@@ -1,0 +1,66 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-action-modal
+  size="sm"
+  precedence="higher"
+  [showProceedButton]="false"
+  [i18nPrefix]="modalPrefix"
+  [isActive]="isModalOpen"
+  (emitOnClose)="handleToggleModalToDeleteTextChannel(false)"
+  (emitDevstateAction)="handleDeleteTextChannel()">
+  {{ modalPrefix + '.description' | translate: { name: textChannelName } }}
+  <vsph-lazy-button-spinner
+    [isLoading]="(isRemoveLoading$ | async)!"
+    (emitClick)="handleDeleteTextChannel()"
+    buttonStyle="vsph-button vsph-button--primary vsph-button--danger mt-4">
+    {{ modalPrefix + '.submitButton' | translate }}
+  </vsph-lazy-button-spinner>
+</vsph-devastate-action-modal>
+<div class="fixed flex w-full">
+  <div class="vsph-settings__container vsph-settings__navbar-container">
+    <div class="min-w-[220px] me-4">
+      <div class="mb-6 pt-12">
+        <a
+          [routerLink]="settingsReturnUrl$ | async"
+          class="vsph-settings__nav-button">
+          {{ 'vsph.clientCommon.settingsPage.closeButton' | translate }}
+          <ng-icon name="closeIcon" />
+        </a>
+      </div>
+      <div class="mb-3">
+        <p class="vsph-settings__nav-paragraph">
+          {{ defaultPrefix + '.name' | translate }}
+        </p>
+        <ul>
+          <li class="w-full">
+            <a
+              routerLinkActive="vsph-settings__nav-button--active"
+              routerLink="overview"
+              class="vsph-settings__nav-button">
+              {{ defaultPrefix + '.subpage.overview.header' | translate }}
+              <ng-icon name="settingsIcon" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <hr class="vsph-settings__separator ms-2.5" />
+      <div class="mb-3">
+        <button
+          (click)="handleToggleModalToDeleteTextChannel(true)"
+          class="vsph-settings__nav-button vsph-settings__nav-button--logout">
+          {{ defaultPrefix + '.deleteTextChannel' | translate }}
+          <ng-icon name="removeTrashIcon" />
+        </button>
+      </div>
+      <div class="pb-12"></div>
+    </div>
+  </div>
+  <div class="vsph-settings__container vsph-settings__content-container">
+    <div class="vsph-settings__content-wrapper">
+      <router-outlet />
+    </div>
+  </div>
+</div>
