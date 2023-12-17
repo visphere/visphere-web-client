@@ -1,0 +1,51 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-modal-wrapper
+  [isActive]="!!(isModalOpen$ | async)"
+  (emitOnClose)="handleEmitOnClose()"
+  modalSize="xs"
+  [header]="commonPrefix + '.' + (currentMode$ | async) + '.header'">
+  <ng-container content>
+    <div *ngIf="(currentMode$ | async) === 'create'">
+      <vsph-create-sphere-form />
+      <div class="flex items-center my-5">
+        <hr class="vsph-separator flex-grow" />
+        <div class="vsph-separator__text">
+          {{ 'vsph.common.utils.or' | translate }}
+        </div>
+        <hr class="vsph-separator flex-grow" />
+      </div>
+      <p class="mb-1 mt-4 text-sm text-vsph-tint-400 dark:text-vsph-tint-400">
+        {{ commonPrefix + '.create.toJoinParagraph' | translate }}
+      </p>
+      <button
+        [disabled]="isLoading$ | async"
+        (click)="handleChangeModalMode('join')"
+        class="vsph-button vsph-button--secondary">
+        {{ commonPrefix + '.toJoinButton' | translate }}
+      </button>
+    </div>
+    <div *ngIf="(currentMode$ | async) === 'join'">
+      <vsph-join-sphere-form />
+      <div class="flex items-center my-5">
+        <hr class="vsph-separator flex-grow" />
+        <div class="vsph-separator__text">
+          {{ 'vsph.common.utils.or' | translate }}
+        </div>
+        <hr class="vsph-separator flex-grow" />
+      </div>
+      <p class="mb-1 mt-4 text-sm text-vsph-tint-400 dark:text-vsph-tint-400">
+        {{ commonPrefix + '.join.toCreateParagraph' | translate }}
+      </p>
+      <button
+        [disabled]="isLoading$ | async"
+        (click)="handleChangeModalMode('create')"
+        class="vsph-button vsph-button--secondary">
+        {{ commonPrefix + '.toCreateButton' | translate }}
+      </button>
+    </div>
+  </ng-container>
+</vsph-modal-wrapper>

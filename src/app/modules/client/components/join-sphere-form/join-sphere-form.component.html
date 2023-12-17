@@ -1,0 +1,26 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<form
+  [formGroup]="joinSphereForm"
+  (ngSubmit)="handleSubmitJoinSphere()"
+  class="grid gap-y-3">
+  <vsph-common-form-input
+    [maxLength]="10"
+    [requiredStar]="true"
+    [additionalInfo]="true"
+    formControlIdentifier="code"
+    placeholder="Gf38g9ed74"
+    i18nPrefix="clientCommon.client.modals.join">
+    <vsph-field-validator />
+    <vsph-field-validator type="pattern" />
+    <vsph-field-validator type="minlength" />
+  </vsph-common-form-input>
+  <vsph-lazy-button-spinner
+    [isLoading]="(isLoading$ | async)!"
+    [buttonDisabled]="joinSphereForm.invalid">
+    {{ commonPrefix + '.toJoinButton' | translate }}
+  </vsph-lazy-button-spinner>
+</form>

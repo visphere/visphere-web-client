@@ -1,0 +1,54 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<form
+  [formGroup]="createSphereForm"
+  (ngSubmit)="handleSubmitCreateSphereForm()"
+  class="grid gap-y-3">
+  <vsph-common-form-input
+    [maxLength]="100"
+    [requiredStar]="true"
+    formControlIdentifier="name"
+    placeholder="vsph.clientCommon.client.modals.create.formFields.name.placeholder"
+    i18nPrefix="clientCommon.client.modals.create">
+    <vsph-field-validator />
+    <vsph-field-validator type="minlength" />
+  </vsph-common-form-input>
+  <vsph-checkbox-form-input
+    formControlIdentifier="isPrivate"
+    i18nPrefix="clientCommon.client.modals.create"
+    [additionalInfo]="true">
+    <ng-container labelContent>
+      {{ commonPrefix + '.create.formFields.isPrivate.value' | translate }}
+    </ng-container>
+  </vsph-checkbox-form-input>
+  <div
+    class="flex justify-center items-center h-[50px]"
+    *ngIf="isFormLoading$ | async; else finishLoading">
+    <div
+      class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
+  </div>
+  <ng-template #finishLoading>
+    <ul class="flex flex-col gap-y-3">
+      <li *ngFor="let category of categories" class="w-full">
+        <button
+          type="button"
+          (click)="handleToggleCategory(category)"
+          [class.vsph-category-list__element--active]="
+            category.id === selectedCategory?.id
+          "
+          class="vsph-category-list__element">
+          <ng-icon [name]="category.id + 'Category'" class="me-3" />
+          {{ commonPrefix + '.create.category.' + category.id | translate }}
+        </button>
+      </li>
+    </ul>
+  </ng-template>
+  <vsph-lazy-button-spinner
+    [isLoading]="(isLoading$ | async)!"
+    [buttonDisabled]="createSphereForm.invalid">
+    {{ commonPrefix + '.toCreateButton' | translate }}
+  </vsph-lazy-button-spinner>
+</form>
