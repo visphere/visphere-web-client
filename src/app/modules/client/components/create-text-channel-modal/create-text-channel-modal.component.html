@@ -1,0 +1,33 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-modal-wrapper
+  [isActive]="!!(isModalOpen$ | async)"
+  (emitOnClose)="handleEmitOnClose()"
+  modalSize="xs"
+  [header]="commonPrefix + '.header'">
+  <form
+    content
+    [formGroup]="textChannelForm"
+    (ngSubmit)="handleSubmitCreateTextChannel()"
+    class="grid gap-y-3">
+    <vsph-common-form-input
+      [maxLength]="50"
+      [requiredStar]="true"
+      [additionalInfo]="true"
+      formControlIdentifier="name"
+      [placeholder]="commonPrefix + '.formFields.name.placeholder'"
+      i18nPrefix="clientCommon.client.modals.createTextChannel">
+      <vsph-field-validator />
+      <vsph-field-validator type="pattern" />
+      <vsph-field-validator type="minlength" />
+    </vsph-common-form-input>
+    <vsph-lazy-button-spinner
+      [isLoading]="(isLoading$ | async)!"
+      [buttonDisabled]="textChannelForm.invalid">
+      {{ commonPrefix + '.submitButton' | translate }}
+    </vsph-lazy-button-spinner>
+  </form>
+</vsph-modal-wrapper>
