@@ -18,13 +18,13 @@ import {
   UserPersistedNofisSettings,
 } from '~/settings-mod/model/notifs.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
-import { AbstractUserSettingsProvider } from '../abstract-user-settings.provider';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
 
 @Injectable()
-export class NotificationsSettingsService extends AbstractUserSettingsProvider {
+export class NotificationsSettingsService extends AbstractWsWebhookProvider<SharedReducer> {
   constructor(
     private readonly _settingsHttpClientService: SettingsHttpClientService,
     private readonly _store: Store<SharedReducer>

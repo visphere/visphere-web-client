@@ -6,13 +6,14 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
-export abstract class AbstractUserSettingsProvider extends AbstractLoadableProvider {
+export abstract class AbstractWsWebhookProvider<
+  T,
+> extends AbstractLoadableProvider {
   protected _onChangeObserver$ = new BehaviorSubject<null>(null);
   protected _isFetching$ = new BehaviorSubject<boolean>(true);
 
-  constructor(private readonly _absStore: Store<SharedReducer>) {
+  constructor(private readonly _absStore: Store<T>) {
     super();
   }
 

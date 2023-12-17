@@ -23,17 +23,17 @@ import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-detai
 import { UpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
+import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
-import { AbstractUserSettingsProvider } from '../abstract-user-settings.provider';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
 import { UpdatableEmailHttpClientService } from '../updatable-email-http-client/updatable-email-http-client.service';
 
 @Injectable()
-export class MyAccountSettingsService extends AbstractUserSettingsProvider {
+export class MyAccountSettingsService extends AbstractWsWebhookProvider<SharedReducer> {
   private _activeModal$ = new BehaviorSubject<UpdatableModalType>('none');
   private _accountDetails$ = new BehaviorSubject<
     UserAccountDetailsModel | undefined
