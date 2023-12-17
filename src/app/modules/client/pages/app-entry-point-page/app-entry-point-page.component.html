@@ -1,0 +1,43 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="vsph-center-content__body flex-col">
+  <div class="vsph-rounded-icon__container mx-auto">
+    <div class="vsph-rounded-icon__body">
+      <img
+        src="{{ path }}/static/logo/visphere.svg"
+        alt=""
+        width="40px"
+        height="40px" />
+    </div>
+    <h3 class="text-xl text-vsph-tint-300">
+      {{ defaultPrefix + '.welcomeMessage' | translate }}
+    </h3>
+    <h2 class="text-2xl font-bold mb-3">Visphere</h2>
+    <p class="text-vsph-tint-300 mb-10 text-center">
+      {{ defaultPrefix + '.navigationInfo' | translate }}
+    </p>
+    <div class="w-full pb-10">
+      <button
+        (click)="handleOpenModalToCreateGuild()"
+        class="vsph-button vsph-button--primary vsph-button--fit mx-auto">
+        {{ defaultPrefix + '.createGuildButton' | translate }}
+      </button>
+      <div class="flex items-center my-5">
+        <hr class="vsph-separator vsph-center-content__separator flex-grow" />
+        <div class="vsph-separator__text">
+          {{ 'vsph.common.utils.or' | translate }}
+        </div>
+        <hr class="vsph-separator vsph-center-content__separator flex-grow" />
+      </div>
+      <a
+        href="{{ landingPagePath }}/public-spheres"
+        target="_blank"
+        class="vsph-button vsph-button--secondary vsph-button--fit mx-auto">
+        {{ defaultPrefix + '.exploreSpheres' | translate }}
+      </a>
+    </div>
+  </div>
+</div>

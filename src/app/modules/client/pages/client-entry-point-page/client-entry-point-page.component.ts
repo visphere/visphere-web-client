@@ -3,35 +3,18 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { FaviconBadgeNotificatorService } from '~/shared-mod/services/favicon-badge-notificator/favicon-badge-notificator.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
+import { GuildService } from '~/client-mod/services/guild/guild.service';
+import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 
 @Component({
   selector: 'vsph-client-entrypoint-page',
   templateUrl: './client-entry-point-page.component.html',
+  providers: [GuildService],
 })
 export class ClientEntryPointPageComponent {
-  constructor(
-    private readonly _faviconBadgeNotificationService: FaviconBadgeNotificatorService,
-    private readonly _router: Router,
-    private readonly _store: Store<SharedReducer>
-  ) {}
+  isModalOpen$ = this._store.select(NgrxSelector_CLN.selectIsAddGuildModalOpen);
 
-  handleShowNotif(): void {
-    this._faviconBadgeNotificationService.showNotify();
-  }
-
-  handleHideNotif(): void {
-    this._faviconBadgeNotificationService.removeNotify();
-  }
-
-  async handleGotoSettings(): Promise<void> {
-    this._store.dispatch(
-      NgrxAction_SHA.__setSettingsReturnUrl({ url: this._router.url })
-    );
-    await this._router.navigateByUrl('settings');
-  }
+  constructor(private readonly _store: Store<ClientReducer>) {}
 }

@@ -3,7 +3,8 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<button (click)="handleGotoSettings()">settings</button><br />
-<br />
-<button (click)="handleShowNotif()">show notif</button><br />
-<button (click)="handleHideNotif()">hide notif</button><br />
+<vsph-create-or-join-sphere-modal *ngIf="!!(isModalOpen$ | async)" />
+<div class="vsph-client__entry-point-container">
+  <vsph-left-navigation-bar />
+  <router-outlet />
+</div>
