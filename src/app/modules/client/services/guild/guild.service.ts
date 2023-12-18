@@ -54,6 +54,7 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
     paramMap$: Observable<ParamMap>
   ): Observable<GuildDetailsResDto> {
     return combineLatest([paramMap$, this._onChangeObserver$]).pipe(
+      tap(() => this._lazyPageLoaderService.setLoading()),
       map(([paramMap]) => Number(paramMap.get('guildId'))),
       switchMap(guildId =>
         this._guildHttpClientService.getGuildDetails$(guildId)
@@ -61,6 +62,11 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
       tap(guildDetails => {
         this._templatePageTitleStrategy.updateCustomTitle(guildDetails.name);
         this._guildDetails$.next(guildDetails);
+        this._lazyPageLoaderService.disableLoading();
+      }),
+      catchError(err => {
+        this._lazyPageLoaderService.disableLoading();
+        return throwError(() => err);
       })
     );
   }

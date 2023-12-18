@@ -33,6 +33,10 @@ export abstract class AbstractWsWebhookProvider<
     this._onChangeObserver$.next(null);
   }
 
+  setFetching(isFetching: boolean): void {
+    this._isFetching$.next(isFetching);
+  }
+
   get isFetching$(): Observable<boolean> {
     return this._isFetching$.asObservable();
   }

@@ -64,12 +64,18 @@ export class TextChannelService extends AbstractWsWebhookProvider<SharedReducer>
       this._guildService.guildDetails$,
       this._textChannelDetails$,
     ]).pipe(
+      tap(() => this.setFetching(true)),
       map(([guildDetails]) => guildDetails?.id),
       filter(guildId => !!guildId),
       map(guildId => guildId!),
       switchMap(guildId =>
         this._textChannelHttpClientService.getGuildTextChannels$(guildId)
-      )
+      ),
+      tap(() => this.setFetching(false)),
+      catchError(err => {
+        this.setFetching(false);
+        return throwError(() => err);
+      })
     );
   }
 

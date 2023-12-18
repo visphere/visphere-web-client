@@ -32,6 +32,8 @@ export class SphereTextChannelsPanelComponent
   guildDetails?: GuildDetailsResDto;
   textChannels: TextChannelResDto[] = [];
 
+  isFetching$ = this._textChannelService.isFetching$;
+
   readonly path = environment.contentDistributorBaseUrl;
   readonly defaultPrefix = 'vsph.clientCommon.guild.leftSidebar';
   readonly tooltipProps: NgxTippyProps = {
