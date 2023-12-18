@@ -19,7 +19,7 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
     super();
   }
 
-  override updateTitle(snapshot: RouterStateSnapshot) {
+  override updateTitle(snapshot: RouterStateSnapshot): void {
     const titlePlaceholder = this.buildTitle(snapshot);
     if (titlePlaceholder !== undefined) {
       const title = this._translateService.instant(
@@ -29,6 +29,10 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
     } else {
       this._title.setTitle(this.DEF_SUFFIX);
     }
+  }
+
+  updateCustomTitle(title: string): void {
+    this._title.setTitle(`${title} ${this.SEPARATOR} ${this.DEF_SUFFIX}`);
   }
 }
 

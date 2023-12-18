@@ -21,5 +21,5 @@ export const regex: RegexValidators = {
   MFA_CODE: /^[\d]+$/,
   DATE_VALID: /^\d{4}-\d{2}-\d{2}$/,
   SPHERE_CODE: /^[a-z\d]+$/,
-  TEXT_CHANNEL_NAME: /^[a-z\d-ąćęńóśźż]+$/,
+  TEXT_CHANNEL_NAME: /^[a-z\d-ąćęłńóśźż]+$/,
 };
