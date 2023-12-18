@@ -6,3 +6,12 @@
 export type CreateTextChannelReqDto = {
   name: string;
 };
+
+export type TextChannelDetailsResDto = {
+  name: string;
+};
+
+export type TextChannelResDto = {
+  id: number;
+  name: string;
+};

@@ -1,0 +1,11 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-create-text-channel-modal *ngIf="isAddTextChannelModalOpen$ | async" />
+<vsph-sphere-text-channels-panel />
+<div class="flex-grow">
+  <router-outlet />
+</div>
+<vsph-sphere-guild-participants-panel />

@@ -1,0 +1,64 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="vsph-side-content__header">
+  <a [routerLink]="'/guild/' + guildDetails?.id" class="line-clamp-1">
+    {{ guildDetails?.name }}
+  </a>
+</div>
+<div class="vsph-side-content__body">
+  <button
+    *ngIf="guildDetails?.isLoggedUserIsOwner"
+    (click)="handleOpenModalToCreateTextChannel()"
+    class="vsph-button vsph-button--primary vsph-button--small vsph-button--small--padding mb-4">
+    {{ defaultPrefix + '.createTextChannel' | translate }}
+  </button>
+  <p class="vsph-sidebar__aside-text ps-3">
+    {{ defaultPrefix + '.textChannels' | translate }} -
+    {{ textChannels.length }}
+  </p>
+  <div
+    *ngIf="textChannels.length === 0"
+    class="flex justify-center items-center h-full">
+    <img
+      src="{{ path }}/static/icon/sad-face.svg"
+      alt=""
+      width="60px"
+      height="60px" />
+  </div>
+  <ul *ngIf="textChannels.length !== 0" class="mt-1 mb-3 flex flex-col gap-y-1">
+    <li
+      *ngFor="let channel of textChannels"
+      [class.vsph-text-channel__container--active]="isActiveRoute(channel.id)"
+      class="vsph-text-channel__container">
+      <a
+        [routerLink]="createRoute(channel.id)"
+        class="flex items-center flex-grow gap-x-2 px-3 py-1">
+        <ng-icon name="textChannelIcon" class="relative -top-[1px]" />
+        <span class="line-clamp-1">{{ channel.name }}</span>
+      </a>
+      <button
+        *ngIf="isActiveRoute(channel.id)"
+        [ngxTippy]="channelSettingsTooltip"
+        [tippyProps]="tooltipProps"
+        (click)="handleGotoTextChannelSettings(channel.id)"
+        class="flex justify-between items-center pe-3 py-1">
+        <ng-icon name="settingsIcon" />
+      </button>
+    </li>
+  </ul>
+</div>
+<div
+  *ngIf="guildDetails?.isLoggedUserIsOwner"
+  class="vsph-side-content__bottom-content">
+  <button
+    (click)="handleGotoSphereSettings()"
+    class="vsph-button vsph-button--secondary">
+    {{ defaultPrefix + '.settingsButton' | translate }}
+  </button>
+</div>
+<ng-template #channelSettingsTooltip>
+  {{ defaultPrefix + '.textChannelSettings' | translate }}
+</ng-template>

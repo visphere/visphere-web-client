@@ -3,11 +3,13 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Injectable } from '@angular/core';
+import { ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   BehaviorSubject,
   Observable,
   catchError,
+  combineLatest,
   map,
   switchMap,
   tap,
@@ -15,10 +17,12 @@ import {
 } from 'rxjs';
 import {
   CreateGuildForm,
+  GuildDetailsResDto,
   SphereGuildCategory,
   UserGuildResDto,
 } from '~/client-mod/model/guild.model';
 import { CreateOrJoinGuildModalMode } from '~/client-mod/types/modal-mode.type';
+import { TemplatePageTitleStrategy } from '~/shared-mod/config/template-page-title.strategy';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -29,10 +33,14 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
   private _isFormLoading$ = new BehaviorSubject<boolean>(false);
   private _createGuildModalMode$ =
     new BehaviorSubject<CreateOrJoinGuildModalMode>('create');
+  private _guildDetails$ = new BehaviorSubject<GuildDetailsResDto | undefined>(
+    undefined
+  );
 
   constructor(
     private readonly _guildHttpClientService: GuildHttpClientService,
     private readonly _lazyPageLoaderService: LazyPageLoaderService,
+    private readonly _templatePageTitleStrategy: TemplatePageTitleStrategy,
     _store: Store<SharedReducer>
   ) {
     super(_store);
@@ -40,6 +48,21 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
 
   setModalMode(mode: CreateOrJoinGuildModalMode): void {
     this._createGuildModalMode$.next(mode);
+  }
+
+  fetchGuildDetails$(
+    paramMap$: Observable<ParamMap>
+  ): Observable<GuildDetailsResDto> {
+    return combineLatest([paramMap$, this._onChangeObserver$]).pipe(
+      map(([paramMap]) => Number(paramMap.get('guildId'))),
+      switchMap(guildId =>
+        this._guildHttpClientService.getGuildDetails$(guildId)
+      ),
+      tap(guildDetails => {
+        this._templatePageTitleStrategy.updateCustomTitle(guildDetails.name);
+        this._guildDetails$.next(guildDetails);
+      })
+    );
   }
 
   getAllUserGuilds$(): Observable<UserGuildResDto[]> {
@@ -108,5 +131,8 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
   }
   get isFormLoading$(): Observable<boolean> {
     return this._isFormLoading$.asObservable();
+  }
+  get guildDetails$(): Observable<GuildDetailsResDto | undefined> {
+    return this._guildDetails$.asObservable();
   }
 }

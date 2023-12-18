@@ -26,3 +26,12 @@ export type SphereGuildCategory = {
   id: string;
   name: string;
 };
+
+export type GuildDetailsResDto = {
+  id: number;
+  name: string;
+  category: string;
+  profileColor: string;
+  isPrivate: boolean;
+  isLoggedUserIsOwner: boolean;
+};

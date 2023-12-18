@@ -1,0 +1,56 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="vsph-center-content__header">
+  <img src="{{ themedBrandIconUrl }}" alt="" width="20px" height="20px" />
+  <p class="font-bold">{{ defaultPrefix + '.welcomeScreen' | translate }}</p>
+</div>
+<div class="vsph-center-content__body flex-col">
+  <div class="vsph-rounded-icon__container m-auto">
+    <div class="vsph-rounded-icon__body">
+      <img
+        src="{{ path }}/static/logo/visphere.svg"
+        alt=""
+        width="40px"
+        height="40px" />
+    </div>
+    <h3 class="text-xl text-vsph-tint-300">
+      {{
+        defaultPrefix + '.welcomeMessage'
+          | translate
+            : {
+                visibility:
+                  (defaultPrefix +
+                    (guildDetails?.isPrivate
+                      ? '.privateSphere'
+                      : '.publicSphere') | translate)
+              }
+      }}
+    </h3>
+    <h2 class="text-2xl font-bold mb-3">{{ guildDetails?.name }}</h2>
+    <p class="text-vsph-tint-300 mb-10 text-center">
+      {{ defaultPrefix + '.navigationInfo' | translate }}
+    </p>
+    <div *ngIf="guildDetails?.isLoggedUserIsOwner" class="w-full">
+      <button
+        (click)="handleOpenModalToCreateTextChannel()"
+        class="vsph-button vsph-button--primary vsph-button--fit mx-auto">
+        {{ defaultPrefix + '.createTextChannelButton' | translate }}
+      </button>
+      <div class="flex items-center my-5">
+        <hr class="vsph-separator vsph-center-content__separator flex-grow" />
+        <div class="vsph-separator__text">
+          {{ 'vsph.common.utils.or' | translate }}
+        </div>
+        <hr class="vsph-separator vsph-center-content__separator flex-grow" />
+      </div>
+      <button
+        (click)="handleGotoSphereSettings()"
+        class="vsph-button vsph-button--secondary vsph-button--fit mx-auto">
+        {{ defaultPrefix + '.settingsButton' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

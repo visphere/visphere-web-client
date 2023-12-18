@@ -1,0 +1,30 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="vsph-center-content__header">
+  <ng-icon name="textChannelIcon" class="font-bold" />
+  <p class="font-bold">
+    {{ textChannelDetails?.name || '...' }}
+  </p>
+</div>
+<div class="vsph-center-content__body">
+  <vsph-sphere-messages-content />
+  <hr class="vsph-center-content__separator mb-10" />
+  <div class="vsph-rounded-icon__container mx-auto">
+    <div class="vsph-rounded-icon__body">
+      <ng-icon name="textChannelIcon" class="text-3xl" />
+    </div>
+    <h3 class="text-xl text-vsph-tint-300">
+      {{ defaultPrefix + '.welcome' | translate }}
+    </h3>
+    <h2 class="text-2xl font-bold mb-3">
+      {{ textChannelDetails?.name || '...' }}
+    </h2>
+    <p class="text-vsph-tint-300 mb-10 text-center">
+      {{ defaultPrefix + '.noMessagesYet' | translate }}
+    </p>
+  </div>
+</div>
+<vsph-input-text-area />

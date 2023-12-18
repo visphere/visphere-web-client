@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import {
   AddGuildResDto,
   CreateGuildReqDto,
+  GuildDetailsResDto,
   SphereGuildCategory,
   UserGuildResDto,
 } from '~/client-mod/model/guild.model';
@@ -17,6 +18,12 @@ import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provid
 export class GuildHttpClientService extends AbstractHttpProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();
+  }
+
+  getGuildDetails$(guildId: number): Observable<GuildDetailsResDto> {
+    return this._httpClient.get<GuildDetailsResDto>(
+      `${this._infraApiPath}/api/v1/sphere/guild/${guildId}/details`
+    );
   }
 
   getAllGuildsForUser$(): Observable<UserGuildResDto[]> {
