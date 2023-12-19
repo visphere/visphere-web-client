@@ -4,7 +4,10 @@
  -->
 
 <div class="vsph-side-content__header">
-  <a [routerLink]="'/guild/' + guildDetails?.id" class="line-clamp-1">
+  <a
+    [routerLink]="'/guild/' + guildDetails?.id"
+    [title]="guildDetails?.name"
+    class="line-clamp-1">
     {{ guildDetails?.name }}
   </a>
 </div>
@@ -44,6 +47,7 @@
         class="vsph-text-channel__container">
         <a
           [routerLink]="createRoute(channel.id)"
+          [title]="channel.name"
           class="flex items-center flex-grow gap-x-2 px-3 py-1">
           <ng-icon name="textChannelIcon" class="relative -top-[1px]" />
           <span class="line-clamp-1">{{ channel.name }}</span>
