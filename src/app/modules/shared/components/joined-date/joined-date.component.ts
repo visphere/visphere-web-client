@@ -17,6 +17,7 @@ export class JoinedDateComponent
   implements OnInit
 {
   @Input() joinDateStr = '';
+  @Input() i18nPrefix = 'joinedDate';
 
   selectedLang$ = this._languageSwitcherService.selectedLang$;
   tooltipProps$ = this._populateTooltipService.field$;

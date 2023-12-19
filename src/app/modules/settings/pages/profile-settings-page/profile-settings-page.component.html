@@ -31,23 +31,11 @@
   <h2 class="vsph-settings__section-header">
     {{ defaultPrefix + '.section.color.header' | translate }}
   </h2>
-  <ul class="flex gap-x-3">
-    <li *ngFor="let color of availableColors">
-      <button
-        [style.background-color]="color"
-        [class.vsph-settings__profile-color-element--loading]="
-          (activeLoading$ | async)! === 'changing-color'
-        "
-        [class.vsph-settings__profile-color-element--active]=""
-        (click)="handleUpdateProfileColor(color)"
-        class="flex justify-center items-center w-[30px] h-[30px] rounded-full">
-        <ng-icon
-          *ngIf="color === selectedColor"
-          name="togglerYesIcon"
-          class="text-vsph-light-100 text-xl" />
-      </button>
-    </li>
-  </ul>
+  <vsph-colors-selector-list
+    [availableColors]="availableColors"
+    [selectedColor]="selectedColor"
+    [activeLoading]="(activeLoading$ | async)!"
+    (emitOnUpdateColor)="handleUpdateProfileColor($event)" />
   <hr class="vsph-settings__separator my-5" />
   <h2 class="vsph-settings__section-header">
     {{ defaultPrefix + '.section.image.header' | translate }}

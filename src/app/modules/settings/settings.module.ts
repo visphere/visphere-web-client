@@ -13,6 +13,7 @@ import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { AccountAuthSettingsComponent } from '~/settings-mod/components/account-auth-settings/account-auth-settings.component';
 import { AccountPanelSettingsComponent } from '~/settings-mod/components/account-panel-settings/account-panel-settings.component';
 import { BirthDateUpdatableModalComponent } from '~/settings-mod/components/birth-date-updatable-modal/birth-date-updatable-modal.component';
+import { ColorsSelectorListComponent } from '~/settings-mod/components/colors-selector-list/colors-selector-list.component';
 import { DevastateAccountModalComponent } from '~/settings-mod/components/devastate-account-modal/devastate-account-modal.component';
 import { EditablePrimitiveValueComponent } from '~/settings-mod/components/editable-primitive-value/editable-primitive-value.component';
 import { EmailAddressUpdatableModalComponent } from '~/settings-mod/components/email-address-updatable-modal/email-address-updatable-modal.component';
@@ -53,6 +54,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     AppearanceSettingsPageComponent,
     BirthDateUpdatableModalComponent,
     BlankInitSettingsPageComponent,
+    ColorsSelectorListComponent,
     DevastateAccountModalComponent,
     EditablePrimitiveValueComponent,
     EmailAddressUpdatableModalComponent,

@@ -1,0 +1,22 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<ul class="flex gap-x-3">
+  <li *ngFor="let color of availableColors">
+    <button
+      [style.background-color]="color"
+      [class.vsph-settings__profile-color-element--loading]="
+        activeLoading === 'changing-color'
+      "
+      [class.vsph-settings__profile-color-element--active]=""
+      (click)="emitOnUpdateColor.emit(color)"
+      class="flex justify-center items-center w-[30px] h-[30px] rounded-full">
+      <ng-icon
+        *ngIf="color === selectedColor"
+        name="togglerYesIcon"
+        class="text-vsph-light-100 text-xl" />
+    </button>
+  </li>
+</ul>
