@@ -45,7 +45,6 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
               severity: 'success',
             })
           );
-          this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
         }),
         catchError(err => {
           this._passwordConfirmationService.setLoading(false);

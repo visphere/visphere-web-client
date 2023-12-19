@@ -22,7 +22,9 @@ import {
   SphereGuildCategory,
   UserGuildResDto,
 } from '~/client-mod/model/guild.model';
+import * as NgrxAction_CLN from '~/client-mod/store/actions';
 import { CreateOrJoinGuildModalMode } from '~/client-mod/types/modal-mode.type';
+import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { TemplatePageTitleStrategy } from '~/shared-mod/config/template-page-title.strategy';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
@@ -30,7 +32,9 @@ import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { GuildHttpClientService } from '../guild-http-client/guild-http-client.service';
 
 @Injectable()
-export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
+export class GuildService extends AbstractWsWebhookProvider<
+  SharedReducer | ClientReducer
+> {
   private _isFormLoading$ = new BehaviorSubject<boolean>(false);
   private _createGuildModalMode$ =
     new BehaviorSubject<CreateOrJoinGuildModalMode>('create');
@@ -42,7 +46,7 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
     private readonly _guildHttpClientService: GuildHttpClientService,
     private readonly _lazyPageLoaderService: LazyPageLoaderService,
     private readonly _templatePageTitleStrategy: TemplatePageTitleStrategy,
-    _store: Store<SharedReducer>
+    private readonly _store: Store<SharedReducer | ClientReducer>
   ) {
     super(_store);
   }
@@ -105,6 +109,7 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
         this.setLoading(false);
         this.showSuccessSnackbar(message);
         this.updateWsSignalValue();
+        this._store.dispatch(NgrxAction_CLN.__closeModal());
         return id;
       }),
       catchError(err => {
@@ -125,6 +130,7 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
           this.setLoading(false);
           this.showSuccessSnackbar(message);
           this.updateWsSignalValue();
+          this._store.dispatch(NgrxAction_CLN.__closeModal());
           return id;
         }),
         catchError(err => {
