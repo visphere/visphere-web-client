@@ -13,6 +13,7 @@ describe('PasswordConfirmationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [PasswordConfirmationService],
     });
     service = TestBed.inject(PasswordConfirmationService);
   });

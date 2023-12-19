@@ -13,6 +13,7 @@ describe('TextChannelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [TextChannelService],
     });
     service = TestBed.inject(TextChannelService);
   });

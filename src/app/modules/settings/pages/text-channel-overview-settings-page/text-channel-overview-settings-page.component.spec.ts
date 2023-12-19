@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { TextChannelService } from '~/settings-mod/services/text-channel/text-channel.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { TextChannelOverviewSettingsPageComponent } from './text-channel-overview-settings-page.component';
 
@@ -14,6 +15,7 @@ describe('TextChannelOverviewSettingsPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [TextChannelService],
     }).compileComponents();
     fixture = TestBed.createComponent(TextChannelOverviewSettingsPageComponent);
     component = fixture.componentInstance;

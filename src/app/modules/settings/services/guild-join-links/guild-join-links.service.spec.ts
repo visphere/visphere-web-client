@@ -13,6 +13,7 @@ describe('GuildJoinLinksService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [GuildJoinLinksService],
     });
     service = TestBed.inject(GuildJoinLinksService);
   });

@@ -13,6 +13,7 @@ describe('GuildAppearanceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
+      providers: [GuildAppearanceService],
     });
     service = TestBed.inject(GuildAppearanceService);
   });

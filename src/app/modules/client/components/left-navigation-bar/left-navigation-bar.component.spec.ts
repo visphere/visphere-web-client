@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
+import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { AppModule } from '~/root-mod/app.module';
 import { LeftNavigationBarComponent } from './left-navigation-bar.component';
 
@@ -14,6 +15,7 @@ describe('LeftNavigationBarComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
+      providers: [GuildService],
     }).compileComponents();
     fixture = TestBed.createComponent(LeftNavigationBarComponent);
     component = fixture.componentInstance;

@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
+import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { AppModule } from '~/root-mod/app.module';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { CreateSphereFormComponent } from './create-sphere-form.component';
@@ -15,7 +16,7 @@ describe('CreateSphereFormComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
-      providers: [PopulateFormGroupService],
+      providers: [GuildService, PopulateFormGroupService],
     }).compileComponents();
     fixture = TestBed.createComponent(CreateSphereFormComponent);
     component = fixture.componentInstance;

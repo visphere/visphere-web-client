@@ -4,6 +4,8 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
+import { GuildService } from '~/client-mod/services/guild/guild.service';
+import { TextChannelService } from '~/client-mod/services/text-channel/text-channel.service';
 import { AppModule } from '~/root-mod/app.module';
 import { SphereTextChannelPageComponent } from './sphere-text-channel-page.component';
 
@@ -14,6 +16,7 @@ describe('SphereTextChannelPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
+      providers: [GuildService, TextChannelService],
     }).compileComponents();
     fixture = TestBed.createComponent(SphereTextChannelPageComponent);
     component = fixture.componentInstance;

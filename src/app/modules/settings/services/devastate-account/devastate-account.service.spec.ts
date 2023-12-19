@@ -5,6 +5,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
 import { SettingsModule } from '~/settings-mod/settings.module';
+import { PasswordConfirmationService } from '../password-confirmation/password-confirmation.service';
 import { DevastateAccountService } from './devastate-account.service';
 
 describe('DevastateAccountService', () => {
@@ -13,7 +14,7 @@ describe('DevastateAccountService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
-      providers: [DevastateAccountService],
+      providers: [PasswordConfirmationService, DevastateAccountService],
     });
     service = TestBed.inject(DevastateAccountService);
   });

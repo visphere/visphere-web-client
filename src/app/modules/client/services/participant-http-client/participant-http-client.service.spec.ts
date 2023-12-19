@@ -4,7 +4,7 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
-import { SettingsModule } from '~/settings-mod/settings.module';
+import { AppModule } from '~/root-mod/app.module';
 import { ParticipantHttpClientService } from './participant-http-client.service';
 
 describe('ParticipantHttpClientService', () => {
@@ -12,7 +12,7 @@ describe('ParticipantHttpClientService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ClientModule, SettingsModule],
+      imports: [AppModule, ClientModule],
     });
     service = TestBed.inject(ParticipantHttpClientService);
   });

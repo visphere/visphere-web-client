@@ -4,7 +4,8 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
-import { SettingsModule } from '~/settings-mod/settings.module';
+import { AppModule } from '~/root-mod/app.module';
+import { GuildService } from '../guild/guild.service';
 import { TextChannelService } from './text-channel.service';
 
 describe('TextChannelService', () => {
@@ -12,7 +13,8 @@ describe('TextChannelService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ClientModule, SettingsModule],
+      imports: [AppModule, ClientModule],
+      providers: [TextChannelService, GuildService],
     });
     service = TestBed.inject(TextChannelService);
   });

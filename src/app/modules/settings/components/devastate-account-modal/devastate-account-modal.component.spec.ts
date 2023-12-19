@@ -6,6 +6,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
 import { DevastateAccountService } from '~/settings-mod/services/devastate-account/devastate-account.service';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
+import { PasswordConfirmationService } from '~/settings-mod/services/password-confirmation/password-confirmation.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { DevastateAccountModalComponent } from './devastate-account-modal.component';
 
@@ -16,7 +17,11 @@ describe('DevastateAccountModalComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
-      providers: [MyAccountSettingsService, DevastateAccountService],
+      providers: [
+        MyAccountSettingsService,
+        DevastateAccountService,
+        PasswordConfirmationService,
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(DevastateAccountModalComponent);
     component = fixture.componentInstance;

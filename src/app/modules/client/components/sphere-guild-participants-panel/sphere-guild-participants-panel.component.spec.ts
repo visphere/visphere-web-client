@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
+import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
 import { AppModule } from '~/root-mod/app.module';
 import { SphereGuildParticipantsPanelComponent } from './sphere-guild-participants-panel.component';
@@ -15,7 +16,7 @@ describe('SphereGuildParticipantsPanelComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
-      providers: [ParticipantService],
+      providers: [GuildService, ParticipantService],
     }).compileComponents();
     fixture = TestBed.createComponent(SphereGuildParticipantsPanelComponent);
     component = fixture.componentInstance;

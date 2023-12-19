@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { TextChannelService } from '~/settings-mod/services/text-channel/text-channel.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { UpdatableTextChannelFormComponent } from './updatable-text-channel-form.component';
@@ -15,7 +16,7 @@ describe('UpdatableTextChannelFormComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
-      providers: [PopulateFormGroupService],
+      providers: [TextChannelService, PopulateFormGroupService],
     }).compileComponents();
     fixture = TestBed.createComponent(UpdatableTextChannelFormComponent);
     component = fixture.componentInstance;

@@ -14,7 +14,7 @@ describe('SphereGuildService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
-      providers: [PasswordConfirmationService],
+      providers: [SphereGuildService, PasswordConfirmationService],
     });
     service = TestBed.inject(SphereGuildService);
   });

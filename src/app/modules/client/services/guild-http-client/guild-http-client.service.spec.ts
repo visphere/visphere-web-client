@@ -4,7 +4,7 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
-import { SettingsModule } from '~/settings-mod/settings.module';
+import { AppModule } from '~/root-mod/app.module';
 import { GuildHttpClientService } from './guild-http-client.service';
 
 describe('GuildHttpClientService', () => {
@@ -12,7 +12,7 @@ describe('GuildHttpClientService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ClientModule, SettingsModule],
+      imports: [AppModule, ClientModule],
     });
     service = TestBed.inject(GuildHttpClientService);
   });
