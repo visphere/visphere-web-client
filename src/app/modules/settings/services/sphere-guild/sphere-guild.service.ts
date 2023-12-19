@@ -3,9 +3,21 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import {
+  Observable,
+  ReplaySubject,
+  catchError,
+  filter,
+  map,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
+import { GuildOwnerDetailsResDto } from '~/settings-mod/model/guild-management.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractGuildManagementProvider } from '../abstract-guild-management.provider';
@@ -14,12 +26,38 @@ import { PasswordConfirmationService } from '../password-confirmation/password-c
 
 @Injectable()
 export class SphereGuildService extends AbstractGuildManagementProvider {
+  private _guildId$ = new ReplaySubject<number>(1);
+  private _guildDetails$ = new ReplaySubject<GuildOwnerDetailsResDto>(1);
+
   constructor(
     private readonly _store: Store<SharedReducer>,
     private readonly _guildManagementHttpClientService: GuildManagementHttpClientService,
-    private readonly _passwordConfirmationService: PasswordConfirmationService
+    private readonly _passwordConfirmationService: PasswordConfirmationService,
+    private readonly _lazyPageLoaderService: LazyPageLoaderService
   ) {
     super(_store);
+  }
+
+  loadGuildDetails$(
+    route: ActivatedRoute
+  ): Observable<GuildOwnerDetailsResDto> {
+    return route.paramMap.pipe(
+      tap(() => this._lazyPageLoaderService.setLoading()),
+      map(paramMap => Number(paramMap.get('guildId'))),
+      filter(guildId => !!guildId),
+      tap(guildId => this._guildId$.next(guildId)),
+      switchMap(guildId =>
+        this._guildManagementHttpClientService.getGuildOwnerDetails$(guildId)
+      ),
+      tap(guildDetails => {
+        this._guildDetails$.next(guildDetails);
+        this._lazyPageLoaderService.disableLoading();
+      }),
+      catchError(err => {
+        this._lazyPageLoaderService.disableLoading();
+        return throwError(() => err);
+      })
+    );
   }
 
   deleteGuild$(
@@ -52,5 +90,9 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
           return throwError(() => err);
         })
       );
+  }
+
+  get guildId$(): Observable<number> {
+    return this._guildId$.asObservable();
   }
 }

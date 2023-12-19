@@ -21,10 +21,12 @@ export type TextChannelDetailsResDto = {
   name: string;
 };
 
-export type GuildDetailsResDto = {
+export type GuildOwnerDetailsResDto = {
+  id: number;
   name: string;
-  isPrivate: boolean;
-  profileColor: string;
-  profileImageUrl: string;
-  createdDate: string;
+};
+
+export type GuildOwnerOverviewResDto = GuildOwnerDetailsResDto & {
+  category: string;
+  isPrivate: string;
 };

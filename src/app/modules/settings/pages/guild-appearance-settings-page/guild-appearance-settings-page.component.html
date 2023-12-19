@@ -3,9 +3,78 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
+<vsph-devastate-action-modal
+  [isActive]="(activeModal$ | async) === 'delete-image'"
+  [isLoading]="(activeLoading$ | async)! === 'deleting-image'"
+  (emitOnClose)="handleCloseModal()"
+  (emitDevstateAction)="handleDeleteCustomGuildProfileImage()"
+  size="sm"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.devastate.deleteProfileImage">
+  {{
+    'vsph.clientCommon.settingsPage.modal.devastate.deleteProfileImage.description'
+      | translate
+  }}
+</vsph-devastate-action-modal>
+<vsph-image-loader-modal
+  *ngIf="(activeModal$ | async) === 'upload-image'"
+  [isActive]="(activeModal$ | async) === 'upload-image'"
+  [isLoading]="(activeLoading$ | async)! === 'generating-image'"
+  (handleEmitOnClose)="handleCloseModal()"
+  (handleEmitOnUpload)="handleUpdateGuildProfileImageToCustom($event)"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.uploadProfileImage" />
 <vsph-setting-panel-wrapper
   category="guildSettings"
   subpage="appearance"
   [isFetching]="!!(isFetching$ | async)">
-  content
+  <div class="vsph-settings__vis-container">
+    <div
+      [style.background-color]="profileImageDetails?.profileColor"
+      class="vsph-settings__vis-profile-banner-container"></div>
+    <div class="vsph-settings__vis-profile-image-container">
+      <img
+        src="{{ profileImageDetails?.profileImageUrl }}"
+        alt=""
+        loading="eager"
+        class="rounded-xl w-[85%] h-[85%]" />
+    </div>
+    <div
+      *ngIf="profileImageDetails"
+      class="flex justify-between items-center ps-[130px]">
+      <div class="flex flex-col gap-y-1">
+        <p class="text-2xl font-bold" [title]="profileImageDetails.guildName">
+          {{ profileImageDetails.guildName }}
+        </p>
+        <vsph-joined-date
+          [joinDateStr]="profileImageDetails.createdDate"
+          i18nPrefix="createdDate" />
+      </div>
+    </div>
+  </div>
+  <hr class="vsph-settings__separator my-5" />
+  <h2 class="vsph-settings__section-header">
+    {{ defaultPrefix + '.section.color.header' | translate }}
+  </h2>
+  <vsph-colors-selector-list
+    [availableColors]="availableColors"
+    [selectedColor]="profileImageDetails?.profileColor || ''"
+    [activeLoading]="(activeLoading$ | async)!"
+    (emitOnUpdateColor)="handleUpdateGuildProfileColor($event)" />
+  <hr class="vsph-settings__separator my-5" />
+  <h2 class="vsph-settings__section-header">
+    {{ defaultPrefix + '.section.image.header' | translate }}
+  </h2>
+  <div class="grid grid-cols-2 gap-x-3">
+    <button
+      [disabled]="profileImageDetails?.imageType === 'custom'"
+      (click)="handleOpenSelectedModal('upload-image')"
+      class="vsph-button vsph-button--primary">
+      {{ defaultPrefix + '.section.image.uploadImageButton' | translate }}
+    </button>
+    <button
+      (click)="handleOpenSelectedModal('delete-image')"
+      [disabled]="profileImageDetails?.imageType === 'default'"
+      class="vsph-button vsph-button--primary vsph-button--danger--outline">
+      {{ defaultPrefix + '.section.image.deleteImage' | translate }}
+    </button>
+  </div>
 </vsph-setting-panel-wrapper>

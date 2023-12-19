@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 import {
   EditGuildReqDto,
   EditTextChannelReqDto,
-  GuildDetailsResDto,
+  GuildOwnerDetailsResDto,
+  GuildOwnerOverviewResDto,
   TextChannelDetailsResDto,
   UpdateGuildVisibilityReqDto,
 } from '~/settings-mod/model/guild-management.model';
@@ -46,9 +47,16 @@ export class GuildManagementHttpClientService extends AbstractHttpProvider {
     );
   }
 
-  getGuildDetails$(guildId: number): Observable<GuildDetailsResDto> {
-    return this._httpClient.get<GuildDetailsResDto>(
-      `${this._infraApiPath}/api/v1/sphere/guild/${guildId}`
+  getGuildOwnerDetails$(guildId: number): Observable<GuildOwnerDetailsResDto> {
+    return this._httpClient.get<GuildOwnerDetailsResDto>(
+      `${this._infraApiPath}/api/v1/sphere/guild/${guildId}/owner/details`
+    );
+  }
+  getGuildOwnerOverview$(
+    guildId: number
+  ): Observable<GuildOwnerOverviewResDto> {
+    return this._httpClient.get<GuildOwnerOverviewResDto>(
+      `${this._infraApiPath}/api/v1/sphere/guild/${guildId}/owner/overview`
     );
   }
 

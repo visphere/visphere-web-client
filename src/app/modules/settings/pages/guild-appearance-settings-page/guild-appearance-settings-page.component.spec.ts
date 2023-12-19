@@ -4,8 +4,9 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
-import { GuildAppearanceService } from '~/settings-mod/services/guild-appearance/guild-appearance.service';
+import { GuildProfileService } from '~/settings-mod/services/guild-profile/guild-profile.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
+import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
 import { GuildAppearanceSettingsPageComponent } from './guild-appearance-settings-page.component';
 
 describe('GuildAppearanceSettingsPageComponent', () => {
@@ -15,7 +16,7 @@ describe('GuildAppearanceSettingsPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
-      providers: [GuildAppearanceService],
+      providers: [GuildProfileService, PopulateTooltipService],
     }).compileComponents();
     fixture = TestBed.createComponent(GuildAppearanceSettingsPageComponent);
     component = fixture.componentInstance;
