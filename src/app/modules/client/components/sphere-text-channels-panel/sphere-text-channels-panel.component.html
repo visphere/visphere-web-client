@@ -49,7 +49,7 @@
           <span class="line-clamp-1">{{ channel.name }}</span>
         </a>
         <button
-          *ngIf="isActiveRoute(channel.id)"
+          *ngIf="isActiveRoute(channel.id) && guildDetails?.isLoggedUserIsOwner"
           [ngxTippy]="channelSettingsTooltip"
           [tippyProps]="tooltipProps"
           (click)="handleGotoTextChannelSettings(channel.id)"

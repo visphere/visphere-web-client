@@ -10,6 +10,7 @@ import {
   Observable,
   catchError,
   combineLatest,
+  distinctUntilChanged,
   map,
   switchMap,
   tap,
@@ -56,6 +57,7 @@ export class GuildService extends AbstractWsWebhookProvider<SharedReducer> {
     return combineLatest([paramMap$, this._onChangeObserver$]).pipe(
       tap(() => this._lazyPageLoaderService.setLoading()),
       map(([paramMap]) => Number(paramMap.get('guildId'))),
+      distinctUntilChanged(),
       switchMap(guildId =>
         this._guildHttpClientService.getGuildDetails$(guildId)
       ),

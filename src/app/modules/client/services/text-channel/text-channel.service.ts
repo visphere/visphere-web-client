@@ -62,7 +62,6 @@ export class TextChannelService extends AbstractWsWebhookProvider<SharedReducer>
   fetchGuildTextChannels$(): Observable<TextChannelResDto[]> {
     return combineLatest([
       this._guildService.guildDetails$,
-      this._textChannelDetails$,
       this._onChangeObserver$,
     ]).pipe(
       tap(() => this.setFetching(true)),
