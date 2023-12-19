@@ -6,8 +6,9 @@ import { ElementRef, inject } from '@angular/core';
 import { AutoResizableTextAreaDirective } from './auto-resizable-text-area.directive';
 
 describe('AutoResizableTextAreaDirective', () => {
+  const elementRef = inject(ElementRef);
+
   it('should create an instance', () => {
-    const elementRef = inject(ElementRef);
     const directive = new AutoResizableTextAreaDirective(elementRef);
     expect(directive).toBeTruthy();
   });
