@@ -5,6 +5,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
 import { SettingsModule } from '~/settings-mod/settings.module';
+import { PasswordConfirmationService } from '../password-confirmation/password-confirmation.service';
 import { SphereGuildService } from '../sphere-guild/sphere-guild.service';
 import { GuildProfileService } from './guild-profile.service';
 
@@ -14,7 +15,11 @@ describe('GuildProfileService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
-      providers: [SphereGuildService, GuildProfileService],
+      providers: [
+        SphereGuildService,
+        GuildProfileService,
+        PasswordConfirmationService,
+      ],
     });
     service = TestBed.inject(GuildProfileService);
   });
