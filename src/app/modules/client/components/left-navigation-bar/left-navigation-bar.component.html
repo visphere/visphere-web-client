@@ -1,0 +1,101 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<nav class="vsph-left-navigation-bar__container">
+  <div class="vsph-left-navigation-bar__wrapper">
+    <a
+      routerLink="/"
+      [ngxTippy]="tooltipWindow"
+      [tippyProps]="tooltipProps"
+      [tippyContext]="{
+        i18nContent: defaultPrefix + '.leftNav.startButton' | translate
+      }"
+      class="vsph-left-navigation-bar__hoverable-element vsph-left-navigation-bar__root-link">
+      <img
+        src="{{ path }}/static/logo/visphere.svg"
+        width="95%"
+        height="95%"
+        alt="" />
+      <div
+        *ngIf="isActiveRoute('/', true)"
+        class="vsph-left-navigation-bar__active-link-notch"></div>
+    </a>
+    <hr class="vsph-left-navigation-bar__separator" />
+    <ul class="vsph-left-navigation-bar__list-container">
+      <li
+        *ngFor="let guild of userGuilds"
+        [ngxTippy]="tooltipWindow"
+        [tippyProps]="tooltipProps"
+        [tippyContext]="{
+          i18nContent: guild.name
+        }"
+        class="mx-3 relative">
+        <a
+          [routerLink]="createGuildRoute(guild)"
+          class="w-[45px] h-[45px] cursor-pointer">
+          <img
+            src="{{ guild.profileUrl }}"
+            alt=""
+            class="vsph-left-navigation-bar__hoverable-element" />
+        </a>
+        <div
+          *ngIf="isActiveRoute(createGuildRoute(guild), false)"
+          class="vsph-left-navigation-bar__active-link-notch"></div>
+      </li>
+      <li
+        [ngxTippy]="tooltipWindow"
+        [tippyProps]="tooltipProps"
+        [tippyContext]="{
+          i18nContent: defaultPrefix + '.leftNav.addSphere' | translate
+        }"
+        class="vsph-left-navigation-bar__hoverable-element vsph-left-navigation-bar__hoverable-element--add">
+        <button
+          (click)="handleOpenAddSphereModal()"
+          class="vsph-left-navigation-bar__hoverable-button">
+          <ng-icon name="addIcon" class="text-4xl text-vsph-light-100" />
+        </button>
+      </li>
+      <li
+        [ngxTippy]="tooltipWindow"
+        [tippyProps]="tooltipProps"
+        [tippyContext]="{
+          i18nContent: defaultPrefix + '.leftNav.exploreSpheres' | translate
+        }"
+        class="vsph-left-navigation-bar__hoverable-element vsph-left-navigation-bar__hoverable-element--public">
+        <a
+          href="{{ landingPagePath }}/public-spheres"
+          target="_blank"
+          class="vsph-left-navigation-bar__hoverable-button">
+          <ng-icon
+            name="exploreIcon"
+            class="text-2xl text-vsph-light-100 dark:text-vsph-dark-900" />
+        </a>
+      </li>
+    </ul>
+  </div>
+  <button
+    [ngxTippy]="tooltipWindow"
+    [tippyProps]="tooltipProps"
+    [tippyContext]="{ i18nContent: loggedUser?.fullName }"
+    [floatUiLoose]="loggedUserDetails"
+    looseTrigger="click"
+    loosePlacement="right"
+    arrowClass="hidden"
+    [styles]="floatUiStyles"
+    class="mx-3 mb-3 w-[45px] h-[45px]">
+    <img
+      src="{{ loggedUser?.profileUrl }}"
+      width="100%"
+      height="100%"
+      alt=""
+      class="vsph-left-navigation-bar__hoverable-element" />
+  </button>
+</nav>
+<float-ui-content #loggedUserDetails>
+  <vsph-logged-user-popup />
+</float-ui-content>
+<ng-template #tooltipWindow let-i18nContent="i18nContent">
+  {{ i18nContent | translate }}
+</ng-template>

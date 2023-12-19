@@ -1,0 +1,54 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="vsph-user-details-popover__container">
+  <div
+    class="vsph-user-details-popover__color-bgp"
+    [style.background-color]="loggedUser?.profileColor"></div>
+  <div class="w-full mt-[60px]">
+    <div class="ps-[90px] my-2">
+      <h3 class="text-2xl font-bold line-clamp-1">
+        {{ loggedUser?.fullName }}
+      </h3>
+      <p class="text-sm dark:text-vsph-tint-400 line-clamp-1">
+        {{ loggedUser?.username }}
+      </p>
+    </div>
+    <div class="vsph-user-details-popover__data-block">
+      <div class="inline-flex items-center">
+        <img
+          src="{{ themedBrandIconUrl }}"
+          alt=""
+          width="16"
+          height="16"
+          class="object-contain me-2" />
+        <p class="text-sm">
+          {{ defaultPrefix + '.userPopup.createAccountDate' | translate }}:
+          {{ loggedUser?.joinDate | vsphDateFormatter: selectedLang$ | async }}
+        </p>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-x-2">
+      <button
+        (click)="handleGotoSettings()"
+        class="vsph-button vsph-button--small vsph-button--small--padding vsph-button--secondary mt-4">
+        {{ defaultPrefix + '.userPopup.openSettings' | translate }}
+      </button>
+      <button
+        (click)="handleOpenLogoutModal()"
+        class="vsph-button vsph-button--small vsph-button--small--padding vsph-button--danger--outline mt-4">
+        {{ defaultPrefix + '.userPopup.logout' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="vsph-user-details-popover__profile-image-container">
+    <img
+      src="{{ loggedUser?.profileUrl }}"
+      width="85%"
+      height="85%"
+      alt=""
+      class="rounded-2xl" />
+  </div>
+</div>
