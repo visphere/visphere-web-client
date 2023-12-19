@@ -2,7 +2,7 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AbstractReactiveProvider } from '~/root-mod/modules/shared/utils/abstract-reactive-provider';
 import { TextChannelService } from '../../services/text-channel/text-channel.service';
 
@@ -12,16 +12,12 @@ import { TextChannelService } from '../../services/text-channel/text-channel.ser
 })
 export class TextChannelOverviewSettingsPageComponent
   extends AbstractReactiveProvider
-  implements OnInit, OnDestroy
+  implements OnDestroy
 {
   isFetching$ = this._textChannelService.isFetching$;
 
   constructor(private readonly _textChannelService: TextChannelService) {
     super();
-  }
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   ngOnDestroy(): void {

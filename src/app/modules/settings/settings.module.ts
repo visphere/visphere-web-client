@@ -76,11 +76,11 @@ import { SettingsRoutingModule } from './settings-routing.module';
     TextChannelOverviewSettingsPageComponent,
     TextChannelSettingsEntryPointPageComponent,
     ToggleButtonComponent,
-    UserAccountBannerComponent,
-    UsernameUpdatableModalComponent,
     UpdatableEmailFinishFormComponent,
     UpdatableEmailStartFormComponent,
     UpdatableTextChannelFormComponent,
+    UserAccountBannerComponent,
+    UsernameUpdatableModalComponent,
   ],
   imports: [
     CommonModule,
