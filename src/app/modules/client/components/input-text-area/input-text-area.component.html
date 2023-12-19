@@ -1,0 +1,39 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<label
+  [ngxTippy]="buttonInfoTooltip"
+  [tippyContext]="{ infoText: defaultPrefix + '.appendFileInfo' }"
+  [tippyProps]="tooltipProps"
+  class="relative vsph-button vsph-button--secondary w-[40px] h-[40px]">
+  <input
+    type="file"
+    multiple
+    class="vsph-drag-drop__input"
+    (change)="handleAddFilesToMessage($event)" />
+  <ng-icon name="appendFileIcon" />
+</label>
+<div class="flex-grow">
+  <textarea
+    vsphAutoResizableTextArea
+    [(ngModel)]="userMessage"
+    [placeholder]="defaultPrefix + '.startTyping' | translate"
+    class="vsph-input vsph-input--textarea"
+    [maxlength]="maxLenght"
+    autocomplete="off"></textarea>
+</div>
+<div>
+  <button
+    [ngxTippy]="buttonInfoTooltip"
+    [tippyContext]="{ infoText: defaultPrefix + '.sendMessageInfo' }"
+    [tippyProps]="tooltipProps"
+    (click)="handleSendMessage()"
+    class="vsph-button vsph-button--primary w-[40px] h-[40px]">
+    <ng-icon name="sendMessageIcon" />
+  </button>
+</div>
+<ng-template #buttonInfoTooltip let-infoText="infoText">
+  {{ infoText | translate }}
+</ng-template>

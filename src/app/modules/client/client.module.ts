@@ -19,11 +19,13 @@ import { CreateOrJoinSphereModalComponent } from '~/client-mod/components/create
 import { CreateSphereFormComponent } from '~/client-mod/components/create-sphere-form/create-sphere-form.component';
 import { CreateTextChannelModalComponent } from '~/client-mod/components/create-text-channel-modal/create-text-channel-modal.component';
 import { DevastateMemberActionModalComponent } from '~/client-mod/components/devastate-member-action-modal/devastate-member-action-modal.component';
+import { InputTextAreaComponent } from '~/client-mod/components/input-text-area/input-text-area.component';
 import { JoinSphereFormComponent } from '~/client-mod/components/join-sphere-form/join-sphere-form.component';
 import { LeftNavigationBarComponent } from '~/client-mod/components/left-navigation-bar/left-navigation-bar.component';
 import { LoggedUserPopupComponent } from '~/client-mod/components/logged-user-popup/logged-user-popup.component';
 import { SphereGuildParticipantComponent } from '~/client-mod/components/sphere-guild-participant/sphere-guild-participant.component';
 import { SphereGuildParticipantsPanelComponent } from '~/client-mod/components/sphere-guild-participants-panel/sphere-guild-participants-panel.component';
+import { SphereMessagesContentComponent } from '~/client-mod/components/sphere-messages-content/sphere-messages-content.component';
 import { SphereTextChannelsPanelComponent } from '~/client-mod/components/sphere-text-channels-panel/sphere-text-channels-panel.component';
 import { AppEntryPointPageComponent } from '~/client-mod/pages/app-entry-point-page/app-entry-point-page.component';
 import { ClientEntryPointPageComponent } from '~/client-mod/pages/client-entry-point-page/client-entry-point-page.component';
@@ -42,6 +44,7 @@ import { clientReduxStore } from './store/reducer';
     CreateSphereFormComponent,
     CreateTextChannelModalComponent,
     DevastateMemberActionModalComponent,
+    InputTextAreaComponent,
     JoinSphereFormComponent,
     LeftNavigationBarComponent,
     LoggedUserPopupComponent,
@@ -49,6 +52,7 @@ import { clientReduxStore } from './store/reducer';
     SphereGuildPageComponent,
     SphereGuildParticipantComponent,
     SphereGuildParticipantsPanelComponent,
+    SphereMessagesContentComponent,
     SphereTextChannelPageComponent,
     SphereTextChannelsPanelComponent,
   ],
