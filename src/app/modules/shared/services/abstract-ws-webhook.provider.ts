@@ -13,7 +13,7 @@ export abstract class AbstractWsWebhookProvider<
   protected _onChangeObserver$ = new BehaviorSubject<null>(null);
   protected _isFetching$ = new BehaviorSubject<boolean>(true);
 
-  constructor(private readonly _absStore: Store<T>) {
+  constructor(protected readonly _absStore: Store<T>) {
     super();
   }
 

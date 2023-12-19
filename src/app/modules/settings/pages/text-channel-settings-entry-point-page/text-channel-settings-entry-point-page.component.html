@@ -11,7 +11,9 @@
   [isActive]="isModalOpen"
   (emitOnClose)="handleToggleModalToDeleteTextChannel(false)"
   (emitDevstateAction)="handleDeleteTextChannel()">
-  {{ modalPrefix + '.description' | translate: { name: textChannelName } }}
+  {{
+    modalPrefix + '.description' | translate: { name: textChannelDetails?.name }
+  }}
   <vsph-lazy-button-spinner
     [isLoading]="(isRemoveLoading$ | async)!"
     (emitClick)="handleDeleteTextChannel()"

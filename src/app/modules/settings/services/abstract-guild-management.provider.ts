@@ -3,23 +3,23 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, of, switchMap, tap, throwError } from 'rxjs';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
-import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
+import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
-export abstract class AbstractGuildManagementProvider extends AbstractLoadableProvider {
-  private _isFetching$ = new BehaviorSubject<boolean>(true);
-
-  constructor(private readonly _absStore: Store<SharedReducer>) {
-    super();
+export abstract class AbstractGuildManagementProvider extends AbstractWsWebhookProvider<SharedReducer> {
+  constructor(_absStore: Store<SharedReducer>) {
+    super(_absStore);
   }
 
   protected performAction$(
     inputObs$: Observable<BaseMessageModel>
   ): Observable<BaseMessageModel> {
-    return inputObs$.pipe(
+    return of(null).pipe(
+      tap(() => this.setLoading(true)),
+      switchMap(() => inputObs$),
       tap(({ message }) => {
         this.setLoading(false);
         this._absStore.dispatch(
@@ -37,9 +37,5 @@ export abstract class AbstractGuildManagementProvider extends AbstractLoadablePr
         return throwError(() => err);
       })
     );
-  }
-
-  get isFetching$(): Observable<boolean> {
-    return this._isFetching$.asObservable();
   }
 }

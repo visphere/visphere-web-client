@@ -26,7 +26,7 @@ export class GuildManagementHttpClientService extends AbstractHttpProvider {
     textChannelId: number
   ): Observable<TextChannelDetailsResDto> {
     return this._httpClient.get<TextChannelDetailsResDto>(
-      `${this._infraApiPath}/api/v1/sphere/text-channel/${textChannelId}`
+      `${this._infraApiPath}/api/v1/sphere/text-channel/${textChannelId}/details`
     );
   }
 

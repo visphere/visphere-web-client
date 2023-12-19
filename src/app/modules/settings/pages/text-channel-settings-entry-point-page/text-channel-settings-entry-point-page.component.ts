@@ -5,6 +5,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TextChannelDetailsResDto } from '~/settings-mod/model/guild-management.model';
 import { TextChannelService } from '~/settings-mod/services/text-channel/text-channel.service';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
@@ -20,7 +21,7 @@ export class TextChannelSettingsEntryPointPageComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  textChannelName = '{{Text channel name}}';
+  textChannelDetails?: TextChannelDetailsResDto;
   isModalOpen = false;
 
   guildId?: number;
@@ -55,6 +56,14 @@ export class TextChannelSettingsEntryPointPageComponent
       this._route,
       'textChannelId'
     );
+    this.wrapAsObservable$(
+      this._textChannelService.fetchTextChannelDetails$(this._route)
+    ).subscribe({
+      next: textChannelDetails =>
+        (this.textChannelDetails = textChannelDetails),
+      error: async () =>
+        await this._router.navigateByUrl(`/guild/${this.guildId}`),
+    });
   }
 
   ngOnDestroy(): void {
