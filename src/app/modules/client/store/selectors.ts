@@ -29,3 +29,13 @@ export const selectSelectedChannelId = createSelector(
   selectClientState,
   ({ selectedChannelId }) => selectedChannelId
 );
+
+export const selectDevastateDetails = createSelector(
+  selectClientState,
+  ({ devastateDetails }) => devastateDetails
+);
+
+export const selectActiveModal = createSelector(
+  selectClientState,
+  ({ activeModal }) => activeModal
+);

@@ -1,0 +1,30 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-action-modal
+  precedence="higher"
+  [isActive]="(activeModal$ | async) === modalType"
+  (emitOnClose)="handleCloseModal()"
+  (emitDevstateAction)="emitDevastateAction.emit(deleteAllMessages)"
+  [i18nPrefix]="defaultPrefix + '.' + i18nPrefix">
+  {{
+    defaultPrefix + '.' + i18nPrefix + '.description'
+      | translate: { name: (devastateDetails$ | async)?.name }
+  }}
+  <div class="flex justify-center gap-y-1 mt-4">
+    <label class="flex gap-x-2 items-start">
+      <input
+        [(ngModel)]="deleteAllMessages"
+        type="checkbox"
+        class="vsph-checkbox vsph-checkbox--danger--red" />
+      <div
+        class="leading-5 text-vsph-tint-400 dark:text-vsph-tint-300 cursor-pointer">
+        {{
+          defaultPrefix + '.' + i18nPrefix + '.deleteAllMessages' | translate
+        }}
+      </div>
+    </label>
+  </div>
+</vsph-devastate-action-modal>

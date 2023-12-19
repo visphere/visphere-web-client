@@ -1,0 +1,131 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div
+  [floatUiLoose]="userDetailsTooltipContent"
+  [positionFixed]="true"
+  looseTrigger="click"
+  loosePlacement="left-start"
+  arrowClass="hidden"
+  [hideOnClickOutside]="true"
+  [styles]="floatUiStyles"
+  (onShown)="handleFetchUserDetails()"
+  (onHidden)="handleClearUserDetailsContext()"
+  class="vsph-user-details-popover__button">
+  <img
+    src="{{ profileImageUrl }}"
+    alt=""
+    class="w-[30px] h-[30px] rounded-lg" />
+  <div class="flex-grow flex items-center gap-x-2">
+    <p class="font-bold line-clamp-1" [title]="userFullName">
+      {{ userFullName }}
+    </p>
+    <img
+      *ngIf="isOwner"
+      src="{{ path }}/static/icon/sphere-owner.svg"
+      alt=""
+      class="w-[15px] h-[15px] -mt-[1px]" />
+  </div>
+</div>
+<float-ui-content #userDetailsTooltipContent>
+  <div
+    *ngIf="!userDetails; else detailsContent"
+    class="vsph-user-details-popover__container vsph-user-details-popover__container--loader">
+    <div
+      class="vsph-button-spinner__carousel vsph-button-spinner__carousel--small"></div>
+  </div>
+  <ng-template #detailsContent>
+    <div class="vsph-user-details-popover__container">
+      <div
+        class="vsph-user-details-popover__color-bgp"
+        [style.background-color]="userDetails?.profileColor"></div>
+      <div class="w-full mt-[60px]">
+        <div class="ps-[90px] my-2">
+          <div class="flex items-center gap-x-3">
+            <h3
+              class="text-2xl font-bold line-clamp-1"
+              [title]="userDetails?.fullName">
+              {{ userDetails?.fullName }}
+            </h3>
+            <img
+              *ngIf="isOwner"
+              src="{{ path }}/static/icon/sphere-owner.svg"
+              alt=""
+              class="w-[20px] h-[20px] -mt-[1px]" />
+          </div>
+          <p
+            class="text-sm dark:text-vsph-tint-400 line-clamp-1"
+            [title]="userDetails?.username">
+            {{ userDetails?.username }}
+          </p>
+        </div>
+        <div class="vsph-user-details-popover__data-block">
+          <div class="inline-flex items-center">
+            <img
+              src="{{ themedBrandIconUrl }}"
+              alt=""
+              width="16"
+              height="16"
+              class="object-contain me-2" />
+            <p class="text-sm">
+              {{ defaultPrefix + '.userPopup.createAccountDate' | translate }}:
+              {{
+                userDetails?.joinDate | vsphDateFormatter: selectedLang$ | async
+              }}
+            </p>
+          </div>
+          <div class="inline-flex items-center">
+            <img
+              src="{{ userDetails?.guildProfileImageUrl }}"
+              alt=""
+              width="16"
+              height="16"
+              class="object-contain me-2 rounded-lg" />
+            <p class="text-sm">
+              {{ defaultPrefix + '.userPopup.guildJoinDate' | translate }}:
+              {{
+                userDetails?.memberSinceDate
+                  | vsphDateFormatter: selectedLang$
+                  | async
+              }}
+            </p>
+          </div>
+        </div>
+        <div
+          class="grid grid-cols-2 gap-x-2"
+          *ngIf="
+            guildDetails?.isLoggedUserIsOwner &&
+            !userDetails?.isOwner &&
+            !userDetails?.isLoggedUser
+          ">
+          <button
+            (click)="handleOpenModalToKickMember()"
+            class="vsph-button vsph-button--small vsph-button--small--padding vsph-button--danger--outline mt-4">
+            {{ defaultPrefix + '.userPopup.kickFromGuild' | translate }}
+          </button>
+          <button
+            (click)="handleOpenModalToBanMember()"
+            class="vsph-button vsph-button--small vsph-button--small--padding vsph-button--danger mt-4">
+            {{ defaultPrefix + '.userPopup.banFromGuild' | translate }}
+          </button>
+        </div>
+        <button
+          *ngIf="userDetails?.isLoggedUser && !userDetails?.isOwner"
+          (click)="handleOpenModalToLeaveSphere()"
+          class="vsph-button vsph-button--small vsph-button--small--padding vsph-button--danger mt-4">
+          {{ defaultPrefix + '.userPopup.leaveGuild' | translate }}
+        </button>
+      </div>
+      <div class="vsph-user-details-popover__profile-image-container">
+        <img
+          src="{{ userDetails?.profileImageUrl }}"
+          width="85%"
+          height="85%"
+          alt=""
+          class="rounded-2xl" />
+      </div>
+    </div>
+  </ng-template>
+</float-ui-content>

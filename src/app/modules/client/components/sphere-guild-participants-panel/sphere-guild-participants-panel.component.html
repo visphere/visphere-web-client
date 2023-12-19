@@ -1,0 +1,64 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-member-action-modal
+  i18nPrefix="leaveGuild"
+  modalType="leave"
+  (emitDevastateAction)="handleLeaveGuild($event)" />
+<vsph-devastate-member-action-modal
+  i18nPrefix="kickFromGuild"
+  modalType="kick"
+  (emitDevastateAction)="handleKickMember($event)" />
+<vsph-devastate-member-action-modal
+  i18nPrefix="banFromGuild"
+  modalType="ban"
+  (emitDevastateAction)="handleBanMember($event)" />
+<div class="vsph-side-content__header">
+  <ng-icon name="participantsIcon" />
+  <p class="font-bold">{{ defaultPrefix + '.header' | translate }}</p>
+</div>
+<div class="vsph-side-content__body">
+  <div
+    *ngIf="isFetching$ | async; else fetchedData"
+    class="flex justify-center items-center h-full">
+    <div
+      class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
+  </div>
+  <ng-template #fetchedData>
+    <p class="vsph-sidebar__aside-text ms-1">
+      {{ defaultPrefix + '.owner' | translate }} - 1
+    </p>
+    <vsph-sphere-guild-participant
+      [guildId]="guildParticipants?.guildId"
+      [userId]="guildParticipants?.owner?.id"
+      [userFullName]="guildParticipants?.owner?.fullName!"
+      [profileImageUrl]="guildParticipants?.owner?.profileImageUrl!"
+      [isOwner]="true" />
+    <p class="vsph-sidebar__aside-text mt-4 ms-1">
+      {{ defaultPrefix + '.members' | translate }} -
+      {{ guildParticipants?.members?.length }}
+    </p>
+    <div
+      *ngIf="guildParticipants?.members?.length === 0; else membersData"
+      class="flex justify-center items-center h-full">
+      <img
+        src="{{ path }}/static/icon/empty-data.svg"
+        alt=""
+        width="80px"
+        height="80px" />
+    </div>
+    <ng-template #membersData>
+      <ul class="flex flex-col gap-y-1">
+        <li *ngFor="let member of guildParticipants?.members">
+          <vsph-sphere-guild-participant
+            [guildId]="guildParticipants?.guildId"
+            [userId]="member.id"
+            [userFullName]="member.fullName!"
+            [profileImageUrl]="member.profileImageUrl!" />
+        </li>
+      </ul>
+    </ng-template>
+  </ng-template>
+</div>

@@ -5,4 +5,8 @@
 
 export type CreateOrJoinGuildModalMode = 'create' | 'join';
 
-export type ClientModal = 'add-sphere' | 'add-text-channel' | 'none';
+export type ClientModal = 'add-sphere' | 'add-text-channel';
+
+export type DevastateMemberModal = 'leave' | 'kick' | 'ban';
+
+export type MergedModal = ClientModal | DevastateMemberModal | 'none';

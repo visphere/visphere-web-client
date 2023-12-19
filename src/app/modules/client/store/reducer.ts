@@ -3,7 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Action, createReducer, on } from '@ngrx/store';
-import { ClientModal } from '../types/modal-mode.type';
+import { ClientModal, MergedModal } from '../types/modal-mode.type';
 import * as NgrxAction from './actions';
 import { ClientStoreState, clientStoreState } from './state';
 
@@ -20,6 +20,20 @@ const _reducer = createReducer(
   on(NgrxAction.__setSelectedChannelId, (state, action) => ({
     ...state,
     selectedChannelId: action.channelId,
+  })),
+  on(NgrxAction.__openDevastateMemberModal, (state, action) => ({
+    ...state,
+    activeModal: action.modal,
+    devastateDetails: {
+      ...state.devastateDetails,
+      id: action.id,
+      name: action.name,
+    },
+  })),
+  on(NgrxAction.__closeDevastateMemberModal, state => ({
+    ...state,
+    activeModal: 'none' as MergedModal,
+    devastateDetails: undefined,
   }))
 );
 
