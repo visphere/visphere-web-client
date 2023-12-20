@@ -3,7 +3,15 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Store } from '@ngrx/store';
-import { Observable, catchError, of, switchMap, tap, throwError } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  first,
+  of,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
@@ -20,6 +28,7 @@ export abstract class AbstractGuildManagementProvider extends AbstractWsWebhookP
     return of(null).pipe(
       tap(() => this.setLoading(true)),
       switchMap(() => inputObs$),
+      first(),
       tap(({ message }) => {
         this.setLoading(false);
         this._absStore.dispatch(

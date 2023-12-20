@@ -9,6 +9,7 @@ import {
   catchError,
   combineLatest,
   filter,
+  first,
   map,
   of,
   switchMap,
@@ -113,6 +114,7 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
       switchMap(() =>
         this._store.select(NgrxSelector_CLN.selectDevastateDetails)
       ),
+      first(),
       filter(devastateDetails => !!devastateDetails),
       switchMap(devastateDetails => initHttp$(devastateDetails!.id)),
       tap(({ message }) => {

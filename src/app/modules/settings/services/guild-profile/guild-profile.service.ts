@@ -8,6 +8,7 @@ import {
   Observable,
   catchError,
   combineLatest,
+  first,
   map,
   of,
   switchMap,
@@ -110,6 +111,7 @@ export class GuildProfileService extends AbstractProfileImageProvider<
     return of(null).pipe(
       tap(() => this._activeLoading$.next(activeLoading)),
       switchMap(() => this._sphereGuildService.guildId$),
+      first(),
       switchMap(guildId => inputObservable$(guildId)),
       tap(({ message }) => {
         this._activeLoading$.next('none');
