@@ -4,6 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
+import { GuildOverviewService } from '~/settings-mod/services/guild-overview/guild-overview.service';
 import { PasswordConfirmationService } from '~/settings-mod/services/password-confirmation/password-confirmation.service';
 import { SphereGuildService } from '~/settings-mod/services/sphere-guild/sphere-guild.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
@@ -16,7 +17,11 @@ describe('GuildOverviewSettingsPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SettingsModule],
-      providers: [PasswordConfirmationService, SphereGuildService],
+      providers: [
+        PasswordConfirmationService,
+        SphereGuildService,
+        GuildOverviewService,
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(GuildOverviewSettingsPageComponent);
     component = fixture.componentInstance;

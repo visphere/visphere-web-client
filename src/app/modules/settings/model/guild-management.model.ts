@@ -28,5 +28,9 @@ export type GuildOwnerDetailsResDto = {
 
 export type GuildOwnerOverviewResDto = GuildOwnerDetailsResDto & {
   category: string;
-  isPrivate: string;
+  isPrivate: boolean;
+  categories: {
+    id: string;
+    name: string;
+  }[];
 };

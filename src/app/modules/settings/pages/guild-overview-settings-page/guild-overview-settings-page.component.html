@@ -3,9 +3,100 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
+<vsph-devastate-action-modal
+  *ngIf="isSetSphereToPublicModalActive"
+  [isActive]="isSetSphereToPublicModalActive"
+  [isLoading]="(activeLoading$ | async) === 'change-visibility'"
+  (emitOnClose)="isSetSphereToPublicModalActive = false"
+  (emitDevstateAction)="handleSetSphereToPublic()"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.devastate.setSphereToPublic">
+  {{
+    'vsph.clientCommon.settingsPage.modal.devastate.setSphereToPublic.paragraph'
+      | translate
+  }}
+  <div class="flex justify-center gap-y-1 mt-4">
+    <label class="flex gap-x-2 items-start">
+      <input
+        [(ngModel)]="deleteAllJoinLinks"
+        type="checkbox"
+        class="vsph-checkbox vsph-checkbox--danger" />
+      <div
+        class="leading-5 text-vsph-tint-400 dark:text-vsph-tint-300 cursor-pointer">
+        {{
+          'vsph.clientCommon.settingsPage.modal.devastate.setSphereToPublic.deleteAllInviteLinks'
+            | translate
+        }}
+      </div>
+    </label>
+  </div>
+</vsph-devastate-action-modal>
 <vsph-setting-panel-wrapper
   category="guildSettings"
   subpage="overview"
   [isFetching]="!!(isFetching$ | async)">
-  content
+  <vsph-icon-info-block
+    *ngIf="isPublic"
+    [i18nText]="
+      'vsph.' + defaultPrefix + '.section.visibility.publicSphereInfoBlock'
+    " />
+  <form
+    *ngIf="sphereGuildForm"
+    [formGroup]="sphereGuildForm"
+    (ngSubmit)="handleSubmitUpdateGuild('change-name')"
+    class="grid gap-y-3">
+    <vsph-common-form-input
+      [maxLength]="100"
+      formControlIdentifier="name"
+      [i18nPrefix]="defaultPrefix + '.section.name'">
+      <vsph-field-validator />
+      <vsph-field-validator type="minlength" />
+    </vsph-common-form-input>
+    <div class="grid grid-cols-2 gap-x-3">
+      <button
+        type="button"
+        [disabled]="nameFieldIsExact"
+        (click)="handleRevertPreviousName()"
+        class="vsph-button vsph-button--secondary">
+        {{ 'vsph.clientCommon.settingsPage.revertPrevious' | translate }}
+      </button>
+      <vsph-lazy-button-spinner
+        [isLoading]="(activeLoading$ | async) === 'change-name'"
+        [buttonDisabled]="sphereGuildForm.invalid || nameFieldIsExact">
+        {{ 'vsph.clientCommon.settingsPage.nameSubmitButton' | translate }}
+      </vsph-lazy-button-spinner>
+    </div>
+  </form>
+  <hr class="vsph-settings__separator my-5" />
+  <h2 class="vsph-settings__section-header">
+    {{ 'vsph.' + defaultPrefix + '.section.category.header' | translate }}
+  </h2>
+  <ul class="grid grid-cols-2 gap-3">
+    <li *ngFor="let category of guildOverview?.categories" class="w-full">
+      <button
+        [disabled]="(activeLoading$ | async) === 'change-category'"
+        (click)="handleToggleCategory(category.name)"
+        [class.vsph-category-list__element--active]="
+          category.name === selectedCategory
+        "
+        class="vsph-category-list__element">
+        <ng-icon [name]="category.id + 'Category'" class="me-3" />
+        {{
+          'vsph.clientCommon.forAll.sphereCategory.' + category.id | translate
+        }}
+      </button>
+    </li>
+  </ul>
+  <hr class="vsph-settings__separator my-5" />
+  <h2 class="vsph-settings__section-header">
+    {{ 'vsph.' + defaultPrefix + '.section.visibility.header' | translate }}
+  </h2>
+  <vsph-toggle-button
+    i18nPrefix="guildSettings.subpage.overview.section.visibility"
+    i18nToggler="visibility"
+    [isSelected]="isPublic"
+    [hasDescription]="true"
+    [isDisabled]="(activeLoading$ | async) === 'change-visibility'"
+    [isFadded]="true"
+    [immediatelyChange]="isPublic"
+    (emitBeforeChanged)="handleToggleSphereVisibility()" />
 </vsph-setting-panel-wrapper>

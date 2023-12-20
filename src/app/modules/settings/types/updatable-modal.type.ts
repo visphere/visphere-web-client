@@ -22,3 +22,9 @@ export type ProfileImageUpdatableModalType =
   | 'upload-image'
   | 'delete-image'
   | 'none';
+
+export type UpdateSphereGuildOverviewModalType =
+  | 'change-name'
+  | 'change-visibility'
+  | 'change-category'
+  | 'none';
