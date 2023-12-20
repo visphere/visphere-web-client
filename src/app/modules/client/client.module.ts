@@ -68,12 +68,6 @@ import { clientReduxStore } from './store/reducer';
     NgIconsModule.withIcons({
       addIcon: BtsIcon.bootstrapPlus,
       exploreIcon: BtsIcon.bootstrapCompass,
-      gamingCategory: BtsIcon.bootstrapController,
-      entertainmentCategory: BtsIcon.bootstrapBalloon,
-      techAndScienceCategory: BtsIcon.bootstrapCpu,
-      musicCategory: BtsIcon.bootstrapMusicNoteList,
-      sportsAndTravelCategory: BtsIcon.bootstrapAirplane,
-      otherCategory: BtsIcon.bootstrapQuestion,
       participantsIcon: BtsIcon.bootstrapPeople,
       textChannelIcon: BtsIcon.bootstrapChatDots,
       appendFileIcon: BtsIcon.bootstrapPlusCircle,
