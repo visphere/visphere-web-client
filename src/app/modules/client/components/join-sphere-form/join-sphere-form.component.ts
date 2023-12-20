@@ -23,7 +23,7 @@ export class JoinSphereFormComponent
 
   isLoading$ = this._guildService.isLoading$;
 
-  readonly commonPrefix = 'vsph.clientCommon.client.modals';
+  readonly defaultPrefix = 'vsph.clientCommon.client.modals';
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,

@@ -7,7 +7,7 @@
   [isActive]="!!(isModalOpen$ | async)"
   (emitOnClose)="handleEmitOnClose()"
   modalSize="xs"
-  [header]="commonPrefix + '.' + (currentMode$ | async) + '.header'">
+  [header]="defaultPrefix + '.' + (currentMode$ | async) + '.header'">
   <ng-container content>
     <div *ngIf="(currentMode$ | async) === 'create'">
       <vsph-create-sphere-form />
@@ -19,13 +19,13 @@
         <hr class="vsph-separator flex-grow" />
       </div>
       <p class="mb-1 mt-4 text-sm text-vsph-tint-400 dark:text-vsph-tint-400">
-        {{ commonPrefix + '.create.toJoinParagraph' | translate }}
+        {{ defaultPrefix + '.create.toJoinParagraph' | translate }}
       </p>
       <button
         [disabled]="isLoading$ | async"
         (click)="handleChangeModalMode('join')"
         class="vsph-button vsph-button--secondary">
-        {{ commonPrefix + '.toJoinButton' | translate }}
+        {{ defaultPrefix + '.toJoinButton' | translate }}
       </button>
     </div>
     <div *ngIf="(currentMode$ | async) === 'join'">
@@ -38,13 +38,13 @@
         <hr class="vsph-separator flex-grow" />
       </div>
       <p class="mb-1 mt-4 text-sm text-vsph-tint-400 dark:text-vsph-tint-400">
-        {{ commonPrefix + '.join.toCreateParagraph' | translate }}
+        {{ defaultPrefix + '.join.toCreateParagraph' | translate }}
       </p>
       <button
         [disabled]="isLoading$ | async"
         (click)="handleChangeModalMode('create')"
         class="vsph-button vsph-button--secondary">
-        {{ commonPrefix + '.toCreateButton' | translate }}
+        {{ defaultPrefix + '.toCreateButton' | translate }}
       </button>
     </div>
   </ng-container>

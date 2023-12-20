@@ -26,7 +26,7 @@ export class CreateSphereFormComponent
   isLoading$ = this._guildService.isLoading$;
   isFormLoading$ = this._guildService.isFormLoading$;
 
-  readonly commonPrefix = 'vsph.clientCommon.client.modals';
+  readonly defaultPrefix = 'vsph.clientCommon.client.modals';
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,

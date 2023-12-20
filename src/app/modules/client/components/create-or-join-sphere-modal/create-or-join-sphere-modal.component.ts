@@ -19,7 +19,7 @@ export class CreateOrJoinSphereModalComponent {
   currentMode$ = this._guildService.createGuildModalMode$;
   isLoading$ = this._guildService.isLoading$;
 
-  readonly commonPrefix = 'vsph.clientCommon.client.modals';
+  readonly defaultPrefix = 'vsph.clientCommon.client.modals';
 
   constructor(
     private readonly _store: Store<ClientReducer>,

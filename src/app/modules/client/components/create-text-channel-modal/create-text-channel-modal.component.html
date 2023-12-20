@@ -7,7 +7,7 @@
   [isActive]="!!(isModalOpen$ | async)"
   (emitOnClose)="handleEmitOnClose()"
   modalSize="xs"
-  [header]="commonPrefix + '.header'">
+  [header]="defaultPrefix + '.header'">
   <form
     content
     [formGroup]="textChannelForm"
@@ -17,7 +17,7 @@
       [maxLength]="50"
       [additionalInfo]="true"
       formControlIdentifier="name"
-      [placeholder]="commonPrefix + '.formFields.name.placeholder'"
+      [placeholder]="defaultPrefix + '.formFields.name.placeholder'"
       i18nPrefix="clientCommon.client.modals.createTextChannel">
       <vsph-field-validator />
       <vsph-field-validator type="pattern" />
@@ -26,7 +26,7 @@
     <vsph-lazy-button-spinner
       [isLoading]="(isLoading$ | async)!"
       [buttonDisabled]="textChannelForm.invalid">
-      {{ commonPrefix + '.submitButton' | translate }}
+      {{ defaultPrefix + '.submitButton' | translate }}
     </vsph-lazy-button-spinner>
   </form>
 </vsph-modal-wrapper>

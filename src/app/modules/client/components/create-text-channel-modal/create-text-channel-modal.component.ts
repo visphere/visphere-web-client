@@ -32,7 +32,7 @@ export class CreateTextChannelModalComponent
   textChannelForm: FormGroup;
   guildId?: number;
 
-  readonly commonPrefix = 'vsph.clientCommon.client.modals.createTextChannel';
+  readonly defaultPrefix = 'vsph.clientCommon.client.modals.createTextChannel';
 
   constructor(
     private readonly _store: Store<ClientReducer>,

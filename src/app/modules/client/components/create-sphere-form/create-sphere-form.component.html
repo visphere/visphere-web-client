@@ -20,7 +20,7 @@
     i18nPrefix="clientCommon.client.modals.create"
     [additionalInfo]="true">
     <ng-container labelContent>
-      {{ commonPrefix + '.create.formFields.isPrivate.value' | translate }}
+      {{ defaultPrefix + '.create.formFields.isPrivate.value' | translate }}
     </ng-container>
   </vsph-checkbox-form-input>
   <div
@@ -50,6 +50,6 @@
   <vsph-lazy-button-spinner
     [isLoading]="(isLoading$ | async)!"
     [buttonDisabled]="createSphereForm.invalid">
-    {{ commonPrefix + '.toCreateButton' | translate }}
+    {{ defaultPrefix + '.toCreateButton' | translate }}
   </vsph-lazy-button-spinner>
 </form>
