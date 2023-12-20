@@ -28,16 +28,17 @@ export class CommonFormInputComponent
   @Input() requiredStar = false;
   @Input() additionalInfo = false;
 
+  formDisabled$ = this._populateFormGroupService.formDisabled$;
+
   formGroup!: FormGroup;
   i18nLabel = '';
-  tooltipProps: NgxTippyProps = {
+  i18nInfo = '';
+
+  readonly tooltipProps: NgxTippyProps = {
     placement: 'top',
     theme: 'vsph-auth',
     animation: 'scale-subtle',
   };
-  i18nInfo = '';
-
-  formDisabled$ = this._populateFormGroupService.formDisabled$;
 
   constructor(
     private readonly _formHelperService: FormHelperService,

@@ -7,7 +7,7 @@ import { ThemeSwitcherService } from '../services/theme-switcher/theme-switcher.
 import { AbstractReactiveProvider } from '../utils/abstract-reactive-provider';
 
 export abstract class AbstractIconThemeProvider extends AbstractReactiveProvider {
-  protected cdnPath = environment.contentDistributorBaseUrl;
+  protected path = environment.contentDistributorBaseUrl;
   protected themedBrandIconUrl = '';
 
   constructor(private readonly _absThemeSwitcherService: ThemeSwitcherService) {
@@ -21,7 +21,7 @@ export abstract class AbstractIconThemeProvider extends AbstractReactiveProvider
       const partialUrl = this._absThemeSwitcherService.isDarkMode(theme)
         ? 'vsph-small-light.svg'
         : 'vsph-small-dark.svg';
-      this.themedBrandIconUrl = `${this.cdnPath}/static/logo/${partialUrl}`;
+      this.themedBrandIconUrl = `${this.path}/static/logo/${partialUrl}`;
     });
   }
 }

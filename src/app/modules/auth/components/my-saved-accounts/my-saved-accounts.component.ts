@@ -23,8 +23,8 @@ export class MySavedAccountsComponent {
 
   removingAccount?: MySavedAccountModel;
   loggedUser?: MySavedAccountModel;
-  cdnPath = environment.contentDistributorBaseUrl;
-  tooltipProps: NgxTippyProps = {
+  readonly path = environment.contentDistributorBaseUrl;
+  readonly tooltipProps: NgxTippyProps = {
     placement: 'bottom',
     theme: 'vsph-auth',
     animation: 'scale-subtle',

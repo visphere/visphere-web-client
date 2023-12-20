@@ -15,7 +15,7 @@ import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/la
 export class LazyPageLoaderComponent {
   isVisible$ = this._lazyPageLoaderService.lazyLoaderIsVisible$;
 
-  cdnPath = environment.contentDistributorBaseUrl;
+  readonly path = environment.contentDistributorBaseUrl;
 
   constructor(private readonly _lazyPageLoaderService: LazyPageLoaderService) {}
 }

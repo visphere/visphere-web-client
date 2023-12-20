@@ -12,7 +12,6 @@ import { ParticipantService } from '~/client-mod/services/participant/participan
 import * as NgrxAction_CLN from '~/client-mod/store/actions';
 import { DevastateMemberModal } from '~/client-mod/types/modal-mode.type';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
-import { environment } from '~/env/environment';
 import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme-provider';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
@@ -40,7 +39,6 @@ export class SphereGuildParticipantComponent
 
   selectedLang$ = this._languageSwitcherService.selectedLang$;
 
-  readonly path = environment.contentDistributorBaseUrl;
   readonly floatUiStyles = floatUiConfig.floatUiStyles;
   readonly defaultPrefix = 'vsph.clientCommon.client';
 

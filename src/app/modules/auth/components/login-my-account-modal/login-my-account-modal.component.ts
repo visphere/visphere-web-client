@@ -11,12 +11,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MySavedAccountModel } from '~/auth-mod/models/my-saved-account.model';
 import { MyAccountsCredentialsService } from '~/auth-mod/services/my-accounts-credentials/my-accounts-credentials.service';
 import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.service';
 import { environment } from '~/env/environment';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
-import { MySavedAccountModel } from '../../models/my-saved-account.model';
 
 @Component({
   selector: 'vsph-login-my-account-modal',
@@ -30,10 +30,11 @@ export class LoginMyAccountModalComponent
   @Input() loggedUser?: MySavedAccountModel;
 
   loginForm: FormGroup;
-  cdnPath = environment.contentDistributorBaseUrl;
 
   isLoading$ = this._myAccountsCredentialsService.isLoading$;
   isOpen$ = this._myAccountsService.loginOnAccountModalIsOpen$;
+
+  readonly path = environment.contentDistributorBaseUrl;
 
   constructor(
     private readonly _myAccountsService: MyAccountsService,

@@ -34,12 +34,13 @@ export class CheckboxFormInputComponent
   @Output() emitOnClick = new EventEmitter<void>();
 
   formGroup!: FormGroup;
-  tooltipProps: NgxTippyProps = {
+  i18nInfo = '';
+
+  readonly tooltipProps: NgxTippyProps = {
     placement: 'top',
     theme: 'vsph-auth',
     animation: 'scale-subtle',
   };
-  i18nInfo = '';
 
   constructor(
     private readonly _formHelperService: FormHelperService,

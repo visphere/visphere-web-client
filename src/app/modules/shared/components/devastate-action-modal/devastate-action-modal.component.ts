@@ -23,8 +23,9 @@ export class DevastateActionModalComponent implements OnInit {
   @Output() emitOnClose = new EventEmitter<void>();
   @Output() emitDevstateAction = new EventEmitter<void>();
 
-  cdnPath = environment.contentDistributorBaseUrl;
   buttonStyle = '';
+
+  readonly path = environment.contentDistributorBaseUrl;
 
   ngOnInit(): void {
     let baseStyle = `vsph-modal__button `;

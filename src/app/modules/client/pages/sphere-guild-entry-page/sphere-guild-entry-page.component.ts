@@ -9,7 +9,6 @@ import { GuildDetailsResDto } from '~/client-mod/model/guild.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
 import * as NgrxAction_CLN from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
-import { environment } from '~/env/environment';
 import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme-provider';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
@@ -25,7 +24,6 @@ export class SphereGuildEntryPageComponent
 {
   guildDetails?: GuildDetailsResDto;
 
-  readonly path = environment.contentDistributorBaseUrl;
   readonly defaultPrefix = 'vsph.clientCommon.guild.startScreen';
 
   constructor(

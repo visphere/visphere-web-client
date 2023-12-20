@@ -4,7 +4,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
-import { environment } from '~/env/environment';
 import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-details.model';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme-provider';
@@ -25,7 +24,6 @@ export class AccountPanelSettingsComponent
   selectedLang$ = this._languageSwitcherService.selectedLang$;
 
   readonly defaultPrefix = this._myAccountSettingsService.defaultPrefix;
-  readonly path = environment.contentDistributorBaseUrl;
 
   constructor(
     _themeSwitcherService: ThemeSwitcherService,

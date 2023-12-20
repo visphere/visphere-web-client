@@ -27,7 +27,7 @@ export class FirstMfaSetupComponent
     this._mfaFirstSetupService.stepperStage$;
 
   mfaData!: MfaAuthenticatorDataResDto;
-  cdnPath = environment.contentDistributorBaseUrl;
+  readonly path = environment.contentDistributorBaseUrl;
 
   constructor(private readonly _mfaFirstSetupService: MfaFirstSetupService) {
     super();
