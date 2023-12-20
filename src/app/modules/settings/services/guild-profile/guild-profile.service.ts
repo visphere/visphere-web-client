@@ -9,6 +9,7 @@ import {
   catchError,
   combineLatest,
   map,
+  of,
   switchMap,
   tap,
   throwError,
@@ -66,16 +67,10 @@ export class GuildProfileService extends AbstractProfileImageProvider<
     color: string
   ): Observable<MessageWithResourcePathResDto> {
     return this.actionOnUpdate$(
-      this._sphereGuildService.guildId$.pipe(
-        switchMap(guildId =>
-          this._guildProfileHttpClientService.updateGuildProfileColor$(
-            guildId,
-            {
-              color,
-            }
-          )
-        )
-      ),
+      guildId =>
+        this._guildProfileHttpClientService.updateGuildProfileColor$(guildId, {
+          color,
+        }),
       'changing-color'
     );
   }
@@ -84,40 +79,38 @@ export class GuildProfileService extends AbstractProfileImageProvider<
     customImage: File
   ): Observable<MessageWithResourcePathResDto> {
     return this.actionOnUpdate$(
-      this._sphereGuildService.guildId$.pipe(
-        switchMap(guildId =>
-          this._guildProfileHttpClientService.updateGuildProfileImageToCustom$(
-            guildId,
-            customImage
-          )
-        )
-      ),
+      guildId =>
+        this._guildProfileHttpClientService.updateGuildProfileImageToCustom$(
+          guildId,
+          customImage
+        ),
       'generating-image'
     );
   }
 
   deleteCustomGuildProfileImage$(): Observable<MessageWithResourcePathResDto> {
     return this.actionOnUpdate$(
-      this._sphereGuildService.guildId$.pipe(
-        switchMap(guildId =>
-          this._guildProfileHttpClientService.deleteCustomGuildProfileImage$(
-            guildId
-          )
-        )
-      ),
+      guildId =>
+        this._guildProfileHttpClientService.deleteCustomGuildProfileImage$(
+          guildId
+        ),
       'deleting-image'
     );
   }
 
   private actionOnUpdate$(
-    inputObservable$: Observable<MessageWithResourcePathResDto>,
+    inputObservable$: (
+      guildId: number
+    ) => Observable<MessageWithResourcePathResDto>,
     activeLoading: Exclude<
       ProfileImageLoadableElementType,
       'generating-identicon'
     >
   ): Observable<MessageWithResourcePathResDto> {
-    this._activeLoading$.next(activeLoading);
-    return inputObservable$.pipe(
+    return of(null).pipe(
+      tap(() => this._activeLoading$.next(activeLoading)),
+      switchMap(() => this._sphereGuildService.guildId$),
+      switchMap(guildId => inputObservable$(guildId)),
       tap(({ message }) => {
         this._activeLoading$.next('none');
         this.showSuccessSnackbar(message);

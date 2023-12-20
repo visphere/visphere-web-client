@@ -40,7 +40,9 @@
           "
           class="vsph-category-list__element">
           <ng-icon [name]="category.id + 'Category'" class="me-3" />
-          {{ commonPrefix + '.create.category.' + category.id | translate }}
+          {{
+            'vsph.clientCommon.forAll.sphereCategory.' + category.id | translate
+          }}
         </button>
       </li>
     </ul>

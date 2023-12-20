@@ -9,6 +9,7 @@ import {
   Observable,
   ReplaySubject,
   catchError,
+  distinctUntilChanged,
   filter,
   map,
   switchMap,
@@ -46,6 +47,7 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
       map(paramMap => Number(paramMap.get('guildId'))),
       filter(guildId => !!guildId),
       tap(guildId => this._guildId$.next(guildId)),
+      distinctUntilChanged(),
       switchMap(guildId =>
         this._guildManagementHttpClientService.getGuildOwnerDetails$(guildId)
       ),

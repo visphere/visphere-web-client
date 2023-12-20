@@ -15,13 +15,18 @@ export class ToggleButtonComponent {
   @Input() isSelected = false;
   @Input() isDisabled = false;
   @Input() isFadded = false;
+  @Input() immediatelyChange = true;
 
   @Output() emitValueChanged = new EventEmitter<boolean>();
+  @Output() emitBeforeChanged = new EventEmitter<void>();
 
-  prefix = 'vsph.clientCommon.settingsPage.category.';
+  readonly prefix = 'vsph.clientCommon.settingsPage.category.';
 
   handleToggleValue(): void {
-    this.isSelected = !this.isSelected;
-    this.emitValueChanged.emit(this.isSelected);
+    this.emitBeforeChanged.emit();
+    if (this.immediatelyChange) {
+      this.isSelected = !this.isSelected;
+      this.emitValueChanged.emit(this.isSelected);
+    }
   }
 }

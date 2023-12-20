@@ -12,8 +12,7 @@
     [maxLength]="50"
     [additionalInfo]="true"
     formControlIdentifier="name"
-    [placeholder]="'vsph.' + commonPrefix + '.formFields.name.placeholder'"
-    [i18nPrefix]="commonPrefix">
+    [i18nPrefix]="defaultPrefix">
     <vsph-field-validator />
     <vsph-field-validator type="pattern" />
     <vsph-field-validator type="minlength" />
@@ -21,14 +20,15 @@
   <div class="grid grid-cols-2 gap-x-3">
     <button
       type="button"
+      [disabled]="nameFieldIsExact"
       (click)="handleRevertPreviousName()"
       class="vsph-button vsph-button--secondary">
-      {{ 'vsph.' + commonPrefix + '.revertPrevious' | translate }}
+      {{ 'vsph.clientCommon.settingsPage.revertPrevious' | translate }}
     </button>
     <vsph-lazy-button-spinner
       [isLoading]="(isLoading$ | async)!"
       [buttonDisabled]="textChannelForm.invalid || nameFieldIsExact">
-      {{ 'vsph.' + commonPrefix + '.textNameSubmitButton' | translate }}
+      {{ 'vsph.clientCommon.settingsPage.nameSubmitButton' | translate }}
     </vsph-lazy-button-spinner>
   </div>
 </form>

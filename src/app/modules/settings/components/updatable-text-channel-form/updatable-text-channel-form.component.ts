@@ -24,7 +24,7 @@ export class UpdatableTextChannelFormComponent
 
   isLoading$ = this._textChannelService.isLoading$;
 
-  readonly commonPrefix =
+  readonly defaultPrefix =
     'clientCommon.settingsPage.category.textChannelSettings.subpage.overview';
 
   constructor(

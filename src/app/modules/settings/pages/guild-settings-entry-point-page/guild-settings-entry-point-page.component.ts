@@ -43,9 +43,10 @@ export class GuildSettingsEntryPointPageComponent
   }
 
   ngOnInit(): void {
-    this._sphereGuildService
-      .loadGuildDetails$(this._route)
-      .subscribe(guildDetails => (this.guildDetails = guildDetails));
+    this._sphereGuildService.loadGuildDetails$(this._route).subscribe({
+      next: guildDetails => (this.guildDetails = guildDetails),
+      error: async () => await this._router.navigateByUrl('/'),
+    });
   }
 
   ngOnDestroy(): void {
