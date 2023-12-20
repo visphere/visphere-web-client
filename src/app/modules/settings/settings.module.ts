@@ -33,6 +33,7 @@ import { UsernameUpdatableModalComponent } from '~/settings-mod/components/usern
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
 import { BlankInitSettingsPageComponent } from '~/settings-mod/pages/blank-init-settings-page/blank-init-settings-page.component';
 import { GuildAppearanceSettingsPageComponent } from '~/settings-mod/pages/guild-appearance-settings-page/guild-appearance-settings-page.component';
+import { GuildBansSettingsPageComponent } from '~/settings-mod/pages/guild-bans-settings-page/guild-bans-settings-page.component';
 import { GuildJoinLinksSettingsPageComponent } from '~/settings-mod/pages/guild-join-links-settings-page/guild-join-links-settings-page.component';
 import { GuildOverviewSettingsPageComponent } from '~/settings-mod/pages/guild-overview-settings-page/guild-overview-settings-page.component';
 import { GuildSettingsEntryPointPageComponent } from '~/settings-mod/pages/guild-settings-entry-point-page/guild-settings-entry-point-page.component';
@@ -60,6 +61,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     EmailAddressUpdatableModalComponent,
     FullNameUpdatableModalComponent,
     GuildAppearanceSettingsPageComponent,
+    GuildBansSettingsPageComponent,
     GuildJoinLinksSettingsPageComponent,
     GuildOverviewSettingsPageComponent,
     GuildSettingsEntryPointPageComponent,
@@ -90,6 +92,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     NgIconsModule.withIcons({
       appearanceIcon: BtsIcon.bootstrapBrush,
       arrowRightIcon: BtsIcon.bootstrapArrowRight,
+      bannedUserIcon: BtsIcon.bootstrapPersonLock,
       closeIcon: BtsIcon.bootstrapXLg,
       downloadIcon: BtsIcon.bootstrapDownload,
       joinLinksIcon: BtsIcon.bootstrapPersonPlus,
@@ -102,6 +105,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
       settingsIcon: BtsIcon.bootstrapGear,
       togglerNoIcon: BtsIcon.bootstrapX,
       togglerYesIcon: BtsIcon.bootstrapCheck,
+      unbanIcon: BtsIcon.bootstrapArrowCounterclockwise,
     }),
     NgxTippyModule,
     ReactiveFormsModule,

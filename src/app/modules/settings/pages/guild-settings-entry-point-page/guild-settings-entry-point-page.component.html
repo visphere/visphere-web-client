@@ -53,6 +53,15 @@
               <ng-icon name="joinLinksIcon" />
             </a>
           </li>
+          <li class="w-full">
+            <a
+              routerLinkActive="vsph-settings__nav-button--active"
+              routerLink="bans"
+              class="vsph-settings__nav-button">
+              {{ defaultPrefix + '.subpage.bans.header' | translate }}
+              <ng-icon name="bannedUserIcon" />
+            </a>
+          </li>
         </ul>
       </div>
       <hr class="vsph-settings__separator ms-2.5" />

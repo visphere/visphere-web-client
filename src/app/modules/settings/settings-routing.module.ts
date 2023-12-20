@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
 import { BlankInitSettingsPageComponent } from '~/settings-mod/pages/blank-init-settings-page/blank-init-settings-page.component';
 import { GuildAppearanceSettingsPageComponent } from '~/settings-mod/pages/guild-appearance-settings-page/guild-appearance-settings-page.component';
+import { GuildBansSettingsPageComponent } from '~/settings-mod/pages/guild-bans-settings-page/guild-bans-settings-page.component';
 import { GuildJoinLinksSettingsPageComponent } from '~/settings-mod/pages/guild-join-links-settings-page/guild-join-links-settings-page.component';
 import { GuildOverviewSettingsPageComponent } from '~/settings-mod/pages/guild-overview-settings-page/guild-overview-settings-page.component';
 import { GuildSettingsEntryPointPageComponent } from '~/settings-mod/pages/guild-settings-entry-point-page/guild-settings-entry-point-page.component';
@@ -86,6 +87,11 @@ const routes: Routes = [
                 path: 'join-links',
                 component: GuildJoinLinksSettingsPageComponent,
                 title: 'settingsPage.joinLinks',
+              },
+              {
+                path: 'bans',
+                component: GuildBansSettingsPageComponent,
+                title: 'settingsPage.bans',
               },
               { path: '', redirectTo: 'overview', pathMatch: 'full' },
             ],

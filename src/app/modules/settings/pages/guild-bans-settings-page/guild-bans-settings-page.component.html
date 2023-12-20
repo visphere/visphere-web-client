@@ -1,0 +1,61 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-action-modal
+  [isActive]="isUnbanUserModalActive"
+  (emitOnClose)="handleToggleModalToUnbanUser(false, undefined)"
+  (emitDevstateAction)="handleUnbanUser()"
+  i18nPrefix="vsph.clientCommon.settingsPage.modal.devastate.unbanUser">
+  {{
+    'vsph.clientCommon.settingsPage.modal.devastate.unbanUser.description'
+      | translate: { name: unbanningUser?.fullName }
+  }}
+</vsph-devastate-action-modal>
+<vsph-setting-panel-wrapper
+  category="guildSettings"
+  subpage="bans"
+  [isFetching]="!!(isFetching$ | async)">
+  <div
+    *ngIf="bannedUsers.length === 0; else bannedUsersContent"
+    class="flex justify-center items-center h-[250px]">
+    <img
+      src="{{ path }}/static/icon/empty-data.svg"
+      width="80px"
+      height="80px"
+      alt="" />
+  </div>
+  <ng-template #bannedUsersContent>
+    <p class="text-vsph-tint-400 mb-3">
+      {{ defaultPrefix + '.bannedUsersCount' | translate }}:
+      {{ bannedUsers.length }}
+    </p>
+    <ul class="vsph-settings__banned-users-container">
+      <li
+        *ngFor="let bannedUser of bannedUsers"
+        class="vsph-settings__banned-user-container vsph-settings__banned-users-hoverable">
+        <div class="flex gap-x-2 items-center">
+          <img
+            src="{{ bannedUser.profileImageUrl }}"
+            alt=""
+            class="w-[30px] h-[30px] rounded-lg" />
+          <div>
+            <h2 class="font-bold">{{ bannedUser.fullName }}</h2>
+            <p class="text-xs text-vsph-tint-400">{{ bannedUser.username }}</p>
+          </div>
+        </div>
+        <button
+          [ngxTippy]="unbanUserTooltip"
+          [tippyProps]="tooltipProps"
+          (click)="handleToggleModalToUnbanUser(true, bannedUser)"
+          class="vsph-settings__banned-user-unban-button vsph-settings__banned-users-hoverable">
+          <ng-icon name="unbanIcon" class="text-vsph-light-100" />
+        </button>
+      </li>
+    </ul>
+  </ng-template>
+</vsph-setting-panel-wrapper>
+<ng-template #unbanUserTooltip let-username="username">
+  {{ defaultPrefix + '.unbanUserButton' | translate }}
+</ng-template>
