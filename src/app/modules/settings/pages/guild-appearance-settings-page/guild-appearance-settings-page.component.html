@@ -41,7 +41,9 @@
       *ngIf="profileImageDetails"
       class="flex justify-between items-center ps-[130px]">
       <div class="flex flex-col gap-y-1">
-        <p class="text-2xl font-bold" [title]="profileImageDetails.guildName">
+        <p
+          class="text-2xl font-bold line-clamp-1"
+          [title]="profileImageDetails.guildName">
           {{ profileImageDetails.guildName }}
         </p>
         <vsph-joined-date
