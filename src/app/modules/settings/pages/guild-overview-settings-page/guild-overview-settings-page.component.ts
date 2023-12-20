@@ -4,6 +4,7 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   EditGuildReqDto,
   GuildOwnerOverviewResDto,
@@ -39,7 +40,8 @@ export class GuildOverviewSettingsPageComponent
 
   constructor(
     private readonly _guildOverviewService: GuildOverviewService,
-    private readonly _populateFormGroupService: PopulateFormGroupService
+    private readonly _populateFormGroupService: PopulateFormGroupService,
+    private readonly _router: Router
   ) {
     super();
   }
@@ -47,21 +49,24 @@ export class GuildOverviewSettingsPageComponent
   ngOnInit(): void {
     this.wrapAsObservable$(
       this._guildOverviewService.loadGuildOverview$()
-    ).subscribe(guildOverview => {
-      this.sphereGuildForm = new FormGroup({
-        name: new FormControl(guildOverview.name, [
-          Validators.required,
-          Validators.minLength(3),
-        ]),
-      });
-      this._populateFormGroupService.setField(this.sphereGuildForm);
-      this.guildOverview = guildOverview;
-      this.isPublic = !guildOverview.isPrivate;
-      this.selectedCategory = guildOverview.category;
-      this.memorizedName = guildOverview.name;
-      this.wrapAsObservable$(this.activeLoading$).subscribe(isLoading =>
-        this._populateFormGroupService.setFormDisabled(isLoading !== 'none')
-      );
+    ).subscribe({
+      next: guildOverview => {
+        this.sphereGuildForm = new FormGroup({
+          name: new FormControl(guildOverview.name, [
+            Validators.required,
+            Validators.minLength(3),
+          ]),
+        });
+        this._populateFormGroupService.setField(this.sphereGuildForm);
+        this.guildOverview = guildOverview;
+        this.isPublic = !guildOverview.isPrivate;
+        this.selectedCategory = guildOverview.category;
+        this.memorizedName = guildOverview.name;
+        this.wrapAsObservable$(this.activeLoading$).subscribe(isLoading =>
+          this._populateFormGroupService.setFormDisabled(isLoading !== 'none')
+        );
+      },
+      error: async () => await this._router.navigateByUrl('/'),
     });
   }
 
