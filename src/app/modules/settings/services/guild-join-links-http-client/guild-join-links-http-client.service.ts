@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  AllGuildJoinLinks,
   CreateGuildJoinLinkReqDto,
-  GuildJoinLink,
   GuildJoinLinkDetails,
   UpdateGuildJoinLinkReqDto,
 } from '~/settings-mod/model/guild-join-links.model';
@@ -21,8 +21,8 @@ export class GuildJoinLinksHttpClientService extends AbstractHttpProvider {
     super();
   }
 
-  getAllGuildJoinLinks$(guildId: number): Observable<GuildJoinLink[]> {
-    return this._httpClient.get<GuildJoinLink[]>(
+  getAllGuildJoinLinks$(guildId: number): Observable<AllGuildJoinLinks> {
+    return this._httpClient.get<AllGuildJoinLinks>(
       `${this._infraApiPath}/api/v1/sphere/link/guild/${guildId}/all`
     );
   }

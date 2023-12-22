@@ -19,7 +19,11 @@
   category="guildSettings"
   subpage="joinLinks"
   [isFetching]="!!(isFetching$ | async)">
+  <vsph-icon-info-block
+    *ngIf="!isPrivate"
+    [i18nText]="defaultPrefix + '.publicGuildInfoBlock'" />
   <button
+    *ngIf="isPrivate"
     (click)="handleToggleModalVisibility('create-link', undefined)"
     class="vsph-button vsph-button--primary vsph-button--fit">
     {{ defaultPrefix + '.createJoinLinkButton' | translate }}

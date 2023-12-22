@@ -3,6 +3,11 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 
+export type AllGuildJoinLinks = {
+  isPrivate: boolean;
+  joinLinks: GuildJoinLink[];
+};
+
 export type GuildJoinLink = {
   id: number;
   name: string;
@@ -25,9 +30,4 @@ export type CreateGuildJoinLinkReqDto = {
 
 export type UpdateGuildJoinLinkReqDto = {
   name: string;
-};
-
-export type UpdateJoinLinkPayload = {
-  linkId: number;
-  reqDto: CreateGuildJoinLinkReqDto;
 };

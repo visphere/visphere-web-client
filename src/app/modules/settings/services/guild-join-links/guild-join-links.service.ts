@@ -18,6 +18,7 @@ import {
   throwError,
 } from 'rxjs';
 import {
+  AllGuildJoinLinks,
   CreateGuildJoinLinkReqDto,
   GuildJoinLink,
   GuildJoinLinkDetails,
@@ -49,7 +50,7 @@ export class GuildJoinLinksService extends AbstractWsWebhookProvider<SharedReduc
     super(_store);
   }
 
-  fetchAllGuildJoinLinks$(): Observable<GuildJoinLink[]> {
+  fetchAllGuildJoinLinks$(): Observable<AllGuildJoinLinks> {
     return combineLatest([
       this._sphereGuildService.guildId$,
       this._onChangeObserver$,

@@ -93,6 +93,7 @@ export class GuildOverviewSettingsPageComponent
   handleToggleSphereVisibility(): void {
     if (!this.isPublic) {
       this.isSetSphereToPublicModalActive = true;
+      this.deleteAllJoinLinks = false;
     } else {
       this.isPublic = false;
       this.onUpdateVisibility();

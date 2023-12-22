@@ -28,6 +28,7 @@ export class GuildJoinLinksSettingsPageComponent
 {
   joinLinks: GuildJoinLink[] = [];
   persistedLink?: GuildJoinLink;
+  isPrivate = false;
 
   isFetching$ = this._guildJoinLinksService.isFetching$;
   activeModal$ = this._guildJoinLinksService.activeModal$;
@@ -59,8 +60,9 @@ export class GuildJoinLinksSettingsPageComponent
         this._guildJoinLinksService.modifiedJoinLink$,
       ])
     ).subscribe({
-      next: ([joinLinks, persistedLink]) => {
-        this.joinLinks = joinLinks;
+      next: ([joinLinksDetails, persistedLink]) => {
+        this.joinLinks = joinLinksDetails.joinLinks;
+        this.isPrivate = joinLinksDetails.isPrivate;
         this.persistedLink = persistedLink;
       },
       error: async () => await this._router.navigateByUrl('/'),
