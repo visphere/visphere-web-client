@@ -10,7 +10,7 @@ import { UserGuildResDto } from '~/client-mod/model/guild.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
 import * as NgrxAction_CLN from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
-import { AbstractLandingUrlProvider } from '~/shared-mod/components/abstract-landing-url-provider';
+import { AbstractLandingUrlProvider } from '~/shared-mod/components/abstract-landing-url.provider';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';

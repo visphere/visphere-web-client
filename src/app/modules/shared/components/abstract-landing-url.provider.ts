@@ -5,7 +5,7 @@
 import { environment } from '~/env/environment';
 import { LanguageSwitcherService } from '../services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '../services/theme-switcher/theme-switcher.service';
-import { AbstractIconThemeProvider } from './abstract-icon-theme-provider';
+import { AbstractIconThemeProvider } from './abstract-icon-theme.provider';
 
 export abstract class AbstractLandingUrlProvider extends AbstractIconThemeProvider {
   protected landingPagePath = '';

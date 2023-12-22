@@ -6,7 +6,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as NgrxAction_CLN from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
-import { AbstractLandingUrlProvider } from '~/shared-mod/components/abstract-landing-url-provider';
+import { AbstractLandingUrlProvider } from '~/shared-mod/components/abstract-landing-url.provider';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 

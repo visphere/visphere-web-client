@@ -5,7 +5,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme-provider';
+import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme.provider';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';

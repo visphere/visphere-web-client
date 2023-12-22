@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { GuildProfileImageDetailsResDto } from '~/settings-mod/model/guild-profile.model';
 import { GuildProfileService } from '~/settings-mod/services/guild-profile/guild-profile.service';
 import { ProfileImageUpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
-import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme-provider';
+import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme.provider';
 import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 

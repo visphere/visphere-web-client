@@ -3,7 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractLandingUrlProvider } from '~/root-mod/modules/shared/components/abstract-landing-url-provider';
+import { AbstractLandingUrlProvider } from '~/shared-mod/components/abstract-landing-url.provider';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
 

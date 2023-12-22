@@ -6,7 +6,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-details.model';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
-import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme-provider';
+import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme.provider';
 import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
