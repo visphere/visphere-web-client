@@ -3,9 +3,120 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
+<vsph-create-join-link-modal *ngIf="(activeModal$ | async) === 'create-link'" />
+<vsph-update-join-link-modal *ngIf="(activeModal$ | async) === 'update-link'" />
+<vsph-devastate-action-modal
+  [isActive]="(activeModal$ | async) === 'delete-link'"
+  (emitOnClose)="handleToggleModalVisibility('none', undefined)"
+  (emitDevstateAction)="handleDeleteLink()"
+  [i18nPrefix]="defaultPrefix + '.deleteJoinLinkModal'">
+  {{
+    defaultPrefix + '.deleteJoinLinkModal.description'
+      | translate: { name: (modifiedJoinLink$ | async)?.name }
+  }}
+</vsph-devastate-action-modal>
 <vsph-setting-panel-wrapper
   category="guildSettings"
   subpage="joinLinks"
   [isFetching]="!!(isFetching$ | async)">
-  content
+  <button
+    (click)="handleToggleModalVisibility('create-link', undefined)"
+    class="vsph-button vsph-button--primary vsph-button--fit">
+    {{ defaultPrefix + '.createJoinLinkButton' | translate }}
+  </button>
+  <div
+    *ngIf="joinLinks.length === 0; else joinLinksContent"
+    class="flex justify-center items-center h-[250px]">
+    <img
+      src="{{ path }}/static/icon/empty-data.svg"
+      width="80px"
+      height="80px"
+      alt="" />
+  </div>
+  <ng-template #joinLinksContent>
+    <p class="text-vsph-tint-400 my-3">
+      {{ defaultPrefix + '.joinLinksCount' | translate }}:
+      {{ joinLinks.length }}
+    </p>
+    <ul class="vsph-settings__list-elements-container">
+      <li
+        *ngFor="let joinLink of joinLinks"
+        [class.vsph-settings__list-element-container--inactive]="
+          !joinLink.active
+        "
+        class="vsph-settings__list-element-container vsph-settings__list-hoverable">
+        <div>
+          <div class="flex gap-x-2 items-center">
+            <h3
+              [class.line-through]="!joinLink.active"
+              class="text-xl font-bold">
+              {{ joinLink.token }}
+            </h3>
+            <button
+              [ngxTippy]="infoTooltip"
+              [tippyProps]="tooltipProps"
+              [tippyContext]="{ i18nContent: 'copyLinkButton' }"
+              [disabled]="!joinLink.active"
+              (click)="handleCopyLinkToClipboard(joinLink)">
+              <ng-icon name="copyIcon" class="mt-1 text-sm" />
+            </button>
+          </div>
+          <div class="flex text-vsph-tint-400">
+            <span class="text-xs max-w-[150px] line-clamp-1">
+              {{ joinLink.name }}
+            </span>
+            <span class="text-xs">
+              ,
+              {{
+                defaultPrefix + '.linkUsedCount'
+                  | translate: { count: joinLink.usagesCount }
+              }}
+            </span>
+          </div>
+          <p class="text-xs text-vsph-tint-400">
+            {{ defaultPrefix + '.linkExpired' | translate }}:
+            {{
+              joinLink.expiredAt
+                ? (joinLink.expiredAt
+                  | vsphDatetimeFormatter: selectedLang$
+                  | async)
+                : (defaultPrefix + '.neverExpired' | translate)
+            }}
+          </p>
+        </div>
+        <div class="flex gap-x-2">
+          <button
+            [ngxTippy]="infoTooltip"
+            [tippyProps]="tooltipProps"
+            [tippyContext]="{ i18nContent: 'editLinkButton' }"
+            [disabled]="!joinLink.active"
+            (click)="handleToggleModalVisibility('update-link', joinLink)"
+            class="vsph-settings__list-element-button vsph-settings__list-element-button--inverted vsph-settings__list-hoverable">
+            <ng-icon name="editIcon" />
+          </button>
+          <button
+            [ngxTippy]="infoTooltip"
+            [tippyProps]="tooltipProps"
+            [tippyContext]="{ i18nContent: 'toggleLinkActivityButton' }"
+            (click)="
+              handleUpdateJoinLinkActivity(joinLink.id, !joinLink.active)
+            "
+            class="vsph-settings__list-element-button vsph-settings__list-element-button--inverted vsph-settings__list-hoverable">
+            <ng-icon [name]="joinLink.active ? 'eyeSlashIcon' : 'eyeIcon'" />
+          </button>
+          <button
+            [ngxTippy]="infoTooltip"
+            [tippyProps]="tooltipProps"
+            [tippyContext]="{ i18nContent: 'deleteLinkButton' }"
+            (click)="handleToggleModalVisibility('delete-link', joinLink)"
+            class="vsph-settings__list-element-button vsph-settings__list-hoverable bg-vsph-red-200">
+            <ng-icon name="removeTrashIcon" class="text-vsph-light-100" />
+          </button>
+        </div>
+      </li>
+    </ul>
+  </ng-template>
 </vsph-setting-panel-wrapper>
+<ng-template #infoTooltip let-i18nContent="i18nContent">
+  {{ defaultPrefix + '.' + i18nContent | translate }}
+</ng-template>

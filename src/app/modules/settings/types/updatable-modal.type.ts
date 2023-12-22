@@ -28,3 +28,9 @@ export type UpdateSphereGuildOverviewModalType =
   | 'change-visibility'
   | 'change-category'
   | 'none';
+
+export type JoinLinkUpdatableModalType =
+  | 'create-link'
+  | 'update-link'
+  | 'delete-link'
+  | 'none';

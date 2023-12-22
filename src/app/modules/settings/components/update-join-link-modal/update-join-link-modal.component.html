@@ -1,0 +1,39 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+<vsph-modal-wrapper
+  [isActive]="(activeModal$ | async) === 'update-link'"
+  (emitOnClose)="handleCloseModal()"
+  modalSize="xs"
+  [header]="defaultPrefix + '.header'">
+  <ng-container content>
+    <div
+      *ngIf="isFetching$ | async; else formContainer"
+      class="flex justify-center items-center h-[150px]">
+      <div
+        class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
+    </div>
+    <ng-template #formContainer>
+      <form
+        [formGroup]="updateJoinLinkForm"
+        (ngSubmit)="handleSubmitUpdateJoinLink()"
+        class="grid gap-y-3 mt-4">
+        <vsph-common-form-input
+          [maxLength]="100"
+          formControlIdentifier="name"
+          i18nPrefix="clientCommon.settingsPage.category.guildSettings.subpage.joinLinks">
+          <vsph-field-validator />
+          <vsph-field-validator type="minlength" />
+        </vsph-common-form-input>
+        <vsph-lazy-button-spinner
+          [isLoading]="(isLoading$ | async)!"
+          [buttonDisabled]="
+            !!updateJoinLinkForm.invalid || contentsAreIdentical
+          ">
+          {{ defaultPrefix + '.submitButton' | translate }}
+        </vsph-lazy-button-spinner>
+      </form>
+    </ng-template>
+  </ng-container>
+</vsph-modal-wrapper>
