@@ -5,8 +5,8 @@
 
 <div *ngIf="isActive" class="vsph-modal__container">
   <div
-    [@authWindowFadeAndMove]
-    (@authWindowFadeAndMove.done)="emitOnAnimationDone.emit()"
+    [@windowFadeAndMove]
+    (@windowFadeAndMove.done)="emitOnAnimationDone.emit()"
     class="vsph-modal__window-container">
     <div
       [class.max-w-[1280px]]="modalSize === 'xl'"

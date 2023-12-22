@@ -10,7 +10,7 @@ import {
   trigger,
 } from '@angular/animations';
 
-export const authWindowFadeAndMove = trigger('authWindowFadeAndMove', [
+export const windowFadeAndMove = trigger('windowFadeAndMove', [
   state(
     'void',
     style({ opacity: 0, transform: 'translateY(-40px) scale(.95)' })

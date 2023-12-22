@@ -4,13 +4,13 @@
  */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { environment } from '~/env/environment';
-import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.animation';
+import { windowFadeAndMove } from '~/shared-mod/animations/window.animation';
 import { ModalDevastatePrecedence } from '~/shared-mod/types/modal.type';
 
 @Component({
   selector: 'vsph-devastate-action-modal',
   templateUrl: './devastate-action-modal.component.html',
-  animations: [authWindowFadeAndMove],
+  animations: [windowFadeAndMove],
 })
 export class DevastateActionModalComponent implements OnInit {
   @Input() i18nPrefix = '';

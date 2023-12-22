@@ -3,13 +3,13 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.animation';
+import { windowFadeAndMove } from '~/root-mod/modules/shared/animations/window.animation';
 import { ModalSize } from '~/shared-mod/types/modal.type';
 
 @Component({
   selector: 'vsph-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
-  animations: [authWindowFadeAndMove],
+  animations: [windowFadeAndMove],
 })
 export class ModalWrapperComponent {
   @Input() isActive = false;
