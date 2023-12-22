@@ -14,3 +14,8 @@ export const dropboxFadeAndMove = trigger('dropboxFadeAndMove', [
   state('void', style({ opacity: 0, transform: 'translateY(20px)' })),
   transition(':enter, :leave', [animate('200ms ease-in-out')]),
 ]);
+
+export const dropboxReverseFadeAndMove = trigger('dropboxReverseFadeAndMove', [
+  state('void', style({ opacity: 0, transform: 'translateY(-5px)' })),
+  transition(':enter, :leave', [animate('200ms ease-in-out')]),
+]);
