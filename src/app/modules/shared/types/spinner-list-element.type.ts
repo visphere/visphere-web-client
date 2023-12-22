@@ -4,6 +4,6 @@
  */
 
 export type SpinnerListElementType = {
-  id: number;
+  id: number | string;
   value: string;
 };

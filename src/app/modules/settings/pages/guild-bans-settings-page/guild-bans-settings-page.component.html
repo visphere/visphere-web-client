@@ -31,10 +31,10 @@
       {{ defaultPrefix + '.bannedUsersCount' | translate }}:
       {{ bannedUsers.length }}
     </p>
-    <ul class="vsph-settings__banned-users-container">
+    <ul class="vsph-settings__list-elements-container">
       <li
         *ngFor="let bannedUser of bannedUsers"
-        class="vsph-settings__banned-user-container vsph-settings__banned-users-hoverable">
+        class="vsph-settings__list-element-container vsph-settings__list-hoverable">
         <div class="flex gap-x-2 items-center">
           <img
             src="{{ bannedUser.profileImageUrl }}"
@@ -49,13 +49,13 @@
           [ngxTippy]="unbanUserTooltip"
           [tippyProps]="tooltipProps"
           (click)="handleToggleModalToUnbanUser(true, bannedUser)"
-          class="vsph-settings__banned-user-unban-button vsph-settings__banned-users-hoverable">
+          class="vsph-settings__list-element-button vsph-settings__list-hoverable bg-vsph-orange-100">
           <ng-icon name="unbanIcon" class="text-vsph-light-100" />
         </button>
       </li>
     </ul>
   </ng-template>
 </vsph-setting-panel-wrapper>
-<ng-template #unbanUserTooltip let-username="username">
+<ng-template #unbanUserTooltip>
   {{ defaultPrefix + '.unbanUserButton' | translate }}
 </ng-template>

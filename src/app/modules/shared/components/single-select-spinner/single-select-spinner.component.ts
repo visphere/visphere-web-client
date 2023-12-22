@@ -89,11 +89,10 @@ export class SingleSelectSpinnerComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['listElements']) {
-      return;
+    if (changes['listElements']) {
+      this.filteredList = changes['listElements'].currentValue;
+      this.setInitialValue();
     }
-    this.filteredList = changes['listElements'].currentValue;
-    this.setInitialValue();
   }
 
   ngAfterViewInit() {
@@ -140,13 +139,12 @@ export class SingleSelectSpinnerComponent
 
   private setInitialValue(): void {
     const initValue = this.filteredList.find(e => e.id === this.initValueId);
-    if (!initValue || !this.inputElement) {
-      return;
+    if (initValue && this.inputElement) {
+      this.inputElement.nativeElement.value = initValue.value;
     }
-    this.inputElement.nativeElement.value = initValue.value;
   }
 
   get hasErrors(): boolean {
-    return Boolean(this.formGroup.get(this.formControlName)?.errors);
+    return !!this.formGroup.get(this.formControlName)?.errors;
   }
 }

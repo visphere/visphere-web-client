@@ -12,18 +12,18 @@
   <ul
     *ngIf="itemsListIsOpen"
     [@dropboxFadeAndMove]
-    class="vsph-auth__single-select-spinner-list__container">
+    class="vsph-single-select-spinner-list__container">
     <li *ngFor="let element of filteredList">
       <button
         type="button"
-        class="vsph-auth__single-select-spinner-list__element hover:bg-vsph-tint-500 hover:text-vsph-light-100 cursor-pointer"
+        class="vsph-single-select-spinner-list__element hover:bg-vsph-tint-500 hover:text-vsph-light-100 cursor-pointer"
         (click)="handleSelectItem(element)">
         {{ element.value }}
       </button>
     </li>
     <li
       *ngIf="filteredList.length === 0"
-      class="vsph-auth__single-select-spinner-list__element text-vsph-dark-800 dark:text-vsph-tint-100">
+      class="vsph-single-select-spinner-list__element text-vsph-dark-800 dark:text-vsph-tint-100">
       {{ 'vsph.common.utils.notFound' | translate }}
     </li>
   </ul>
