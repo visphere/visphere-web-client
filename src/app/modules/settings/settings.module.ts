@@ -14,6 +14,7 @@ import { AccountAuthSettingsComponent } from '~/settings-mod/components/account-
 import { AccountPanelSettingsComponent } from '~/settings-mod/components/account-panel-settings/account-panel-settings.component';
 import { BirthDateUpdatableModalComponent } from '~/settings-mod/components/birth-date-updatable-modal/birth-date-updatable-modal.component';
 import { ColorsSelectorListComponent } from '~/settings-mod/components/colors-selector-list/colors-selector-list.component';
+import { CreateJoinLinkModalComponent } from '~/settings-mod/components/create-join-link-modal/create-join-link-modal.component';
 import { DevastateAccountModalComponent } from '~/settings-mod/components/devastate-account-modal/devastate-account-modal.component';
 import { EditablePrimitiveValueComponent } from '~/settings-mod/components/editable-primitive-value/editable-primitive-value.component';
 import { EmailAddressUpdatableModalComponent } from '~/settings-mod/components/email-address-updatable-modal/email-address-updatable-modal.component';
@@ -28,6 +29,7 @@ import { ToggleButtonComponent } from '~/settings-mod/components/toggle-button/t
 import { UpdatableEmailFinishFormComponent } from '~/settings-mod/components/updatable-email-finish-form/updatable-email-finish-form.component';
 import { UpdatableEmailStartFormComponent } from '~/settings-mod/components/updatable-email-start-form/updatable-email-start-form.component';
 import { UpdatableTextChannelFormComponent } from '~/settings-mod/components/updatable-text-channel-form/updatable-text-channel-form.component';
+import { UpdateJoinLinkModalComponent } from '~/settings-mod/components/update-join-link-modal/update-join-link-modal.component';
 import { UserAccountBannerComponent } from '~/settings-mod/components/user-account-banner/user-account-banner.component';
 import { UsernameUpdatableModalComponent } from '~/settings-mod/components/username-updatable-modal/username-updatable-modal.component';
 import { AppearanceSettingsPageComponent } from '~/settings-mod/pages/appearance-settings-page/appearance-settings-page.component';
@@ -56,6 +58,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     BirthDateUpdatableModalComponent,
     BlankInitSettingsPageComponent,
     ColorsSelectorListComponent,
+    CreateJoinLinkModalComponent,
     DevastateAccountModalComponent,
     EditablePrimitiveValueComponent,
     EmailAddressUpdatableModalComponent,
@@ -83,6 +86,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     UpdatableEmailFinishFormComponent,
     UpdatableEmailStartFormComponent,
     UpdatableTextChannelFormComponent,
+    UpdateJoinLinkModalComponent,
     UserAccountBannerComponent,
     UsernameUpdatableModalComponent,
   ],
@@ -93,8 +97,10 @@ import { SettingsRoutingModule } from './settings-routing.module';
       appearanceIcon: BtsIcon.bootstrapBrush,
       arrowRightIcon: BtsIcon.bootstrapArrowRight,
       bannedUserIcon: BtsIcon.bootstrapPersonLock,
+      copyIcon: BtsIcon.bootstrapClipboardCheck,
       closeIcon: BtsIcon.bootstrapXLg,
       downloadIcon: BtsIcon.bootstrapDownload,
+      editIcon: BtsIcon.bootstrapPencilSquare,
       joinLinksIcon: BtsIcon.bootstrapPersonPlus,
       languageIcon: BtsIcon.bootstrapTranslate,
       logoutIcon: BtsIcon.bootstrapBoxArrowRight,

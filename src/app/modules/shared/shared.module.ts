@@ -31,6 +31,7 @@ import { LogoutModalComponent } from '~/shared-mod/components/logout-modal/logou
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
 import { PasswordInputTogglerComponent } from '~/shared-mod/components/password-input-toggler/password-input-toggler.component';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
+import { SelectListInputComponent } from '~/shared-mod/components/select-list-input/select-list-input.component';
 import { SingleSelectSpinnerComponent } from '~/shared-mod/components/single-select-spinner/single-select-spinner.component';
 import { SnackbarsContainerComponent } from '~/shared-mod/components/snackbars-container/snackbars-container.component';
 import { SocialsHorizontalComponent } from '~/shared-mod/components/socials-horizontal/socials-horizontal.component';
@@ -39,6 +40,7 @@ import { AutoResizableTextAreaDirective } from '~/shared-mod/directives/auto-res
 import { DragAndDropDirective } from '~/shared-mod/directives/drag-and-drop/drag-and-drop.directive';
 import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 import { DateFormatterPipe } from '~/shared-mod/pipes/date-formatter/date-formatter.pipe';
+import { DatetimeFormatterPipe } from '~/shared-mod/pipes/datetime-formatter/datetime-formatter.pipe';
 import { SanitizePipe } from '~/shared-mod/pipes/sanitize/sanitize.pipe';
 import { sharedReduxStore } from '~/shared-mod/store/reducer';
 import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
@@ -51,6 +53,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     CommonFormInputComponent,
     ConditionalTooltipWrapperComponent,
     DateFormatterPipe,
+    DatetimeFormatterPipe,
     DeferredButtonComponent,
     DevastateActionModalComponent,
     DragAndDropDirective,
@@ -66,6 +69,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     PasswordInputTogglerComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
+    SelectListInputComponent,
     SingleSelectSpinnerComponent,
     SocialsHorizontalComponent,
     SnackbarsContainerComponent,
@@ -111,6 +115,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     CommonFormInputComponent,
     ConditionalTooltipWrapperComponent,
     DateFormatterPipe,
+    DatetimeFormatterPipe,
     DeferredButtonComponent,
     DevastateActionModalComponent,
     FieldValidatorComponent,
@@ -124,6 +129,8 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     PasswordInputTogglerComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
+    SelectListInputComponent,
+    SingleSelectSpinnerComponent,
     SocialsHorizontalComponent,
     SnackbarsContainerComponent,
     VerifyCaptchaModalComponent,
