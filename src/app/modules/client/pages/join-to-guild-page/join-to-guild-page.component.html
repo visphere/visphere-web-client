@@ -1,0 +1,82 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-left-section-wrapper>
+  <div
+    *ngIf="isFetching$ | async"
+    class="min-h-[150px] flex justify-center items-center">
+    <div
+      class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
+  </div>
+  <div *ngIf="(isFetching$ | async) === false && (guildError$ | async) !== ''">
+    <img
+      src="{{ path }}/static/icon/danger-higher.svg"
+      class="w-[80px] h-[80px] mx-auto mb-4"
+      alt="" />
+    <h2 class="text-center font-bold text-xl mb-3 text-vsph-red-200">
+      {{ defaultPrefix + '.failedToLoad' | translate }}
+    </h2>
+    <p class="text-xs text-center max-w-[250px] mx-auto">
+      <span class="vsph-join-sphere__paragraph-label">
+        {{ defaultPrefix + '.errorMessage' | translate }}:
+      </span>
+      <br />
+      <span class="vsph-join-sphere__paragraph-text">
+        {{ guildError$ | async }}
+      </span>
+    </p>
+    <a routerLink="/" class="vsph-button vsph-button--secondary mt-8">
+      {{ defaultPrefix + '.returnToSpheresButton' | translate }}
+    </a>
+  </div>
+  <ng-container
+    *ngIf="(isFetching$ | async) === false && (guildError$ | async) === ''">
+    <h1 class="vsph-join-sphere__header">
+      {{ defaultPrefix + '.formHeader' | translate }}
+    </h1>
+    <img
+      src="{{ guildDetails?.profileImageUrl }}"
+      class="w-[80px] h-[80px] rounded-2xl mx-auto mt-10 mb-4"
+      alt="" />
+    <h2 class="text-center font-bold text-xl">
+      {{ guildDetails?.name }}
+    </h2>
+    <div class="flex flex-col gap-y-1 items-center mt-4">
+      <p class="vsph-join-sphere__paragraph-label">
+        {{ defaultPrefix + '.sphereType' | translate }}:
+        <span class="vsph-join-sphere__paragraph-text">
+          {{
+            defaultPrefix +
+              (guildDetails?.private ? '.privateSphere' : '.publicSphere')
+              | translate
+          }}
+        </span>
+      </p>
+      <p class="vsph-join-sphere__paragraph-label">
+        {{ defaultPrefix + '.sphereParticipants' | translate }}:
+        <span class="vsph-join-sphere__paragraph-text">
+          {{ guildDetails?.participants }}
+        </span>
+      </p>
+    </div>
+    <div class="mt-10">
+      <vsph-lazy-button-spinner
+        (emitClick)="handleJoinToGuild()"
+        [isLoading]="(isLoading$ | async)!">
+        {{ defaultPrefix + '.joinToSphereButton' | translate }}
+      </vsph-lazy-button-spinner>
+      <div class="flex items-center my-3 mx-10">
+        <hr class="vsph-separator flex-grow" />
+        <div class="vsph-separator__text">
+          {{ 'vsph.common.utils.or' | translate }}
+        </div>
+        <hr class="vsph-separator flex-grow" />
+      </div>
+      <a routerLink="/" class="vsph-button vsph-button--secondary">
+        {{ defaultPrefix + '.returnToSpheresButton' | translate }}
+      </a>
+    </div>
+  </ng-container>
+</vsph-left-section-wrapper>

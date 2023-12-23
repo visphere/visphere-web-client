@@ -29,6 +29,7 @@ import { SphereMessagesContentComponent } from '~/client-mod/components/sphere-m
 import { SphereTextChannelsPanelComponent } from '~/client-mod/components/sphere-text-channels-panel/sphere-text-channels-panel.component';
 import { AppEntryPointPageComponent } from '~/client-mod/pages/app-entry-point-page/app-entry-point-page.component';
 import { ClientEntryPointPageComponent } from '~/client-mod/pages/client-entry-point-page/client-entry-point-page.component';
+import { JoinToGuildPageComponent } from '~/client-mod/pages/join-to-guild-page/join-to-guild-page.component';
 import { SphereGuildEntryPageComponent } from '~/client-mod/pages/sphere-guild-entry-page/sphere-guild-entry-page.component';
 import { SphereGuildPageComponent } from '~/client-mod/pages/sphere-guild-page/sphere-guild-page.component';
 import { SphereTextChannelPageComponent } from '~/client-mod/pages/sphere-text-channel-page/sphere-text-channel-page.component';
@@ -45,6 +46,7 @@ import { clientReduxStore } from './store/reducer';
     CreateTextChannelModalComponent,
     DevastateMemberActionModalComponent,
     InputTextAreaComponent,
+    JoinToGuildPageComponent,
     JoinSphereFormComponent,
     LeftNavigationBarComponent,
     LoggedUserPopupComponent,
