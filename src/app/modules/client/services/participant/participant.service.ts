@@ -122,6 +122,8 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
         this.showSuccessSnackbar(message);
         if (refetch) {
           this.updateWsSignalValue();
+        } else {
+          this._guildService.resetGuildDetails();
         }
         this._store.dispatch(NgrxAction_CLN.__closeDevastateMemberModal());
       }),

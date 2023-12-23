@@ -30,6 +30,7 @@ import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-web
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { GuildHttpClientService } from '../guild-http-client/guild-http-client.service';
+import { JoinLinkHttpClientService } from '../join-link-http-client/join-link-http-client.service';
 
 @Injectable()
 export class GuildService extends AbstractWsWebhookProvider<
@@ -44,6 +45,7 @@ export class GuildService extends AbstractWsWebhookProvider<
 
   constructor(
     private readonly _guildHttpClientService: GuildHttpClientService,
+    private readonly _joinLinkHttpClientService: JoinLinkHttpClientService,
     private readonly _lazyPageLoaderService: LazyPageLoaderService,
     private readonly _templatePageTitleStrategy: TemplatePageTitleStrategy,
     private readonly _store: Store<SharedReducer | ClientReducer>
@@ -53,6 +55,10 @@ export class GuildService extends AbstractWsWebhookProvider<
 
   setModalMode(mode: CreateOrJoinGuildModalMode): void {
     this._createGuildModalMode$.next(mode);
+  }
+
+  resetGuildDetails(): void {
+    this._guildDetails$.next(undefined);
   }
 
   fetchGuildDetails$(
@@ -104,13 +110,14 @@ export class GuildService extends AbstractWsWebhookProvider<
   }
 
   joinToSphereViaCode$(code: string): Observable<number> {
-    return this._guildHttpClientService.joinViaCode$(code).pipe(
-      map(({ id, message }) => {
+    this.setLoading(true);
+    return this._joinLinkHttpClientService.joinToGuild$(code, false).pipe(
+      map(({ guildId, message }) => {
         this.setLoading(false);
         this.showSuccessSnackbar(message);
         this.updateWsSignalValue();
         this._store.dispatch(NgrxAction_CLN.__closeModal());
-        return id;
+        return guildId;
       }),
       catchError(err => {
         this.setLoading(false);
@@ -123,6 +130,7 @@ export class GuildService extends AbstractWsWebhookProvider<
     formData: CreateGuildForm,
     category: string
   ): Observable<number> {
+    this.setLoading(true);
     return this._guildHttpClientService
       .createNewGuild$({ ...formData, category })
       .pipe(
