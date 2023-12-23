@@ -13,6 +13,7 @@ describe('JoinLinkService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
+      providers: [JoinLinkService],
     }).compileComponents();
     service = TestBed.inject(JoinLinkService);
   });
