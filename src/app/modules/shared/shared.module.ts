@@ -27,6 +27,7 @@ import { ImageLoaderModalComponent } from '~/shared-mod/components/image-loader-
 import { JoinedDateComponent } from '~/shared-mod/components/joined-date/joined-date.component';
 import { LazyButtonSpinnerComponent } from '~/shared-mod/components/lazy-button-spinner/lazy-button-spinner.component';
 import { LazyPageLoaderComponent } from '~/shared-mod/components/lazy-page-loader/lazy-page-loader.component';
+import { LeftSectionWrapperComponent } from '~/shared-mod/components/left-section-wrapper/left-section-wrapper.component';
 import { LogoutModalComponent } from '~/shared-mod/components/logout-modal/logout-modal.component';
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
 import { PasswordInputTogglerComponent } from '~/shared-mod/components/password-input-toggler/password-input-toggler.component';
@@ -63,6 +64,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     JoinedDateComponent,
     LazyButtonSpinnerComponent,
     LazyPageLoaderComponent,
+    LeftSectionWrapperComponent,
     LogoutModalComponent,
     ModalWrapperComponent,
     NotFoundPageComponent,
@@ -124,6 +126,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     JoinedDateComponent,
     LazyPageLoaderComponent,
     LazyButtonSpinnerComponent,
+    LeftSectionWrapperComponent,
     LogoutModalComponent,
     ModalWrapperComponent,
     PasswordInputTogglerComponent,

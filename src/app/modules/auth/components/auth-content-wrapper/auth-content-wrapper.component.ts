@@ -3,27 +3,24 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, HostListener, Input } from '@angular/core';
-import { environment } from '~/env/environment';
-import { authWindowFadeAndMove } from '~/shared-mod/animations/auth-window.animation';
+import { windowFadeAndMove } from '~/shared-mod/animations/window.animation';
+import { AbstractResizableProvider } from '~/shared-mod/components/abstract-resizable.provider';
 
 @Component({
   selector: 'vsph-auth-content-wrapper',
   templateUrl: './auth-content-wrapper.component.html',
   host: { class: 'flex-grow flex flex-col h-full' },
-  animations: [authWindowFadeAndMove],
+  animations: [windowFadeAndMove],
 })
-export class AuthContentWrapperComponent {
+export class AuthContentWrapperComponent extends AbstractResizableProvider {
   @Input() size: 'sm' | 'md' | 'xl' = 'sm';
 
-  path = environment.contentDistributorBaseUrl;
-  isAnimationDisabled = this.triggerDisableAnimation();
+  constructor() {
+    super(768);
+  }
 
   @HostListener('window:resize')
   onWindowResize() {
     this.isAnimationDisabled = this.triggerDisableAnimation();
-  }
-
-  private triggerDisableAnimation() {
-    return window.innerWidth <= 768;
   }
 }

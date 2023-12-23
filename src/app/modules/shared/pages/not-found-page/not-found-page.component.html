@@ -3,15 +3,7 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<div class="flex-grow hidden w-full h-screen md:block relative">
-  <div
-    [style.background-image]="
-      'url(' + path + '/static/gfx/primary-mesh-gradient.png)'
-    "
-    class="absolute top-0 left-0 w-full h-full -z-10 opacity-40 bg-no-repeat bg-cover"></div>
-</div>
-<div
-  class="flex flex-col justify-center h-screen basis-full md:max-w-[550px] p-10">
+<vsph-left-section-wrapper>
   <img
     src="{{ path }}/static/logo/visphere.svg"
     width="60"
@@ -23,16 +15,21 @@
     class="leading-[21px] text-center text-lg mb-6 text-vsph-tint-400 dark:text-vsph-tint-300">
     {{ 'vsph.webCommon.notFound.header' | translate }}
   </p>
-  <div class="mt-10 flex flex-col items-center w-[250px] mx-auto">
+  <div class="mt-10 w-[280px] mx-auto">
     <a routerLink="/" class="vsph-button vsph-button--primary">
       {{ 'vsph.webCommon.notFound.openInBrowserButton' | translate }}
     </a>
-    <hr
-      class="my-10 mx-auto w-[150px] border-vsph-tint-200 dark:border-vsph-dark-750" />
+    <div class="flex items-center my-3 mx-10">
+      <hr class="vsph-separator flex-grow" />
+      <div class="vsph-separator__text">
+        {{ 'vsph.common.utils.or' | translate }}
+      </div>
+      <hr class="vsph-separator flex-grow" />
+    </div>
     <a
       class="vsph-button vsph-button--secondary"
       href="{{ landingPagePath }}/download">
       {{ 'vsph.webCommon.notFound.download' | translate }}
     </a>
   </div>
-</div>
+</vsph-left-section-wrapper>

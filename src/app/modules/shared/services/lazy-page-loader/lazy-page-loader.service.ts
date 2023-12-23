@@ -11,6 +11,7 @@ import {
 } from '@angular/router';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { WindowInitLoaderService } from '../window-init-loader/window-init-loader.service';
 
 @Injectable({ providedIn: 'root' })
 export class LazyPageLoaderService {
@@ -18,7 +19,8 @@ export class LazyPageLoaderService {
 
   constructor(
     private readonly _router: Router,
-    @Inject(DOCUMENT) private readonly _document: Document
+    @Inject(DOCUMENT) private readonly _document: Document,
+    private readonly _windowInitLoaderService: WindowInitLoaderService
   ) {}
 
   initLoader(): void {
@@ -27,6 +29,7 @@ export class LazyPageLoaderService {
         this.setLoading();
       } else if (event instanceof RouteConfigLoadEnd) {
         setTimeout(() => {
+          this._windowInitLoaderService.unsetLoading();
           this.disableLoading();
         }, 1500);
       }

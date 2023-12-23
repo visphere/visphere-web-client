@@ -1,0 +1,23 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div class="grid md:grid-cols-1 lg:grid-cols-2 w-full h-full">
+  <div
+    class="flex justify-center items-center py-0 sm:py-16 flex-grow-0 sm:flex-grow">
+    <div
+      *ngIf="isVisible"
+      class="vsph-content__container w-full max-w-[450px] p-5 sm:p-10"
+      [@windowFadeAndMove]
+      [@.disabled]="isAnimationDisabled">
+      <ng-content />
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="!isAnimationDisabled"
+  [style.background-image]="
+    'url(' + path + '/static/gfx/primary-mesh-gradient.png)'
+  "
+  class="absolute top-0 left-0 w-full h-full -z-10 opacity-40 bg-no-repeat bg-cover"></div>
