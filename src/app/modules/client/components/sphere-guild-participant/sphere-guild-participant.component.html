@@ -17,7 +17,7 @@
   <img
     src="{{ profileImageUrl }}"
     alt=""
-    class="w-[30px] h-[30px] rounded-lg" />
+    class="w-[32px] h-[32px] rounded-lg" />
   <div class="flex-grow flex items-center gap-x-2">
     <p class="font-bold line-clamp-1" [title]="userFullName">
       {{ userFullName }}
@@ -118,14 +118,12 @@
           {{ defaultPrefix + '.userPopup.leaveGuild' | translate }}
         </button>
       </div>
-      <div class="vsph-user-details-popover__profile-image-container">
-        <img
-          src="{{ userDetails?.profileImageUrl }}"
-          width="85%"
-          height="85%"
-          alt=""
-          class="rounded-2xl" />
-      </div>
+      <img
+        src="{{ userDetails?.profileImageUrl }}"
+        width="85%"
+        height="85%"
+        alt=""
+        class="vsph-user-details-popover__profile-image" />
     </div>
   </ng-template>
 </float-ui-content>

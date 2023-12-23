@@ -104,7 +104,7 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
           this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
           this._localStorageService.remove('loggedUser');
           this._router.navigateByUrl('/auth/login').then(r => r);
-          return throwError(() => new Error(err));
+          return throwError(() => err);
         })
       );
     }

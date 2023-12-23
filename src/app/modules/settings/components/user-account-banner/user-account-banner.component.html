@@ -12,7 +12,7 @@
       src="{{ loggedUser?.profileUrl }}"
       alt=""
       loading="eager"
-      class="rounded-xl w-[85%] h-[85%]" />
+      class="vsph-settings__vis-profile-image" />
     <div
       *ngIf="
         loggedUser?.credentialsSupplier !== 'local' &&
@@ -22,10 +22,7 @@
       [class.bg-vsph-facebook-bg]="
         loggedUser?.credentialsSupplier === 'facebook'
       "
-      [ngClass]="{
-        'border-4 border-vsph-light-200 dark:border-vsph-dark-850':
-          loggedUser?.credentialsSupplier === 'google'
-      }"
+      [class.bg-vsph-x-bg]="loggedUser?.credentialsSupplier === 'x'"
       class="vsph-settings__vis-profile-oauth2-wrapper">
       <img
         src="{{ path }}/static/oauth2/{{

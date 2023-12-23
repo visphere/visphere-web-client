@@ -44,11 +44,4 @@ export class GuildHttpClientService extends AbstractHttpProvider {
       reqDto
     );
   }
-
-  joinViaCode$(code: string): Observable<AddGuildResDto> {
-    return this._httpClient.post<AddGuildResDto>(
-      `${this._infraApiPath}/api/v1/sphere/guild/join`,
-      { code }
-    );
-  }
 }

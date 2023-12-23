@@ -20,6 +20,6 @@ export const regex: RegexValidators = {
   PASSWORD: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,80}$/,
   MFA_CODE: /^[\d]+$/,
   DATE_VALID: /^\d{4}-\d{2}-\d{2}$/,
-  SPHERE_CODE: /^[a-z\d]+$/,
+  SPHERE_CODE: /^[a-zA-Z\d]+$/,
   TEXT_CHANNEL_NAME: /^[a-z\d-ąćęłńóśźż]+$/,
 };
