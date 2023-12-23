@@ -8,4 +8,5 @@ export type ProfileImageLoadableElementType =
   | 'generating-image'
   | 'generating-identicon'
   | 'deleting-image'
+  | 'changing-image-provider'
   | 'none';

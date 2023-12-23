@@ -11,6 +11,7 @@ export type LoggedUser = {
   profileColor: string;
   joinDate: string;
   credentialsSupplier: string;
+  imageFromExternalProvider: boolean;
   isMfaSetup: boolean;
   settings: UserSettings;
 };

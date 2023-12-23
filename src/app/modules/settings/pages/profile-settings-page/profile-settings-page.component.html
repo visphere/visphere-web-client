@@ -40,7 +40,7 @@
   <h2 class="vsph-settings__section-header">
     {{ defaultPrefix + '.section.image.header' | translate }}
   </h2>
-  <div class="grid grid-cols-12 gap-x-3">
+  <div class="grid grid-cols-12 gap-x-3 mb-8">
     <button
       [disabled]="loadedImageType === 'custom'"
       (click)="handleOpenSelectedModal('upload-image')"
@@ -65,4 +65,13 @@
       {{ defaultPrefix + '.section.image.deleteImage' | translate }}
     </button>
   </div>
+  <vsph-toggle-button
+    *ngIf="isExternalProvider"
+    i18nPrefix="userSettings.subpage.profileSettings.section.image"
+    i18nToggler="defaultImageSource"
+    [isSelected]="fromProvider"
+    [hasDescription]="true"
+    [isDisabled]="(activeLoading$ | async) === 'changing-image-provider'"
+    [isFadded]="true"
+    (emitValueChanged)="handleToggleProfileImageProvider($event)" />
 </vsph-setting-panel-wrapper>

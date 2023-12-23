@@ -36,8 +36,8 @@ export class ProfileSettingsService extends AbstractProfileImageProvider<Profile
   }
 
   loadProfileDetails$(): Observable<ProfileDetails> {
-    this._isFetching$.next(true);
     return this._onChangeObserver$.pipe(
+      tap(() => this._isFetching$.next(true)),
       switchMap(() =>
         combineLatest([
           this._profileSettingsHttpClientService.getProfileImageDetails$(),
@@ -64,7 +64,8 @@ export class ProfileSettingsService extends AbstractProfileImageProvider<Profile
     return this.actionOnUpdate$(
       this._profileSettingsHttpClientService.updateProfileColor$({ color }),
       color,
-      'changing-color'
+      'changing-color',
+      true
     );
   }
 
@@ -76,7 +77,8 @@ export class ProfileSettingsService extends AbstractProfileImageProvider<Profile
         customImage
       ),
       '',
-      'generating-image'
+      'generating-image',
+      true
     );
   }
 
@@ -84,7 +86,8 @@ export class ProfileSettingsService extends AbstractProfileImageProvider<Profile
     return this.actionOnUpdate$(
       this._profileSettingsHttpClientService.updateProfileImageToIdenticon$(),
       '',
-      'generating-identicon'
+      'generating-identicon',
+      true
     );
   }
 
@@ -92,14 +95,29 @@ export class ProfileSettingsService extends AbstractProfileImageProvider<Profile
     return this.actionOnUpdate$(
       this._profileSettingsHttpClientService.deleteCustomProfileImage$(),
       '',
-      'deleting-image'
+      'deleting-image',
+      true
+    );
+  }
+
+  toggleOAuth2ProfileImageProvider$(
+    fromProvider: boolean
+  ): Observable<MessageWithResourcePathResDto> {
+    return this.actionOnUpdate$(
+      this._profileSettingsHttpClientService.toggleOAuth2ProfileImageProvider$(
+        fromProvider
+      ),
+      '',
+      'changing-image-provider',
+      false
     );
   }
 
   private actionOnUpdate$(
     inputObservable$: Observable<MessageWithResourcePathResDto>,
     color: string,
-    activeLoading: ProfileImageLoadableElementType
+    activeLoading: ProfileImageLoadableElementType,
+    refetch: boolean
   ): Observable<MessageWithResourcePathResDto> {
     this._activeLoading$.next(activeLoading);
     return inputObservable$.pipe(
@@ -112,11 +130,13 @@ export class ProfileSettingsService extends AbstractProfileImageProvider<Profile
         this._store.dispatch(
           NgrxAction_SHA.__updateProfileImageUrl({ imageUrl: resourcePath })
         );
-        this._onChangeObserver$.next(null);
+        if (refetch) {
+          this._onChangeObserver$.next(null);
+        }
       }),
-      catchError(() => {
+      catchError(err => {
         this._activeLoading$.next('none');
-        return throwError(() => []);
+        return throwError(() => err);
       })
     );
   }

@@ -62,4 +62,14 @@ export class ProfileSettingsHttpClientService extends AbstractHttpProvider {
       `${this._infraApiPath}/api/v1/multimedia/profile/image`
     );
   }
+
+  toggleOAuth2ProfileImageProvider$(
+    fromProvider: boolean
+  ): Observable<MessageWithResourcePathResDto> {
+    return this._httpClient.patch<MessageWithResourcePathResDto>(
+      `${this._infraApiPath}/api/v1/oauth2/image/user/provider`,
+      null,
+      { params: { fromProvider } }
+    );
+  }
 }

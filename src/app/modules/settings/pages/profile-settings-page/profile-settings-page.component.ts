@@ -25,6 +25,8 @@ export class ProfileSettingsPageComponent
   selectedColor = '';
   availableColors: string[] = [];
   loadedImageType: ImageType = 'default';
+  fromProvider = false;
+  isExternalProvider = false;
 
   activeLoading$ = this._profileSettingsService.activeLoading$;
   activeModal$ = this._profileSettingsService.activeModal$;
@@ -53,6 +55,8 @@ export class ProfileSettingsPageComponent
       ])
     ).subscribe(([loggedUser, profileDetails]) => {
       this.selectedColor = loggedUser?.profileColor || '';
+      this.isExternalProvider = loggedUser?.credentialsSupplier !== 'local';
+      this.fromProvider = loggedUser?.imageFromExternalProvider || false;
       this.availableColors = profileDetails.availableColors;
       this.loadedImageType = profileDetails.imageType;
     });
@@ -93,5 +97,15 @@ export class ProfileSettingsPageComponent
     this.wrapAsObservable$(
       this._profileSettingsService.deleteCustomProfileImage$()
     ).subscribe({ next: () => this._profileSettingsService.closeModal() });
+  }
+
+  handleToggleProfileImageProvider(fromProvider: boolean): void {
+    if (this.isExternalProvider) {
+      this.wrapAsObservable$(
+        this._profileSettingsService.toggleOAuth2ProfileImageProvider$(
+          fromProvider
+        )
+      ).subscribe();
+    }
   }
 }

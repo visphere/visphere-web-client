@@ -12,6 +12,7 @@ export type LoginResDtoModel = {
   accessToken: string;
   refreshToken: string;
   credentialsSupplier: string;
+  imageFromExternalProvider: boolean;
   isActivated: boolean;
   isDisabled: boolean;
   isMfaEnabled: boolean;
