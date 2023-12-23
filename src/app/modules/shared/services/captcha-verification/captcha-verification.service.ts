@@ -53,6 +53,7 @@ export class CaptchaVerificationService
 
   setModalVisibility(isOpen: boolean): void {
     this._modalUtilsService.blockBodyScroll(isOpen);
+    window.scrollTo(0, 0);
     this._isModalOpen$.next(isOpen);
   }
 
