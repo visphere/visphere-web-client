@@ -21,7 +21,7 @@ export class UpdatableEmailHttpClientService extends AbstractHttpProvider {
     isResend: boolean
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/email/${variant}/request${
+      `${this._infraApiPath}/api/v1/user/email/${variant}/request${
         isResend ? '/resend' : ''
       }`,
       reqDto
@@ -34,14 +34,14 @@ export class UpdatableEmailHttpClientService extends AbstractHttpProvider {
     variant: EmailVariant
   ): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/email/${variant}/${token}`,
+      `${this._infraApiPath}/api/v1/user/email/${variant}/${token}`,
       reqDto
     );
   }
 
   deleteSecondEmailAddress$(): Observable<BaseMessageModel> {
     return this._httpClient.delete<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/email/second`
+      `${this._infraApiPath}/api/v1/user/email/second`
     );
   }
 }

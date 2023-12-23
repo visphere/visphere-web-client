@@ -24,7 +24,7 @@ export class IdentityHttpClientService extends AbstractHttpProvider {
       'X-RefreshToken': refreshToken,
     });
     return this._httpClient.post<LoginResDtoModel>(
-      `${this._infraApiPath}/api/v1/auth/identity/login/token`,
+      `${this._infraApiPath}/api/v1/user/identity/login/token`,
       null,
       { headers }
     );
@@ -32,7 +32,7 @@ export class IdentityHttpClientService extends AbstractHttpProvider {
 
   refrehToken$(req: RefreshTokenReqDto): Observable<RefreshTokenResDto> {
     return this._httpClient.patch<RefreshTokenResDto>(
-      `${this._infraApiPath}/api/v1/auth/identity/refresh`,
+      `${this._infraApiPath}/api/v1/user/identity/refresh`,
       req
     );
   }
@@ -42,7 +42,7 @@ export class IdentityHttpClientService extends AbstractHttpProvider {
       'X-RefreshToken': refreshToken,
     });
     return this._httpClient.delete<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/identity/logout`,
+      `${this._infraApiPath}/api/v1/user/identity/logout`,
       { headers }
     );
   }

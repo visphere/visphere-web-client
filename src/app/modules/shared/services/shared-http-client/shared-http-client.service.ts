@@ -38,7 +38,7 @@ export class SharedHttpClientService extends AbstractHttpProvider {
     value: string
   ): Observable<CheckExistResDtoModel> {
     return this._httpClient.get<CheckExistResDtoModel>(
-      `${this._infraApiPath}/api/v1/auth/check/prop/exist`,
+      `${this._infraApiPath}/api/v1/user/check/prop/exist`,
       { params: { by: by.toUpperCase(), value } }
     );
   }
@@ -48,7 +48,7 @@ export class SharedHttpClientService extends AbstractHttpProvider {
     value: string
   ): Observable<CheckExistResDtoModel> {
     return this._httpClient.get<CheckExistResDtoModel>(
-      `${this._infraApiPath}/api/v1/auth/check/logged/prop/exist`,
+      `${this._infraApiPath}/api/v1/user/check/logged/prop/exist`,
       { params: { by: by.toUpperCase(), value } }
     );
   }

@@ -37,7 +37,7 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
 
   updateMfaStateSettings$(enabled: boolean): Observable<BaseMessageModel> {
     return this._httpClient.patch<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/mfa/settings/toggle`,
+      `${this._infraApiPath}/api/v1/user/mfa/settings/toggle`,
       null,
       { params: { enabled } }
     );
@@ -45,7 +45,7 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
 
   getAccountDetails$(): Observable<UserAccountDetailsResDto> {
     return this._httpClient.get<UserAccountDetailsResDto>(
-      `${this._infraApiPath}/api/v1/auth/account/details`
+      `${this._infraApiPath}/api/v1/user/account/details`
     );
   }
 
@@ -53,7 +53,7 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
     reqDto: UpdateAccountDetailsReqDto
   ): Observable<UpdateAccountDetailsResDto> {
     return this._httpClient.patch<UpdateAccountDetailsResDto>(
-      `${this._infraApiPath}/api/v1/auth/account/details`,
+      `${this._infraApiPath}/api/v1/user/account/details`,
       reqDto
     );
   }
@@ -66,7 +66,7 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
       'X-RefreshToken': refreshToken,
     });
     return this._httpClient.patch<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/password/renew/logged/change`,
+      `${this._infraApiPath}/api/v1/user/password/renew/logged/change`,
       reqDto,
       { headers }
     );
@@ -122,7 +122,7 @@ export class SettingsHttpClientService extends AbstractHttpProvider {
       'X-RefreshToken': refreshToken,
     });
     return this._httpClient.delete<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/mfa/reset`,
+      `${this._infraApiPath}/api/v1/user/mfa/reset`,
       { headers, params: { logoutFromAll } }
     );
   }

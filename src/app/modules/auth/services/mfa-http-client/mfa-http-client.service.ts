@@ -21,7 +21,7 @@ export class MfaHttpClientService extends AbstractHttpProvider {
     req: LoginReqDtoModel
   ): Observable<MfaAuthenticatorDataResDto> {
     return this._httpClient.post<MfaAuthenticatorDataResDto>(
-      `${this._infraApiPath}/api/v1/auth/mfa/authenticator/data`,
+      `${this._infraApiPath}/api/v1/user/mfa/authenticator/data`,
       req
     );
   }
@@ -32,7 +32,7 @@ export class MfaHttpClientService extends AbstractHttpProvider {
     req: LoginReqDtoModel
   ): Observable<LoginResDtoModel> {
     return this._httpClient.patch<LoginResDtoModel>(
-      `${this._infraApiPath}/api/v1/auth/mfa/authenticator/verify/${code}`,
+      `${this._infraApiPath}/api/v1/user/mfa/authenticator/verify/${code}`,
       req,
       { params: { firstSetup } }
     );
@@ -40,7 +40,7 @@ export class MfaHttpClientService extends AbstractHttpProvider {
 
   alternativeEmailSend$(req: LoginReqDtoModel): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/mfa/alternative/email`,
+      `${this._infraApiPath}/api/v1/user/mfa/alternative/email`,
       req
     );
   }
@@ -50,7 +50,7 @@ export class MfaHttpClientService extends AbstractHttpProvider {
     req: LoginReqDtoModel
   ): Observable<LoginResDtoModel> {
     return this._httpClient.patch<LoginResDtoModel>(
-      `${this._infraApiPath}/api/v1/auth/mfa/alternative/email/${token}/validate`,
+      `${this._infraApiPath}/api/v1/user/mfa/alternative/email/${token}/validate`,
       req
     );
   }

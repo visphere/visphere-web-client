@@ -19,7 +19,7 @@ export class DevastateAccountHttpClientService extends AbstractHttpProvider {
     reqDto: PasswordConfirmationReqDto
   ): Observable<BaseMessageModel> {
     return this._httpClient.post<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/account/disable`,
+      `${this._infraApiPath}/api/v1/user/account/disable`,
       reqDto
     );
   }
@@ -28,7 +28,7 @@ export class DevastateAccountHttpClientService extends AbstractHttpProvider {
     reqDto: PasswordConfirmationReqDto
   ): Observable<BaseMessageModel> {
     return this._httpClient.delete<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/auth/account/delete`,
+      `${this._infraApiPath}/api/v1/user/account/delete`,
       { body: reqDto }
     );
   }
