@@ -13,6 +13,7 @@ import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-gro
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
+import { composeToAsync } from '~/shared-mod/validators/compose-to-async';
 import { regex } from '~/shared-mod/validators/regex.constant';
 import { requiredBoolValidator } from '~/shared-mod/validators/required-bool.validator';
 
@@ -55,12 +56,13 @@ export class FillDataFormComponent
       this.fillDataForm = new FormGroup({
         username: new FormControl(
           data?.username,
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.pattern(regex.USERNAME),
-          ],
-          [this._accountValueAlreadyExistValidator.validate('username')]
+          null,
+          Validators.composeAsync([
+            composeToAsync(Validators.required),
+            composeToAsync(Validators.minLength(3)),
+            composeToAsync(Validators.pattern(regex.USERNAME)),
+            this._accountValueAlreadyExistValidator.validate('username'),
+          ])
         ),
         firstName: new FormControl(data?.firstName, [
           Validators.required,

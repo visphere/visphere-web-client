@@ -5,10 +5,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '~/auth-mod/services/register/register.service';
-import { AccountValueAlreadyExistValidator } from '~/root-mod/modules/auth/validators/account-value-already-exist.validator';
+import { AccountValueAlreadyExistValidator } from '~/auth-mod/validators/account-value-already-exist.validator';
 import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { BirthDateValidator } from '~/shared-mod/validators/birth-date.validator';
+import { composeToAsync } from '~/shared-mod/validators/compose-to-async';
 import { emailWithSecondaryEmail } from '~/shared-mod/validators/email-with-secondary-email.validator';
 import { passwordMatchValidator } from '~/shared-mod/validators/password-match.validator';
 import { regex } from '~/shared-mod/validators/regex.constant';
@@ -40,17 +41,22 @@ export class RegisterFormComponent
           {
             username: new FormControl(
               '',
-              [
-                Validators.required,
-                Validators.minLength(3),
-                Validators.pattern(regex.USERNAME),
-              ],
-              [this._accountValueAlreadyExistValidator.validate('username')]
+              null,
+              Validators.composeAsync([
+                composeToAsync(Validators.required),
+                composeToAsync(Validators.minLength(3)),
+                composeToAsync(Validators.pattern(regex.USERNAME)),
+                this._accountValueAlreadyExistValidator.validate('username'),
+              ])
             ),
             emailAddress: new FormControl(
               '',
-              [Validators.required, Validators.email],
-              [this._accountValueAlreadyExistValidator.validate('email')]
+              null,
+              Validators.composeAsync([
+                composeToAsync(Validators.required),
+                composeToAsync(Validators.email),
+                this._accountValueAlreadyExistValidator.validate('email'),
+              ])
             ),
             password: new FormControl('', [
               Validators.required,

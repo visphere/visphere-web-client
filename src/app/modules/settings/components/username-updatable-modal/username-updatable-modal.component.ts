@@ -11,6 +11,7 @@ import { AccountValueForAnotherExistValidator } from '~/settings-mod/validators/
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
+import { composeToAsync } from '~/shared-mod/validators/compose-to-async';
 import { regex } from '~/shared-mod/validators/regex.constant';
 import { AbstractUpdatableModalProvider } from '../abstract-updatable-modal-provider';
 
@@ -37,12 +38,13 @@ export class UsernameUpdatableModalComponent
       this.formGroup = new FormGroup({
         username: new FormControl(
           details?.username,
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.pattern(regex.USERNAME),
-          ],
-          [this._accountValueForAnotherExistValidator.validate('username')]
+          null,
+          Validators.composeAsync([
+            composeToAsync(Validators.required),
+            composeToAsync(Validators.minLength(3)),
+            composeToAsync(Validators.pattern(regex.USERNAME)),
+            this._accountValueForAnotherExistValidator.validate('username'),
+          ])
         ),
       });
       this._populateFormGroupService.setField(this.formGroup);

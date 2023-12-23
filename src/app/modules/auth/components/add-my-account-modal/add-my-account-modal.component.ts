@@ -8,6 +8,7 @@ import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.s
 import { MyAcccountUserAlreadyExistValidator } from '~/auth-mod/validators/my-account-user-already-exist.validator';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
+import { composeToAsync } from '~/shared-mod/validators/compose-to-async';
 
 @Component({
   selector: 'vsph-add-my-account-modal',
@@ -32,8 +33,10 @@ export class AddMyAccountModalComponent
     this.addMyAccountForm = new FormGroup({
       usernameOrEmailAddress: new FormControl(
         '',
-        [Validators.required],
-        [this._myAcccountUserAlreadyExistValidator.validate()]
+        Validators.composeAsync([
+          composeToAsync(Validators.required),
+          this._myAcccountUserAlreadyExistValidator.validate(),
+        ])
       ),
     });
     this._myAccountsService.setReactiveForm(this.addMyAccountForm);

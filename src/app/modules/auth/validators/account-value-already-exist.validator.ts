@@ -8,7 +8,6 @@ import {
   Observable,
   debounceTime,
   distinctUntilChanged,
-  filter,
   first,
   map,
   switchMap,
@@ -26,7 +25,6 @@ export class AccountValueAlreadyExistValidator {
   validate(by: QueryParamKey): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ExtendedValidatorErrors> =>
       control.valueChanges.pipe(
-        filter(value => value !== ''),
         debounceTime(300),
         distinctUntilChanged(),
         switchMap(value =>

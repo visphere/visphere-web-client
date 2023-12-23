@@ -15,6 +15,7 @@ import { UpdatableEmailService } from '~/settings-mod/services/updatable-email/u
 import { AccountValueForAnotherExistValidator } from '~/settings-mod/validators/account-value-for-another-exist.validator';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
+import { composeToAsync } from '~/shared-mod/validators/compose-to-async';
 
 @Component({
   selector: 'vsph-updatable-email-start-form',
@@ -42,13 +43,20 @@ export class UpdatableEmailStartFormComponent
   }
 
   ngOnInit(): void {
+    const validators: any[] = [
+      composeToAsync(Validators.required),
+      composeToAsync(Validators.email),
+    ];
+    if (this.isUnique) {
+      validators.push(
+        this._accountValueForAnotherExistValidator.validate('email')
+      );
+    }
     this.emailAddressForm = new FormGroup({
       emailAddress: new FormControl(
         this.initValue,
-        [Validators.required, Validators.email],
-        this.isUnique
-          ? [this._accountValueForAnotherExistValidator.validate('email')]
-          : []
+        null,
+        Validators.composeAsync(validators)
       ),
     });
     this._updatableEmailService.setReactiveForm(this.emailAddressForm);
