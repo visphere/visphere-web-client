@@ -37,7 +37,11 @@ export class AppRootComponent
     this.wrapAsObservable$(
       this._identityService.refreshSession$(this.redirectUrl)
     ).subscribe({
-      next: async (url: string) => await this._router.navigateByUrl(url),
+      next: async redirectUrl => {
+        if (redirectUrl) {
+          await this._router.navigateByUrl(redirectUrl);
+        }
+      },
       error: async () => await this._router.navigateByUrl('auth/login'),
     });
   }

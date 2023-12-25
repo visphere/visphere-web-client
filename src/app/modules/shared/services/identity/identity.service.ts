@@ -38,7 +38,7 @@ export class IdentityService {
             })
           );
           this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
-          return redirectUrl;
+          return '';
         }),
         catchError(() => {
           this._localStorageService.remove('loggedUser');
