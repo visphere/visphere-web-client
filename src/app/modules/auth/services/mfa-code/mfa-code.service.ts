@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { MfaCodeForm } from '~/auth-mod/models/mfa-data.model';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractMfaFormProvider } from '../abstract-mfa-form-provider';
 import { MfaHttpClientService } from '../mfa-http-client/mfa-http-client.service';
@@ -23,9 +24,10 @@ export class MfaCodeService
   constructor(
     private readonly _mfaHttpClientService: MfaHttpClientService,
     store: Store<AuthReducer | SharedReducer>,
-    router: Router
+    router: Router,
+    localStorageService: LocalStorageService
   ) {
-    super(store, router);
+    super(store, router, localStorageService);
   }
 
   override abstractSubmitForm$(): Observable<LoginResDtoModel> {

@@ -12,6 +12,7 @@ import {
   combineLatest,
   filter,
   map,
+  mergeMap,
   switchMap,
   tap,
   throwError,
@@ -23,6 +24,8 @@ import {
 import { TemplatePageTitleStrategy } from '~/shared-mod/config/template-page-title.strategy';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { GuildService } from '../guild/guild.service';
 import { TextChannelHttpClientService } from '../text-channel-http-client/text-channel-http-client.service';
@@ -37,7 +40,8 @@ export class TextChannelService extends AbstractWsWebhookProvider<SharedReducer>
     private readonly _textChannelHttpClientService: TextChannelHttpClientService,
     private readonly _templatePageTitleStrategy: TemplatePageTitleStrategy,
     private readonly _guildService: GuildService,
-    _store: Store<SharedReducer>
+    private readonly _store: Store<SharedReducer>,
+    private readonly _localStorageService: LocalStorageService
   ) {
     super(_store);
   }
@@ -55,7 +59,19 @@ export class TextChannelService extends AbstractWsWebhookProvider<SharedReducer>
           textChannelDetails.name
         );
         this._textChannelDetails$.next(textChannelDetails);
-      })
+      }),
+      catchError(err =>
+        this._store.select(NgrxSelector_SHA.selectLoggedUser).pipe(
+          mergeMap(loggedUser => {
+            if (loggedUser) {
+              this._localStorageService.remove(
+                `memorizedPath+${loggedUser.username}`
+              );
+            }
+            return throwError(() => err);
+          })
+        )
+      )
     );
   }
 

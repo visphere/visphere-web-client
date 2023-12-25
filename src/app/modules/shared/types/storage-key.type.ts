@@ -7,4 +7,5 @@ export type StorageKeyType =
   | 'selectedLang'
   | 'selectedTheme'
   | 'mySavedAccounts'
-  | 'loggedUser';
+  | 'loggedUser'
+  | 'memorizedPath';

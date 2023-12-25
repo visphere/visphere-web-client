@@ -17,7 +17,7 @@ export class LocalStorageService {
     this.localStorage = this._document.defaultView.localStorage;
   }
 
-  get<T>(storageKey: StorageKeyType): T | null {
+  get<T>(storageKey: StorageKeyType | string): T | null {
     const preParsed = this.localStorage.getItem(storageKey);
     if (!preParsed) {
       return null;
@@ -25,12 +25,12 @@ export class LocalStorageService {
     return JSON.parse(preParsed);
   }
 
-  save<T>(storageKey: StorageKeyType, data: T): void {
+  save<T>(storageKey: StorageKeyType | string, data: T): void {
     this.localStorage.removeItem(storageKey);
     this.localStorage.setItem(storageKey, JSON.stringify(data));
   }
 
-  remove(storageKey: StorageKeyType): void {
+  remove(storageKey: StorageKeyType | string): void {
     this.localStorage.removeItem(storageKey);
   }
 

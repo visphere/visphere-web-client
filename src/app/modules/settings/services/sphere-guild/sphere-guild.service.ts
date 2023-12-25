@@ -17,10 +17,11 @@ import {
   throwError,
 } from 'rxjs';
 import { GuildOwnerDetailsResDto } from '~/settings-mod/model/guild-management.model';
-import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractGuildManagementProvider } from '../abstract-guild-management.provider';
 import { GuildManagementHttpClientService } from '../guild-management-http-client/guild-management-http-client.service';
@@ -34,9 +35,10 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
     private readonly _store: Store<SharedReducer>,
     private readonly _guildManagementHttpClientService: GuildManagementHttpClientService,
     private readonly _passwordConfirmationService: PasswordConfirmationService,
-    private readonly _lazyPageLoaderService: LazyPageLoaderService
+    private readonly _lazyPageLoaderService: LazyPageLoaderService,
+    private readonly _localStorageService: LocalStorageService
   ) {
-    super(_store);
+    super(_store, _localStorageService);
   }
 
   loadGuildDetails$(
@@ -62,10 +64,7 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
     );
   }
 
-  deleteGuild$(
-    guildId: number,
-    passwordOrMfaCode: string
-  ): Observable<BaseMessageModel> {
+  deleteGuild$(guildId: number, passwordOrMfaCode: string): Observable<null> {
     const reqDto =
       this._passwordConfirmationService.formatToConfirmationDto(
         passwordOrMfaCode
@@ -85,6 +84,15 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
               severity: 'success',
             })
           );
+        }),
+        switchMap(() => this._store.select(NgrxSelector_SHA.selectLoggedUser)),
+        map(loggedUser => {
+          if (loggedUser) {
+            this._localStorageService.remove(
+              `memorizedPath+${loggedUser.username}`
+            );
+          }
+          return null;
         }),
         catchError(err => {
           this._passwordConfirmationService.setLoading(false);

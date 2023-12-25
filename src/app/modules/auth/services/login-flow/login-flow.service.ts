@@ -9,6 +9,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AuthHttpClientService } from '../auth-http-client/auth-http-client.service';
@@ -18,7 +19,8 @@ export class LoginFlowService {
   constructor(
     private readonly _authHttpClientService: AuthHttpClientService,
     private readonly _store: Store<SharedReducer | AuthReducer>,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _localStorageService: LocalStorageService
   ) {}
 
   performLoginFlow$(
@@ -65,6 +67,12 @@ export class LoginFlowService {
                       details: res,
                     })
               );
+              const memorizedPath = this._localStorageService.get<string>(
+                `memorizedPath+${res.username}`
+              );
+              if (memorizedPath) {
+                navigateUrl = memorizedPath;
+              }
             }
           }
           if (!isDisabled || isMfaEnabled) {

@@ -35,7 +35,7 @@ export class AuthLoginPageComponent
     this.wrapAsObservable$(
       this._oauthLoginService.performLoginViaProvider$()
     ).subscribe({
-      next: async () => this._router.navigateByUrl('/'),
+      next: async navigateUrl => this._router.navigateByUrl(navigateUrl),
       error: async () => this._router.navigateByUrl('/auth/login'),
     });
   }

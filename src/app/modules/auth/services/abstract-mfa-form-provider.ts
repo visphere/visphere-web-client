@@ -9,6 +9,7 @@ import * as NgrxAction_ATH from '~/auth-mod/store/actions';
 import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { MfaStateModel } from '../models/mfa-data.model';
@@ -19,7 +20,8 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
 
   constructor(
     private readonly _absStore: Store<AuthReducer | SharedReducer>,
-    private readonly _absRouter: Router
+    private readonly _absRouter: Router,
+    private readonly _absLocalStorageService: LocalStorageService
   ) {
     super();
     this.wrapAsObservable$(
@@ -47,7 +49,14 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
         );
         this._absStore.dispatch(NgrxAction_ATH.__removeMfaState());
         if (!isDisabled) {
-          await this._absRouter.navigateByUrl('/');
+          let navigateUrl = '/';
+          const memorizedPath = this._absLocalStorageService.get<string>(
+            `memorizedPath+${res.username}`
+          );
+          if (memorizedPath) {
+            navigateUrl = memorizedPath;
+          }
+          await this._absRouter.navigateByUrl(navigateUrl);
         }
       }),
       catchError(err => {

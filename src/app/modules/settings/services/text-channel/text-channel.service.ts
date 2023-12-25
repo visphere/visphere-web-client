@@ -19,7 +19,7 @@ import {
   throwError,
 } from 'rxjs';
 import { TextChannelDetailsResDto } from '~/settings-mod/model/guild-management.model';
-import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractGuildManagementProvider } from '../abstract-guild-management.provider';
 import { GuildManagementHttpClientService } from '../guild-management-http-client/guild-management-http-client.service';
@@ -31,9 +31,10 @@ export class TextChannelService extends AbstractGuildManagementProvider {
 
   constructor(
     _store: Store<SharedReducer>,
+    _localStorageService: LocalStorageService,
     private readonly _guildManagementHttpClientService: GuildManagementHttpClientService
   ) {
-    super(_store);
+    super(_store, _localStorageService);
   }
 
   fetchTextChannelDetails$(
@@ -61,20 +62,19 @@ export class TextChannelService extends AbstractGuildManagementProvider {
     );
   }
 
-  updateTextChannel$(
-    textChannelId: number,
-    name: string
-  ): Observable<BaseMessageModel> {
+  updateTextChannel$(textChannelId: number, name: string): Observable<null> {
     return this.performAction$(
       this._guildManagementHttpClientService.updateTextChannel$(textChannelId, {
         name,
-      })
+      }),
+      false
     );
   }
 
-  deleteTextChannel$(textChannelId: number): Observable<BaseMessageModel> {
+  deleteTextChannel$(textChannelId: number): Observable<null> {
     return this.performAction$(
-      this._guildManagementHttpClientService.deleteTextChannel$(textChannelId)
+      this._guildManagementHttpClientService.deleteTextChannel$(textChannelId),
+      true
     );
   }
 

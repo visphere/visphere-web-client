@@ -38,6 +38,12 @@ export class IdentityService {
             })
           );
           this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
+          const memorizedPath = this._localStorageService.get<string>(
+            `memorizedPath+${res.username}`
+          );
+          if (memorizedPath && redirectUrl === '/') {
+            return memorizedPath;
+          }
           return '';
         }),
         catchError(() => {

@@ -12,6 +12,7 @@ import {
   combineLatest,
   distinctUntilChanged,
   map,
+  mergeMap,
   switchMap,
   tap,
   throwError,
@@ -28,6 +29,8 @@ import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { TemplatePageTitleStrategy } from '~/shared-mod/config/template-page-title.strategy';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { GuildHttpClientService } from '../guild-http-client/guild-http-client.service';
 import { JoinLinkHttpClientService } from '../join-link-http-client/join-link-http-client.service';
@@ -48,7 +51,8 @@ export class GuildService extends AbstractWsWebhookProvider<
     private readonly _joinLinkHttpClientService: JoinLinkHttpClientService,
     private readonly _lazyPageLoaderService: LazyPageLoaderService,
     private readonly _templatePageTitleStrategy: TemplatePageTitleStrategy,
-    private readonly _store: Store<SharedReducer | ClientReducer>
+    private readonly _store: Store<SharedReducer | ClientReducer>,
+    private readonly _localStorageService: LocalStorageService
   ) {
     super(_store);
   }
@@ -76,10 +80,19 @@ export class GuildService extends AbstractWsWebhookProvider<
         this._guildDetails$.next(guildDetails);
         this._lazyPageLoaderService.disableLoading();
       }),
-      catchError(err => {
-        this._lazyPageLoaderService.disableLoading();
-        return throwError(() => err);
-      })
+      catchError(err =>
+        this._store.select(NgrxSelector_SHA.selectLoggedUser).pipe(
+          mergeMap(loggedUser => {
+            if (loggedUser) {
+              this._localStorageService.remove(
+                `memorizedPath+${loggedUser.username}`
+              );
+            }
+            this._lazyPageLoaderService.disableLoading();
+            return throwError(() => err);
+          })
+        )
+      )
     );
   }
 

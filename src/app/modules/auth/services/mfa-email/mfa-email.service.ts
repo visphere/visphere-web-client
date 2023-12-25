@@ -10,6 +10,7 @@ import { MfaTokenForm } from '~/auth-mod/models/mfa-data.model';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractMfaFormProvider } from '../abstract-mfa-form-provider';
@@ -25,9 +26,10 @@ export class MfaEmailService
   constructor(
     private readonly _mfaHttpClientService: MfaHttpClientService,
     private readonly _store: Store<AuthReducer | SharedReducer>,
+    localStorageService: LocalStorageService,
     router: Router
   ) {
-    super(_store, router);
+    super(_store, router, localStorageService);
   }
 
   ngOnDestroy(): void {

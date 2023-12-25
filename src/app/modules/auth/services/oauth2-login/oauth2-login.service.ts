@@ -14,6 +14,7 @@ import {
   of,
   throwError,
 } from 'rxjs';
+import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { OAuth2Supplier } from '~/shared-mod/types/oauth2-supplier.type';
@@ -33,7 +34,8 @@ export class Oauth2LoginService
 
   constructor(
     private readonly _oauth2HttpClientService: Oauth2HttpClientService,
-    private readonly _store: Store<SharedReducer>
+    private readonly _store: Store<SharedReducer>,
+    private readonly _localStorageService: LocalStorageService
   ) {
     super();
   }
@@ -64,14 +66,15 @@ export class Oauth2LoginService
     this._isLoading$.next(!!this._token);
   }
 
-  performLoginViaProvider$(): Observable<boolean> {
+  performLoginViaProvider$(): Observable<string> {
     if (!this._token) {
-      return of(false);
+      return of('/auth/login');
     }
     return this._oauth2HttpClientService.loginViaProvider$(this._token).pipe(
       delay(2000),
       map(res => {
         const { isDisabled, accessToken } = res;
+        let navigateUrl = '/';
         this._store.dispatch(
           isDisabled
             ? NgrxAction_SHA.__openDisabledAccountModal({ accessToken })
@@ -81,7 +84,13 @@ export class Oauth2LoginService
         );
         this._isLoading$.next(false);
         this._activeSupplier$.next(null);
-        return false;
+        const memorizedPath = this._localStorageService.get<string>(
+          `memorizedPath+${res.username}`
+        );
+        if (memorizedPath) {
+          navigateUrl = memorizedPath;
+        }
+        return navigateUrl;
       }),
       catchError(err => {
         this._isLoading$.next(false);
