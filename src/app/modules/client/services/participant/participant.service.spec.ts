@@ -5,6 +5,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
 import { AppModule } from '~/root-mod/app.module';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { GuildService } from '../guild/guild.service';
 import { ParticipantService } from './participant.service';
 
@@ -14,7 +15,11 @@ describe('ParticipantService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
-      providers: [ParticipantService, GuildService],
+      providers: [
+        ParticipantService,
+        PasswordConfirmationService,
+        GuildService,
+      ],
     });
     service = TestBed.inject(ParticipantService);
   });

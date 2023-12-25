@@ -89,6 +89,10 @@ export class SphereGuildParticipantComponent
     this.openSelectedModal('ban');
   }
 
+  handleOpenModalToDelegateGuild(): void {
+    this.openSelectedModal('delegate');
+  }
+
   handleOpenModalToLeaveSphere(): void {
     if (this.guildDetails) {
       this._store.dispatch(
@@ -108,7 +112,7 @@ export class SphereGuildParticipantComponent
         NgrxAction_CLN.__openDevastateMemberModal({
           modal,
           id: this.userDetails.id,
-          name: this.userDetails.fullName,
+          name: `${this.userDetails.fullName} (${this.userDetails.username})`,
         })
       );
       this.userDetailsTooltipContent?.hide();

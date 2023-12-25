@@ -1,0 +1,18 @@
+<!--
+ ~ Copyright (c) 2023 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-action-modal
+  size="sm"
+  precedence="higher"
+  [showProceedButton]="false"
+  [isActive]="(selectedOpenModal$ | async) === 'delegate'"
+  (emitOnClose)="handleCloseModal()"
+  [i18nPrefix]="defaultPrefix">
+  <vsph-password-confirmation-form
+    i18nSuffixSubmitButton="client.modals.delegateGuild.submitButton"
+    [i18nDescription]="defaultPrefix + '.description'"
+    [i18nParams]="i18nParams"
+    (emitSubmitConfirmation)="handleDelegateDetails($event)" />
+</vsph-devastate-action-modal>

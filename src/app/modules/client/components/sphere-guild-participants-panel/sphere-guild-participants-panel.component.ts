@@ -8,6 +8,7 @@ import { GuildParticipantsResDto } from '~/client-mod/model/participant.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
 import { environment } from '~/env/environment';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
@@ -17,7 +18,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
     class:
       'vsph-side-content__container bg-vsph-light-200 dark:bg-vsph-dark-800',
   },
-  providers: [ParticipantService],
+  providers: [PasswordConfirmationService, ParticipantService],
 })
 export class SphereGuildParticipantsPanelComponent
   extends AbstractReactiveProvider

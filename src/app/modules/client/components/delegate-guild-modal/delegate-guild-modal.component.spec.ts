@@ -8,22 +8,22 @@ import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
 import { AppModule } from '~/root-mod/app.module';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
-import { SphereGuildParticipantComponent } from './sphere-guild-participant.component';
+import { DelegateGuildModalComponent } from './delegate-guild-modal.component';
 
-describe('SphereGuildParticipantComponent', () => {
-  let component: SphereGuildParticipantComponent;
-  let fixture: ComponentFixture<SphereGuildParticipantComponent>;
+describe('DelegateGuildModalComponent', () => {
+  let component: DelegateGuildModalComponent;
+  let fixture: ComponentFixture<DelegateGuildModalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
       providers: [
-        GuildService,
         PasswordConfirmationService,
         ParticipantService,
+        GuildService,
       ],
     }).compileComponents();
-    fixture = TestBed.createComponent(SphereGuildParticipantComponent);
+    fixture = TestBed.createComponent(DelegateGuildModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

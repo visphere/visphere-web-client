@@ -10,6 +10,7 @@ import {
   GuildParticipantsResDto,
 } from '~/client-mod/model/participant.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { PasswordConfirmationReqDto } from '~/shared-mod/models/password-confirmation.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
 
 @Injectable({ providedIn: 'root' })
@@ -63,6 +64,17 @@ export class ParticipantHttpClientService extends AbstractHttpProvider {
       `${this._infraApiPath}/api/v1/sphere/participant/guild/${guildId}/ban/user/${userId}`,
       null,
       { params: { deleteAllMessages } }
+    );
+  }
+
+  delegateGuildProprietyToUser$(
+    guildId: number,
+    userId: number,
+    reqDto: PasswordConfirmationReqDto
+  ): Observable<BaseMessageModel> {
+    return this._httpClient.patch<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/sphere/participant/guild/${guildId}/delegate/user/${userId}`,
+      reqDto
     );
   }
 }

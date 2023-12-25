@@ -25,6 +25,7 @@ import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { GuildService } from '../guild/guild.service';
 import { ParticipantHttpClientService } from '../participant-http-client/participant-http-client.service';
 
@@ -33,7 +34,8 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
   constructor(
     private readonly _participantHttpClientService: ParticipantHttpClientService,
     private readonly _guildService: GuildService,
-    private readonly _store: Store<ClientReducer>
+    private readonly _store: Store<ClientReducer>,
+    private readonly _passwordConfirmationService: PasswordConfirmationService
   ) {
     super(_store);
   }
@@ -102,6 +104,48 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
           deleteAllMessages
         ),
       true
+    );
+  }
+
+  delegateGuildProprietyToUser$(
+    passwordOrMfaCode: string
+  ): Observable<BaseMessageModel> {
+    return of(null).pipe(
+      tap(() => this.setLoading(true)),
+      switchMap(() =>
+        combineLatest([
+          this._guildService.guildDetails$,
+          this._store.select(NgrxSelector_CLN.selectDevastateDetails),
+        ])
+      ),
+      filter(
+        ([guildDetails, devastateDetails]) =>
+          !!guildDetails && !!devastateDetails
+      ),
+      map(([guildDetails, devastateDetails]) => ({
+        guildId: guildDetails!.id,
+        userId: devastateDetails!.id,
+      })),
+      first(),
+      switchMap(({ guildId, userId }) =>
+        this._participantHttpClientService.delegateGuildProprietyToUser$(
+          guildId,
+          userId,
+          this._passwordConfirmationService.formatToConfirmationDto(
+            passwordOrMfaCode
+          )
+        )
+      ),
+      tap(({ message }) => {
+        this.setLoading(false);
+        this.updateWsSignalValue();
+        this.showSuccessSnackbar(message);
+        this._store.dispatch(NgrxAction_CLN.__closeDevastateMemberModal());
+      }),
+      catchError(err => {
+        this.setLoading(false);
+        return throwError(() => err);
+      })
     );
   }
 
