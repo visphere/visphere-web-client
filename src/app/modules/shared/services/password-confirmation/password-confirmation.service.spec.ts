@@ -4,7 +4,6 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
-import { SettingsModule } from '~/settings-mod/settings.module';
 import { PasswordConfirmationService } from './password-confirmation.service';
 
 describe('PasswordConfirmationService', () => {
@@ -12,7 +11,7 @@ describe('PasswordConfirmationService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, SettingsModule],
+      imports: [AppModule],
       providers: [PasswordConfirmationService],
     });
     service = TestBed.inject(PasswordConfirmationService);

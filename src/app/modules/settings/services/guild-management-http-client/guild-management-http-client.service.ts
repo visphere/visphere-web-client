@@ -13,8 +13,8 @@ import {
   TextChannelDetailsResDto,
   UpdateGuildVisibilityReqDto,
 } from '~/settings-mod/model/guild-management.model';
-import { PasswordConfirmationReqDto } from '~/settings-mod/model/password-confirmation.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
+import { PasswordConfirmationReqDto } from '~/shared-mod/models/password-confirmation.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
 
 @Injectable({ providedIn: 'root' })

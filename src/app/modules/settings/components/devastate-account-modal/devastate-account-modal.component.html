@@ -7,55 +7,14 @@
   size="sm"
   precedence="higher"
   [showProceedButton]="false"
-  [i18nPrefix]="specifiedI18nPrefix"
+  [i18nPrefix]="defaultPrefix + '.' + i18nPrefix"
   [isActive]="isActiveModal"
-  (emitOnClose)="handleCloseModal()"
-  (emitDevstateAction)="handleEmitDevastateAction()">
-  <div *ngIf="(isLocalSupplier$ | async) === false">
-    {{ specifiedI18nPrefix + '.description' | translate }}
-    <vsph-lazy-button-spinner
-      [isLoading]="(isLoading$ | async)!"
-      (emitClick)="handleEmitMfaDevastateAction('')"
-      buttonStyle="vsph-button vsph-button--primary vsph-button--danger mt-4">
-      {{ specifiedI18nPrefix + '.submitButton' | translate }}
-    </vsph-lazy-button-spinner>
-  </div>
-  <div *ngIf="isLocalSupplier$ | async" class="flex flex-col gap-y-5">
-    {{ specifiedI18nPrefix + '.description' | translate: i18nParams }}
-    <div class="vsph-info-card__container">
-      {{
-        commonI18nPrefix +
-          ((currentStage$ | async) === 'password'
-            ? '.confirmPassword'
-            : '.nextInsertMfaCode') | translate
-      }}
-    </div>
-    <form
-      *ngIf="(currentStage$ | async) === 'password'"
-      [formGroup]="passwordForm"
-      (ngSubmit)="handleEmitDevastateAction()"
-      class="grid gap-y-3">
-      <vsph-password-input-toggler
-        [maxLength]="50"
-        formControlIdentifier="password"
-        [i18nPrefix]="'clientCommon.settingsPage.modal.devastate'">
-        <vsph-field-validator />
-      </vsph-password-input-toggler>
-      <vsph-lazy-button-spinner
-        [isLoading]="(isLoading$ | async)!"
-        [buttonDisabled]="passwordForm.invalid"
-        buttonStyle="vsph-button vsph-button--primary vsph-button--danger">
-        {{
-          (isMfaSetup
-            ? 'vsph.common.utils.continue'
-            : specifiedI18nPrefix + '.submitButton'
-          ) | translate
-        }}
-      </vsph-lazy-button-spinner>
-    </form>
-    <vsph-mfa-devastate-form
-      *ngIf="(currentStage$ | async) === 'mfa'"
-      [i18nButtonText]="specifiedI18nPrefix + '.submitButton'"
-      (emitMfa)="handleEmitMfaDevastateAction($event)" />
-  </div>
+  (emitOnClose)="handleCloseModal()">
+  <vsph-password-confirmation-form
+    [i18nSuffixSubmitButton]="
+      'settingsPage.modal.devastate.' + i18nPrefix + '.submitButton'
+    "
+    [i18nDescription]="defaultPrefix + '.' + i18nPrefix + '.description'"
+    [i18nParams]="i18nParams"
+    (emitSubmitConfirmation)="handleEmitOnSubmitConfirmation($event)" />
 </vsph-devastate-action-modal>

@@ -4,9 +4,9 @@
  */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AbstractLoadableProvider } from '~/root-mod/modules/shared/services/abstract-loadable-provider';
-import { PasswordConfirmationReqDto } from '~/settings-mod/model/password-confirmation.model';
-import { DevastateModalFormStage } from '~/settings-mod/types/form-stages.type';
+import { PasswordConfirmationReqDto } from '~/shared-mod/models/password-confirmation.model';
+import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
+import { DevastateModalFormStage } from '~/shared-mod/types/form-stages.type';
 
 @Injectable()
 export class PasswordConfirmationService extends AbstractLoadableProvider {

@@ -5,7 +5,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
 import { SettingsModule } from '~/settings-mod/settings.module';
-import { PasswordConfirmationService } from '../password-confirmation/password-confirmation.service';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { SphereGuildService } from '../sphere-guild/sphere-guild.service';
 import { GuildJoinLinksService } from './guild-join-links.service';
 

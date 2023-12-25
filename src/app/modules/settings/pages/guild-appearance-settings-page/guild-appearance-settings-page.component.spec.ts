@@ -5,10 +5,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
 import { GuildProfileService } from '~/settings-mod/services/guild-profile/guild-profile.service';
-import { PasswordConfirmationService } from '~/settings-mod/services/password-confirmation/password-confirmation.service';
 import { SphereGuildService } from '~/settings-mod/services/sphere-guild/sphere-guild.service';
 import { SettingsModule } from '~/settings-mod/settings.module';
 import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { GuildAppearanceSettingsPageComponent } from './guild-appearance-settings-page.component';
 
 describe('GuildAppearanceSettingsPageComponent', () => {

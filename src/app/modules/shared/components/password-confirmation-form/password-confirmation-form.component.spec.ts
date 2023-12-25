@@ -4,20 +4,20 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
-import { SettingsModule } from '~/settings-mod/settings.module';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
-import { DevastateAccountModalComponent } from './devastate-account-modal.component';
+import { PasswordConfirmationFormComponent } from './password-confirmation-form.component';
 
-describe('DevastateAccountModalComponent', () => {
-  let component: DevastateAccountModalComponent;
-  let fixture: ComponentFixture<DevastateAccountModalComponent>;
+describe('PasswordConfirmationFormComponent', () => {
+  let component: PasswordConfirmationFormComponent;
+  let fixture: ComponentFixture<PasswordConfirmationFormComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, SettingsModule],
-      providers: [PasswordConfirmationService],
+      imports: [AppModule],
+      providers: [PopulateFormGroupService, PasswordConfirmationService],
     }).compileComponents();
-    fixture = TestBed.createComponent(DevastateAccountModalComponent);
+    fixture = TestBed.createComponent(PasswordConfirmationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

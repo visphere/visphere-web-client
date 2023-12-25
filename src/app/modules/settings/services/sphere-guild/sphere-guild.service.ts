@@ -19,11 +19,11 @@ import {
 import { GuildOwnerDetailsResDto } from '~/settings-mod/model/guild-management.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractGuildManagementProvider } from '../abstract-guild-management.provider';
 import { GuildManagementHttpClientService } from '../guild-management-http-client/guild-management-http-client.service';
-import { PasswordConfirmationService } from '../password-confirmation/password-confirmation.service';
 
 @Injectable()
 export class SphereGuildService extends AbstractGuildManagementProvider {

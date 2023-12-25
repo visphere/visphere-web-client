@@ -4,9 +4,8 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/root-mod/app.module';
-import { DevastateAccountService } from '~/settings-mod/services/devastate-account/devastate-account.service';
-import { PasswordConfirmationService } from '~/settings-mod/services/password-confirmation/password-confirmation.service';
-import { SettingsModule } from '~/settings-mod/settings.module';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { MfaDevastateFormComponent } from './mfa-devastate-form.component';
 
 describe('MfaDevastateFormComponent', () => {
@@ -15,8 +14,8 @@ describe('MfaDevastateFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, SettingsModule],
-      providers: [PasswordConfirmationService, DevastateAccountService],
+      imports: [AppModule],
+      providers: [PasswordConfirmationService, PopulateFormGroupService],
     }).compileComponents();
     fixture = TestBed.createComponent(MfaDevastateFormComponent);
     component = fixture.componentInstance;

@@ -29,7 +29,9 @@ import { LazyButtonSpinnerComponent } from '~/shared-mod/components/lazy-button-
 import { LazyPageLoaderComponent } from '~/shared-mod/components/lazy-page-loader/lazy-page-loader.component';
 import { LeftSectionWrapperComponent } from '~/shared-mod/components/left-section-wrapper/left-section-wrapper.component';
 import { LogoutModalComponent } from '~/shared-mod/components/logout-modal/logout-modal.component';
+import { MfaDevastateFormComponent } from '~/shared-mod/components/mfa-devastate-form/mfa-devastate-form.component';
 import { ModalWrapperComponent } from '~/shared-mod/components/modal-wrapper/modal-wrapper.component';
+import { PasswordConfirmationFormComponent } from '~/shared-mod/components/password-confirmation-form/password-confirmation-form.component';
 import { PasswordInputTogglerComponent } from '~/shared-mod/components/password-input-toggler/password-input-toggler.component';
 import { PasswordStrengthMeterComponent } from '~/shared-mod/components/password-strength-meter/password-strength-meter.component';
 import { SelectListInputComponent } from '~/shared-mod/components/select-list-input/select-list-input.component';
@@ -66,8 +68,10 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     LazyPageLoaderComponent,
     LeftSectionWrapperComponent,
     LogoutModalComponent,
+    MfaDevastateFormComponent,
     ModalWrapperComponent,
     NotFoundPageComponent,
+    PasswordConfirmationFormComponent,
     PasswordInputTogglerComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,
@@ -129,6 +133,7 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     LeftSectionWrapperComponent,
     LogoutModalComponent,
     ModalWrapperComponent,
+    PasswordConfirmationFormComponent,
     PasswordInputTogglerComponent,
     PasswordStrengthMeterComponent,
     SanitizePipe,

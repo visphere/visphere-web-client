@@ -8,10 +8,10 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import * as NgrxAction_SHA from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { DevastateAccountHttpClientService } from '../devastate-account-http-client/devastate-account-http-client.service';
-import { PasswordConfirmationService } from '../password-confirmation/password-confirmation.service';
 
 @Injectable()
 export class DevastateAccountService extends AbstractLoadableProvider {
