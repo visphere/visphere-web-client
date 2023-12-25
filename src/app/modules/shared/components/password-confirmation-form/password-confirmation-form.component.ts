@@ -69,7 +69,6 @@ export class PasswordConfirmationFormComponent
 
   handleSubmitPasswordConfirmation(): void {
     const { password } = this.passwordForm.getRawValue();
-    console.log(this.isMfaSetup);
     if (this.isMfaSetup) {
       this._passwordConfirmationService.persistPasswordAndUpdateStage(password);
       return;
