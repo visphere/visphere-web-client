@@ -74,6 +74,10 @@ export class LeftNavigationBarComponent
     );
   }
 
+  handleClosePopup(): void {
+    this.loggedUserDetailsPopup?.hide();
+  }
+
   createGuildRoute(guild: UserGuildResDto): string {
     return `/guild/${guild.id}`;
   }

@@ -2,10 +2,15 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { NgxFloatUiContentComponent } from 'ngx-float-ui';
 import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme.provider';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
@@ -22,7 +27,7 @@ export class LoggedUserPopupComponent
   extends AbstractIconThemeProvider
   implements OnInit, OnDestroy
 {
-  @Input() loggedUserDetailsPopup?: NgxFloatUiContentComponent;
+  @Output() emitOnClosePopup = new EventEmitter<void>();
 
   loggedUser?: LoggedUser;
 
@@ -61,6 +66,6 @@ export class LoggedUserPopupComponent
     this._store.dispatch(
       NgrxAction_SHA.__updateLogoutModalState({ isOpen: true })
     );
-    this.loggedUserDetailsPopup?.hide();
+    this.emitOnClosePopup.emit();
   }
 }
