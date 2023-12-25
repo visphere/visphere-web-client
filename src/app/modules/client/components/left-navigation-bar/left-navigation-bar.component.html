@@ -94,7 +94,7 @@
   </button>
 </nav>
 <float-ui-content #loggedUserDetails>
-  <vsph-logged-user-popup />
+  <vsph-logged-user-popup [loggedUserDetailsPopup]="loggedUserDetailsPopup" />
 </float-ui-content>
 <ng-template #tooltipWindow let-i18nContent="i18nContent">
   {{ i18nContent | translate }}

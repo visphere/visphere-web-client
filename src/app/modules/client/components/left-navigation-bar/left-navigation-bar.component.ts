@@ -2,9 +2,10 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { NgxFloatUiContentComponent } from 'ngx-float-ui';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { UserGuildResDto } from '~/client-mod/model/guild.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
@@ -26,6 +27,9 @@ export class LeftNavigationBarComponent
   extends AbstractLandingUrlProvider
   implements OnInit, OnDestroy
 {
+  @ViewChild('loggedUserDetails', { static: false })
+  loggedUserDetailsPopup?: NgxFloatUiContentComponent;
+
   loggedUser?: LoggedUser;
   userGuilds: UserGuildResDto[] = [];
 
