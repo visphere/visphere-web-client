@@ -6,12 +6,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TextChannelDetailsResDto } from '~/client-mod/model/text-channel.model';
 import { TextChannelService } from '~/client-mod/services/text-channel/text-channel.service';
+import { WsService } from '~/client-mod/services/ws/ws.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'vsph-sphere-text-channel-page',
   templateUrl: './sphere-text-channel-page.component.html',
   host: { class: 'vsph-center-content__container' },
+  providers: [WsService],
 })
 export class SphereTextChannelPageComponent
   extends AbstractReactiveProvider
@@ -24,7 +26,8 @@ export class SphereTextChannelPageComponent
   constructor(
     private readonly _route: ActivatedRoute,
     private readonly _textChannelService: TextChannelService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _wsService: WsService
   ) {
     super();
   }
@@ -33,8 +36,12 @@ export class SphereTextChannelPageComponent
     this.wrapAsObservable$(
       this._textChannelService.fetchTextChannelDetails$(this._route.paramMap)
     ).subscribe({
-      next: textChannelDetails =>
-        (this.textChannelDetails = textChannelDetails),
+      next: textChannelDetails => {
+        this.textChannelDetails = textChannelDetails;
+        this.wrapAsObservable$(
+          this._wsService.initSocket$(this._route.paramMap)
+        ).subscribe();
+      },
       error: async () => this._router.navigateByUrl('/'),
     });
   }

@@ -17,6 +17,7 @@
 </label>
 <div class="flex-grow">
   <textarea
+    #resizableTextAreaRef
     vsphAutoResizableTextArea
     [(ngModel)]="userMessage"
     [placeholder]="defaultPrefix + '.startTyping' | translate"
