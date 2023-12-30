@@ -33,5 +33,6 @@ export type GuildDetailsResDto = {
   category: string;
   profileColor: string;
   isPrivate: boolean;
+  ownerId: number;
   isLoggedUserIsOwner: boolean;
 };
