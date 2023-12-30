@@ -4,8 +4,10 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
+import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { MessagesService } from '~/client-mod/services/messages/messages.service';
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
+import { WsService } from '~/client-mod/services/ws/ws.service';
 import { AppModule } from '~/root-mod/app.module';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { SphereMessagesContentComponent } from './sphere-messages-content.component';
@@ -21,6 +23,8 @@ describe('SphereMessagesContentComponent', () => {
         MessagesService,
         ParticipantService,
         PasswordConfirmationService,
+        WsService,
+        GuildService,
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(SphereMessagesContentComponent);

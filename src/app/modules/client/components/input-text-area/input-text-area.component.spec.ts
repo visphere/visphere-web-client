@@ -4,6 +4,8 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
+import { GuildService } from '~/client-mod/services/guild/guild.service';
+import { WsService } from '~/client-mod/services/ws/ws.service';
 import { AppModule } from '~/root-mod/app.module';
 import { InputTextAreaComponent } from './input-text-area.component';
 
@@ -14,6 +16,7 @@ describe('InputTextAreaComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
+      providers: [WsService, GuildService],
     }).compileComponents();
     fixture = TestBed.createComponent(InputTextAreaComponent);
     component = fixture.componentInstance;
