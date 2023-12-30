@@ -7,27 +7,14 @@
   [floatUiLoose]="userDetailsTooltipContent"
   [positionFixed]="true"
   looseTrigger="click"
-  loosePlacement="left-start"
+  [loosePlacement]="placement"
   arrowClass="hidden"
   [hideOnClickOutside]="true"
   [styles]="floatUiStyles"
   (onShown)="handleFetchUserDetails()"
   (onHidden)="handleClearUserDetailsContext()"
-  class="vsph-user-details-popover__button">
-  <img
-    src="{{ profileImageUrl }}"
-    alt=""
-    class="w-[32px] h-[32px] rounded-lg" />
-  <div class="flex-grow flex items-center gap-x-2">
-    <p class="font-bold line-clamp-1" [title]="userFullName">
-      {{ userFullName }}
-    </p>
-    <img
-      *ngIf="isOwner"
-      src="{{ path }}/static/icon/sphere-owner.svg"
-      alt=""
-      class="w-[15px] h-[15px] -mt-[1px]" />
-  </div>
+  [ngClass]="appliedClass">
+  <ng-content />
 </div>
 <float-ui-content #userDetailsTooltipContent>
   <div

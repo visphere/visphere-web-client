@@ -34,9 +34,24 @@
     <vsph-sphere-guild-participant
       [guildId]="guildParticipants?.guildId"
       [userId]="guildParticipants?.owner?.id"
-      [userFullName]="guildParticipants?.owner?.fullName!"
-      [profileImageUrl]="guildParticipants?.owner?.profileImageUrl!"
-      [isOwner]="true" />
+      [isOwner]="true"
+      appliedClass="vsph-user-details-popover__button">
+      <img
+        src="{{ guildParticipants?.owner?.profileImageUrl }}"
+        alt=""
+        class="w-[32px] h-[32px] rounded-lg" />
+      <div class="flex-grow flex items-center gap-x-2">
+        <p
+          class="font-bold line-clamp-1"
+          [title]="guildParticipants?.owner?.fullName">
+          {{ guildParticipants?.owner?.fullName }}
+        </p>
+        <img
+          src="{{ path }}/static/icon/sphere-owner.svg"
+          alt=""
+          class="w-[15px] h-[15px] -mt-[1px]" />
+      </div>
+    </vsph-sphere-guild-participant>
     <p class="vsph-sidebar__aside-text mt-4 ms-1">
       {{ defaultPrefix + '.members' | translate }} -
       {{ guildParticipants?.members?.length }}
@@ -56,8 +71,17 @@
           <vsph-sphere-guild-participant
             [guildId]="guildParticipants?.guildId"
             [userId]="member.id"
-            [userFullName]="member.fullName!"
-            [profileImageUrl]="member.profileImageUrl!" />
+            appliedClass="vsph-user-details-popover__button">
+            <img
+              src="{{ member?.profileImageUrl }}"
+              alt=""
+              class="w-[32px] h-[32px] rounded-lg" />
+            <div class="flex-grow flex items-center gap-x-2">
+              <p class="font-bold line-clamp-1" [title]="member?.fullName">
+                {{ member?.fullName }}
+              </p>
+            </div>
+          </vsph-sphere-guild-participant>
         </li>
       </ul>
     </ng-template>

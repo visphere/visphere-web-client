@@ -27,9 +27,9 @@ export class SphereGuildParticipantComponent
 {
   @Input() guildId?: number;
   @Input() userId?: number;
-  @Input() profileImageUrl = '';
-  @Input() userFullName = '';
   @Input() isOwner = false;
+  @Input() placement: 'left-start' | 'right-start' = 'left-start';
+  @Input() appliedClass = '';
 
   @ViewChild('userDetailsTooltipContent', { static: false })
   userDetailsTooltipContent?: NgxFloatUiContentComponent;
