@@ -5,17 +5,16 @@
 import { TestBed } from '@angular/core/testing';
 import { ClientModule } from '~/client-mod/client.module';
 import { AppModule } from '~/root-mod/app.module';
-import { MessagesService } from './messages.service';
+import { MessagesHttpClientService } from './messages-http-client.service';
 
-describe('MessagesService', () => {
-  let service: MessagesService;
+describe('MessagesHttpClientService', () => {
+  let service: MessagesHttpClientService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, ClientModule],
-      providers: [MessagesService],
     });
-    service = TestBed.inject(MessagesService);
+    service = TestBed.inject(MessagesHttpClientService);
   });
 
   it('should be created', () => {
