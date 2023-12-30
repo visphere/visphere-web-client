@@ -3,4 +3,27 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<div>messages container</div>
+<div *ngFor="let message of messages" class="vsph-message__container">
+  <vsph-sphere-guild-participant
+    [guildId]="guildDetails?.id"
+    [userId]="message.userId"
+    [isOwner]="guildDetails?.ownerId === message.userId"
+    placement="right-start"
+    appliedClass="cursor-pointer">
+    <img
+      src="{{ message.profileImageUrl }}"
+      class="w-[40px] h-[40px] rounded-lg"
+      alt="" />
+  </vsph-sphere-guild-participant>
+  <div class="flex-grow w-full">
+    <div class="flex items-center gap-x-3">
+      <div class="font-bold">{{ message.fullName }}</div>
+      <div class="text-xs text-vsph-tint-400">
+        {{ message.sendDate | vsphDatetimeFormatter: selectedLang$ | async }}
+      </div>
+    </div>
+    <div class="whitespace-pre-line" [style.wordBreak]="'break-word'">
+      {{ message.message }}
+    </div>
+  </div>
+</div>
