@@ -50,6 +50,8 @@
     "@ngrx/store": "^16.2.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@stomp/rx-stomp": "^2.0.0",
+    "@stomp/stompjs": "^7.0.0",
     "@zxcvbn-ts/core": "^3.0.2",
     "angular-cd-timer": "^3.0.0",
     "axios": "^1.4.0",
