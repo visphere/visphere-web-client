@@ -5,6 +5,7 @@
 import { UserSettings } from './identity.model';
 
 export type LoggedUser = {
+  id: number;
   fullName: string;
   username: string;
   profileUrl: string;

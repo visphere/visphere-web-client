@@ -4,6 +4,7 @@
  */
 
 export type LoginResDtoModel = {
+  id: number;
   fullName: string;
   username: string;
   emailAddress: string;

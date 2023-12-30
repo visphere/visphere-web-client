@@ -41,6 +41,7 @@ export class SharedEffects {
       ofType(NgrxAction.__setLoggedUserDetails),
       mergeMap(({ details }) => {
         const {
+          id,
           fullName,
           username,
           profileUrl,
@@ -67,6 +68,7 @@ export class SharedEffects {
         return of(
           NgrxAction.__persistLoggedUserDetails({
             details: {
+              id,
               fullName,
               username,
               profileUrl,
