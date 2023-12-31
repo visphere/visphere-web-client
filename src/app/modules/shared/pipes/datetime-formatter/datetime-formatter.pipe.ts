@@ -10,7 +10,8 @@ import { TranslationRow } from '~/shared-mod/types/translation.type';
 export class DatetimeFormatterPipe implements PipeTransform {
   transform(
     dateStr: string | undefined,
-    lang$: Observable<TranslationRow>
+    lang$: Observable<TranslationRow>,
+    seconds?: boolean
   ): Observable<string> {
     return lang$.pipe(
       map(({ lang }) => {
@@ -18,13 +19,17 @@ export class DatetimeFormatterPipe implements PipeTransform {
           return '';
         }
         const parsedDate = new Date(dateStr);
-        return parsedDate.toLocaleDateString(lang, {
+        const props: Intl.DateTimeFormatOptions = {
           year: 'numeric',
           month: 'short',
           day: '2-digit',
           hour: 'numeric',
           minute: '2-digit',
-        });
+        };
+        if (seconds) {
+          props['second'] = '2-digit';
+        }
+        return parsedDate.toLocaleDateString(lang, props);
       })
     );
   }

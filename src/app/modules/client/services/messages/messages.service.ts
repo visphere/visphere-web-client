@@ -19,7 +19,7 @@ import { MessagesHttpClientService } from '../messages-http-client/messages-http
 
 @Injectable()
 export class MessagesService extends AbstractLoadableProvider {
-  private readonly _size = 40;
+  private readonly _size = 3;
 
   private _currentOffset$ = new BehaviorSubject<number>(0);
 

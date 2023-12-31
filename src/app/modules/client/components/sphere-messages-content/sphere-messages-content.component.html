@@ -19,7 +19,9 @@
     <div class="flex items-center gap-x-3">
       <div class="font-bold">{{ message.fullName }}</div>
       <div class="text-xs text-vsph-tint-400">
-        {{ message.sendDate | vsphDatetimeFormatter: selectedLang$ | async }}
+        {{
+          message.sendDate | vsphDatetimeFormatter: selectedLang$ : true | async
+        }}
       </div>
     </div>
     <div class="whitespace-pre-line" [style.wordBreak]="'break-word'">
