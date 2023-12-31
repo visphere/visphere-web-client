@@ -4,6 +4,7 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { GuildDetailsResDto } from '~/client-mod/model/guild.model';
 import { MessagePayloadResDto } from '~/client-mod/model/message.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
@@ -55,5 +56,20 @@ export class SphereMessagesContentComponent
 
   ngOnDestroy(): void {
     this.unmountAllSubscriptions();
+  }
+
+  isFirstMessage(
+    message: MessagePayloadResDto,
+    prevMessage: MessagePayloadResDto | undefined
+  ): boolean {
+    if (!prevMessage) {
+      return true;
+    }
+    const messageDate = moment(message.sendDate).startOf('minute');
+    const prevMessageDate = moment(prevMessage.sendDate).startOf('minute');
+    return !(
+      messageDate.isSame(prevMessageDate) &&
+      message.userId === prevMessage.userId
+    );
   }
 }

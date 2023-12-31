@@ -4,34 +4,41 @@
  -->
 
 <div
-  *ngFor="let message of messages"
-  class="vsph-message__container"
-  [class.vsph-message__container--hoverable]="!message.accountDeleted">
-  <vsph-sphere-guild-participant
-    *ngIf="!message.accountDeleted; else onlyImageContent"
-    [guildId]="guildDetails?.id"
-    [userId]="message.userId"
-    [isOwner]="guildDetails?.ownerId === message.userId"
-    placement="right-start"
-    appliedClass="cursor-pointer">
-    <img
-      src="{{ message.profileImageUrl }}"
-      class="vsph-message__profile-image"
-      alt="" />
-  </vsph-sphere-guild-participant>
-  <ng-template #onlyImageContent>
-    <img
-      src="{{ message.profileImageUrl }}"
-      class="vsph-message__profile-image"
-      alt="" />
-  </ng-template>
+  *ngFor="let message of messages; let i = index"
+  [class.vsph-message__container--first]="
+    isFirstMessage(message, i > 0 ? messages[i - 1] : undefined)
+  "
+  class="vsph-message__container">
+  <ng-container
+    *ngIf="isFirstMessage(message, i > 0 ? messages[i - 1] : undefined)">
+    <div class="vsph-message__profile-image-container">
+      <vsph-sphere-guild-participant
+        *ngIf="!message.accountDeleted; else onlyImageContent"
+        [guildId]="guildDetails?.id"
+        [userId]="message.userId"
+        [isOwner]="guildDetails?.ownerId === message.userId"
+        placement="right-start">
+        <img
+          src="{{ message.profileImageUrl }}"
+          class="vsph-message__profile-image"
+          [class.vsph-message__container--hoverable]="!message.accountDeleted"
+          alt="" />
+      </vsph-sphere-guild-participant>
+    </div>
+    <ng-template #onlyImageContent>
+      <img
+        src="{{ message.profileImageUrl }}"
+        class="vsph-message__profile-image"
+        alt="" />
+    </ng-template>
+  </ng-container>
   <div class="flex-grow w-full">
-    <div class="flex items-center gap-x-3">
+    <div
+      *ngIf="isFirstMessage(message, i > 0 ? messages[i - 1] : undefined)"
+      class="flex items-center gap-x-3">
       <div class="font-bold">{{ message.fullName }}</div>
       <div class="text-xs text-vsph-tint-400">
-        {{
-          message.sendDate | vsphDatetimeFormatter: selectedLang$ : true | async
-        }}
+        {{ message.sendDate | vsphDatetimeFormatter: selectedLang$ | async }}
       </div>
     </div>
     <div class="whitespace-pre-line" [style.wordBreak]="'break-word'">
