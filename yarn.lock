@@ -7055,6 +7055,13 @@ ngx-image-cropper@^7.1.2:
   dependencies:
     tslib "^2.3.0"
 
+ngx-infinite-scroll@^17.0.0:
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-infinite-scroll/-/ngx-infinite-scroll-17.0.0.tgz#15726104d5b4e248a6eb96b03149959b20233ae8"
+  integrity sha512-pQXLuRiuhRuDKD3nmgyW1V08JVNBepmk6nb8qjHc5hgsWNts01+R/p33rYcRDzcut6/PWqGyrZ9o9i8swzMYMA==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-rerender@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ngx-rerender/-/ngx-rerender-1.2.0.tgz#4b7a145cb6e5f36f317097e315fa5c8d48ff9ee6"

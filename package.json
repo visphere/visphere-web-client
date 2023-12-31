@@ -62,6 +62,7 @@
     "moment": "^2.29.4",
     "ngx-float-ui": "^17.0.1",
     "ngx-image-cropper": "^7.1.2",
+    "ngx-infinite-scroll": "^17.0.0",
     "ngx-rerender": "^1.2.0",
     "ngx-tippy-wrapper": "^6.2.2",
     "ngx-translate-messageformat-compiler": "^6.5.0",

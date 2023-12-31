@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxFloatUiModule } from 'ngx-float-ui';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { ClientRootComponent } from '~/client-mod/client-root.component';
 import { ClientRoutingModule } from '~/client-mod/client-routing.module';
@@ -69,6 +70,7 @@ import { clientReduxStore } from './store/reducer';
     }),
     EffectsModule.forFeature([]),
     FormsModule,
+    InfiniteScrollModule,
     NgIconsModule.withIcons({
       addIcon: BtsIcon.bootstrapPlus,
       exploreIcon: BtsIcon.bootstrapCompass,
