@@ -17,7 +17,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 @Component({
   selector: 'vsph-sphere-messages-content',
   templateUrl: './sphere-messages-content.component.html',
-  providers: [MessagesService, ParticipantService, PasswordConfirmationService],
+  providers: [ParticipantService, PasswordConfirmationService],
 })
 export class SphereMessagesContentComponent
   extends AbstractReactiveProvider
@@ -44,10 +44,10 @@ export class SphereMessagesContentComponent
     );
     this.wrapAsObservable$(
       this._messagesService.resetOffsetOnChangePage$(this._route)
-    ).subscribe();
+    ).subscribe(() => (this.messages = []));
     this.wrapAsObservable$(
       this._messagesService.fetchMessagesWithOffset$(this._route)
-    ).subscribe(messages => (this.messages = messages));
+    ).subscribe(messages => (this.messages = [...messages, ...this.messages]));
     this.wrapAsObservable$(
       this._wsService.observableMessagesStream$()
     ).subscribe(message => this.messages.push(message));

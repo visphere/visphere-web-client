@@ -16,4 +16,11 @@ export type MessagePayloadResDto = {
   profileImageUrl: string;
   sendDate: string;
   message: string;
+  accountDeleted: boolean;
+};
+
+export type MessagesResDto = {
+  messages: MessagePayloadResDto[];
+  paginationState: string;
+  paginationEnd: boolean;
 };

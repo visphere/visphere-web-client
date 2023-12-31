@@ -5,7 +5,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MessagePayloadResDto } from '~/client-mod/model/message.model';
+import { MessagesResDto } from '~/client-mod/model/message.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
 
 @Injectable({ providedIn: 'root' })
@@ -17,11 +17,12 @@ export class MessagesHttpClientService extends AbstractHttpProvider {
   getTextChannelMessagesWithOffset$(
     offset: number,
     size: number,
+    nextPage: string,
     textChannelId: number
-  ): Observable<MessagePayloadResDto[]> {
-    return this._httpClient.get<MessagePayloadResDto[]>(
+  ): Observable<MessagesResDto> {
+    return this._httpClient.get<MessagesResDto>(
       `${this._infraApiPath}/api/v1/chat/message/textChannel/${textChannelId}/all`,
-      { params: { offset, size } }
+      { params: { offset, nextPage, size } }
     );
   }
 }

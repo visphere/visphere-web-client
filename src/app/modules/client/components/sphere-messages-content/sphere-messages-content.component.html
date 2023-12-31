@@ -3,8 +3,12 @@
  ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  -->
 
-<div *ngFor="let message of messages" class="vsph-message__container">
+<div
+  *ngFor="let message of messages"
+  class="vsph-message__container"
+  [class.vsph-message__container--hoverable]="!message.accountDeleted">
   <vsph-sphere-guild-participant
+    *ngIf="!message.accountDeleted; else onlyImageContent"
     [guildId]="guildDetails?.id"
     [userId]="message.userId"
     [isOwner]="guildDetails?.ownerId === message.userId"
@@ -12,9 +16,15 @@
     appliedClass="cursor-pointer">
     <img
       src="{{ message.profileImageUrl }}"
-      class="w-[40px] h-[40px] rounded-lg"
+      class="vsph-message__profile-image"
       alt="" />
   </vsph-sphere-guild-participant>
+  <ng-template #onlyImageContent>
+    <img
+      src="{{ message.profileImageUrl }}"
+      class="vsph-message__profile-image"
+      alt="" />
+  </ng-template>
   <div class="flex-grow w-full">
     <div class="flex items-center gap-x-3">
       <div class="font-bold">{{ message.fullName }}</div>

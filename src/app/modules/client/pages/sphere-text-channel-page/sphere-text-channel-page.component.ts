@@ -5,6 +5,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TextChannelDetailsResDto } from '~/client-mod/model/text-channel.model';
+import { MessagesService } from '~/client-mod/services/messages/messages.service';
 import { TextChannelService } from '~/client-mod/services/text-channel/text-channel.service';
 import { WsService } from '~/client-mod/services/ws/ws.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -13,7 +14,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
   selector: 'vsph-sphere-text-channel-page',
   templateUrl: './sphere-text-channel-page.component.html',
   host: { class: 'vsph-center-content__container' },
-  providers: [WsService],
+  providers: [WsService, MessagesService],
 })
 export class SphereTextChannelPageComponent
   extends AbstractReactiveProvider
@@ -21,13 +22,19 @@ export class SphereTextChannelPageComponent
 {
   textChannelDetails?: TextChannelDetailsResDto;
 
+  isPaginationEnd$ = this._messagesService.isPaginationEnd$;
+  isLoading$ = this._messagesService.isLoading$;
+
   readonly defaultPrefix = 'vsph.clientCommon.guild.textChannel';
+  readonly throttle = 300;
+  readonly scrollUpDistance = -9;
 
   constructor(
     private readonly _route: ActivatedRoute,
     private readonly _textChannelService: TextChannelService,
     private readonly _router: Router,
-    private readonly _wsService: WsService
+    private readonly _wsService: WsService,
+    private readonly _messagesService: MessagesService
   ) {
     super();
   }
@@ -48,5 +55,9 @@ export class SphereTextChannelPageComponent
 
   ngOnDestroy(): void {
     this.unmountAllSubscriptions();
+  }
+
+  handleFetchNextMessages(): void {
+    this._messagesService.increaseOffset();
   }
 }

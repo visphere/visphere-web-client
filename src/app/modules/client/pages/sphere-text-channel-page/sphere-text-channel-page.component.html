@@ -9,22 +9,36 @@
     {{ textChannelDetails?.name || '...' }}
   </p>
 </div>
-<div class="vsph-center-content__body">
+<div
+  infinite-scroll
+  [scrollWindow]="false"
+  [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle"
+  (scrolledUp)="handleFetchNextMessages()"
+  class="vsph-center-content__body">
   <vsph-sphere-messages-content />
-  <hr class="vsph-center-content__separator mb-10" />
-  <div class="vsph-rounded-icon__container mx-auto justify-end">
-    <div class="vsph-rounded-icon__body">
-      <ng-icon name="textChannelIcon" class="text-3xl" />
-    </div>
-    <h3 class="text-xl text-vsph-tint-300">
-      {{ defaultPrefix + '.welcome' | translate }}
-    </h3>
-    <h2 class="text-2xl font-bold mb-3">
-      {{ textChannelDetails?.name || '...' }}
-    </h2>
-    <p class="text-vsph-tint-300 mb-10 text-center">
-      {{ defaultPrefix + '.noMessagesYet' | translate }}
-    </p>
+  <div
+    *ngIf="isLoading$ | async"
+    class="flex justify-center items-center my-10">
+    <div
+      class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
   </div>
+  <ng-container *ngIf="isPaginationEnd$ | async">
+    <hr class="vsph-center-content__separator mb-10" />
+    <div class="vsph-rounded-icon__container mx-auto justify-end">
+      <div class="vsph-rounded-icon__body">
+        <ng-icon name="textChannelIcon" class="text-3xl" />
+      </div>
+      <h3 class="text-xl text-vsph-tint-300">
+        {{ defaultPrefix + '.welcome' | translate }}
+      </h3>
+      <h2 class="text-2xl font-bold mb-3">
+        {{ textChannelDetails?.name || '...' }}
+      </h2>
+      <p class="text-vsph-tint-300 mb-10 text-center">
+        {{ defaultPrefix + '.noMessagesYet' | translate }}
+      </p>
+    </div>
+  </ng-container>
 </div>
 <vsph-input-text-area />
