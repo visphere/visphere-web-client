@@ -16,5 +16,27 @@
     "
     [i18nDescription]="defaultPrefix + '.' + i18nPrefix + '.description'"
     [i18nParams]="i18nParams"
-    (emitSubmitConfirmation)="handleEmitOnSubmitConfirmation($event)" />
+    (emitSubmitConfirmation)="handleEmitOnSubmitConfirmation($event)">
+    <div *ngIf="showDeleteMessagesCheckbox" class="flex justify-center gap-y-1">
+      <label class="flex gap-x-2 items-start">
+        <input
+          [(ngModel)]="deleteAllMessages"
+          type="checkbox"
+          class="vsph-checkbox vsph-checkbox--danger--red" />
+        <div
+          class="leading-5 text-vsph-tint-400 dark:text-vsph-tint-300 cursor-pointer">
+          {{ defaultPrefix + '.deleteAllMessages' | translate }}
+        </div>
+        <div
+          [ngxTippy]="inputTooltip"
+          [tippyProps]="tooltipProps"
+          class="ms-1 flex items-center">
+          <ng-icon name="questionCircleIcon" />
+          <ng-template #inputTooltip>
+            {{ defaultPrefix + '.deleteAllMessagesInfo' | translate }}
+          </ng-template>
+        </div>
+      </label>
+    </div>
+  </vsph-password-confirmation-form>
 </vsph-devastate-action-modal>

@@ -7,6 +7,7 @@
   *ngIf="isModalActive"
   [isActiveModal]="isModalActive"
   [i18nParams]="{ name: guildDetails?.name }"
+  [showDeleteMessagesCheckbox]="false"
   i18nPrefix="deleteGuild"
   (emitDevastateAction)="handleDeleteGuild($event)"
   (emitCloseModal)="handleToggleModalToDeleteGuild(false)" />

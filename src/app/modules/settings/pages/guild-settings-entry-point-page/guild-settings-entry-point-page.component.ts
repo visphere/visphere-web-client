@@ -6,6 +6,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { GuildOwnerDetailsResDto } from '~/settings-mod/model/guild-management.model';
+import { DevastateModalData } from '~/settings-mod/model/user-account-details.model';
 import { SphereGuildService } from '~/settings-mod/services/sphere-guild/sphere-guild.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
@@ -57,7 +58,7 @@ export class GuildSettingsEntryPointPageComponent
     this.isModalActive = isActive;
   }
 
-  handleDeleteGuild(passwordOrMfaCode: string): void {
+  handleDeleteGuild({ passwordOrMfaCode }: DevastateModalData): void {
     if (this.guildDetails?.id) {
       this.wrapAsObservable$(
         this._sphereGuildService.deleteGuild$(

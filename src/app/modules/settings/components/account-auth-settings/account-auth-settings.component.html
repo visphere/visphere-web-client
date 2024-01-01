@@ -34,12 +34,14 @@
   (emitDevastateAction)="handleResetMfaSettings()" />
 <vsph-devastate-account-modal
   *ngIf="(activeModal$ | async) === 'disable-account'"
+  [deleteAllMessages]="false"
   [isActiveModal]="(activeModal$ | async) === 'disable-account'"
   i18nPrefix="disableAccount"
   (emitDevastateAction)="handleDisableAccount($event)"
   (emitCloseModal)="handleCloseActiveModal()" />
 <vsph-devastate-account-modal
   *ngIf="(activeModal$ | async) === 'delete-account'"
+  [deleteAllMessages]="true"
   [isActiveModal]="(activeModal$ | async) === 'delete-account'"
   i18nPrefix="deleteAccount"
   (emitDevastateAction)="handleDeleteAccount($event)"

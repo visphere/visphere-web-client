@@ -5,6 +5,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, tap, throwError } from 'rxjs';
+import { DevastateModalData } from '~/settings-mod/model/user-account-details.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
@@ -24,22 +25,30 @@ export class DevastateAccountService extends AbstractLoadableProvider {
     super();
   }
 
-  disableAcount$(passwordOrMfaCode: string): Observable<BaseMessageModel> {
+  disableAcount$({
+    passwordOrMfaCode,
+    deleteAllMessages,
+  }: DevastateModalData): Observable<BaseMessageModel> {
     return this.proceedDevastateAction$(
       this._devastateAccountHttpClientService.disableAccount$(
         this._passwordConfirmationService.formatToConfirmationDto(
           passwordOrMfaCode
-        )
+        ),
+        deleteAllMessages
       )
     );
   }
 
-  deleteAccount$(passwordOrMfaCode: string): Observable<BaseMessageModel> {
+  deleteAccount$({
+    passwordOrMfaCode,
+    deleteAllMessages,
+  }: DevastateModalData): Observable<BaseMessageModel> {
     return this.proceedDevastateAction$(
       this._devastateAccountHttpClientService.deleteAccount$(
         this._passwordConfirmationService.formatToConfirmationDto(
           passwordOrMfaCode
-        )
+        ),
+        deleteAllMessages
       )
     );
   }

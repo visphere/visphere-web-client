@@ -4,7 +4,10 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserAccountDetailsModel } from '~/settings-mod/model/user-account-details.model';
+import {
+  DevastateModalData,
+  UserAccountDetailsModel,
+} from '~/settings-mod/model/user-account-details.model';
 import { DevastateAccountService } from '~/settings-mod/services/devastate-account/devastate-account.service';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { UpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
@@ -75,15 +78,15 @@ export class AccountAuthSettingsComponent
     }
   }
 
-  handleDisableAccount(passwordOrMfaCode: string): void {
+  handleDisableAccount(modalData: DevastateModalData): void {
     this.wrapAsObservable$(
-      this._devastateAccountService.disableAcount$(passwordOrMfaCode)
+      this._devastateAccountService.disableAcount$(modalData)
     ).subscribe({ next: async () => this.logout() });
   }
 
-  handleDeleteAccount(passwordOrMfaCode: string): void {
+  handleDeleteAccount(modalData: DevastateModalData): void {
     this.wrapAsObservable$(
-      this._devastateAccountService.deleteAccount$(passwordOrMfaCode)
+      this._devastateAccountService.deleteAccount$(modalData)
     ).subscribe({ next: async () => this.logout() });
   }
 

@@ -23,3 +23,8 @@ export type UserAccountDetailsModel = UserAccountDetailsResDto & {
   profileUrl: string;
   profileColor: string;
 };
+
+export type DevastateModalData = {
+  passwordOrMfaCode: string;
+  deleteAllMessages: boolean;
+};
