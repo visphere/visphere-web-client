@@ -111,7 +111,7 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
     passwordOrMfaCode: string
   ): Observable<BaseMessageModel> {
     return of(null).pipe(
-      tap(() => this.setLoading(true)),
+      tap(() => this._passwordConfirmationService.setLoading(true)),
       switchMap(() =>
         combineLatest([
           this._guildService.guildDetails$,
@@ -137,13 +137,13 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
         )
       ),
       tap(({ message }) => {
-        this.setLoading(false);
+        this._passwordConfirmationService.setLoading(false);
         this.updateWsSignalValue();
         this.showSuccessSnackbar(message);
         this._store.dispatch(NgrxAction_CLN.__closeDevastateMemberModal());
       }),
       catchError(err => {
-        this.setLoading(false);
+        this._passwordConfirmationService.setLoading(false);
         return throwError(() => err);
       })
     );
