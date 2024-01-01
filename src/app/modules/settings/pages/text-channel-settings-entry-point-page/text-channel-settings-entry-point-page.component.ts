@@ -27,7 +27,7 @@ export class TextChannelSettingsEntryPointPageComponent
   guildId?: number;
   textChannelId?: number;
 
-  isRemoveLoading$ = this._textChannelService.isLoading$;
+  activeLoading$ = this._textChannelService.activeLoading$;
   settingsReturnUrl$ = this._store.select(
     NgrxSelector_SHA.selectSettingsReturnUrl
   );

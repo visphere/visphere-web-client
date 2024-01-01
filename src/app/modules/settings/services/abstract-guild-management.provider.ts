@@ -30,14 +30,15 @@ export abstract class AbstractGuildManagementProvider extends AbstractWsWebhookP
 
   protected performAction$(
     inputObs$: Observable<BaseMessageModel>,
-    removeSavePath: boolean
+    removeSavePath: boolean,
+    onLoadingCallback: (state: boolean) => void
   ): Observable<null> {
     return of(null).pipe(
-      tap(() => this.setLoading(true)),
+      tap(() => onLoadingCallback(true)),
       switchMap(() => inputObs$),
       first(),
       tap(({ message }) => {
-        this.setLoading(false);
+        onLoadingCallback(false);
         this._absStore.dispatch(
           NgrxAction_SHA.__addSnackbar({
             content: {
@@ -58,7 +59,7 @@ export abstract class AbstractGuildManagementProvider extends AbstractWsWebhookP
         return null;
       }),
       catchError(err => {
-        this.setLoading(false);
+        onLoadingCallback(false);
         return throwError(() => err);
       })
     );

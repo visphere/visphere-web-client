@@ -10,3 +10,5 @@ export type ProfileImageLoadableElementType =
   | 'deleting-image'
   | 'changing-image-provider'
   | 'none';
+
+export type TextChannelLoadableElementType = 'updating' | 'deleting' | 'none';

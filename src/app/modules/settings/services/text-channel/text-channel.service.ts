@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
+  BehaviorSubject,
   Observable,
   ReplaySubject,
   Subject,
@@ -19,6 +20,7 @@ import {
   throwError,
 } from 'rxjs';
 import { TextChannelDetailsResDto } from '~/settings-mod/model/guild-management.model';
+import { TextChannelLoadableElementType } from '~/settings-mod/types/loadable-element.type';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractGuildManagementProvider } from '../abstract-guild-management.provider';
@@ -28,6 +30,9 @@ import { GuildManagementHttpClientService } from '../guild-management-http-clien
 export class TextChannelService extends AbstractGuildManagementProvider {
   private _textChannelDetails$ = new Subject<TextChannelDetailsResDto>();
   private _textChannelId$ = new ReplaySubject<number>(1);
+  private _activeLoading$ = new BehaviorSubject<TextChannelLoadableElementType>(
+    'none'
+  );
 
   constructor(
     _store: Store<SharedReducer>,
@@ -67,14 +72,16 @@ export class TextChannelService extends AbstractGuildManagementProvider {
       this._guildManagementHttpClientService.updateTextChannel$(textChannelId, {
         name,
       }),
-      false
+      false,
+      isLoading => this._activeLoading$.next(isLoading ? 'updating' : 'none')
     );
   }
 
   deleteTextChannel$(textChannelId: number): Observable<null> {
     return this.performAction$(
       this._guildManagementHttpClientService.deleteTextChannel$(textChannelId),
-      true
+      true,
+      isLoading => this._activeLoading$.next(isLoading ? 'deleting' : 'none')
     );
   }
 
@@ -83,5 +90,8 @@ export class TextChannelService extends AbstractGuildManagementProvider {
   }
   get textChannelId$(): Observable<number> {
     return this._textChannelId$.asObservable();
+  }
+  get activeLoading$(): Observable<TextChannelLoadableElementType> {
+    return this._activeLoading$.asObservable();
   }
 }

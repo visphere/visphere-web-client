@@ -26,7 +26,7 @@
       {{ 'vsph.clientCommon.settingsPage.revertPrevious' | translate }}
     </button>
     <vsph-lazy-button-spinner
-      [isLoading]="(isLoading$ | async)!"
+      [isLoading]="(activeLoading$ | async) === 'updating'"
       [buttonDisabled]="textChannelForm.invalid || nameFieldIsExact">
       {{ 'vsph.clientCommon.settingsPage.nameSubmitButton' | translate }}
     </vsph-lazy-button-spinner>

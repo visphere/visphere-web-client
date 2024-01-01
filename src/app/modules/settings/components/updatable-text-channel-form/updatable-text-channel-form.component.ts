@@ -22,7 +22,7 @@ export class UpdatableTextChannelFormComponent
   textChannelForm?: FormGroup;
   memorizedName = '';
 
-  isLoading$ = this._textChannelService.isLoading$;
+  activeLoading$ = this._textChannelService.activeLoading$;
 
   readonly defaultPrefix =
     'clientCommon.settingsPage.category.textChannelSettings.subpage.overview';
@@ -51,8 +51,10 @@ export class UpdatableTextChannelFormComponent
     this.wrapAsObservable$(this._textChannelService.textChannelId$).subscribe(
       textChannelId => (this.textChannelId = textChannelId)
     );
-    this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
-      this._populateFormGroupService.setFormDisabled(isLoading)
+    this.wrapAsObservable$(this.activeLoading$).subscribe(activeLoading =>
+      this._populateFormGroupService.setFormDisabled(
+        activeLoading === 'updating'
+      )
     );
   }
 

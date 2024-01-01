@@ -15,7 +15,7 @@
     modalPrefix + '.description' | translate: { name: textChannelDetails?.name }
   }}
   <vsph-lazy-button-spinner
-    [isLoading]="(isRemoveLoading$ | async)!"
+    [isLoading]="(activeLoading$ | async) === 'deleting'"
     (emitClick)="handleDeleteTextChannel()"
     buttonStyle="vsph-button vsph-button--primary vsph-button--danger mt-4">
     {{ modalPrefix + '.submitButton' | translate }}
