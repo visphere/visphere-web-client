@@ -16,7 +16,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
   templateUrl: './sphere-guild-participants-panel.component.html',
   host: {
     class:
-      'vsph-side-content__container bg-vsph-light-200 dark:bg-vsph-dark-800',
+      'vsph-side-content__container bg-vsph-light-300 dark:bg-vsph-dark-800',
   },
   providers: [PasswordConfirmationService, ParticipantService],
 })

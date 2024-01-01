@@ -22,7 +22,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
   templateUrl: './sphere-text-channels-panel.component.html',
   host: {
     class:
-      'vsph-side-content__container bg-vsph-light-200 dark:bg-vsph-dark-900',
+      'vsph-side-content__container bg-vsph-light-300 dark:bg-vsph-dark-900',
   },
 })
 export class SphereTextChannelsPanelComponent
