@@ -16,10 +16,12 @@ import {
   of,
   switchMap,
   tap,
+  withLatestFrom,
 } from 'rxjs';
 import { MessagePayloadResDto } from '~/client-mod/model/message.model';
 import { environment } from '~/env/environment';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
+import { FaviconBadgeNotificatorService } from '~/shared-mod/services/favicon-badge-notificator/favicon-badge-notificator.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
@@ -39,7 +41,8 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
   constructor(
     private readonly _guildService: GuildService,
     private readonly _localStorageService: LocalStorageService,
-    private readonly _store: Store<SharedReducer>
+    private readonly _store: Store<SharedReducer>,
+    private readonly _faviconBadgeNotificatorService: FaviconBadgeNotificatorService
   ) {
     super();
     this._rxStomp = new RxStomp();
@@ -90,7 +93,14 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
           destination: `/topic/outbound.${textChannelId}`,
         })
       ),
-      map(message => JSON.parse(message.body) as MessagePayloadResDto)
+      withLatestFrom(this._store.select(NgrxSelector_SHA.selectLoggedUser)),
+      map(([{ body }, loggedUser]) => {
+        const message = JSON.parse(body) as MessagePayloadResDto;
+        if (message.userId !== loggedUser?.id) {
+          this._faviconBadgeNotificatorService.showNotify();
+        }
+        return message;
+      })
     );
   }
 

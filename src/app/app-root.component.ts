@@ -2,8 +2,9 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FaviconBadgeNotificatorService } from './modules/shared/services/favicon-badge-notificator/favicon-badge-notificator.service';
 import { IdentityService } from './modules/shared/services/identity/identity.service';
 import { AbstractReactiveProvider } from './modules/shared/utils/abstract-reactive-provider';
 
@@ -27,7 +28,8 @@ export class AppRootComponent
 
   constructor(
     private readonly _identityService: IdentityService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _faviconBadgeNotificatorService: FaviconBadgeNotificatorService
   ) {
     super();
     this.redirectUrl = this._router.url;
@@ -48,5 +50,10 @@ export class AppRootComponent
 
   ngOnDestroy(): void {
     this.unmountAllSubscriptions();
+  }
+
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    this._faviconBadgeNotificatorService.removeNotify();
   }
 }
