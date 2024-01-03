@@ -3,8 +3,8 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, OnDestroy } from '@angular/core';
-import { AbstractReactiveProvider } from '~/root-mod/modules/shared/utils/abstract-reactive-provider';
-import { TextChannelService } from '../../services/text-channel/text-channel.service';
+import { TextChannelService } from '~/settings-mod/services/text-channel/text-channel.service';
+import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
 @Component({
   selector: 'vsph-text-channel-overview-settings-page',

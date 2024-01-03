@@ -14,7 +14,7 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
 @Component({
   selector: 'vsph-sphere-guild-page',
   templateUrl: './sphere-guild-page.component.html',
-  host: { class: 'flex h-screen w-full' },
+  host: { class: 'flex flex-grow h-screen' },
   providers: [TextChannelService],
 })
 export class SphereGuildPageComponent

@@ -36,7 +36,6 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
   private _textChannelId$ = new ReplaySubject<number>(1);
 
   private _rxStomp: RxStomp;
-  private _spaceKeyPressed = false;
 
   constructor(
     private readonly _guildService: GuildService,
@@ -127,17 +126,6 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
     );
   }
 
-  sendMessageOnKeyPress(event: KeyboardEvent, callback: () => void): void {
-    if (event.key === ' ' && !this._spaceKeyPressed) {
-      this._spaceKeyPressed = true;
-      event.preventDefault();
-    } else if (event.key === 'Enter' && this._spaceKeyPressed) {
-      callback();
-      this._spaceKeyPressed = false;
-      event.preventDefault();
-    }
-  }
-
   private logOnDev(message: string): void {
     if (!this._isProd) {
       console.log(message);
@@ -154,5 +142,9 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
     return (
       this._infraApiPath!.replace(`http${secured}`, `ws${secured}`) + '/chat/ws'
     );
+  }
+
+  get textChannelId$(): Observable<number> {
+    return this._textChannelId$.asObservable();
   }
 }

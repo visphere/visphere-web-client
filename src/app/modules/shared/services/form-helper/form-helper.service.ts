@@ -97,7 +97,10 @@ export class FormHelperService {
     const fileExt = file.name.slice(
       ((file.name.lastIndexOf('.') - 1) >>> 0) + 2
     );
-    if (!(allowedExt as string[]).includes(fileExt)) {
+    if (
+      allowedExt.length !== 0 &&
+      !(allowedExt as string[]).includes(fileExt)
+    ) {
       return {
         i18nError: `notSupportedExt`,
         params: {

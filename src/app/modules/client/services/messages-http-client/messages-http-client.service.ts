@@ -21,7 +21,7 @@ export class MessagesHttpClientService extends AbstractHttpProvider {
     textChannelId: number
   ): Observable<MessagesResDto> {
     return this._httpClient.get<MessagesResDto>(
-      `${this._infraApiPath}/api/v1/chat/message/textChannel/${textChannelId}/all`,
+      `${this._infraApiPath}/api/v1/chat/message/textchannel/${textChannelId}/all`,
       { params: { offset, nextPage, size } }
     );
   }
