@@ -35,6 +35,7 @@ import { CreateSphereFormComponent } from '~/client-mod/components/create-sphere
 import { CreateTextChannelModalComponent } from '~/client-mod/components/create-text-channel-modal/create-text-channel-modal.component';
 import { DelegateGuildModalComponent } from '~/client-mod/components/delegate-guild-modal/delegate-guild-modal.component';
 import { DevastateMemberActionModalComponent } from '~/client-mod/components/devastate-member-action-modal/devastate-member-action-modal.component';
+import { ImageViewerModalComponent } from '~/client-mod/components/image-viewer-modal/image-viewer-modal.component';
 import { InputTextAreaComponent } from '~/client-mod/components/input-text-area/input-text-area.component';
 import { JoinSphereFormComponent } from '~/client-mod/components/join-sphere-form/join-sphere-form.component';
 import { LeftNavigationBarComponent } from '~/client-mod/components/left-navigation-bar/left-navigation-bar.component';
@@ -62,6 +63,7 @@ import { clientReduxStore } from './store/reducer';
     CreateTextChannelModalComponent,
     DelegateGuildModalComponent,
     DevastateMemberActionModalComponent,
+    ImageViewerModalComponent,
     InputTextAreaComponent,
     JoinToGuildPageComponent,
     JoinSphereFormComponent,

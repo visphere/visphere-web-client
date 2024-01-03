@@ -9,6 +9,7 @@ import { RoutePersistorService } from './services/route-persistor/route-persisto
 @Component({
   selector: 'vsph-client-root',
   template: `
+    <vsph-image-viewer-modal />
     <div class="flex-grow">
       <router-outlet></router-outlet>
     </div>

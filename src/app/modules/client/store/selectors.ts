@@ -39,3 +39,8 @@ export const selectActiveModal = createSelector(
   selectClientState,
   ({ activeModal }) => activeModal
 );
+
+export const selectImageViewerDetails = createSelector(
+  selectClientState,
+  ({ imageViewerDetails }) => imageViewerDetails
+);

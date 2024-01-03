@@ -34,6 +34,10 @@ const _reducer = createReducer(
     ...state,
     activeModal: 'none' as MergedModal,
     devastateDetails: undefined,
+  })),
+  on(NgrxAction.__setViewedImageDetails, (state, action) => ({
+    ...state,
+    imageViewerDetails: action.details,
   }))
 );
 

@@ -1,0 +1,21 @@
+<!--
+ ~ Copyright (c) 2024 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<div *ngIf="viewerDetails" class="vsph-modal__container">
+  <div [@windowFadeAndMove] class="py-20">
+    <div #imageViewer class="mx-auto w-fit">
+      <img
+        [src]="viewerDetails.path"
+        [alt]="viewerDetails.originalName"
+        class="max-h-[90%] w-auto h-auto rounded-lg" />
+      <a
+        [href]="viewerDetails.path"
+        target="_blank"
+        class="text-sm text-vsph-light-100 hover:underline mt-1">
+        {{ 'vsph.clientCommon.client.openInNewTab' | translate }}
+      </a>
+    </div>
+  </div>
+</div>
