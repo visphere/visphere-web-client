@@ -2,9 +2,17 @@
  * Copyright (c) 2023 by Visphere & Vsph Technologies
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TextChannelDetailsResDto } from '~/client-mod/model/text-channel.model';
+import { MessageFilesService } from '~/client-mod/services/message-files/message-files.service';
 import { MessagesService } from '~/client-mod/services/messages/messages.service';
 import { TextChannelService } from '~/client-mod/services/text-channel/text-channel.service';
 import { WsService } from '~/client-mod/services/ws/ws.service';
@@ -14,12 +22,15 @@ import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-p
   selector: 'vsph-sphere-text-channel-page',
   templateUrl: './sphere-text-channel-page.component.html',
   host: { class: 'vsph-center-content__container' },
-  providers: [WsService, MessagesService],
+  providers: [WsService, MessagesService, MessageFilesService],
 })
 export class SphereTextChannelPageComponent
   extends AbstractReactiveProvider
-  implements OnInit, OnDestroy
+  implements OnInit, AfterViewInit, OnDestroy
 {
+  @ViewChild('infiniteScrollRef', { static: true })
+  infiniteScrollRef?: ElementRef;
+
   textChannelDetails?: TextChannelDetailsResDto;
 
   isPaginationEnd$ = this._messagesService.isPaginationEnd$;
@@ -37,6 +48,10 @@ export class SphereTextChannelPageComponent
     private readonly _messagesService: MessagesService
   ) {
     super();
+  }
+
+  ngAfterViewInit(): void {
+    this._messagesService.setInfiniteScrollRef(this.infiniteScrollRef);
   }
 
   ngOnInit(): void {

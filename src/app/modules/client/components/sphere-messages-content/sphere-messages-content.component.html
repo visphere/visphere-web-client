@@ -44,5 +44,47 @@
     <div class="whitespace-pre-line" [style.wordBreak]="'break-word'">
       {{ message.message }}
     </div>
+    <ul *ngIf="message.attachments.length !== 0">
+      <li
+        *ngFor="let attachment of message.attachments"
+        [class.inline-block]="!attachment.mimeType.includes('image')"
+        [class.me-4]="!attachment.mimeType.includes('image')"
+        class="py-1 w-fit">
+        <button
+          *ngIf="attachment.mimeType.includes('image'); else regularFile"
+          (click)="handleOpenImageModal(attachment)"
+          class="cursor-pointer">
+          <img
+            [src]="attachment.path"
+            [alt]="attachment.originalName"
+            class="vsph-message__embed-image" />
+        </button>
+        <ng-template #regularFile>
+          <div class="vsph-message__embed-file-container">
+            <button
+              (click)="handleDownloadFile(attachment)"
+              class="vsph-message__file-action-button vsph-message__file-action-button--download">
+              <ng-icon name="downloadIcon" />
+            </button>
+            <div class="flex-grow flex justify-center items-center">
+              <fa-icon
+                [icon]="getFileIcon(attachment.mimeType)"
+                class="vsph-message__embed-file-icon" />
+            </div>
+            <span
+              [title]="attachment.originalName"
+              class="text-xs line-clamp-1">
+              {{ attachment.originalName }}
+            </span>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
   </div>
+</div>
+<div
+  *ngIf="isSendingMessage$ | async"
+  class="w-full flex justify-center items-center h-[60px]">
+  <div
+    class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
 </div>

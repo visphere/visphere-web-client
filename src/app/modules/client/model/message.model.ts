@@ -9,6 +9,12 @@ export type MessagePayloadReqDto = {
   message: string;
 };
 
+export type FileAttachment = {
+  path: string;
+  originalName: string;
+  mimeType: string;
+};
+
 export type MessagePayloadResDto = {
   userId: number;
   messageId: string;
@@ -17,10 +23,17 @@ export type MessagePayloadResDto = {
   sendDate: string;
   message: string;
   accountDeleted: boolean;
+  attachments: FileAttachment[];
 };
 
 export type MessagesResDto = {
   messages: MessagePayloadResDto[];
   paginationState: string;
   paginationEnd: boolean;
+};
+
+export type BlobFile = {
+  file: File;
+  isImage: boolean;
+  imageSrc: string;
 };

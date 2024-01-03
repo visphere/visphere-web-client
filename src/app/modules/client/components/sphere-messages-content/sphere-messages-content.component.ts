@@ -4,13 +4,21 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { GuildDetailsResDto } from '~/client-mod/model/guild.model';
-import { MessagePayloadResDto } from '~/client-mod/model/message.model';
+import {
+  FileAttachment,
+  MessagePayloadResDto,
+} from '~/client-mod/model/message.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { MessagesService } from '~/client-mod/services/messages/messages.service';
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
 import { WsService } from '~/client-mod/services/ws/ws.service';
+import * as NgrxAction_CLN from '~/client-mod/store/actions';
+import { ClientReducer } from '~/client-mod/types/ngx-store.type';
+import { getFontAwesomeIconFromMime } from '~/client-mod/utils/mime-converter';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -28,13 +36,15 @@ export class SphereMessagesContentComponent
   messages: MessagePayloadResDto[] = [];
 
   selectedLang$ = this._languageSwitcherService.selectedLang$;
+  isSendingMessage$ = this._messagesService.sendingMessagesWithFiles$;
 
   constructor(
     private readonly _wsService: WsService,
     private readonly _route: ActivatedRoute,
     private readonly _messagesService: MessagesService,
     private readonly _guildService: GuildService,
-    private readonly _languageSwitcherService: LanguageSwitcherService
+    private readonly _languageSwitcherService: LanguageSwitcherService,
+    private readonly _store: Store<ClientReducer>
   ) {
     super();
   }
@@ -71,5 +81,19 @@ export class SphereMessagesContentComponent
       messageDate.isSame(prevMessageDate) &&
       message.userId === prevMessage.userId
     );
+  }
+
+  handleOpenImageModal(imageAttachment: FileAttachment): void {
+    this._store.dispatch(
+      NgrxAction_CLN.__setViewedImageDetails({ details: imageAttachment })
+    );
+  }
+
+  handleDownloadFile(fileAttachment: FileAttachment): void {
+    window.open(fileAttachment.path, '_blank');
+  }
+
+  getFileIcon(mime: string): IconDefinition {
+    return getFontAwesomeIconFromMime(mime);
   }
 }

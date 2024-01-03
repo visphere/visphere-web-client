@@ -5,36 +5,74 @@
 
 <label
   [ngxTippy]="buttonInfoTooltip"
-  [tippyContext]="{ infoText: defaultPrefix + '.appendFileInfo' }"
+  [tippyContext]="{
+    infoText:
+      defaultPrefix +
+      (appendFiles.length === maxFiles ? '.exceedSize' : '.appendFileInfo')
+  }"
   [tippyProps]="tooltipProps"
-  class="relative vsph-button vsph-button--secondary w-[40px] h-[40px]">
+  [class.vsph-message__file-input--disabled]="appendFiles.length === maxFiles"
+  class="vsph-button vsph-button--secondary vsph-message__file-input">
   <input
+    #fileInputRef
     type="file"
     multiple
     class="vsph-drag-drop__input"
+    [disabled]="appendFiles.length === maxFiles"
     (change)="handleAddFilesToMessage($event)" />
   <ng-icon name="appendFileIcon" />
 </label>
-<div class="flex-grow">
+<div [class.mb-[170px]]="appendFiles.length !== 0" class="flex-grow relative">
   <textarea
-    #resizableTextAreaRef
+    #textAreaRef
     vsphAutoResizableTextArea
     [(ngModel)]="userMessage"
     [placeholder]="defaultPrefix + '.startTyping' | translate"
     class="vsph-input vsph-input--textarea"
     [maxlength]="maxLenght"
-    autocomplete="off"></textarea>
+    [disabled]="!!(sendingFileMessage$ | async)"
+    autocomplete="off"
+    (paste)="handleOnPasteImage($event)"></textarea>
+  <ul
+    *ngIf="appendFiles.length !== 0"
+    [style.max-width.px]="filesContainerWidth"
+    class="vsph-message__files-container">
+    <li
+      *ngFor="let appendFile of appendFiles; let i = index"
+      class="vsph-message__file-element">
+      <button
+        (click)="handleRemoveFile(i)"
+        class="vsph-message__file-action-button vsph-message__file-action-button--remove">
+        <ng-icon name="removeTrashIcon" />
+      </button>
+      <div class="flex-grow flex justify-center items-center">
+        <img
+          *ngIf="appendFile.isImage"
+          [src]="appendFile.imageSrc"
+          alt=""
+          class="h-[100px] w-[164px] object-contain self-start" />
+        <fa-icon
+          *ngIf="!appendFile.isImage"
+          [icon]="getFileIcon(appendFile.file.type)"
+          class="text-4xl" />
+      </div>
+      <span
+        [title]="appendFile.file.name"
+        class="text-xs text-vsph-tint-400 line-clamp-1">
+        {{ appendFile.file.name }}
+      </span>
+    </li>
+  </ul>
 </div>
-<div>
-  <button
-    [ngxTippy]="buttonInfoTooltip"
-    [tippyContext]="{ infoText: defaultPrefix + '.sendMessageInfo' }"
-    [tippyProps]="tooltipProps"
-    (click)="handleSendMessage()"
-    class="vsph-button vsph-button--primary w-[40px] h-[40px]">
-    <ng-icon name="sendMessageIcon" />
-  </button>
-</div>
+<button
+  [ngxTippy]="buttonInfoTooltip"
+  [tippyContext]="{ infoText: defaultPrefix + '.sendMessageInfo' }"
+  [tippyProps]="tooltipProps"
+  [disabled]="userMessage === '' && appendFiles.length === 0"
+  (click)="handleSendMessage()"
+  class="vsph-button vsph-button--primary w-[40px] h-[40px]">
+  <ng-icon name="sendMessageIcon" />
+</button>
 <ng-template #buttonInfoTooltip let-infoText="infoText">
   {{ infoText | translate }}
 </ng-template>
