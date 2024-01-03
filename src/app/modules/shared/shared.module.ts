@@ -90,9 +90,11 @@ import { SharedEffects } from '~/shared-mod/store/side-effects/shared-effects';
     NgIconsModule.withIcons({
       arrowLeftIcon: BtsIcon.bootstrapArrowLeft,
       darkModeIcon: BtsIcon.bootstrapMoonStarsFill,
+      downloadIcon: BtsIcon.bootstrapDownload,
       eyeIcon: BtsIcon.bootstrapEye,
       eyeSlashIcon: BtsIcon.bootstrapEyeSlash,
       lightModeIcon: BtsIcon.bootstrapSunFill,
+      removeTrashIcon: BtsIcon.bootstrapTrashFill,
       selectArrowDownIcon: BtsIcon.bootstrapCaretDownFill,
       settingsIcon: BtsIcon.bootstrapGear,
       systemModeIcon: BtsIcon.bootstrapCircleHalf,
