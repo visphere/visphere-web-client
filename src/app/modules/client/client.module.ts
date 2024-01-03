@@ -6,6 +6,20 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faFile,
+  faFileAlt,
+  faFileArchive,
+  faFileAudio,
+  faFileCode,
+  faFileExcel,
+  faFilePdf,
+  faFilePowerpoint,
+  faFileVideo,
+  faFileWord,
+} from '@fortawesome/free-solid-svg-icons';
 import * as BtsIcon from '@ng-icons/bootstrap-icons';
 import { NgIconsModule } from '@ng-icons/core';
 import { EffectsModule } from '@ngrx/effects';
@@ -70,6 +84,7 @@ import { clientReduxStore } from './store/reducer';
     }),
     EffectsModule.forFeature([]),
     FormsModule,
+    FontAwesomeModule,
     InfiniteScrollModule,
     NgIconsModule.withIcons({
       addIcon: BtsIcon.bootstrapPlus,
@@ -90,4 +105,19 @@ import { clientReduxStore } from './store/reducer';
     TranslateModule,
   ],
 })
-export class ClientModule {}
+export class ClientModule {
+  constructor() {
+    library.add(
+      faFile,
+      faFileAlt,
+      faFileArchive,
+      faFileAudio,
+      faFileCode,
+      faFileExcel,
+      faFilePdf,
+      faFilePowerpoint,
+      faFileVideo,
+      faFileWord
+    );
+  }
+}
