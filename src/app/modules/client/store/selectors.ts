@@ -44,3 +44,8 @@ export const selectImageViewerDetails = createSelector(
   selectClientState,
   ({ imageViewerDetails }) => imageViewerDetails
 );
+
+export const selectDeletingMessageContent = createSelector(
+  selectClientState,
+  ({ deletingMessageContent }) => deletingMessageContent
+);

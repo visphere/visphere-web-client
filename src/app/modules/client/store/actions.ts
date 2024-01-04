@@ -3,7 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { createAction, props } from '@ngrx/store';
-import { FileAttachment } from '../model/message.model';
+import { FileAttachment, MessagePayloadResDto } from '../model/message.model';
 import { ClientModal, DevastateMemberModal } from '../types/modal-mode.type';
 
 enum Action {
@@ -14,6 +14,7 @@ enum Action {
   OPEN_DEVASTATE_MEMBER_MODAL = '[CLIENT] OPEN DEVASTATE MEMBER MODAL',
   CLOSE_DEVASTATE_MEMBER_MODAL = '[CLIENT] CLOSE DEVASTATE MEMBER MODAL',
   SET_VIEWED_IMAGE_DETAILS = '[CLIENT] SET VIEWED IMAGE DETAILS',
+  SET_DELETING_MESSAGE_CONTENT = '[CLIENT] SET DELETING MESSAGE CONTENT',
 }
 
 export const __openSelectedModal = createAction(
@@ -43,5 +44,10 @@ export const __closeDevastateMemberModal = createAction(
 
 export const __setViewedImageDetails = createAction(
   Action.SET_VIEWED_IMAGE_DETAILS,
-  props<{ details: FileAttachment | null }>()
+  props<{ details: FileAttachment | undefined }>()
+);
+
+export const __setDeletingMessageContent = createAction(
+  Action.SET_DELETING_MESSAGE_CONTENT,
+  props<{ messageContent: MessagePayloadResDto | undefined }>()
 );

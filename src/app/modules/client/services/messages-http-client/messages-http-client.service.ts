@@ -10,6 +10,7 @@ import {
   MessagePayloadReqDto,
   MessagesResDto,
 } from '~/client-mod/model/message.model';
+import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';
 
 @Injectable({ providedIn: 'root' })
@@ -43,6 +44,15 @@ export class MessagesHttpClientService extends AbstractHttpProvider {
     return this._httpClient.post<void>(
       `${this._infraApiPath}/api/v1/chat/message/textchannel/${textChannelId}`,
       formData
+    );
+  }
+
+  deleteMessage$(
+    messageId: string,
+    textChannelId: number
+  ): Observable<BaseMessageModel> {
+    return this._httpClient.delete<BaseMessageModel>(
+      `${this._infraApiPath}/api/v1/chat/message/${messageId}/textchannel/${textChannelId}`
     );
   }
 }

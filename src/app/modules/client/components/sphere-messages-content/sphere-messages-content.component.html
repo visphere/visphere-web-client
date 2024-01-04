@@ -9,6 +9,8 @@
   [class.vsph-message__container--first]="
     isFirstMessage(message, i > 0 ? messages[i - 1] : undefined)
   "
+  (mouseenter)="handleOnHoverMessage(message.messageId)"
+  (mouseleave)="handleOnHoverMessage('')"
   class="vsph-message__container">
   <ng-container
     *ngIf="isFirstMessage(message, i > 0 ? messages[i - 1] : undefined)">
@@ -82,6 +84,21 @@
       </li>
     </ul>
   </div>
+  <div
+    *ngIf="
+      hoveredMessageId === message.messageId &&
+      (message.userId === loggedUser?.id ||
+        guildDetails?.ownerId === loggedUser?.id)
+    "
+    class="vsph-message__modify-actions-container">
+    <button
+      [ngxTippy]="deleteMessageTooptip"
+      [tippyProps]="tooltipProps"
+      (click)="handleRemoveMessage(message)"
+      class="vsph-message__delete-message-button">
+      <ng-icon name="removeTrashIcon" />
+    </button>
+  </div>
 </div>
 <div
   *ngIf="(activeLoading$ | async) === 'sending'"
@@ -89,3 +106,6 @@
   <div
     class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>
 </div>
+<ng-template #deleteMessageTooptip>
+  {{ defaultPrefix + '.deleteMessage' | translate }}
+</ng-template>

@@ -103,6 +103,17 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
     );
   }
 
+  observableRemoveMessagesStream$(): Observable<string> {
+    return this._textChannelId$.pipe(
+      switchMap(textChannelId =>
+        this._rxStomp.watch({
+          destination: `/topic/outbound.${textChannelId}.delete.message`,
+        })
+      ),
+      map(({ body }) => JSON.parse(body) as string)
+    );
+  }
+
   sendMessage$(message: string): Observable<null> {
     return of(null).pipe(
       switchMap(() =>

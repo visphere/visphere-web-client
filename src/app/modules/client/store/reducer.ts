@@ -38,6 +38,10 @@ const _reducer = createReducer(
   on(NgrxAction.__setViewedImageDetails, (state, action) => ({
     ...state,
     imageViewerDetails: action.details,
+  })),
+  on(NgrxAction.__setDeletingMessageContent, (state, action) => ({
+    ...state,
+    deletingMessageContent: action.messageContent,
   }))
 );
 
