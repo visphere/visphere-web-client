@@ -37,7 +37,9 @@
       </h2>
       <div
         class="vsph-modal__window-paragraph"
-        [class.vsph-modal__window-paragraph--large]="size === 'xl'">
+        [class.vsph-modal__window-paragraph--large]="
+          size === 'xl' && !fullWidth
+        ">
         <ng-content />
       </div>
       <div class="flex justify-end gap-x-3 mt-5">

@@ -15,6 +15,7 @@ export class MessageFilesService {
   private _fileInputRef?: ElementRef;
 
   readonly maxFiles = 5;
+  readonly maxFileSizeMb = 20;
 
   constructor(
     private readonly _formHelperService: FormHelperService,
@@ -77,7 +78,11 @@ export class MessageFilesService {
     if (!file) {
       return;
     }
-    const result = this._formHelperService.validateFileInput(file, [], 5);
+    const result = this._formHelperService.validateFileInput(
+      file,
+      [],
+      this.maxFileSizeMb
+    );
     if (!result) {
       this.appendFiles.push({
         file,

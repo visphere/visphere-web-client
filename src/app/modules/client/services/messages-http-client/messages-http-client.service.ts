@@ -31,7 +31,6 @@ export class MessagesHttpClientService extends AbstractHttpProvider {
   }
 
   sendMessageWithFiles$(
-    userId: number,
     textChannelId: number,
     blobFiles: BlobFile[],
     reqDto: MessagePayloadReqDto
@@ -42,7 +41,7 @@ export class MessagesHttpClientService extends AbstractHttpProvider {
     }
     formData.append('body', JSON.stringify(reqDto));
     return this._httpClient.post<void>(
-      `${this._infraApiPath}/api/v1/chat/message/textchannel/${textChannelId}/user/${userId}`,
+      `${this._infraApiPath}/api/v1/chat/message/textchannel/${textChannelId}`,
       formData
     );
   }

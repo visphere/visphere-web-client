@@ -19,6 +19,7 @@ export class DevastateActionModalComponent implements OnInit {
   @Input() size: 'sm' | 'xl' = 'xl';
   @Input() precedence: ModalDevastatePrecedence = 'normal';
   @Input() showProceedButton = true;
+  @Input() fullWidth = false;
 
   @Output() emitOnClose = new EventEmitter<void>();
   @Output() emitDevstateAction = new EventEmitter<void>();

@@ -29,7 +29,7 @@ export class ImageViewerModalComponent
 {
   @ViewChild('imageViewer') imageViewer?: ElementRef;
 
-  viewerDetails: FileAttachment | null = null;
+  viewerDetails?: FileAttachment;
 
   constructor(private readonly _store: Store<ClientReducer>) {
     super();
@@ -44,7 +44,7 @@ export class ImageViewerModalComponent
       console.log(clickedInside);
       if (!clickedInside) {
         this._store.dispatch(
-          NgrxAction_CLN.__setViewedImageDetails({ details: null })
+          NgrxAction_CLN.__setViewedImageDetails({ details: undefined })
         );
       }
     }

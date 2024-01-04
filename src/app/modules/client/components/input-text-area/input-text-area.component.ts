@@ -35,7 +35,7 @@ export class InputTextAreaComponent
 
   sendingFileMessage$ = this._messagesService.sendingMessagesWithFiles$;
 
-  readonly maxLenght = 200;
+  readonly maxLenght = 2000;
   readonly maxFiles = this._messageFilesService.maxFiles;
   readonly defaultPrefix = 'vsph.clientCommon.guild.textArea';
   readonly tooltipProps: NgxTippyProps = {

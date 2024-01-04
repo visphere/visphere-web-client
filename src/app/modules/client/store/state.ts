@@ -11,7 +11,7 @@ export interface ClientStoreState {
   selectedGuildId: number | undefined;
   selectedChannelId: number | undefined;
   devastateDetails: DevastateDetails | undefined;
-  imageViewerDetails: FileAttachment | null;
+  imageViewerDetails: FileAttachment | undefined;
 }
 
 export const clientStoreState: ClientStoreState = {
@@ -19,5 +19,5 @@ export const clientStoreState: ClientStoreState = {
   selectedGuildId: undefined,
   selectedChannelId: undefined,
   devastateDetails: undefined,
-  imageViewerDetails: null,
+  imageViewerDetails: undefined,
 };
