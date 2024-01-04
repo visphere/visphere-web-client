@@ -5,8 +5,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StartResetPasswordService } from '~/auth-mod/services/start-reset-password/start-reset-password.service';
-import { CaptchaVerificationService } from '~/root-mod/modules/shared/services/captcha-verification/captcha-verification.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
+import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { regex } from '~/shared-mod/validators/regex.constant';
 

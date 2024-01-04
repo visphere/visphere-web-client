@@ -14,7 +14,7 @@ import {
 } from '~/auth-mod/models/my-saved-account.model';
 import { RegisterReqDtoModel } from '~/auth-mod/models/register-form.model';
 import { StartResetPasswordViaEmailFormModel } from '~/auth-mod/models/reset-password-form.model';
-import { AccessRefreshInterceptor } from '~/root-mod/modules/shared/interceptors/access-refresh/access-refresh.interceptor';
+import { AccessRefreshInterceptor } from '~/shared-mod/interceptors/access-refresh/access-refresh.interceptor';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { AbstractHttpProvider } from '~/shared-mod/services/abstract-http-provider';

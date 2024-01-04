@@ -6,7 +6,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthModule } from '~/auth-mod/auth.module';
 import { AppModule } from '~/root-mod/app.module';
-import { PopulateFormGroupService } from '~/root-mod/modules/shared/context/populate-form-group/populate-form-group.service';
+import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { AgreeTermsContentComponent } from './agree-terms-content.component';
 
 describe('AgreeTermsContentComponent', () => {

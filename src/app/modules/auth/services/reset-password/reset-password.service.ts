@@ -4,7 +4,7 @@
  */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
-import { ResetPasswordFormStage } from '~/root-mod/modules/auth/types/form-stage.type';
+import { ResetPasswordFormStage } from '~/auth-mod/types/form-stage.type';
 
 @Injectable()
 export class ResetPasswordService {

@@ -3,7 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { dropboxFadeAndMove } from '~/root-mod/modules/shared/animations/dropbox.animation';
+import { dropboxFadeAndMove } from '~/shared-mod/animations/dropbox.animation';
 
 @Component({
   selector: 'vsph-footer-control-list',

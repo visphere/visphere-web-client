@@ -3,7 +3,7 @@
  * Originally developed by Miłosz Gilga <https://miloszgilga.pl>
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { windowFadeAndMove } from '~/root-mod/modules/shared/animations/window.animation';
+import { windowFadeAndMove } from '~/shared-mod/animations/window.animation';
 import { ModalSize } from '~/shared-mod/types/modal.type';
 
 @Component({
