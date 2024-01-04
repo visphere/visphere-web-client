@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from '~/env/environment';
 import { CaptchaVerificationService } from '~/shared-mod/services/captcha-verification/captcha-verification.service';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { HcaptchaErrorEvent } from '~/shared-mod/types/hcaptcha.type';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -74,7 +74,7 @@ export class VerifyCaptchaModalComponent
     this._captchaVerificationService.setModalVisibility(false);
     if (this.snackbarPlaceholder) {
       this._store.dispatch(
-        NgrxAction_SHA.__addSnackbar({
+        actionAddSnackbar({
           content: {
             placeholder: this.snackbarPlaceholder,
           },

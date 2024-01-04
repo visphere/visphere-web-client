@@ -9,7 +9,7 @@ import { UpdatableEmailFormStage } from '~/settings-mod/types/form-stages.type';
 import { EmailVariant } from '~/settings-mod/types/updatable-modal.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { UpdatableEmailHttpClientService } from '../updatable-email-http-client/updatable-email-http-client.service';
 
@@ -101,7 +101,7 @@ export class UpdatableEmailService
 
   private showSuccessSnackbar(message: string): void {
     this._store.dispatch(
-      NgrxAction_SHA.__addSnackbar({
+      actionAddSnackbar({
         content: {
           placeholder: message,
           omitTransformation: true,

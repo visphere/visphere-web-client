@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { GuildDetailsResDto } from '~/client-mod/model/guild.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
+import { actionOpenSelectedModal } from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme.provider';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionSetSettingsReturnUrl } from '~/shared-mod/store/actions';
 
 @Component({
   selector: 'vsph-sphere-guild-entry-page',
@@ -48,14 +48,12 @@ export class SphereGuildEntryPageComponent
 
   handleOpenModalToCreateTextChannel(): void {
     this._store.dispatch(
-      NgrxAction_CLN.__openSelectedModal({ modal: 'add-text-channel' })
+      actionOpenSelectedModal({ modal: 'add-text-channel' })
     );
   }
 
   async handleGotoSphereSettings(): Promise<void> {
-    this._store.dispatch(
-      NgrxAction_SHA.__setSettingsReturnUrl({ url: this._router.url })
-    );
+    this._store.dispatch(actionSetSettingsReturnUrl({ url: this._router.url }));
     await this._router.navigateByUrl(
       `/settings/guild/${this.guildDetails?.id}/overview`
     );

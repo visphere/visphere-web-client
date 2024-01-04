@@ -10,7 +10,7 @@ import { RadioElement } from '~/settings-mod/types/radio-element.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionUpdateLoggedUserSettings } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { ThemeType, themeModes } from '~/shared-mod/types/theme-mode.type';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
@@ -43,9 +43,7 @@ export class AppearanceSettingsService extends AbstractWsWebhookProvider<SharedR
         if (!selectedTheme) {
           selectedTheme = currentTheme.id;
         }
-        this._store.dispatch(
-          NgrxAction_SHA.__updateLoggedUserSettings({ userSettings })
-        );
+        this._store.dispatch(actionUpdateLoggedUserSettings({ userSettings }));
         this._isFetching$.next(false);
         return {
           elements: themeModes.map(({ id, i18nKey, icon }) => ({

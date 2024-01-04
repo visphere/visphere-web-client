@@ -9,7 +9,7 @@ import { ProfileSettingsService } from '~/settings-mod/services/profile-settings
 import { ImageType } from '~/settings-mod/types/image-type';
 import { ProfileImageUpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
 import { PopulateTooltipService } from '~/shared-mod/context/populate-tooltip/populate-tooltip.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -50,7 +50,7 @@ export class ProfileSettingsPageComponent
     });
     this.wrapAsObservable$(
       combineLatest([
-        this._store.select(NgrxSelector_SHA.selectLoggedUser),
+        this._store.select(selectLoggedUser),
         this._profileSettingsService.loadProfileDetails$(),
       ])
     ).subscribe(([loggedUser, profileDetails]) => {

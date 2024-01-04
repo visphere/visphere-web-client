@@ -15,7 +15,11 @@ import {
   throwError,
 } from 'rxjs';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import {
+  actionAddSnackbar,
+  actionOpenDisabledAccountModal,
+  actionSetLoggedUserDetails,
+} from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { OAuth2Supplier } from '~/shared-mod/types/oauth2-supplier.type';
 import { Severity } from '~/shared-mod/types/snackbar.type';
@@ -49,7 +53,7 @@ export class Oauth2LoginService
     const type = route.snapshot.queryParamMap.get('type') as Severity;
     if (message) {
       this._store.dispatch(
-        NgrxAction_SHA.__addSnackbar({
+        actionAddSnackbar({
           content: {
             placeholder: message,
             omitTransformation: true,
@@ -77,8 +81,8 @@ export class Oauth2LoginService
         let navigateUrl = '/';
         this._store.dispatch(
           isDisabled
-            ? NgrxAction_SHA.__openDisabledAccountModal({ accessToken })
-            : NgrxAction_SHA.__setLoggedUserDetails({
+            ? actionOpenDisabledAccountModal({ accessToken })
+            : actionSetLoggedUserDetails({
                 details: res,
               })
         );

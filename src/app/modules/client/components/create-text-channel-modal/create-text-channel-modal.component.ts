@@ -7,8 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TextChannelService } from '~/client-mod/services/text-channel/text-channel.service';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
-import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { actionCloseModal } from '~/client-mod/store/actions';
+import { selectIsAddTextChannelModalOpen } from '~/client-mod/store/selectors';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
@@ -25,9 +25,7 @@ export class CreateTextChannelModalComponent
   implements OnInit, OnDestroy
 {
   isLoading$ = this._textChannelService.isLoading$;
-  isModalOpen$ = this._store.select(
-    NgrxSelector_CLN.selectIsAddTextChannelModalOpen
-  );
+  isModalOpen$ = this._store.select(selectIsAddTextChannelModalOpen);
 
   textChannelForm: FormGroup;
   guildId?: number;
@@ -67,7 +65,7 @@ export class CreateTextChannelModalComponent
   }
 
   handleEmitOnClose(): void {
-    this._store.dispatch(NgrxAction_CLN.__closeModal());
+    this._store.dispatch(actionCloseModal());
   }
 
   handleSubmitCreateTextChannel(): void {
@@ -76,7 +74,7 @@ export class CreateTextChannelModalComponent
       this.wrapAsObservable$(
         this._textChannelService.createTextChannel$(this.guildId, name)
       ).subscribe({
-        next: () => this._store.dispatch(NgrxAction_CLN.__closeModal()),
+        next: () => this._store.dispatch(actionCloseModal()),
       });
     }
   }

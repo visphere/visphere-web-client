@@ -5,8 +5,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
-import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { actionCloseModal } from '~/client-mod/store/actions';
+import { selectIsAddGuildModalOpen } from '~/client-mod/store/selectors';
 import { CreateOrJoinGuildModalMode } from '~/client-mod/types/modal-mode.type';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 
@@ -15,7 +15,7 @@ import { ClientReducer } from '~/client-mod/types/ngx-store.type';
   templateUrl: './create-or-join-sphere-modal.component.html',
 })
 export class CreateOrJoinSphereModalComponent {
-  isModalOpen$ = this._store.select(NgrxSelector_CLN.selectIsAddGuildModalOpen);
+  isModalOpen$ = this._store.select(selectIsAddGuildModalOpen);
   currentMode$ = this._guildService.createGuildModalMode$;
   isLoading$ = this._guildService.isLoading$;
 
@@ -27,7 +27,7 @@ export class CreateOrJoinSphereModalComponent {
   ) {}
 
   handleEmitOnClose(): void {
-    this._store.dispatch(NgrxAction_CLN.__closeModal());
+    this._store.dispatch(actionCloseModal());
     this.handleChangeModalMode('create');
   }
 

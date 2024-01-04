@@ -16,7 +16,7 @@ import {
   MfaAuthenticatorDataResDto,
   MfaStateModel,
 } from '~/auth-mod/models/mfa-data.model';
-import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
+import { selectMfaState } from '~/auth-mod/store/selectors';
 import { MfaFirstSetupFormStage } from '~/auth-mod/types/form-stage.type';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { FetchingState } from '~/shared-mod/types/fetching-state.type';
@@ -40,13 +40,13 @@ export class MfaFirstSetupService
     private readonly _store: Store<AuthReducer>
   ) {
     super();
-    this.wrapAsObservable$(
-      this._store.select(NgrxSelector_ATH.selectMfaState)
-    ).subscribe(state => {
-      if (state) {
-        this._mfaState = state;
+    this.wrapAsObservable$(this._store.select(selectMfaState)).subscribe(
+      state => {
+        if (state) {
+          this._mfaState = state;
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy(): void {

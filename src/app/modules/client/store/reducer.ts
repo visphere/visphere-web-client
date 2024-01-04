@@ -4,24 +4,32 @@
  */
 import { Action, createReducer, on } from '@ngrx/store';
 import { ClientModal, MergedModal } from '../types/modal-mode.type';
-import * as NgrxAction from './actions';
+import {
+  actionCloseDevastateMemberModal,
+  actionCloseModal,
+  actionOpenDevastateMemberModal,
+  actionOpenSelectedModal,
+  actionSetDeletingMessageContent,
+  actionSetSelectedChannelId,
+  actionSetViewedImageDetails,
+} from './actions';
 import { ClientStoreState, clientStoreState } from './state';
 
 const _reducer = createReducer(
   clientStoreState,
-  on(NgrxAction.__openSelectedModal, (state, action) => ({
+  on(actionOpenSelectedModal, (state, action) => ({
     ...state,
     activeModal: action.modal,
   })),
-  on(NgrxAction.__closeModal, state => ({
+  on(actionCloseModal, state => ({
     ...state,
     activeModal: 'none' as ClientModal,
   })),
-  on(NgrxAction.__setSelectedChannelId, (state, action) => ({
+  on(actionSetSelectedChannelId, (state, action) => ({
     ...state,
     selectedChannelId: action.channelId,
   })),
-  on(NgrxAction.__openDevastateMemberModal, (state, action) => ({
+  on(actionOpenDevastateMemberModal, (state, action) => ({
     ...state,
     activeModal: action.modal,
     devastateDetails: {
@@ -30,16 +38,16 @@ const _reducer = createReducer(
       name: action.name,
     },
   })),
-  on(NgrxAction.__closeDevastateMemberModal, state => ({
+  on(actionCloseDevastateMemberModal, state => ({
     ...state,
     activeModal: 'none' as MergedModal,
     devastateDetails: undefined,
   })),
-  on(NgrxAction.__setViewedImageDetails, (state, action) => ({
+  on(actionSetViewedImageDetails, (state, action) => ({
     ...state,
     imageViewerDetails: action.details,
   })),
-  on(NgrxAction.__setDeletingMessageContent, (state, action) => ({
+  on(actionSetDeletingMessageContent, (state, action) => ({
     ...state,
     deletingMessageContent: action.messageContent,
   }))

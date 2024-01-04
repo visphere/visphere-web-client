@@ -15,7 +15,7 @@ import {
 } from 'rxjs';
 import { environment } from '~/env/environment';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractLazyProvider } from '../abstract-lazy-provider';
 import { ModalUtilsService } from '../modal-utils/modal-utils.service';
@@ -71,7 +71,7 @@ export class CaptchaVerificationService
         delay(500),
         tap(({ message }) => {
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: message,
                 omitTransformation: true,

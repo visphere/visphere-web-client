@@ -13,7 +13,7 @@ import { GuildJoinLink } from '~/settings-mod/model/guild-join-links.model';
 import { GuildJoinLinksService } from '~/settings-mod/services/guild-join-links/guild-join-links.service';
 import { JoinLinkUpdatableModalType } from '~/settings-mod/types/updatable-modal.type';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -110,7 +110,7 @@ export class GuildJoinLinksSettingsPageComponent
   handleCopyLinkToClipboard(joinLink: GuildJoinLink): void {
     copy(joinLink.joinLinkUrl);
     this._store.dispatch(
-      NgrxAction_SHA.__addSnackbar({
+      actionAddSnackbar({
         content: {
           i18nPrefix: this.defaultPrefix,
           placeholder: '.successfullyCopiedLink',

@@ -6,7 +6,7 @@ import { Injectable, inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectUserIsLogged } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +15,7 @@ class LoggedRouteGuard {
     store: Store<SharedReducer>,
     router: Router
   ): Observable<boolean> {
-    return store.select(NgrxSelector_SHA.selectUserIsLogged).pipe(
+    return store.select(selectUserIsLogged).pipe(
       map(({ isUserLogged, isInitialLoading }) => {
         if (isUserLogged || isInitialLoading) {
           return true;

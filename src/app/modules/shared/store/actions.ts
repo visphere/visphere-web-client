@@ -25,70 +25,72 @@ enum Action {
   UPDATE_PROFILE_COLOR = '[SHARED] UPDATE PROFILE COLOR',
 }
 
-export const __addSnackbar = createAction(
+export const actionAddSnackbar = createAction(
   Action.ADD_SNACKBAR,
   props<{ header?: SnackbarI18n; content: SnackbarI18n; severity?: Severity }>()
 );
 
-export const __removeSnackbar = createAction(
+export const actionRemoveSnackbar = createAction(
   Action.REMOVE_SNACKBAR,
   props<{ id?: string }>()
 );
 
-export const __setLoggedUserDetails = createAction(
+export const actionSetLoggedUserDetails = createAction(
   Action.SET_LOGGED_USER_DETAILS,
   props<{ details: LoginResDtoModel }>()
 );
 
-export const __persistLoggedUserDetails = createAction(
+export const actionPersistLoggedUserDetails = createAction(
   Action.PERSIST_LOGGED_USER_DETAILS,
   props<{ details: LoggedUser }>()
 );
 
-export const __removeUserDetails = createAction(Action.REMOVE_USER_DETAILS);
+export const removeUserDetailsAction = createAction(Action.REMOVE_USER_DETAILS);
 
-export const __unsetInitialLoading = createAction(Action.UNSET_INITIAL_LOADING);
+export const actionUnsetInitialLoading = createAction(
+  Action.UNSET_INITIAL_LOADING
+);
 
-export const __setSettingsReturnUrl = createAction(
+export const actionSetSettingsReturnUrl = createAction(
   Action.SET_SETTINGS_RETURN_URL,
   props<{ url: string }>()
 );
 
-export const __updateLoggedUserSettings = createAction(
+export const actionUpdateLoggedUserSettings = createAction(
   Action.UPDATE_LOGGED_USER_SETTINGS,
   props<{ userSettings: UserSettings }>()
 );
 
-export const __updateLogoutModalState = createAction(
+export const actionUpdateLogoutModalState = createAction(
   Action.UPDATE_LOGOUT_MODAL_STATE,
   props<{ isOpen: boolean }>()
 );
 
-export const __updateLoggedUserFullName = createAction(
+export const actionUpdateLoggedUserFullName = createAction(
   Action.UPDATE_LOGGED_USER_FULL_NAME,
   props<{ fullName: string }>()
 );
 
-export const __updateLoggedUserUsername = createAction(
+export const actionUpdateLoggedUserUsername = createAction(
   Action.UPDATE_LOGGED_USER_USERNAME,
   props<{ username: string }>()
 );
 
-export const __openDisabledAccountModal = createAction(
+export const actionOpenDisabledAccountModal = createAction(
   Action.OPEN_DISABLED_ACCOUNT_MODAL,
   props<{ accessToken: string }>()
 );
 
-export const __closeDisabledAccountModal = createAction(
+export const actionCloseDisabledAccountModal = createAction(
   Action.CLOSE_DISABLED_ACCOUNT_MODAL
 );
 
-export const __updateProfileImageUrl = createAction(
+export const actionUpdateProfileImageUrl = createAction(
   Action.UPDATE_PROFILE_IMAGE_URL,
   props<{ imageUrl: string }>()
 );
 
-export const __updateProfileColor = createAction(
+export const actionUpdateProfileColor = createAction(
   Action.UPDATE_PROFILE_COLOR,
   props<{ color: string }>()
 );

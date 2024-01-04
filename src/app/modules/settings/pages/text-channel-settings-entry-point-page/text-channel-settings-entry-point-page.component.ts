@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { TextChannelDetailsResDto } from '~/settings-mod/model/guild-management.model';
 import { TextChannelService } from '~/settings-mod/services/text-channel/text-channel.service';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectSettingsReturnUrl } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -28,9 +28,7 @@ export class TextChannelSettingsEntryPointPageComponent
   textChannelId?: number;
 
   activeLoading$ = this._textChannelService.activeLoading$;
-  settingsReturnUrl$ = this._store.select(
-    NgrxSelector_SHA.selectSettingsReturnUrl
-  );
+  settingsReturnUrl$ = this._store.select(selectSettingsReturnUrl);
 
   readonly defaultPrefix =
     'vsph.clientCommon.settingsPage.category.textChannelSettings';

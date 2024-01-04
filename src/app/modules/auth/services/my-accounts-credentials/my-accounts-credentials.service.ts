@@ -9,7 +9,7 @@ import {
   MySavedAccountAuthFormModel,
   MySavedAccountModel,
 } from '~/auth-mod/models/my-saved-account.model';
-import * as NgrxAction_ATH from '~/auth-mod/store/actions';
+import { actionSetMySavedAccountVerified } from '~/auth-mod/store/actions';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
@@ -45,7 +45,7 @@ export class MyAccountsCredentialsService extends AbstractSimpleFormProvider<
       () => this.setLoading(false),
       res => {
         this._store.dispatch(
-          NgrxAction_ATH.__setMySavedAccountVerified({
+          actionSetMySavedAccountVerified({
             uuid: this._loggedUser!.accountId,
             thumbnailUrl: res.profileUrl,
             username: res.username,

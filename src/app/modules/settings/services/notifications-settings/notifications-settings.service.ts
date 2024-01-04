@@ -19,7 +19,7 @@ import {
 } from '~/settings-mod/model/notifs.model';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionUpdateLoggedUserSettings } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
 
@@ -43,9 +43,7 @@ export class NotificationsSettingsService extends AbstractWsWebhookProvider<Shar
         ])
       ),
       map(([userSettings, notifSettings]) => {
-        this._store.dispatch(
-          NgrxAction_SHA.__updateLoggedUserSettings({ userSettings })
-        );
+        this._store.dispatch(actionUpdateLoggedUserSettings({ userSettings }));
         this._isFetching$.next(false);
         return {
           isPushNotifsSelected: userSettings.pushNotifsEnabled,

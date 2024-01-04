@@ -6,7 +6,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { environment } from '~/env/environment';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable({ providedIn: 'root' })
@@ -26,13 +26,11 @@ export class FaviconBadgeNotificatorService {
     this._audio = new Audio(
       `${environment.contentDistributorBaseUrl}/static/sfx/notification.mp3`
     );
-    this._store
-      .select(NgrxSelector_SHA.selectLoggedUser)
-      .subscribe(loggedUser => {
-        this.isPushNotifsSelected = !!loggedUser?.settings.pushNotifsEnabled;
-        this.isPushNotifsSoundSelected =
-          !!loggedUser?.settings.pushNotifsSoundEnabled;
-      });
+    this._store.select(selectLoggedUser).subscribe(loggedUser => {
+      this.isPushNotifsSelected = !!loggedUser?.settings.pushNotifsEnabled;
+      this.isPushNotifsSoundSelected =
+        !!loggedUser?.settings.pushNotifsSoundEnabled;
+    });
   }
 
   showNotify(): void {

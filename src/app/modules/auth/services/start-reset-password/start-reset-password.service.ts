@@ -10,7 +10,7 @@ import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth
 import { ResetPasswordService } from '~/auth-mod/services/reset-password/reset-password.service';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable()
@@ -32,7 +32,7 @@ export class StartResetPasswordService extends AbstractSimpleFormProvider<BaseMe
         tap(({ message }) => {
           this.setLoading(false);
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: message,
                 omitTransformation: true,

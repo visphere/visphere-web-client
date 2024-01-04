@@ -9,7 +9,7 @@ import { UpdateAccountDetailsReqDto } from '~/settings-mod/model/update-account-
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { AccountValueForAnotherExistValidator } from '~/settings-mod/validators/account-value-for-another-exist.validator';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionUpdateLoggedUserUsername } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { composeToAsync } from '~/shared-mod/validators/compose-to-async';
 import { regex } from '~/shared-mod/validators/regex.constant';
@@ -72,7 +72,7 @@ export class UsernameUpdatableModalComponent
       ).subscribe({
         next: () =>
           this._store.dispatch(
-            NgrxAction_SHA.__updateLoggedUserUsername({
+            actionUpdateLoggedUserUsername({
               username: reqDto.username,
             })
           ),

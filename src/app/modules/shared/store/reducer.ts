@@ -4,12 +4,27 @@
  */
 import { Action, createReducer, on } from '@ngrx/store';
 import { v4 as uuidv4 } from 'uuid';
-import * as NgrxAction from './actions';
+import {
+  actionAddSnackbar,
+  actionCloseDisabledAccountModal,
+  actionOpenDisabledAccountModal,
+  actionPersistLoggedUserDetails,
+  actionRemoveSnackbar,
+  actionSetSettingsReturnUrl,
+  actionUnsetInitialLoading,
+  actionUpdateLoggedUserFullName,
+  actionUpdateLoggedUserSettings,
+  actionUpdateLoggedUserUsername,
+  actionUpdateLogoutModalState,
+  actionUpdateProfileColor,
+  actionUpdateProfileImageUrl,
+  removeUserDetailsAction,
+} from './actions';
 import { SharedStoreState, sharedStoreState } from './state';
 
 const _reducer = createReducer(
   sharedStoreState,
-  on(NgrxAction.__addSnackbar, (state, action) => {
+  on(actionAddSnackbar, (state, action) => {
     const { header, content, severity } = action;
     return {
       ...state,
@@ -19,29 +34,29 @@ const _reducer = createReducer(
       ],
     };
   }),
-  on(NgrxAction.__removeSnackbar, (state, action) => ({
+  on(actionRemoveSnackbar, (state, action) => ({
     ...state,
     snackbarStack: action.id
       ? state.snackbarStack.filter(({ id }) => id !== action.id)
       : state.snackbarStack.slice(0, -1),
   })),
-  on(NgrxAction.__persistLoggedUserDetails, (state, action) => ({
+  on(actionPersistLoggedUserDetails, (state, action) => ({
     ...state,
     loggedUser: action.details,
   })),
-  on(NgrxAction.__removeUserDetails, state => ({
+  on(removeUserDetailsAction, state => ({
     ...state,
     loggedUser: null,
   })),
-  on(NgrxAction.__unsetInitialLoading, state => ({
+  on(actionUnsetInitialLoading, state => ({
     ...state,
     initialLoading: false,
   })),
-  on(NgrxAction.__setSettingsReturnUrl, (state, action) => ({
+  on(actionSetSettingsReturnUrl, (state, action) => ({
     ...state,
     settingsReturnUrl: action.url,
   })),
-  on(NgrxAction.__updateLoggedUserSettings, (state, action) =>
+  on(actionUpdateLoggedUserSettings, (state, action) =>
     state.loggedUser
       ? {
           ...state,
@@ -52,11 +67,11 @@ const _reducer = createReducer(
         }
       : state
   ),
-  on(NgrxAction.__updateLogoutModalState, (state, action) => ({
+  on(actionUpdateLogoutModalState, (state, action) => ({
     ...state,
     logoutModalIsOpen: action.isOpen,
   })),
-  on(NgrxAction.__updateLoggedUserFullName, (state, action) =>
+  on(actionUpdateLoggedUserFullName, (state, action) =>
     state.loggedUser
       ? {
           ...state,
@@ -67,7 +82,7 @@ const _reducer = createReducer(
         }
       : state
   ),
-  on(NgrxAction.__updateLoggedUserUsername, (state, action) =>
+  on(actionUpdateLoggedUserUsername, (state, action) =>
     state.loggedUser
       ? {
           ...state,
@@ -78,21 +93,21 @@ const _reducer = createReducer(
         }
       : state
   ),
-  on(NgrxAction.__openDisabledAccountModal, (state, action) => ({
+  on(actionOpenDisabledAccountModal, (state, action) => ({
     ...state,
     disabledAccount: {
       accessToken: action.accessToken,
       modalIsOpen: true,
     },
   })),
-  on(NgrxAction.__closeDisabledAccountModal, state => ({
+  on(actionCloseDisabledAccountModal, state => ({
     ...state,
     disabledAccount: {
       accessToken: '',
       modalIsOpen: false,
     },
   })),
-  on(NgrxAction.__updateProfileImageUrl, (state, action) =>
+  on(actionUpdateProfileImageUrl, (state, action) =>
     state.loggedUser
       ? {
           ...state,
@@ -103,7 +118,7 @@ const _reducer = createReducer(
         }
       : state
   ),
-  on(NgrxAction.__updateProfileColor, (state, action) =>
+  on(actionUpdateProfileColor, (state, action) =>
     state.loggedUser
       ? {
           ...state,

@@ -11,7 +11,7 @@ import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth
 import { ChangePasswordFormStage } from '~/auth-mod/types/form-stage.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractSimpleFormStateProvider } from '~/shared-mod/services/abstract-simple-form-state-provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable()
@@ -46,7 +46,7 @@ export class ChangePasswordService extends AbstractSimpleFormStateProvider<
         tap(({ message }) => {
           this.setLoading(false);
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: message,
                 omitTransformation: true,

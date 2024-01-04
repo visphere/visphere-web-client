@@ -6,7 +6,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import {
+  actionAddSnackbar,
+  actionSetLoggedUserDetails,
+  actionUnsetInitialLoading,
+  removeUserDetailsAction,
+} from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { IdentityHttpClientService } from '../identity-http-client/identity-http-client.service';
 import { LazyPageLoaderService } from '../lazy-page-loader/lazy-page-loader.service';
@@ -24,7 +29,7 @@ export class IdentityService {
   refreshSession$(redirectUrl: string): Observable<string> {
     const tokenData = this._localStorageService.get<StorageKeys>('loggedUser');
     if (!tokenData) {
-      this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
+      this._store.dispatch(actionUnsetInitialLoading());
       return of(redirectUrl.includes('auth') ? redirectUrl : 'auth/login');
     }
     return this._identityHttpClientService
@@ -33,11 +38,11 @@ export class IdentityService {
         map(res => {
           this._lazyPageLoaderService.disableLoading();
           this._store.dispatch(
-            NgrxAction_SHA.__setLoggedUserDetails({
+            actionSetLoggedUserDetails({
               details: res,
             })
           );
-          this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
+          this._store.dispatch(actionUnsetInitialLoading());
           const memorizedPath = this._localStorageService.get<string>(
             `memorizedPath+${res.username}`
           );
@@ -48,7 +53,7 @@ export class IdentityService {
         }),
         catchError(() => {
           this._localStorageService.remove('loggedUser');
-          this._store.dispatch(NgrxAction_SHA.__unsetInitialLoading());
+          this._store.dispatch(actionUnsetInitialLoading());
           this._lazyPageLoaderService.disableLoading();
           return throwError(() => 'auth/login');
         })
@@ -63,7 +68,7 @@ export class IdentityService {
     return this._identityHttpClientService.logout$(tokenData.refreshToken).pipe(
       map(({ message }) => {
         this._store.dispatch(
-          NgrxAction_SHA.__addSnackbar({
+          actionAddSnackbar({
             content: {
               placeholder: message,
               omitTransformation: true,
@@ -71,7 +76,7 @@ export class IdentityService {
             severity: 'success',
           })
         );
-        this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
+        this._store.dispatch(removeUserDetailsAction());
         this._localStorageService.remove('loggedUser');
         return true;
       }),

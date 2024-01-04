@@ -5,7 +5,7 @@
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '../store/actions';
 
 export abstract class AbstractWsWebhookProvider<
   T,
@@ -19,7 +19,7 @@ export abstract class AbstractWsWebhookProvider<
 
   protected showSuccessSnackbar(message: string): void {
     this._absStore.dispatch(
-      NgrxAction_SHA.__addSnackbar({
+      actionAddSnackbar({
         content: {
           placeholder: message,
           omitTransformation: true,

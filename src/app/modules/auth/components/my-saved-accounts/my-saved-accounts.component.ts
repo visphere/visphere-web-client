@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { MySavedAccountModel } from '~/auth-mod/models/my-saved-account.model';
 import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.service';
-import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
+import { selectMySavedAccounts } from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { environment } from '~/env/environment';
 
@@ -19,7 +19,7 @@ export class MySavedAccountsComponent {
   isRemoveModalOpen$ = this._myAccountsService.removeModalIsOpen$;
   fetchingState$ = this._myAccountsService.fetchingState$;
 
-  mySavedAccounts$ = this._store.select(NgrxSelector_ATH.selectMySavedAccounts);
+  mySavedAccounts$ = this._store.select(selectMySavedAccounts);
 
   removingAccount?: MySavedAccountModel;
   loggedUser?: MySavedAccountModel;

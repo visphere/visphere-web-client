@@ -7,8 +7,11 @@ import { Store } from '@ngrx/store';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import {
+  actionAddSnackbar,
+  actionCloseDisabledAccountModal,
+} from '~/shared-mod/store/actions';
+import { selectDisabledAccountAccessToken } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AuthHttpClientService } from '../auth-http-client/auth-http-client.service';
 
@@ -25,7 +28,7 @@ export class UnlockAccountService
   ) {
     super();
     this.wrapAsObservable$(
-      this._store.select(NgrxSelector_SHA.selectDisabledAccountAccessToken)
+      this._store.select(selectDisabledAccountAccessToken)
     ).subscribe(accessToken => (this._accessToken = accessToken));
   }
 
@@ -37,7 +40,7 @@ export class UnlockAccountService
     return this._authHttpClientService.unlockAccount$(this._accessToken).pipe(
       tap(({ message }) => {
         this._store.dispatch(
-          NgrxAction_SHA.__addSnackbar({
+          actionAddSnackbar({
             content: {
               placeholder: message,
               omitTransformation: true,
@@ -54,6 +57,6 @@ export class UnlockAccountService
 
   closeModal(): void {
     this.setLoading(false);
-    this._store.dispatch(NgrxAction_SHA.__closeDisabledAccountModal());
+    this._store.dispatch(actionCloseDisabledAccountModal());
   }
 }

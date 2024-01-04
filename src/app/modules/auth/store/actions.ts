@@ -21,42 +21,42 @@ enum Action {
   REMOVE_MFA_STATE = '[AUTH] REMOVE MFA STATE',
 }
 
-export const __setActivateAccountEmail = createAction(
+export const actionSetActivateAccountEmail = createAction(
   Action.SET_ACTIVATE_ACCOUNT_EMAIL,
   props<{ email: string }>()
 );
 
-export const __removeActivateAccountEmail = createAction(
+export const actionRemoveActivateAccountEmail = createAction(
   Action.REMOVE_ACTIVATE_ACCOUNT_EMAIL
 );
 
-export const __loadMySavedAccounts = createAction(
+export const actionLoadMySavedAccounts = createAction(
   Action.LOAD_MY_SAVED_ACCOUNTS,
   props<{ accounts: MySavedAccountModel[] }>()
 );
 
-export const __addNewMySavedAccount = createAction(
+export const actionAddNewMySavedAccount = createAction(
   Action.ADD_NEW_MY_SAVED_ACCOUNT,
   props<{ account: MySavedAccountPayload }>()
 );
 
-export const __removeMySavedAccount = createAction(
+export const actionRemoveMySavedAccount = createAction(
   Action.REMOVE_MY_SAVED_ACCOUNT,
   props<{ accountId: string }>()
 );
 
-export const __removeAllMySavedAccount = createAction(
+export const actionRemoveAllMySavedAccount = createAction(
   Action.REMOVE_ALL_MY_SAVED_ACCOUNT
 );
 
-export const __setMySavedAccountVerified = createAction(
+export const actionSetMySavedAccountVerified = createAction(
   Action.SET_MY_SAVED_ACCOUNT_VERIFIED,
   props<{ uuid: string; thumbnailUrl: string; username: string }>()
 );
 
-export const __setMfaState = createAction(
+export const actionSetMfaState = createAction(
   Action.SET_MFA_STATE,
   props<{ mfaState: MfaStateModel }>()
 );
 
-export const __removeMfaState = createAction(Action.REMOVE_MFA_STATE);
+export const actionRemoveMfaState = createAction(Action.REMOVE_MFA_STATE);

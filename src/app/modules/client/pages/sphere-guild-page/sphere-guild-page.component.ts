@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { TextChannelService } from '~/client-mod/services/text-channel/text-channel.service';
-import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { selectIsAddTextChannelModalOpen } from '~/client-mod/store/selectors';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -22,7 +22,7 @@ export class SphereGuildPageComponent
   implements OnInit, OnDestroy
 {
   isAddTextChannelModalOpen$ = this._store.select(
-    NgrxSelector_CLN.selectIsAddTextChannelModalOpen
+    selectIsAddTextChannelModalOpen
   );
 
   constructor(

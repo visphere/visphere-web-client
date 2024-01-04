@@ -17,7 +17,7 @@ import {
 } from 'rxjs';
 import { JoiningGuildDetailsResDto } from '~/client-mod/model/join-guild.model';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { JoinLinkHttpClientService } from '../join-link-http-client/join-link-http-client.service';
 
@@ -78,7 +78,7 @@ export class JoinLinkService extends AbstractLoadableProvider {
         map(({ message, guildId }) => {
           this.setLoading(false);
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: message,
                 omitTransformation: true,

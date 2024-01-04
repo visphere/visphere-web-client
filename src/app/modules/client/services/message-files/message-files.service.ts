@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { BlobFile } from '~/client-mod/model/message.model';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 
 @Injectable()
 export class MessageFilesService {
@@ -92,7 +92,7 @@ export class MessageFilesService {
       return;
     }
     this._store.dispatch(
-      NgrxAction_SHA.__addSnackbar({
+      actionAddSnackbar({
         content: {
           i18nPrefix: 'vsph.common.file.error.',
           placeholder: result.i18nError,

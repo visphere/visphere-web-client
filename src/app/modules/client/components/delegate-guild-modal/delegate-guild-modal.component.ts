@@ -7,8 +7,11 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DevastateDetails } from '~/client-mod/model/participant.model';
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
-import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { actionCloseDevastateMemberModal } from '~/client-mod/store/actions';
+import {
+  selectActiveModal,
+  selectDevastateDetails,
+} from '~/client-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -23,7 +26,7 @@ export class DelegateGuildModalComponent
   devastateDetails?: DevastateDetails;
   i18nParams = {};
 
-  selectedOpenModal$ = this._store.select(NgrxSelector_CLN.selectActiveModal);
+  selectedOpenModal$ = this._store.select(selectActiveModal);
   isLoading$ = this._participantService.isLoading$;
 
   readonly defaultPrefix = 'vsph.clientCommon.client.modals.delegateGuild';
@@ -38,7 +41,7 @@ export class DelegateGuildModalComponent
 
   ngOnInit(): void {
     this.wrapAsObservable$(
-      this._store.select(NgrxSelector_CLN.selectDevastateDetails)
+      this._store.select(selectDevastateDetails)
     ).subscribe(devastateDetails => {
       this.i18nParams = {
         name: devastateDetails?.name,
@@ -51,7 +54,7 @@ export class DelegateGuildModalComponent
   }
 
   handleCloseModal(): void {
-    this._store.dispatch(NgrxAction_CLN.__closeDevastateMemberModal());
+    this._store.dispatch(actionCloseDevastateMemberModal());
   }
 
   handleDelegateDetails(usernameOrMfaCode: string): void {

@@ -13,8 +13,8 @@ import {
   map,
   switchMap,
 } from 'rxjs';
-import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { ExtendedValidatorErrors } from '~/shared-mod/types/validation.type';
+import { checkIfMySavedAccountAlreadyExist } from '../store/selectors';
 import { AuthReducer } from '../types/ngrx-store.type';
 
 @Injectable({ providedIn: 'root' })
@@ -27,9 +27,7 @@ export class MyAcccountUserAlreadyExistValidator {
         debounceTime(300),
         distinctUntilChanged(),
         switchMap(value =>
-          this._store.select(
-            NgrxSelector_ATH.checkIfMySavedAccountAlreadyExist(value)
-          )
+          this._store.select(checkIfMySavedAccountAlreadyExist(value))
         ),
         map(alreadyExist => (alreadyExist ? { exist: alreadyExist } : null)),
         first()

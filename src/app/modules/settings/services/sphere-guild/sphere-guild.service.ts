@@ -20,8 +20,8 @@ import { GuildOwnerDetailsResDto } from '~/settings-mod/model/guild-management.m
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractGuildManagementProvider } from '../abstract-guild-management.provider';
 import { GuildManagementHttpClientService } from '../guild-management-http-client/guild-management-http-client.service';
@@ -76,7 +76,7 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
         tap(({ message }) => {
           this._passwordConfirmationService.setLoading(false);
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: message,
                 omitTransformation: true,
@@ -85,7 +85,7 @@ export class SphereGuildService extends AbstractGuildManagementProvider {
             })
           );
         }),
-        switchMap(() => this._store.select(NgrxSelector_SHA.selectLoggedUser)),
+        switchMap(() => this._store.select(selectLoggedUser)),
         map(loggedUser => {
           if (loggedUser) {
             this._localStorageService.remove(

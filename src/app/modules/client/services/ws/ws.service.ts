@@ -23,7 +23,7 @@ import { environment } from '~/env/environment';
 import { StorageKeys } from '~/shared-mod/models/identity.model';
 import { FaviconBadgeNotificatorService } from '~/shared-mod/services/favicon-badge-notificator/favicon-badge-notificator.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 import { GuildService } from '../guild/guild.service';
@@ -92,7 +92,7 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
           destination: `/topic/outbound.${textChannelId}`,
         })
       ),
-      withLatestFrom(this._store.select(NgrxSelector_SHA.selectLoggedUser)),
+      withLatestFrom(this._store.select(selectLoggedUser)),
       map(([{ body }, loggedUser]) => {
         const message = JSON.parse(body) as MessagePayloadResDto;
         if (message.userId !== loggedUser?.id) {
@@ -118,7 +118,7 @@ export class WsService extends AbstractReactiveProvider implements OnDestroy {
     return of(null).pipe(
       switchMap(() =>
         combineLatest([
-          this._store.select(NgrxSelector_SHA.selectLoggedUser),
+          this._store.select(selectLoggedUser),
           this._textChannelId$,
         ])
       ),

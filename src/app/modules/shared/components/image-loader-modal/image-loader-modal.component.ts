@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { environment } from '~/env/environment';
 import { FormHelperService } from '~/shared-mod/services/form-helper/form-helper.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { FileExtensionType } from '~/shared-mod/types/file-extensions.type';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
@@ -116,7 +116,7 @@ export class ImageLoaderModalComponent {
     parameters?: { [key: string]: any }
   ): void {
     this._store.dispatch(
-      NgrxAction_SHA.__addSnackbar({
+      actionAddSnackbar({
         content: {
           i18nPrefix: 'vsph.common.file.error.',
           placeholder,

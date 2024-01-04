@@ -5,7 +5,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MyAccountsService } from '~/auth-mod/services/my-accounts/my-accounts.service';
-import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
+import { selectMySavedAccountsCount } from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 
 @Component({
@@ -19,9 +19,7 @@ export class AuthMyAccountsPageComponent {
   isAddNewModalOpen$ = this._myAccountsService.addNewModalIsOpen$;
   fetchingState$ = this._myAccountsService.fetchingState$;
 
-  mySavedAccountsCount$ = this._store.select(
-    NgrxSelector_ATH.selectMySavedAccountsCount
-  );
+  mySavedAccountsCount$ = this._store.select(selectMySavedAccountsCount);
 
   constructor(
     private readonly _myAccountsService: MyAccountsService,

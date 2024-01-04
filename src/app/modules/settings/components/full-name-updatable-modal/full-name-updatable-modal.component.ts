@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { UpdateAccountDetailsReqDto } from '~/settings-mod/model/update-account-details.model';
 import { MyAccountSettingsService } from '~/settings-mod/services/my-account-settings/my-account-settings.service';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionUpdateLoggedUserFullName } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractUpdatableModalProvider } from '../abstract-updatable-modal-provider';
 
@@ -67,7 +67,7 @@ export class FullNameUpdatableModalComponent
       ).subscribe({
         next: () =>
           this._store.dispatch(
-            NgrxAction_SHA.__updateLoggedUserFullName({
+            actionUpdateLoggedUserFullName({
               fullName: `${reqDto.firstName} ${reqDto.lastName}`,
             })
           ),

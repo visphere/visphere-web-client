@@ -6,8 +6,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IdentityService } from '~/shared-mod/services/identity/identity.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { actionUpdateLogoutModalState } from '~/shared-mod/store/actions';
+import { selectLogoutModalIsOpen } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -19,7 +19,7 @@ export class LogoutModalComponent
   extends AbstractReactiveProvider
   implements OnDestroy
 {
-  isModalOpen$ = this._store.select(NgrxSelector_SHA.selectLogoutModalIsOpen);
+  isModalOpen$ = this._store.select(selectLogoutModalIsOpen);
 
   isLoading = false;
 
@@ -49,8 +49,6 @@ export class LogoutModalComponent
   }
 
   handleCloseModal(): void {
-    this._store.dispatch(
-      NgrxAction_SHA.__updateLogoutModalState({ isOpen: false })
-    );
+    this._store.dispatch(actionUpdateLogoutModalState({ isOpen: false }));
   }
 }

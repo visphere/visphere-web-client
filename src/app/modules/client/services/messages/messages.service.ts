@@ -26,8 +26,8 @@ import { MessageLoadingStateType } from '~/client-mod/types/loading-state.type';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
-import { __addSnackbar } from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { MessagesHttpClientService } from '../messages-http-client/messages-http-client.service';
 import { WsService } from '../ws/ws.service';
 
@@ -129,7 +129,7 @@ export class MessagesService extends AbstractLoadableProvider {
       tap(() => this._activeLoading$.next('sending')),
       switchMap(() =>
         combineLatest([
-          this._store.select(NgrxSelector_SHA.selectLoggedUser),
+          this._store.select(selectLoggedUser),
           this._wsService.textChannelId$,
         ])
       ),
@@ -167,7 +167,7 @@ export class MessagesService extends AbstractLoadableProvider {
       tap(({ message }) => {
         this._activeLoading$.next('none');
         this._store.dispatch(
-          __addSnackbar({
+          actionAddSnackbar({
             content: {
               placeholder: message,
               omitTransformation: true,

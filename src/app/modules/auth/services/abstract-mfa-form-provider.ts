@@ -5,14 +5,17 @@
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import * as NgrxAction_ATH from '~/auth-mod/store/actions';
-import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import {
+  actionOpenDisabledAccountModal,
+  actionSetLoggedUserDetails,
+} from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { MfaStateModel } from '../models/mfa-data.model';
+import { actionRemoveMfaState } from '../store/actions';
+import { selectMfaState } from '../store/selectors';
 import { AuthReducer } from '../types/ngrx-store.type';
 
 export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider<LoginResDtoModel> {
@@ -24,13 +27,13 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
     private readonly _absLocalStorageService: LocalStorageService
   ) {
     super();
-    this.wrapAsObservable$(
-      this._absStore.select(NgrxSelector_ATH.selectMfaState)
-    ).subscribe(state => {
-      if (state) {
-        this._mfaState = state;
+    this.wrapAsObservable$(this._absStore.select(selectMfaState)).subscribe(
+      state => {
+        if (state) {
+          this._mfaState = state;
+        }
       }
-    });
+    );
   }
 
   protected verifyCodeAndPerformLogin$(
@@ -42,12 +45,12 @@ export abstract class AbstractMfaFormProvider extends AbstractSimpleFormProvider
         const { isDisabled, accessToken } = res;
         this._absStore.dispatch(
           isDisabled
-            ? NgrxAction_SHA.__openDisabledAccountModal({ accessToken })
-            : NgrxAction_SHA.__setLoggedUserDetails({
+            ? actionOpenDisabledAccountModal({ accessToken })
+            : actionSetLoggedUserDetails({
                 details: res,
               })
         );
-        this._absStore.dispatch(NgrxAction_ATH.__removeMfaState());
+        this._absStore.dispatch(actionRemoveMfaState());
         if (!isDisabled) {
           let navigateUrl = '/';
           const memorizedPath = this._absLocalStorageService.get<string>(

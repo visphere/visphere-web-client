@@ -23,14 +23,14 @@ import {
   SphereGuildCategory,
   UserGuildResDto,
 } from '~/client-mod/model/guild.model';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
+import { actionCloseModal } from '~/client-mod/store/actions';
 import { CreateOrJoinGuildModalMode } from '~/client-mod/types/modal-mode.type';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { TemplatePageTitleStrategy } from '~/shared-mod/config/template-page-title.strategy';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { GuildHttpClientService } from '../guild-http-client/guild-http-client.service';
 import { JoinLinkHttpClientService } from '../join-link-http-client/join-link-http-client.service';
@@ -81,7 +81,7 @@ export class GuildService extends AbstractWsWebhookProvider<
         this._lazyPageLoaderService.disableLoading();
       }),
       catchError(err =>
-        this._store.select(NgrxSelector_SHA.selectLoggedUser).pipe(
+        this._store.select(selectLoggedUser).pipe(
           mergeMap(loggedUser => {
             if (loggedUser) {
               this._localStorageService.remove(
@@ -129,7 +129,7 @@ export class GuildService extends AbstractWsWebhookProvider<
         this.setLoading(false);
         this.showSuccessSnackbar(message);
         this.updateWsSignalValue();
-        this._store.dispatch(NgrxAction_CLN.__closeModal());
+        this._store.dispatch(actionCloseModal());
         return guildId;
       }),
       catchError(err => {
@@ -151,7 +151,7 @@ export class GuildService extends AbstractWsWebhookProvider<
           this.setLoading(false);
           this.showSuccessSnackbar(message);
           this.updateWsSignalValue();
-          this._store.dispatch(NgrxAction_CLN.__closeModal());
+          this._store.dispatch(actionCloseModal());
           return id;
         }),
         catchError(err => {

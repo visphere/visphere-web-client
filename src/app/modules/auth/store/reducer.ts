@@ -4,24 +4,34 @@
  */
 import { Action, createReducer, on } from '@ngrx/store';
 import { v4 as uuidv4 } from 'uuid';
-import * as NgrxAction from './actions';
+import {
+  actionAddNewMySavedAccount,
+  actionLoadMySavedAccounts,
+  actionRemoveActivateAccountEmail,
+  actionRemoveAllMySavedAccount,
+  actionRemoveMfaState,
+  actionRemoveMySavedAccount,
+  actionSetActivateAccountEmail,
+  actionSetMfaState,
+  actionSetMySavedAccountVerified,
+} from './actions';
 import { AuthStoreState, authStoreState } from './state';
 
 const _reducer = createReducer(
   authStoreState,
-  on(NgrxAction.__setActivateAccountEmail, (state, action) => ({
+  on(actionSetActivateAccountEmail, (state, action) => ({
     ...state,
     activateAccountEmail: action.email,
   })),
-  on(NgrxAction.__removeActivateAccountEmail, state => ({
+  on(actionRemoveActivateAccountEmail, state => ({
     ...state,
     activateAccountEmail: '',
   })),
-  on(NgrxAction.__loadMySavedAccounts, (state, action) => ({
+  on(actionLoadMySavedAccounts, (state, action) => ({
     ...state,
     mySavedAccounts: action.accounts,
   })),
-  on(NgrxAction.__addNewMySavedAccount, (state, action) => ({
+  on(actionAddNewMySavedAccount, (state, action) => ({
     ...state,
     mySavedAccounts: [
       ...state.mySavedAccounts,
@@ -31,18 +41,18 @@ const _reducer = createReducer(
       },
     ],
   })),
-  on(NgrxAction.__removeMySavedAccount, (state, action) => ({
+  on(actionRemoveMySavedAccount, (state, action) => ({
     ...state,
     mySavedAccounts: state.mySavedAccounts.filter(
       ({ accountId }) => accountId !== action.accountId
     ),
   })),
-  on(NgrxAction.__removeAllMySavedAccount, state => ({
+  on(actionRemoveAllMySavedAccount, state => ({
     ...state,
     mySavedAccounts: [],
   })),
   on(
-    NgrxAction.__setMySavedAccountVerified,
+    actionSetMySavedAccountVerified,
     (state, { thumbnailUrl, username, uuid }) => {
       const alreadyExist = !!state.mySavedAccounts.find(
         ({ usernameOrEmailAddress, accountId }) =>
@@ -70,11 +80,11 @@ const _reducer = createReducer(
           };
     }
   ),
-  on(NgrxAction.__setMfaState, (state, { mfaState }) => ({
+  on(actionSetMfaState, (state, { mfaState }) => ({
     ...state,
     mfaState,
   })),
-  on(NgrxAction.__removeMfaState, state => ({
+  on(actionRemoveMfaState, state => ({
     ...state,
     mfaState: undefined,
   }))

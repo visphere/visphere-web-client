@@ -17,12 +17,17 @@ import {
   MyAccountReqDto,
   MySavedAccountModel,
 } from '~/auth-mod/models/my-saved-account.model';
-import * as NgrxAction_ATH from '~/auth-mod/store/actions';
+import {
+  actionAddNewMySavedAccount,
+  actionLoadMySavedAccounts,
+  actionRemoveAllMySavedAccount,
+  actionRemoveMySavedAccount,
+} from '~/auth-mod/store/actions';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { ModalUtilsService } from '~/shared-mod/services/modal-utils/modal-utils.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { FetchingState } from '~/shared-mod/types/fetching-state.type';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { Severity } from '~/shared-mod/types/snackbar.type';
@@ -57,7 +62,7 @@ export class MyAccountsService
       )
       .subscribe(accounts => {
         this._store.dispatch(
-          NgrxAction_ATH.__loadMySavedAccounts({
+          actionLoadMySavedAccounts({
             accounts,
           })
         );
@@ -93,7 +98,7 @@ export class MyAccountsService
       this.parseFormValues<AddNewMyAccountFormModel>();
 
     this._store.dispatch(
-      NgrxAction_ATH.__addNewMySavedAccount({
+      actionAddNewMySavedAccount({
         account: {
           usernameOrEmailAddress,
           thumbnailUrl: '',
@@ -109,13 +114,13 @@ export class MyAccountsService
     if (!accountId) {
       return;
     }
-    this._store.dispatch(NgrxAction_ATH.__removeMySavedAccount({ accountId }));
+    this._store.dispatch(actionRemoveMySavedAccount({ accountId }));
     this.changeRemoveModalVisibility(false);
     this.generateSuccessSnackbarResponse('removeMySavedAccount');
   }
 
   removeAllAccounts(): void {
-    this._store.dispatch(NgrxAction_ATH.__removeAllMySavedAccount());
+    this._store.dispatch(actionRemoveAllMySavedAccount());
     this.changeRemoveAllModalVisibility(false);
     this.generateSuccessSnackbarResponse('removeAllMySavedAccounts');
   }
@@ -139,7 +144,7 @@ export class MyAccountsService
     severity: Severity = 'success'
   ): void {
     this._store.dispatch(
-      NgrxAction_SHA.__addSnackbar({
+      actionAddSnackbar({
         content: {
           i18nPrefix: 'vsph.clientCommon.myAccountsPage.snackbars.',
           placeholder,

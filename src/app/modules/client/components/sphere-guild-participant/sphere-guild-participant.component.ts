@@ -9,7 +9,7 @@ import { GuildDetailsResDto } from '~/client-mod/model/guild.model';
 import { GuildParticipantDetailsResDto } from '~/client-mod/model/participant.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
+import { actionOpenDevastateMemberModal } from '~/client-mod/store/actions';
 import { DevastateMemberModal } from '~/client-mod/types/modal-mode.type';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon-theme.provider';
@@ -96,7 +96,7 @@ export class SphereGuildParticipantComponent
   handleOpenModalToLeaveSphere(): void {
     if (this.guildDetails) {
       this._store.dispatch(
-        NgrxAction_CLN.__openDevastateMemberModal({
+        actionOpenDevastateMemberModal({
           modal: 'leave',
           id: this.guildDetails.id,
           name: this.guildDetails.name,
@@ -109,7 +109,7 @@ export class SphereGuildParticipantComponent
   private openSelectedModal(modal: DevastateMemberModal): void {
     if (this.userDetails) {
       this._store.dispatch(
-        NgrxAction_CLN.__openDevastateMemberModal({
+        actionOpenDevastateMemberModal({
           modal,
           id: this.userDetails.id,
           name: `${this.userDetails.fullName} (${this.userDetails.username})`,

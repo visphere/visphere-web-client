@@ -6,8 +6,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { environment } from '~/env/environment';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { actionUpdateLogoutModalState } from '~/shared-mod/store/actions';
+import { selectSettingsReturnUrl } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -22,9 +22,7 @@ export class NavigationBarComponent
 {
   landingPagePath = environment.baseLandingUrl;
 
-  settingsReturnUrl$ = this._store.select(
-    NgrxSelector_SHA.selectSettingsReturnUrl
-  );
+  settingsReturnUrl$ = this._store.select(selectSettingsReturnUrl);
 
   constructor(
     private readonly _languageSwitcherService: LanguageSwitcherService,
@@ -46,8 +44,6 @@ export class NavigationBarComponent
   }
 
   handleOpenLogoutModal(): void {
-    this._store.dispatch(
-      NgrxAction_SHA.__updateLogoutModalState({ isOpen: true })
-    );
+    this._store.dispatch(actionUpdateLogoutModalState({ isOpen: true }));
   }
 }

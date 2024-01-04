@@ -10,10 +10,10 @@ import { GuildDetailsResDto } from '~/client-mod/model/guild.model';
 import { TextChannelResDto } from '~/client-mod/model/text-channel.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
 import { TextChannelService } from '~/client-mod/services/text-channel/text-channel.service';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
+import { actionOpenSelectedModal } from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { environment } from '~/env/environment';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionSetSettingsReturnUrl } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -66,7 +66,7 @@ export class SphereTextChannelsPanelComponent
 
   handleOpenModalToCreateTextChannel(): void {
     this._store.dispatch(
-      NgrxAction_CLN.__openSelectedModal({ modal: 'add-text-channel' })
+      actionOpenSelectedModal({ modal: 'add-text-channel' })
     );
   }
 
@@ -94,9 +94,7 @@ export class SphereTextChannelsPanelComponent
   }
 
   private async saveUrlAndNavigateTo(destinationUrl: string): Promise<void> {
-    this._store.dispatch(
-      NgrxAction_SHA.__setSettingsReturnUrl({ url: this._router.url })
-    );
+    this._store.dispatch(actionSetSettingsReturnUrl({ url: this._router.url }));
     await this._router.navigateByUrl(`/settings/${destinationUrl}/overview`);
   }
 }

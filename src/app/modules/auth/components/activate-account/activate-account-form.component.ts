@@ -7,7 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ActivateAccountService } from '~/auth-mod/services/activate-account/activate-account.service';
-import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
+import { selectActivateAccountEmail } from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
@@ -24,7 +24,7 @@ export class ActivateAccountFormComponent
 {
   activateAccountForm: FormGroup;
 
-  userEmail$ = this._store.select(NgrxSelector_ATH.selectActivateAccountEmail);
+  userEmail$ = this._store.select(selectActivateAccountEmail);
   isLoading$ = this._activateAccountService.isLoading$;
   isResendLoading$ = this._activateAccountService.resendIsLoading$;
   currentStage$ = this._activateAccountService.currentStage$;

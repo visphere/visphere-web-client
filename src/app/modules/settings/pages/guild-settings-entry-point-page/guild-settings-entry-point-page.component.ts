@@ -9,7 +9,7 @@ import { GuildOwnerDetailsResDto } from '~/settings-mod/model/guild-management.m
 import { DevastateModalData } from '~/settings-mod/model/user-account-details.model';
 import { SphereGuildService } from '~/settings-mod/services/sphere-guild/sphere-guild.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectSettingsReturnUrl } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -30,9 +30,7 @@ export class GuildSettingsEntryPointPageComponent
   readonly modalPrefix =
     'vsph.clientCommon.settingsPage.modal.devastate.deleteGuild';
 
-  settingsReturnUrl$ = this._store.select(
-    NgrxSelector_SHA.selectSettingsReturnUrl
-  );
+  settingsReturnUrl$ = this._store.select(selectSettingsReturnUrl);
 
   constructor(
     private readonly _store: Store<SharedReducer>,

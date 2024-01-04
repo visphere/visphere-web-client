@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FileAttachment } from '~/client-mod/model/message.model';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
-import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { actionSetViewedImageDetails } from '~/client-mod/store/actions';
+import { selectImageViewerDetails } from '~/client-mod/store/selectors';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { windowFadeAndMove } from '~/shared-mod/animations/window.animation';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
@@ -44,7 +44,7 @@ export class ImageViewerModalComponent
       console.log(clickedInside);
       if (!clickedInside) {
         this._store.dispatch(
-          NgrxAction_CLN.__setViewedImageDetails({ details: undefined })
+          actionSetViewedImageDetails({ details: undefined })
         );
       }
     }
@@ -52,7 +52,7 @@ export class ImageViewerModalComponent
 
   ngOnInit(): void {
     this.wrapAsObservable$(
-      this._store.select(NgrxSelector_CLN.selectImageViewerDetails)
+      this._store.select(selectImageViewerDetails)
     ).subscribe(viewerDetails => (this.viewerDetails = viewerDetails));
   }
 

@@ -16,8 +16,8 @@ import {
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 export abstract class AbstractGuildManagementProvider extends AbstractWsWebhookProvider<SharedReducer> {
@@ -40,7 +40,7 @@ export abstract class AbstractGuildManagementProvider extends AbstractWsWebhookP
       tap(({ message }) => {
         onLoadingCallback(false);
         this._absStore.dispatch(
-          NgrxAction_SHA.__addSnackbar({
+          actionAddSnackbar({
             content: {
               placeholder: message,
               omitTransformation: true,
@@ -49,7 +49,7 @@ export abstract class AbstractGuildManagementProvider extends AbstractWsWebhookP
           })
         );
       }),
-      switchMap(() => this._absStore.select(NgrxSelector_SHA.selectLoggedUser)),
+      switchMap(() => this._absStore.select(selectLoggedUser)),
       map(loggedUser => {
         if (loggedUser && removeSavePath) {
           this._absLocalStorageService.remove(

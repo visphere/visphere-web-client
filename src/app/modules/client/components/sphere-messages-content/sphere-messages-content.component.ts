@@ -18,8 +18,8 @@ import { MessagesService } from '~/client-mod/services/messages/messages.service
 import { ParticipantService } from '~/client-mod/services/participant/participant.service';
 import { WsService } from '~/client-mod/services/ws/ws.service';
 import {
-  __setDeletingMessageContent,
-  __setViewedImageDetails,
+  actionSetDeletingMessageContent,
+  actionSetViewedImageDetails,
 } from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { getFontAwesomeIconFromMime } from '~/client-mod/utils/mime-converter';
@@ -110,7 +110,9 @@ export class SphereMessagesContentComponent
   }
 
   handleOpenImageModal(imageAttachment: FileAttachment): void {
-    this._store.dispatch(__setViewedImageDetails({ details: imageAttachment }));
+    this._store.dispatch(
+      actionSetViewedImageDetails({ details: imageAttachment })
+    );
   }
 
   handleOnHoverMessage(messageId: string): void {
@@ -122,7 +124,7 @@ export class SphereMessagesContentComponent
   }
 
   handleRemoveMessage(messageContent: MessagePayloadResDto): void {
-    this._store.dispatch(__setDeletingMessageContent({ messageContent }));
+    this._store.dispatch(actionSetDeletingMessageContent({ messageContent }));
   }
 
   getFileIcon(mime: string): IconDefinition {

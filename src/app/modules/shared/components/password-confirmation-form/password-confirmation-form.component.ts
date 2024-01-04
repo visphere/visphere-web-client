@@ -14,7 +14,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { PopulateFormGroupService } from '~/shared-mod/context/populate-form-group/populate-form-group.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import {
+  selectIsLocalSupplier,
+  selectIsMfaSetup,
+} from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -40,7 +43,7 @@ export class PasswordConfirmationFormComponent
 
   isLoading$ = this._passwordConfirmationService.isLoading$;
   currentStage$ = this._passwordConfirmationService.currentStage$;
-  isLocalSupplier$ = this._store.select(NgrxSelector_SHA.selectIsLocalSupplier);
+  isLocalSupplier$ = this._store.select(selectIsLocalSupplier);
 
   constructor(
     private readonly _populateFormGroupService: PopulateFormGroupService,
@@ -55,9 +58,9 @@ export class PasswordConfirmationFormComponent
 
   ngOnInit(): void {
     this._populateFormGroupService.setField(this.passwordForm);
-    this.wrapAsObservable$(
-      this._store.select(NgrxSelector_SHA.selectIsMfaSetup)
-    ).subscribe(isMfaSetup => (this.isMfaSetup = isMfaSetup));
+    this.wrapAsObservable$(this._store.select(selectIsMfaSetup)).subscribe(
+      isMfaSetup => (this.isMfaSetup = isMfaSetup)
+    );
     this.wrapAsObservable$(this.isLoading$).subscribe(isLoading =>
       this._populateFormGroupService.setFormDisabled(isLoading)
     );

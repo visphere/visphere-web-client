@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, filter, map, switchMap } from 'rxjs';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class RoutePersistorService {
   persistRoute$(): Observable<string> {
     return this._router.events.pipe(
       filter(events => events instanceof NavigationEnd),
-      switchMap(() => this._store.select(NgrxSelector_SHA.selectLoggedUser)),
+      switchMap(() => this._store.select(selectLoggedUser)),
       filter(loggedUser => !!loggedUser),
       map(loggedUser => {
         const url = this._router.url;

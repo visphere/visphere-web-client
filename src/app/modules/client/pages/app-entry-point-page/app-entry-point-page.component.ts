@@ -4,7 +4,7 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
+import { actionOpenSelectedModal } from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { AbstractLandingUrlProvider } from '~/shared-mod/components/abstract-landing-url.provider';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
@@ -38,8 +38,6 @@ export class AppEntryPointPageComponent
   }
 
   handleOpenModalToCreateGuild(): void {
-    this._store.dispatch(
-      NgrxAction_CLN.__openSelectedModal({ modal: 'add-sphere' })
-    );
+    this._store.dispatch(actionOpenSelectedModal({ modal: 'add-sphere' }));
   }
 }

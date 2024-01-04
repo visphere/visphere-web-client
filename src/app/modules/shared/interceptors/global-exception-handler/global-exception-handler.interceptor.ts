@@ -14,7 +14,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '~/env/environment';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { flattedErrorResponse } from '~/shared-mod/utils/flatted-error-response';
 
@@ -33,7 +33,7 @@ export class GlobalExceptionHandlerInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
         this._store.dispatch(
-          NgrxAction_SHA.__addSnackbar({
+          actionAddSnackbar({
             content: err.error
               ? flattedErrorResponse(err.error)
               : {

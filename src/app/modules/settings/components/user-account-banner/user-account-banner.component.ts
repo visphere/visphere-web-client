@@ -6,7 +6,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { environment } from '~/env/environment';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -29,13 +29,13 @@ export class UserAccountBannerComponent
   }
 
   ngOnInit(): void {
-    this.wrapAsObservable$(
-      this._store.select(NgrxSelector_SHA.selectLoggedUser)
-    ).subscribe(loggedUser => {
-      if (loggedUser) {
-        this.loggedUser = loggedUser;
+    this.wrapAsObservable$(this._store.select(selectLoggedUser)).subscribe(
+      loggedUser => {
+        if (loggedUser) {
+          this.loggedUser = loggedUser;
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy(): void {

@@ -29,7 +29,7 @@ import {
 } from '~/shared-mod/models/identity.model';
 import { IdentityHttpClientService } from '~/shared-mod/services/identity-http-client/identity-http-client.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { removeUserDetailsAction } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable()
@@ -101,7 +101,7 @@ export class AccessRefreshInterceptor implements HttpInterceptor {
         }),
         catchError(err => {
           this._isRefreshing = false;
-          this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
+          this._store.dispatch(removeUserDetailsAction());
           this._localStorageService.remove('loggedUser');
           this._router.navigateByUrl('/auth/login').then(r => r);
           return throwError(() => err);

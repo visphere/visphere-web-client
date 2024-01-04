@@ -6,7 +6,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UnlockAccountService } from '~/auth-mod/services/unlock-account/unlock-account.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectDisabledAccountModalIsOpen } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractReactiveProvider } from '~/shared-mod/utils/abstract-reactive-provider';
 
@@ -20,9 +20,7 @@ export class LockedAccountModalComponent
   implements OnDestroy
 {
   isLoading$ = this._unlockAccountService.isLoading$;
-  isModalActive$ = this._store.select(
-    NgrxSelector_SHA.selectDisabledAccountModalIsOpen
-  );
+  isModalActive$ = this._store.select(selectDisabledAccountModalIsOpen);
 
   constructor(
     private readonly _store: Store<SharedReducer>,

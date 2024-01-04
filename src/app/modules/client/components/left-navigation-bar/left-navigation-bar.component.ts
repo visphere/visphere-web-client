@@ -9,13 +9,13 @@ import { NgxFloatUiContentComponent } from 'ngx-float-ui';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { UserGuildResDto } from '~/client-mod/model/guild.model';
 import { GuildService } from '~/client-mod/services/guild/guild.service';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
+import { actionOpenSelectedModal } from '~/client-mod/store/actions';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { AbstractLandingUrlProvider } from '~/shared-mod/components/abstract-landing-url.provider';
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { floatUiConfig } from '~/shared-mod/utils/float-ui.config';
 
@@ -56,9 +56,9 @@ export class LeftNavigationBarComponent
   ngOnInit(): void {
     this.loadLandingUrl();
     this.loadBrandThemedIcon();
-    this.wrapAsObservable$(
-      this._store.select(NgrxSelector_SHA.selectLoggedUser)
-    ).subscribe(loggedUser => (this.loggedUser = loggedUser ?? undefined));
+    this.wrapAsObservable$(this._store.select(selectLoggedUser)).subscribe(
+      loggedUser => (this.loggedUser = loggedUser ?? undefined)
+    );
     this.wrapAsObservable$(this._guildService.getAllUserGuilds$()).subscribe(
       guilds => (this.userGuilds = guilds)
     );
@@ -69,9 +69,7 @@ export class LeftNavigationBarComponent
   }
 
   handleOpenAddSphereModal(): void {
-    this._store.dispatch(
-      NgrxAction_CLN.__openSelectedModal({ modal: 'add-sphere' })
-    );
+    this._store.dispatch(actionOpenSelectedModal({ modal: 'add-sphere' }));
   }
 
   handleClosePopup(): void {

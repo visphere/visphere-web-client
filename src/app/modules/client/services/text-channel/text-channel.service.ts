@@ -25,7 +25,7 @@ import { TemplatePageTitleStrategy } from '~/shared-mod/config/template-page-tit
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { GuildService } from '../guild/guild.service';
 import { TextChannelHttpClientService } from '../text-channel-http-client/text-channel-http-client.service';
@@ -61,7 +61,7 @@ export class TextChannelService extends AbstractWsWebhookProvider<SharedReducer>
         this._textChannelDetails$.next(textChannelDetails);
       }),
       catchError(err =>
-        this._store.select(NgrxSelector_SHA.selectLoggedUser).pipe(
+        this._store.select(selectLoggedUser).pipe(
           mergeMap(loggedUser => {
             if (loggedUser) {
               this._localStorageService.remove(

@@ -4,8 +4,11 @@
  */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
-import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { actionCloseDevastateMemberModal } from '~/client-mod/store/actions';
+import {
+  selectActiveModal,
+  selectDevastateDetails,
+} from '~/client-mod/store/selectors';
 import { DevastateMemberModal } from '~/client-mod/types/modal-mode.type';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 
@@ -19,10 +22,8 @@ export class DevastateMemberActionModalComponent {
 
   @Output() emitDevastateAction = new EventEmitter<boolean>();
 
-  activeModal$ = this._store.select(NgrxSelector_CLN.selectActiveModal);
-  devastateDetails$ = this._store.select(
-    NgrxSelector_CLN.selectDevastateDetails
-  );
+  activeModal$ = this._store.select(selectActiveModal);
+  devastateDetails$ = this._store.select(selectDevastateDetails);
 
   deleteAllMessages = false;
 
@@ -31,7 +32,7 @@ export class DevastateMemberActionModalComponent {
   constructor(private readonly _store: Store<ClientReducer>) {}
 
   handleCloseModal(): void {
-    this._store.dispatch(NgrxAction_CLN.__closeDevastateMemberModal());
+    this._store.dispatch(actionCloseDevastateMemberModal());
     this.deleteAllMessages = false;
   }
 }

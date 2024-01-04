@@ -18,7 +18,10 @@ import {
   ProfileDetails,
 } from '~/settings-mod/model/profile-settings.module';
 import { ProfileImageLoadableElementType } from '~/settings-mod/types/loadable-element.type';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import {
+  actionUpdateProfileColor,
+  actionUpdateProfileImageUrl,
+} from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractProfileImageProvider } from '../abstract-profile-image.provider';
 import { ProfileSettingsHttpClientService } from '../profile-settings-http-client/profile-settings-http-client.service';
@@ -125,10 +128,10 @@ export class ProfileSettingsService extends AbstractProfileImageProvider<Profile
         this._activeLoading$.next('none');
         this.showSuccessSnackbar(message);
         if (color) {
-          this._store.dispatch(NgrxAction_SHA.__updateProfileColor({ color }));
+          this._store.dispatch(actionUpdateProfileColor({ color }));
         }
         this._store.dispatch(
-          NgrxAction_SHA.__updateProfileImageUrl({ imageUrl: resourcePath })
+          actionUpdateProfileImageUrl({ imageUrl: resourcePath })
         );
         if (refetch) {
           this._onChangeObserver$.next(null);

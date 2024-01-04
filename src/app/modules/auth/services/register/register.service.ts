@@ -13,12 +13,12 @@ import {
   RegisterReqDtoModel,
 } from '~/auth-mod/models/register-form.model';
 import { AuthHttpClientService } from '~/auth-mod/services/auth-http-client/auth-http-client.service';
-import * as NgrxAction_ATH from '~/auth-mod/store/actions';
+import { actionSetActivateAccountEmail } from '~/auth-mod/store/actions';
 import { RegisterFormStage } from '~/auth-mod/types/form-stage.type';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractMultistageFormProvider } from '~/shared-mod/services/abstract-multistage-form-provider';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Injectable()
@@ -60,7 +60,7 @@ export class RegisterService extends AbstractMultistageFormProvider<
       .pipe(
         tap(({ message }) => {
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: message,
                 omitTransformation: true,
@@ -69,7 +69,7 @@ export class RegisterService extends AbstractMultistageFormProvider<
             })
           );
           this._store.dispatch(
-            NgrxAction_ATH.__setActivateAccountEmail({
+            actionSetActivateAccountEmail({
               email: data.firstStage.emailAddress,
             })
           );

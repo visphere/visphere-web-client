@@ -7,7 +7,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Store } from '@ngrx/store';
 import { MessagePayloadResDto } from '~/client-mod/model/message.model';
 import { MessagesService } from '~/client-mod/services/messages/messages.service';
-import { __setDeletingMessageContent } from '~/client-mod/store/actions';
+import { actionSetDeletingMessageContent } from '~/client-mod/store/actions';
 import { selectDeletingMessageContent } from '~/client-mod/store/selectors';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { getFontAwesomeIconFromMime } from '~/client-mod/utils/mime-converter';
@@ -51,7 +51,7 @@ export class DeleteMessageModalComponent
 
   handleCloseDeleteMessageModal(): void {
     this._store.dispatch(
-      __setDeletingMessageContent({ messageContent: undefined })
+      actionSetDeletingMessageContent({ messageContent: undefined })
     );
   }
 

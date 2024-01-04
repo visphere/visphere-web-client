@@ -10,9 +10,14 @@ import { StorageKeys } from '~/shared-mod/models/identity.model';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
-import * as NgrxAction from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { ThemeType } from '~/shared-mod/types/theme-mode.type';
+import {
+  actionAddSnackbar,
+  actionPersistLoggedUserDetails,
+  actionRemoveSnackbar,
+  actionSetLoggedUserDetails,
+} from '../actions';
 
 @Injectable()
 export class SharedEffects {
@@ -27,10 +32,10 @@ export class SharedEffects {
   debounceSnackbarAfterOpen$ = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(NgrxAction.__addSnackbar),
+        ofType(actionAddSnackbar),
         delay(5000),
         tap(() => {
-          this._store.dispatch(NgrxAction.__removeSnackbar({}));
+          this._store.dispatch(actionRemoveSnackbar({}));
         })
       ),
     { dispatch: false }
@@ -38,7 +43,7 @@ export class SharedEffects {
 
   persistUserSettingsAfterLogin$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(NgrxAction.__setLoggedUserDetails),
+      ofType(actionSetLoggedUserDetails),
       mergeMap(({ details }) => {
         const {
           id,
@@ -66,7 +71,7 @@ export class SharedEffects {
           this._themeSwitcherService.changeTheme(theme as ThemeType);
         }
         return of(
-          NgrxAction.__persistLoggedUserDetails({
+          actionPersistLoggedUserDetails({
             details: {
               id,
               fullName,

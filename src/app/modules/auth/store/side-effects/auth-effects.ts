@@ -6,10 +6,15 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { tap, withLatestFrom } from 'rxjs';
-import * as NgrxAction from '~/auth-mod/store/actions';
-import * as NgrxSelector from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
+import {
+  actionAddNewMySavedAccount,
+  actionRemoveAllMySavedAccount,
+  actionRemoveMySavedAccount,
+  actionSetMySavedAccountVerified,
+} from '../actions';
+import { selectMySavedAccounts } from '../selectors';
 
 @Injectable()
 export class AuthEffects {
@@ -23,12 +28,12 @@ export class AuthEffects {
     () =>
       this._actions$.pipe(
         ofType(
-          NgrxAction.__addNewMySavedAccount,
-          NgrxAction.__removeMySavedAccount,
-          NgrxAction.__removeAllMySavedAccount,
-          NgrxAction.__setMySavedAccountVerified
+          actionAddNewMySavedAccount,
+          actionRemoveMySavedAccount,
+          actionRemoveAllMySavedAccount,
+          actionSetMySavedAccountVerified
         ),
-        withLatestFrom(this._store.select(NgrxSelector.selectMySavedAccounts)),
+        withLatestFrom(this._store.select(selectMySavedAccounts)),
         tap(([, state]) => {
           this._localStorageService.save('mySavedAccounts', state);
         })

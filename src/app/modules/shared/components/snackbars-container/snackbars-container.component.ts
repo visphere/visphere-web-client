@@ -5,8 +5,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { snackbarFadeAndMove } from '~/shared-mod/animations/snackbar.animation';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { actionRemoveSnackbar } from '~/shared-mod/store/actions';
+import { selectSnackbarsStack } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Component({
@@ -15,11 +15,11 @@ import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
   animations: [snackbarFadeAndMove],
 })
 export class SnackbarsContainerComponent {
-  snackbarStack$ = this._store.select(NgrxSelector_SHA.selectSnackbarsStack);
+  snackbarStack$ = this._store.select(selectSnackbarsStack);
 
   constructor(private readonly _store: Store<SharedReducer>) {}
 
   handleRemoveSnackbar(id: string) {
-    this._store.dispatch(NgrxAction_SHA.__removeSnackbar({ id }));
+    this._store.dispatch(actionRemoveSnackbar({ id }));
   }
 }

@@ -15,8 +15,11 @@ import { AbstractIconThemeProvider } from '~/shared-mod/components/abstract-icon
 import { LoggedUser } from '~/shared-mod/models/logged-user.model';
 import { LanguageSwitcherService } from '~/shared-mod/services/language-switcher/language-switcher.service';
 import { ThemeSwitcherService } from '~/shared-mod/services/theme-switcher/theme-switcher.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import {
+  actionSetSettingsReturnUrl,
+  actionUpdateLogoutModalState,
+} from '~/shared-mod/store/actions';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 
 @Component({
@@ -46,9 +49,9 @@ export class LoggedUserPopupComponent
 
   ngOnInit(): void {
     this.loadBrandThemedIcon();
-    this.wrapAsObservable$(
-      this._store.select(NgrxSelector_SHA.selectLoggedUser)
-    ).subscribe(loggedUser => (this.loggedUser = loggedUser ?? undefined));
+    this.wrapAsObservable$(this._store.select(selectLoggedUser)).subscribe(
+      loggedUser => (this.loggedUser = loggedUser ?? undefined)
+    );
   }
 
   ngOnDestroy(): void {
@@ -56,16 +59,12 @@ export class LoggedUserPopupComponent
   }
 
   async handleGotoSettings(): Promise<void> {
-    this._store.dispatch(
-      NgrxAction_SHA.__setSettingsReturnUrl({ url: this._router.url })
-    );
+    this._store.dispatch(actionSetSettingsReturnUrl({ url: this._router.url }));
     await this._router.navigateByUrl('settings');
   }
 
   handleOpenLogoutModal(): void {
-    this._store.dispatch(
-      NgrxAction_SHA.__updateLogoutModalState({ isOpen: true })
-    );
+    this._store.dispatch(actionUpdateLogoutModalState({ isOpen: true }));
     this.emitOnClosePopup.emit();
   }
 }

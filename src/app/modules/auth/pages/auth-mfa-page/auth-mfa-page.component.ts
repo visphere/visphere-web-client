@@ -4,7 +4,7 @@
  */
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as NgrxSelector_ATH from '~/auth-mod/store/selectors';
+import { isFirstTimeMfaSetup } from '~/auth-mod/store/selectors';
 import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 
 @Component({
@@ -13,7 +13,7 @@ import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
   host: { class: 'flex-grow flex flex-col' },
 })
 export class AuthMfaPageComponent {
-  isInitialMfaSetup$ = this._store.select(NgrxSelector_ATH.isFirstTimeMfaSetup);
+  isInitialMfaSetup$ = this._store.select(isFirstTimeMfaSetup);
 
   constructor(private readonly _store: Store<AuthReducer>) {}
 }

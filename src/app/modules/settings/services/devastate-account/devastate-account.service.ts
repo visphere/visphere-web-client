@@ -10,7 +10,10 @@ import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractLoadableProvider } from '~/shared-mod/services/abstract-loadable-provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { PasswordConfirmationService } from '~/shared-mod/services/password-confirmation/password-confirmation.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import {
+  actionAddSnackbar,
+  removeUserDetailsAction,
+} from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { DevastateAccountHttpClientService } from '../devastate-account-http-client/devastate-account-http-client.service';
 
@@ -61,7 +64,7 @@ export class DevastateAccountService extends AbstractLoadableProvider {
       tap(({ message }) => {
         this._passwordConfirmationService.setLoading(false);
         this._store.dispatch(
-          NgrxAction_SHA.__addSnackbar({
+          actionAddSnackbar({
             content: {
               placeholder: message,
               omitTransformation: true,
@@ -69,7 +72,7 @@ export class DevastateAccountService extends AbstractLoadableProvider {
             severity: 'success',
           })
         );
-        this._store.dispatch(NgrxAction_SHA.__removeUserDetails());
+        this._store.dispatch(removeUserDetailsAction());
         this._localStorageService.remove('loggedUser');
       }),
       catchError(err => {

@@ -11,7 +11,7 @@ import { AuthReducer } from '~/auth-mod/types/ngrx-store.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import { actionAddSnackbar } from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { AbstractMfaFormProvider } from '../abstract-mfa-form-provider';
 import { MfaHttpClientService } from '../mfa-http-client/mfa-http-client.service';
@@ -58,7 +58,7 @@ export class MfaEmailService
       .pipe(
         tap(({ message }) => {
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: message,
                 omitTransformation: true,

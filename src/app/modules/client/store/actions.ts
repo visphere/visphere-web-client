@@ -17,19 +17,19 @@ enum Action {
   SET_DELETING_MESSAGE_CONTENT = '[CLIENT] SET DELETING MESSAGE CONTENT',
 }
 
-export const __openSelectedModal = createAction(
+export const actionOpenSelectedModal = createAction(
   Action.OPEN_SELECTED_MODAL,
   props<{ modal: ClientModal }>()
 );
 
-export const __closeModal = createAction(Action.CLOSE_MODAL);
+export const actionCloseModal = createAction(Action.CLOSE_MODAL);
 
-export const __setSelectedChannelId = createAction(
+export const actionSetSelectedChannelId = createAction(
   Action.SET_SELECTED_CHANNEL_ID,
   props<{ channelId: number | undefined }>()
 );
 
-export const __openDevastateMemberModal = createAction(
+export const actionOpenDevastateMemberModal = createAction(
   Action.OPEN_DEVASTATE_MEMBER_MODAL,
   props<{
     modal: DevastateMemberModal;
@@ -38,16 +38,16 @@ export const __openDevastateMemberModal = createAction(
   }>()
 );
 
-export const __closeDevastateMemberModal = createAction(
+export const actionCloseDevastateMemberModal = createAction(
   Action.CLOSE_DEVASTATE_MEMBER_MODAL
 );
 
-export const __setViewedImageDetails = createAction(
+export const actionSetViewedImageDetails = createAction(
   Action.SET_VIEWED_IMAGE_DETAILS,
   props<{ details: FileAttachment | undefined }>()
 );
 
-export const __setDeletingMessageContent = createAction(
+export const actionSetDeletingMessageContent = createAction(
   Action.SET_DELETING_MESSAGE_CONTENT,
   props<{ messageContent: MessagePayloadResDto | undefined }>()
 );

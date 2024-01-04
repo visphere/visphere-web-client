@@ -26,8 +26,8 @@ import { StorageKeys } from '~/shared-mod/models/identity.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
 import { LocalStorageService } from '~/shared-mod/services/local-storage/local-storage.service';
 import { TimeUtilsService } from '~/shared-mod/services/time-utils/time-utils.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
-import * as NgrxSelector_SHA from '~/shared-mod/store/selectors';
+import { actionUpdateProfileImageUrl } from '~/shared-mod/store/actions';
+import { selectLoggedUser } from '~/shared-mod/store/selectors';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { SettingsHttpClientService } from '../settings-http-client/settings-http-client.service';
 import { UpdatableEmailHttpClientService } from '../updatable-email-http-client/updatable-email-http-client.service';
@@ -69,7 +69,7 @@ export class MyAccountSettingsService extends AbstractWsWebhookProvider<SharedRe
       switchMap(() =>
         combineLatest([
           this._settingsHttpClientService.getAccountDetails$(),
-          this._store.select(NgrxSelector_SHA.selectLoggedUser),
+          this._store.select(selectLoggedUser),
         ]).pipe(
           map(([accountDetails, loggedUser]) => {
             this._isFetching$.next(false);
@@ -98,7 +98,7 @@ export class MyAccountSettingsService extends AbstractWsWebhookProvider<SharedRe
           accessToken
         );
         this._store.dispatch(
-          NgrxAction_SHA.__updateProfileImageUrl({ imageUrl: profileImagePath })
+          actionUpdateProfileImageUrl({ imageUrl: profileImagePath })
         );
         this.showSuccessSnackbar(message);
         this._activeModal$.next('none');

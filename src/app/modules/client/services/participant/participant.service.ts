@@ -20,8 +20,8 @@ import {
   GuildParticipantDetailsResDto,
   GuildParticipantsResDto,
 } from '~/client-mod/model/participant.model';
-import * as NgrxAction_CLN from '~/client-mod/store/actions';
-import * as NgrxSelector_CLN from '~/client-mod/store/selectors';
+import { actionCloseDevastateMemberModal } from '~/client-mod/store/actions';
+import { selectDevastateDetails } from '~/client-mod/store/selectors';
 import { ClientReducer } from '~/client-mod/types/ngx-store.type';
 import { BaseMessageModel } from '~/shared-mod/models/base-message.model';
 import { AbstractWsWebhookProvider } from '~/shared-mod/services/abstract-ws-webhook.provider';
@@ -115,7 +115,7 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
       switchMap(() =>
         combineLatest([
           this._guildService.guildDetails$,
-          this._store.select(NgrxSelector_CLN.selectDevastateDetails),
+          this._store.select(selectDevastateDetails),
         ])
       ),
       filter(
@@ -140,7 +140,7 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
         this._passwordConfirmationService.setLoading(false);
         this.updateWsSignalValue();
         this.showSuccessSnackbar(message);
-        this._store.dispatch(NgrxAction_CLN.__closeDevastateMemberModal());
+        this._store.dispatch(actionCloseDevastateMemberModal());
       }),
       catchError(err => {
         this._passwordConfirmationService.setLoading(false);
@@ -155,9 +155,7 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
   ): Observable<BaseMessageModel> {
     return of(null).pipe(
       tap(() => this.setLoading(true)),
-      switchMap(() =>
-        this._store.select(NgrxSelector_CLN.selectDevastateDetails)
-      ),
+      switchMap(() => this._store.select(selectDevastateDetails)),
       first(),
       filter(devastateDetails => !!devastateDetails),
       switchMap(devastateDetails => initHttp$(devastateDetails!.id)),
@@ -169,7 +167,7 @@ export class ParticipantService extends AbstractWsWebhookProvider<ClientReducer>
         } else {
           this._guildService.resetGuildDetails();
         }
-        this._store.dispatch(NgrxAction_CLN.__closeDevastateMemberModal());
+        this._store.dispatch(actionCloseDevastateMemberModal());
       }),
       catchError(err => {
         this.setLoading(false);

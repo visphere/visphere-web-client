@@ -22,7 +22,10 @@ import {
 import { LoginResDtoModel } from '~/shared-mod/models/identity.model';
 import { AbstractSimpleFormProvider } from '~/shared-mod/services/abstract-simple-form-provider';
 import { LazyPageLoaderService } from '~/shared-mod/services/lazy-page-loader/lazy-page-loader.service';
-import * as NgrxAction_SHA from '~/shared-mod/store/actions';
+import {
+  actionAddSnackbar,
+  actionSetLoggedUserDetails,
+} from '~/shared-mod/store/actions';
 import { SharedReducer } from '~/shared-mod/types/ngrx-store.type';
 import { oAuth2Suppliers } from '~/shared-mod/types/oauth2-supplier.type';
 import { Oauth2HttpClientService } from '../oauth2-http-client/oauth2-http-client.service';
@@ -65,7 +68,7 @@ export class FillDataService extends AbstractSimpleFormProvider<LoginResDtoModel
         map(res => {
           this._userData$.next(res);
           this._store.dispatch(
-            NgrxAction_SHA.__addSnackbar({
+            actionAddSnackbar({
               content: {
                 placeholder: res.message,
                 omitTransformation: true,
@@ -93,7 +96,7 @@ export class FillDataService extends AbstractSimpleFormProvider<LoginResDtoModel
       .pipe(
         tap(async res => {
           this._store.dispatch(
-            NgrxAction_SHA.__setLoggedUserDetails({
+            actionSetLoggedUserDetails({
               details: res,
             })
           );
