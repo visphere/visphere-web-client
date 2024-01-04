@@ -34,6 +34,7 @@ import { CreateOrJoinSphereModalComponent } from '~/client-mod/components/create
 import { CreateSphereFormComponent } from '~/client-mod/components/create-sphere-form/create-sphere-form.component';
 import { CreateTextChannelModalComponent } from '~/client-mod/components/create-text-channel-modal/create-text-channel-modal.component';
 import { DelegateGuildModalComponent } from '~/client-mod/components/delegate-guild-modal/delegate-guild-modal.component';
+import { DeleteMessageModalComponent } from '~/client-mod/components/delete-message-modal/delete-message-modal.component';
 import { DevastateMemberActionModalComponent } from '~/client-mod/components/devastate-member-action-modal/devastate-member-action-modal.component';
 import { ImageViewerModalComponent } from '~/client-mod/components/image-viewer-modal/image-viewer-modal.component';
 import { InputTextAreaComponent } from '~/client-mod/components/input-text-area/input-text-area.component';
@@ -62,6 +63,7 @@ import { clientReduxStore } from './store/reducer';
     CreateSphereFormComponent,
     CreateTextChannelModalComponent,
     DelegateGuildModalComponent,
+    DeleteMessageModalComponent,
     DevastateMemberActionModalComponent,
     ImageViewerModalComponent,
     InputTextAreaComponent,

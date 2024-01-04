@@ -1,0 +1,65 @@
+<!--
+ ~ Copyright (c) 2024 by Visphere & Vsph Technologies
+ ~ Originally developed by Miłosz Gilga <https://miloszgilga.pl>
+ -->
+
+<vsph-devastate-action-modal
+  size="xl"
+  [fullWidth]="true"
+  [isActive]="!!deletingMessageContent"
+  (emitOnClose)="handleCloseDeleteMessageModal()"
+  (emitDevstateAction)="handleDeleteMessageAccount()"
+  [isLoading]="(activeLoading$ | async) === 'deleting'"
+  [i18nPrefix]="defaultPrefix + '.modals.deleteMessage'">
+  <p class="mb-4 max-w-[80%] mx-auto">
+    {{ defaultPrefix + '.modals.deleteMessage.description' | translate }}
+  </p>
+  <div class="vsph-message__delete-message-modal-wrapper">
+    <img
+      [src]="deletingMessageContent?.profileImageUrl"
+      alt=""
+      class="absolute top-2 -left-[20px] rounded-lg w-[40px] h-[40px]" />
+    <div class="flex items-center gap-x-3 mb-1">
+      <div class="font-bold">{{ deletingMessageContent?.fullName }}</div>
+      <div class="text-xs text-vsph-tint-400">
+        {{
+          deletingMessageContent?.sendDate
+            | vsphDatetimeFormatter: selectedLang$
+            | async
+        }}
+      </div>
+    </div>
+    <p class="text-left text-vsph-dark-900 dark:text-vsph-light-100">
+      {{ deletingMessageContent?.message }}
+    </p>
+    <ul
+      *ngIf="deletingMessageContent?.attachments?.length !== 0"
+      class="text-left">
+      <li
+        *ngFor="let attachment of deletingMessageContent?.attachments"
+        [class.inline-block]="!attachment.mimeType.includes('image')"
+        [class.me-4]="!attachment.mimeType.includes('image')"
+        class="py-1 w-fit">
+        <img
+          *ngIf="attachment.mimeType.includes('image'); else regularFile"
+          [src]="attachment.path"
+          [alt]="attachment.originalName"
+          class="max-w-[200px] max-h-[300px] rounded-lg" />
+        <ng-template #regularFile>
+          <div class="vsph-message__embed-file-container">
+            <div class="flex-grow flex justify-center items-center">
+              <fa-icon
+                [icon]="getFileIcon(attachment.mimeType)"
+                class="vsph-message__embed-file-icon" />
+            </div>
+            <span
+              [title]="attachment.originalName"
+              class="text-xs line-clamp-1">
+              {{ attachment.originalName }}
+            </span>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</vsph-devastate-action-modal>
