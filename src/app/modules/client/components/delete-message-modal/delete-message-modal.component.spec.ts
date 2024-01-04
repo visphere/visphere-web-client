@@ -14,7 +14,8 @@ describe('DeleteMessageModalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule, ClientModule, MessagesService],
+      imports: [AppModule, ClientModule],
+      providers: [MessagesService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DeleteMessageModalComponent);
