@@ -83,7 +83,7 @@
   </div>
 </div>
 <div
-  *ngIf="isSendingMessage$ | async"
+  *ngIf="(activeLoading$ | async) === 'sending'"
   class="w-full flex justify-center items-center h-[60px]">
   <div
     class="vsph-button-spinner__carousel vsph-button-spinner__carousel--large"></div>

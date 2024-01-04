@@ -40,7 +40,9 @@ export class MessagesService extends AbstractLoadableProvider {
 
   private _onNextOffset$ = new BehaviorSubject<null>(null);
   private _isPaginationEnd$ = new BehaviorSubject<boolean>(false);
-  private _sendingMessagesWithFiles$ = new BehaviorSubject<boolean>(false);
+  private _activeLoading$ = new BehaviorSubject<MessageLoadingStateType>(
+    'none'
+  );
 
   constructor(
     private readonly _messagesHttpClientService: MessagesHttpClientService,
@@ -121,7 +123,7 @@ export class MessagesService extends AbstractLoadableProvider {
     blobFiles: BlobFile[]
   ): Observable<null> {
     return of(null).pipe(
-      tap(() => this._sendingMessagesWithFiles$.next(true)),
+      tap(() => this._activeLoading$.next('sending')),
       switchMap(() =>
         combineLatest([
           this._store.select(NgrxSelector_SHA.selectLoggedUser),
@@ -130,7 +132,6 @@ export class MessagesService extends AbstractLoadableProvider {
       ),
       switchMap(([loggedUser, textChannelId]) =>
         this._messagesHttpClientService.sendMessageWithFiles$(
-          loggedUser!.id,
           textChannelId,
           blobFiles,
           {
@@ -142,7 +143,7 @@ export class MessagesService extends AbstractLoadableProvider {
       ),
       first(),
       map(() => {
-        this._sendingMessagesWithFiles$.next(false);
+        this._activeLoading$.next('none');
         return null;
       }),
       catchError(err => {
@@ -179,7 +180,7 @@ export class MessagesService extends AbstractLoadableProvider {
   get isPaginationEnd$(): Observable<boolean> {
     return this._isPaginationEnd$.asObservable();
   }
-  get sendingMessagesWithFiles$(): Observable<boolean> {
-    return this._sendingMessagesWithFiles$.asObservable();
+  get activeLoading$(): Observable<MessageLoadingStateType> {
+    return this._activeLoading$.asObservable();
   }
 }

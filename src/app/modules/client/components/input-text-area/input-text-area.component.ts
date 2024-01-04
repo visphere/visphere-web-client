@@ -33,7 +33,7 @@ export class InputTextAreaComponent
   appendFiles = this._messageFilesService.appendFiles;
   filesContainerWidth = 0;
 
-  sendingFileMessage$ = this._messagesService.sendingMessagesWithFiles$;
+  activeLoading$ = this._messagesService.activeLoading$;
 
   readonly maxLenght = 2000;
   readonly maxFiles = this._messageFilesService.maxFiles;

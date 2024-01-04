@@ -30,7 +30,7 @@
     [placeholder]="defaultPrefix + '.startTyping' | translate"
     class="vsph-input vsph-input--textarea"
     [maxlength]="maxLenght"
-    [disabled]="!!(sendingFileMessage$ | async)"
+    [disabled]="(activeLoading$ | async) === 'sending'"
     autocomplete="off"
     (paste)="handleOnPasteImage($event)"></textarea>
   <ul
