@@ -49,10 +49,11 @@ export class MessagesHttpClientService extends AbstractHttpProvider {
 
   deleteMessage$(
     messageId: string,
+    authorId: number,
     textChannelId: number
   ): Observable<BaseMessageModel> {
     return this._httpClient.delete<BaseMessageModel>(
-      `${this._infraApiPath}/api/v1/chat/message/${messageId}/textchannel/${textChannelId}`
+      `${this._infraApiPath}/api/v1/chat/message/${messageId}/author/${authorId}/textchannel/${textChannelId}`
     );
   }
 }

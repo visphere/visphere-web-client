@@ -59,7 +59,8 @@ export class DeleteMessageModalComponent
     if (this.deletingMessageContent) {
       this.wrapAsObservable$(
         this._messagesService.deleteMessage$(
-          this.deletingMessageContent.messageId
+          this.deletingMessageContent.messageId,
+          this.deletingMessageContent.userId
         )
       ).subscribe({ next: () => this.handleCloseDeleteMessageModal() });
     }

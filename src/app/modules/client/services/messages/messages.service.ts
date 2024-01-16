@@ -156,12 +156,19 @@ export class MessagesService extends AbstractLoadableProvider {
     );
   }
 
-  deleteMessage$(messageId: string): Observable<BaseMessageModel> {
+  deleteMessage$(
+    messageId: string,
+    authorId: number
+  ): Observable<BaseMessageModel> {
     return of(null).pipe(
       tap(() => this._activeLoading$.next('deleting')),
       switchMap(() => this._wsService.textChannelId$),
       switchMap(textChannelId =>
-        this._messagesHttpClientService.deleteMessage$(messageId, textChannelId)
+        this._messagesHttpClientService.deleteMessage$(
+          messageId,
+          authorId,
+          textChannelId
+        )
       ),
       first(),
       tap(({ message }) => {
