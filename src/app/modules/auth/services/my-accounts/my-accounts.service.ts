@@ -8,6 +8,7 @@ import {
   BehaviorSubject,
   Observable,
   catchError,
+  map,
   of,
   tap,
   throwError,
@@ -34,10 +35,7 @@ import { Severity } from '~/shared-mod/types/snackbar.type';
 import { AuthHttpClientService } from '../auth-http-client/auth-http-client.service';
 
 @Injectable()
-export class MyAccountsService
-  extends AbstractSimpleFormProvider<AddNewMyAccountFormModel>
-  implements OnDestroy
-{
+export class MyAccountsService extends AbstractSimpleFormProvider<AddNewMyAccountFormModel> {
   private _removeModalIsOpen$ = new BehaviorSubject(false);
   private _removeAllModalIsOpen$ = new BehaviorSubject(false);
   private _addNewModalIsOpen$ = new BehaviorSubject(false);
@@ -51,26 +49,23 @@ export class MyAccountsService
     private readonly _authHttpClientService: AuthHttpClientService
   ) {
     super();
-    this.wrapAsObservable$(
-      this._authHttpClientService.checkIfMyAccountsExists$(
-        this.mapAccountsToReqDtos()
-      )
-    )
-      .pipe(
-        tap(() => this._fetchingState$.next('success')),
-        catchError(err => throwError(() => err))
-      )
-      .subscribe(accounts => {
-        this._store.dispatch(
-          actionLoadMySavedAccounts({
-            accounts,
-          })
-        );
-      });
   }
 
-  ngOnDestroy(): void {
-    this.unmountAllSubscriptions();
+  loadMyAccounts$(): Observable<null> {
+    return this._authHttpClientService
+      .checkIfMyAccountsExists$(this.mapAccountsToReqDtos())
+      .pipe(
+        map(accounts => {
+          this._fetchingState$.next('success');
+          this._store.dispatch(
+            actionLoadMySavedAccounts({
+              accounts,
+            })
+          );
+          return null;
+        }),
+        catchError(err => throwError(() => err))
+      );
   }
 
   changeRemoveModalVisibility(isOpen: boolean): void {
@@ -96,7 +91,6 @@ export class MyAccountsService
   override abstractSubmitForm$(): Observable<AddNewMyAccountFormModel> {
     const { usernameOrEmailAddress } =
       this.parseFormValues<AddNewMyAccountFormModel>();
-
     this._store.dispatch(
       actionAddNewMySavedAccount({
         account: {
