@@ -41,7 +41,6 @@ export class ImageViewerModalComponent
       const clickedInside = this.imageViewer.nativeElement.contains(
         event.target
       );
-      console.log(clickedInside);
       if (!clickedInside) {
         this._store.dispatch(
           actionSetViewedImageDetails({ details: undefined })
