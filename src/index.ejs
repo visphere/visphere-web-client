@@ -79,6 +79,18 @@
       rel="manifest"
       href="/assets/manifest/pl/pwa-manifest.json" />
     <!-- end PWA -->
+    <script type="text/javascript">
+      window.VSPH_IS_PRODUCTION_MODE = '<%= isProductionMode %>';
+      window.VSPH_BASE_LANDING_URL = '<%= baseLandingUrl %>';
+      window.VSPH_BASE_CLIENT_URL = '<%= externalClientBasePath %>';
+      window.VSPH_BASE_STATIC_CDN_URL = '<%= externalCdnBasePath %>';
+      window.VSPH_INFRA_API_GATEWAY_URL = '<%= infraApiGatewayUrl %>';
+      window.VSPH_HCAPTCHA_SITE_KEY = '<%= hCaptchaSiteKey %>';
+      window.BUILD_INFO = {
+        buildTime: '<%= buildTime %>',
+        version: '<%= appVersion %>',
+      };
+    </script>
   </head>
   <body class="min-h-screen font-medium vsph-body-container">
     <!-- start disable script section -->

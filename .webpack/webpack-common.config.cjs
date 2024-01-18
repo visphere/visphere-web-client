@@ -12,9 +12,9 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const { AngularWebpackPlugin } = require('@ngtools/webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { DefinePlugin } = require('webpack');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const webpackUtils = require('../../visphere-base/webpack/webpack-utils.cjs');
+const random = require('random-string-alphanumeric-generator');
 
 const vsphBasePath = path.resolve(__dirname, '..', '..', 'visphere-base');
 const envPath = path.join(vsphBasePath, '.env');
@@ -114,25 +114,11 @@ const commonWebpackConfig = ({
       },
       plugins: [
         new RemoveEmptyScriptsPlugin(),
-        new DefinePlugin({
-          'process.env.IS_PRODUCTION_MODE': JSON.stringify(isProdMode),
-          'process.env.BASE_LANDING_PAGE_URL':
-            JSON.stringify(landingPageBaseUrl),
-          'process.env.BASE_CLIENT_URL': JSON.stringify(clientBaseUrl),
-          'process.env.BASE_CDN_URL': JSON.stringify(cdnBaseUrl),
-          'process.env.HCAPTCHA_SITE_KEY': JSON.stringify(
-            isProdMode
-              ? process.env.ENV_VSPH_HCAPTCHA_SITE_KEY
-              : process.env.ENV_VSPH_DEV_HCAPTCHA_SITE_KEY
-          ),
-          'process.env.INFRA_API_GATEWAY_URL':
-            JSON.stringify(infraApiGatewayUrl),
-        }),
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, '..', 'src', 'index.ejs'),
           title: 'Visphere',
-          inject: 'body',
-          scriptLoading: 'blocking',
+          inject: 'head',
+          scriptLoading: 'defer',
           templateParameters: async (
             compilation,
             assets,
@@ -159,6 +145,14 @@ const commonWebpackConfig = ({
               },
               externalCdnBasePath: cdnBaseUrl,
               externalClientBasePath: clientBaseUrl,
+              isProductionMode: isProdMode,
+              baseLandingUrl: landingPageBaseUrl,
+              infraApiGatewayUrl: infraApiGatewayUrl,
+              hCaptchaSiteKey: isProdMode
+                ? process.env.ENV_VSPH_HCAPTCHA_SITE_KEY
+                : process.env.ENV_VSPH_DEV_HCAPTCHA_SITE_KEY,
+              buildTime: Date.now(),
+              appVersion: random.randomAlphanumeric(12, 'lowercase'),
               frontEndGenerator: `Angular ${
                 JSON.parse(stdout).dependencies['@angular/core'].version
               }`,
